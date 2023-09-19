@@ -1,68 +1,47 @@
-To create a new Svelte project, you can use the official Svelte template. Here are the steps to create a new Svelte project:
+# Svelte + Vite
 
-1. **Install Node.js and npm**:
+This template should help get you started developing with Svelte in Vite.
 
-   Ensure you have Node.js and npm (Node Package Manager) installed on your computer. You can download and install them from the official Node.js website: [Node.js Downloads](https://nodejs.org/en/download/).
+## Recommended IDE Setup
 
-   To check if Node.js and npm are installed, you can open your terminal or command prompt and run the following commands to check their versions:
+[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
-   ```bash
-   node -v
-   npm -v
-   ```
+## Need an official Svelte framework?
 
-   If these commands return version numbers, Node.js and npm are installed.
+Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
 
-2. **Create a New Svelte Project**:
+## Technical considerations
 
-   Once you have Node.js and npm installed, you can create a new Svelte project using the official template. Open your terminal or command prompt and run the following command to create a new Svelte project:
+**Why use this over SvelteKit?**
 
-   ```bash
-   npx degit sveltejs/template svelte-app
-   ```
+- It brings its own routing solution which might not be preferable for some users.
+- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
 
-   This command will use the `degit` tool to clone the Svelte template repository and create a new project directory named "svelte-app." You can replace "svelte-app" with your desired project name.
+This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
 
-3. **Navigate to the Project Directory**:
+Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
 
-   Change your current directory to the newly created project directory:
+**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
 
-   ```bash
-   cd svelte-app
-   ```
+Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
 
-4. **Install Dependencies**:
+**Why include `.vscode/extensions.json`?**
 
-   Inside your project directory, you need to install the project's dependencies using npm:
+Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
 
-   ```bash
-   npm install
-   ```
+**Why enable `checkJs` in the JS template?**
 
-   This command will download and install the required packages, including Svelte itself.
+It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
 
-5. **Start the Development Server**:
+**Why is HMR not preserving my local component state?**
 
-   To start the development server and see your Svelte app in action, run the following command:
+HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
 
-   ```bash
-   npm run dev
-   ```
+If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
 
-   This will start a development server, and you'll see the URL (usually `http://localhost:5000`) where your Svelte app is running. Open a web browser and navigate to this URL to see your new Svelte project.
-
-6. **Begin Development**:
-
-   You can start editing the Svelte components in the "src" directory. As you make changes, the development server will automatically update the application in the browser.
-
-7. **Build for Production**:
-
-   When you're ready to build your Svelte app for production, you can run the following command:
-
-   ```bash
-   npm run build
-   ```
-
-   This command will generate optimized production-ready files in the "public" directory.
-
-That's it! You've successfully created a new Svelte project and can start building your web application with Svelte.
+```js
+// store.js
+// An extremely simple external store
+import { writable } from 'svelte/store'
+export default writable(0)
+```
