@@ -9,19 +9,20 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^2.4.6",
-    "autoprefixer": "^10.4.15",
-    "flowbite-svelte": "^0.44.15",
+    "@sveltejs/vite-plugin-svelte": "^2.4.2",
+    "autoprefixer": "^10.4.14",
+    "flowbite": "^1.8.1",
+    "flowbite-svelte": "^0.44.17",
     "flowbite-svelte-icons": "^0.4.4",
-    "postcss": "^8.4.30",
+    "postcss": "^8.4.24",
     "postcss-load-config": "^4.0.1",
     "svelte": "^4.0.0",
-    "tailwindcss": "^3.3.3",
-    "vite": "^4.4.9"
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.4.5"
   },
   "dependencies": {
+    "save": "^2.9.0",
     "svelte-navigator": "^3.2.2",
-    "svelte-routing": "^2.4.0",
-    "svelte-spa-router": "^3.3.0"
+    "svelte-routing": "^2.4.0"
   }
 }

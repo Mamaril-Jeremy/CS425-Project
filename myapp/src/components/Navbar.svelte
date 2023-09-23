@@ -1,80 +1,43 @@
 <script>
-    import { Link } from "svelte-routing";
+    import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Input } from 'flowbite-svelte';
+    import { SearchOutline } from 'flowbite-svelte-icons';
 </script>
 
-<svelte:head>
-    <title>Plato</title> 
-</svelte:head>
-
-<nav>
-    <!-- svelte-ignore a11y-label-has-associated-control -->
-    <label class="logo">Plato</label>
-    <ul>
-        <li>    
-            <Link to="/home"><span class="link">Home</span></Link>
-        </li>
-        <li>    
-            <Link to="/event"><span class="link">Event</span></Link>
-        </li>
-        <li>    
-            <Link to="/connections"><span class="link">Connections</span></Link>
-        </li>
-        <li>    
-            <Link to="/chat"><span class="link">Chat</span></Link>
-        </li>
-        <li>    
-            <Link to="/profile"><span class="link">Profile</span></Link>
-        </li>
-    </ul>
-</nav>
-
-<style lang="css">
-    * {
-        padding: 0;
-        margin: 0;
-        text-decoration: none;
-        list-style: none;
-        box-sizing: border-box;
-        color:white;
-    }
-
-    nav {
-        font-family: Montserrat;
-        background: #0082e6;
-        height: 80px;
-        width: 100%;
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center; 
-        padding: 0 20px; 
-    }
-
-    label.logo {
-        color: white;
-        font-size: 35px;
-        font-weight: bold;
-    }
-
-    nav ul {
-        display: flex;
-    }
-
-    nav ul li {
-        margin: 0 10px; 
-    }
-
-    span{
-        color: white; 
-        font-size: 17px;
-        padding: 7px 13px;
-        border-radius: 3px;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
-
-    span:hover{ 
-        background: #1b9bff;
-        transition: 0.5s;
-        cursor: pointer;
+<style>
+    /* Apply CSS styles to make Navbar stick to the top */
+    .navbar-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000; /* You can adjust the z-index as needed */
     }
 </style>
+
+<div class="navbar-container">
+    <Navbar let:hidden let:toggle>
+        <NavBrand href="/">
+            <img src="/images/flowbite-svelte-icon-logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+            <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Plato</span>
+        </NavBrand>
+        <div class="flex md:order-2">
+            <Button color="none" data-collapse-toggle="mobile-menu-3" aria-controls="mobile-menu-3" aria-expanded="false" class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
+                <SearchOutline class="w-5 h-5" />
+            </Button>
+            <div class="hidden relative md:block">
+                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <SearchOutline class="w-4 h-4" />
+                </div>
+                <Input id="search-navbar" class="pl-10" placeholder="Search..." />
+            </div>
+            <NavHamburger on:click={toggle} />
+        </div>
+        <NavUl {hidden}>
+            <NavLi href="/" active={true}>Home</NavLi>
+            <NavLi href="/chat">Chat</NavLi>
+            <NavLi href="/connections" active={true}>Connections</NavLi>
+            <NavLi href="/events">Event</NavLi>
+            <NavLi href="/profile" active={true}>Profile</NavLi>
+        </NavUl>
+    </Navbar>
+</div>
