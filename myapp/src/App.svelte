@@ -1,6 +1,5 @@
 <script>
   import {Router, Route} from "svelte-routing";
-  import {GradientButton} from "flowbite-svelte";
   import Navbar from "./components/Navbar.svelte";
   import Home from "./routes/home/Home.svelte";
   import About from "./routes/profile/Profile.svelte";
@@ -8,26 +7,33 @@
   import Event from "./routes/events/Event.svelte";
   import Connections from "./routes/connections/Connections.svelte";
   import Profile from "./routes/profile/Profile.svelte";
+  import SignIn from "./routes/sign-in/Sign-In.svelte";
 </script>
 
 <main>
-  <Navbar/>
   
   <Router>
-    <Route path="/">
-      <Home/>
-    </Route>
-    <Route path="/about">
-      <About/>
-    </Route>
-    <Route path="/events">
+		<Route path="/">
+			<SignIn />
+		</Route>
+
+		<Route path="/home">
+			<Navbar />
+			<Home />
+		</Route>
+
+		<Route path="/events">
+			<Navbar />
 			<Event />
 		</Route>
+
 		<Route path="/connections">
+			<Navbar />
 			<Connections />
 		</Route>
 
 		<Route path="/chat">
+			<Navbar />
 			<Chat />
 		</Route>
 		
@@ -35,5 +41,5 @@
 			<Navbar />
 			<Profile />
 		</Route>
-  </Router>
+	</Router>
 </main>
