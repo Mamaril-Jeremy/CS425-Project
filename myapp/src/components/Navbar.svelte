@@ -33,7 +33,7 @@
             <NavHamburger on:click={toggle} />
         </div>
         <NavUl {hidden}>
-            <NavLi href="/" active={true}>Home</NavLi>
+            <NavLi href="/home" active={true}>Home</NavLi>
             <NavLi href="/chat">Chat</NavLi>
             <NavLi href="/connections" active={true}>Connections</NavLi>
             <NavLi href="/events">Event</NavLi>
