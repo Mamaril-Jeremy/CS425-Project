@@ -27,4 +27,5 @@ These combined are only 20 minutes so no excuses...
 HTML: https://youtu.be/salY_Sm6mv4?si=BuABgOYFM8QnMeKp <br />
 CSS: https://youtu.be/Z4pCqK-V_Wo?si=S5e3A_Dnm2S80fBe <br />
 Javascript: https://www.youtube.com/watch?v=c-I5S_zTwAc <br />
+Svelte: https://youtu.be/TanFofZBvNI?si=SNs0im2dqQHxEXKP 
 
