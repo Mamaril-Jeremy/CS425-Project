@@ -22,3 +22,9 @@ pnpm dev
 **Flowbite**
 
 **Training (HTML, CSS, Javascript, and Svelte)**
+These combined are only 20 minutes so no excuses...
+
+HTML: https://youtu.be/salY_Sm6mv4?si=BuABgOYFM8QnMeKp
+CSS: https://youtu.be/Z4pCqK-V_Wo?si=S5e3A_Dnm2S80fBe
+Javascript: https://www.youtube.com/watch?v=c-I5S_zTwAc
+
