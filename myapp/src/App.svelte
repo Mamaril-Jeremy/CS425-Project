@@ -8,6 +8,7 @@
   import Connections from "./routes/connections/Connections.svelte";
   import Profile from "./routes/profile/Profile.svelte";
   import SignIn from "./routes/sign-in/Sign-In.svelte";
+  //Hi
 </script>
 
 <main>
