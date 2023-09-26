@@ -15,6 +15,7 @@ pnpm add save svelte@4.00.0
 pnpm i -D flowbite-svelte flowbite
 pnpm i -D flowbite-svelte-icons
 pnpm dev
+Ctrl + C
 ```
 
 **Github Desktop and Git Branches**
