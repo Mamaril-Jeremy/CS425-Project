@@ -28,9 +28,7 @@ pnpm i -D flowbite-svelte-icons    #installs flowbite icons
 #You will use these more frequently
 pnpm install    #install packages before running (do this if you see errors when running pnpm dev)
 
-
 pnpm dev    #runs the application. do this frequently to see what the stuff you make looks like
-
 
 Ctrl + C    #exits out the app when you want to return to terminal
 ```
@@ -40,7 +38,6 @@ Ctrl + C    #exits out the app when you want to return to terminal
 
 
 **Flowbite**
-
 https://flowbite-svelte.com/docs/components/accordion
 
 
