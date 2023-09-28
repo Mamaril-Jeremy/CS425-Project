@@ -1,6 +1,6 @@
 **Plato**
 
-**Terminal Commands for reference **
+**Terminal Commands for reference**
 
 ```
 #Do not do these without asking please
