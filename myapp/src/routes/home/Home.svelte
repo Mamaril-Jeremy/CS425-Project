@@ -1,14 +1,9 @@
-<<<<<<< Updated upstream
-<p>Home</p>
-=======
 <script>
-  import Card from "../../components/Card.svelte";
+  //import Card from "../components/Card.svelte";
   import { Link } from "svelte-routing";
   import { GradientButton } from 'flowbite-svelte';
   import { ArrowRightOutline } from 'flowbite-svelte-icons';
 </script>
-
-<Card />
 
 <div class="button">
   <Link to="/connections">
@@ -33,4 +28,3 @@
     position: relative;
   }
 </style>
->>>>>>> Stashed changes

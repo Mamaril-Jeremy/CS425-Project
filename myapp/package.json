@@ -24,12 +24,8 @@
   },
   "dependencies": {
     "save": "^2.9.0",
-<<<<<<< Updated upstream
     "svelte-navigator": "^3.2.2",
     "svelte-routing": "^2.4.0"
-=======
-    "svelte-navigator": "^3.2.2"
->>>>>>> Stashed changes
   }
 }
 
