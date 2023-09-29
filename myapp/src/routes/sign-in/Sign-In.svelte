@@ -18,7 +18,7 @@
         <Checkbox>Remember me</Checkbox>
         <a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500"> Lost password? </a>
       </div>
-      <a href="/home"><Button type="submit" class="w-full bg-blue-600 hover:opacity-75 hover:bg-blue-600">Login to your account</Button></a>
+      <Button href="/home" type="submit" class="w-full bg-blue-600 hover:opacity-75 hover:bg-blue-600">Login to your account</Button>
       <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
         Not registered? <a href="/" class="text-blue-600 hover:underline dark:text-primary-500"> Create account </a>
       </div>
