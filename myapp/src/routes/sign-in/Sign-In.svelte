@@ -2,7 +2,7 @@
   import { Card, Button, Label, Input, Checkbox } from 'flowbite-svelte';
 </script>
 
-<p style="background-image: url('placeholderbackground_login.jpg');">
+<p style="background-image: url('placeholderbackground_login.png');">
 
 <div class="card-container">
   <Card class="w-72 max-w-none">
