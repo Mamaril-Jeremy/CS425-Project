@@ -2,11 +2,10 @@
   import {Router, Route} from "svelte-routing";
   import Navbar from "./components/Navbar.svelte";
   import Home from "./routes/home/Home.svelte";
-  import About from "./routes/profile/Profile.svelte";
+  import Profile from "./routes/profile/Profile.svelte";
   import Chat from "./routes/chat/Chat.svelte";
   import Event from "./routes/events/Event.svelte";
   import Connections from "./routes/connections/Connections.svelte";
-  import Profile from "./routes/profile/Profile.svelte";
   import SignIn from "./routes/sign-in/Sign-In.svelte";
 </script>
 
