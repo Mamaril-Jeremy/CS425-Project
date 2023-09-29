@@ -20,8 +20,13 @@ devDependencies:
     specifier: ^2.4.2
     version: 2.4.6(svelte@4.0.0)(vite@4.4.9)
   autoprefixer:
+<<<<<<< Updated upstream
     specifier: ^10.4.14
     version: 10.4.16(postcss@8.4.30)
+=======
+    specifier: ^10.4.15
+    version: 10.4.15(postcss@8.4.30)
+>>>>>>> Stashed changes
   flowbite:
     specifier: ^1.8.1
     version: 1.8.1
