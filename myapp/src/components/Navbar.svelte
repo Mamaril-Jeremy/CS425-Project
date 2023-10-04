@@ -6,7 +6,7 @@
 <div class="navbar-container">
 <Navbar let:hidden let:toggle>
     <NavBrand href="/">
-        <img src="/images/flowbite-svelte-icon-logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+        <img src="../assets/plato_logo.png" class="mr-3 h-6 sm:h-9" alt="Plato Logo" />
         <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Plato</span>
     </NavBrand>
     <div class="flex md:order-2">
