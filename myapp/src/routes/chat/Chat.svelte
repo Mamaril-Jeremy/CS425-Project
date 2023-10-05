@@ -1,7 +1,7 @@
 
 <script>
     import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
-    import { ChartPieSolid, GridSolid, MailBoxSolid, UserSolid, ArrowRightToBracketSolid, FileEditSolid } from 'flowbite-svelte-icons';
+    import { ChartPieSolid, GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
 </script>
 
 <div class = "Sidebar">
