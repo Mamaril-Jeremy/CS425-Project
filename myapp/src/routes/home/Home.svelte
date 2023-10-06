@@ -14,6 +14,7 @@
   </Link>
 </div>
 
+//Button tests
 <GradientButton color="blue">Blue</GradientButton>
 <GradientButton color="green">Green</GradientButton>
 <GradientButton color="cyan">Cyan</GradientButton>
