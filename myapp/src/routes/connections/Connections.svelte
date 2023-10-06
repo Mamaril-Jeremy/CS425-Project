@@ -8,7 +8,7 @@
 </body>
 
 <style>
-    body {
+body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,8 +17,8 @@
 }
 
 .container {
-    width: 200px;
-    height: 200px;
+    width: 450px;
+    height: 300px;
     position: relative;
 }
 
@@ -26,21 +26,25 @@
     width: 50%;
     height: 50%;
     position: absolute;
+    border: solid;
 }
 
 .quadrant:nth-child(1) {
     top: 0;
     left: 0;
+    border: solid;
 }
 
 .quadrant:nth-child(2) {
     top: 0;
     left: 50%;
+    border: solid;
 }
 
 .quadrant:nth-child(3) {
     top: 50%;
     left: 0;
+    border: solid;
 }
 
 .quadrant:nth-child(4) {
