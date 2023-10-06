@@ -69,8 +69,8 @@
         height : 35rem;
     }
     .chatbox{
-        width : 74.05rem;
-        height : 43rem;
+        width : 82.7%;
+        height : 91.7%;
         position:fixed;
         top: 4.2rem;
         left: 16rem;
