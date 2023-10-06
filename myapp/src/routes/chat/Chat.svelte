@@ -1,6 +1,6 @@
 
 <script>
-    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Banner, Avatar } from 'flowbite-svelte';
+    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Banner, Avatar, GradientButton } from 'flowbite-svelte';
     import { ChartPieSolid, GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
 </script>
 
@@ -38,7 +38,7 @@
         <div class = "textbox">
             <input type="text" placeholder="Enter text here"/>
         </div>
-        <button>Send</button>
+        <div class ="button"><GradientButton color="blue">Send</GradientButton></div>
         <Banner id="default-banner" position="absolute">
             <p class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
               <span class="inline-flex p-1 mr-3 bg-gray-200 rounded-full dark:bg-gray-600">
@@ -65,8 +65,8 @@
         overflow-y: scroll;
         position: absolute;
         right:0.01rem;
-        top: 3.6rem;
-        height : 35rem;
+        top: 8.5rem;
+        height : 70%;
     }
     .chatbox{
         width : 82.7%;
@@ -80,14 +80,13 @@
         z-index: 500;
     }  
     
-    button
-    {
+    
+    .button{
         position: absolute;
         bottom: 1rem;
         right: 0.5rem;
         width : 100px;
         height : 2.75rem;
-        background-color: rgb(250, 144, 23);
         color:rgb(0, 0, 0); 
         cursor:pointer;
         border-radius: .25rem;
@@ -106,8 +105,8 @@
     {
         position : absolute;
         bottom: 1rem;
-        right: 7.5rem;
-        width : 1050px;
+        left: 1rem;
+        width : 89%;
         box-sizing: border-box;
         font-size: 16px;
         z-index: 1000;
@@ -117,7 +116,7 @@
         margin : 0;
     }
     .textbox input[type="text"] {
-        width: 1050px;
+        width: 100%;
         color: black;
     }
 
