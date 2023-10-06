@@ -1,6 +1,6 @@
 
 <script>
-    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
+    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Banner, Avatar } from 'flowbite-svelte';
     import { ChartPieSolid, GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
 </script>
 
@@ -13,7 +13,7 @@
                 </div>
                 <SidebarItem label="Mark Marsala" href="/">
                     <svelte:fragment slot="icon">
-                    <ChartPieSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    <Avatar src="src/routes/profile/Mark Marsala.jpg" class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
                 <SidebarItem label="Jeremy" href="/docs/components/accordion">
@@ -39,13 +39,23 @@
             <input type="text" placeholder="Enter text here"/>
         </div>
         <button>Send</button>
+        <Banner id="default-banner" position="absolute">
+            <p class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
+              <span class="inline-flex p-1 mr-3 bg-gray-200 rounded-full dark:bg-gray-600">
+                <span class="sr-only">Light bulb</span>
+              </span>
+              <span>
+                New brand identity has been launched for the <a href="https://flowbite.com" class="inline font-medium text-primary-600 underline dark:text-primary-500 underline-offset-2 decoration-600 dark:decoration-500 decoration-solid hover:no-underline"> Flowbite Library </a>
+              </span>
+            </p>
+          </Banner>
     </div>
 </div>
 
 <style>
     .Sidebar{
         position : fixed;
-        top : 5rem;
+        top : 4.5rem;
         left : 0rem;
         height : 44rem;
         box-shadow: rgba(0,0,0,25) 0px 3px 8px;
@@ -53,13 +63,16 @@
     }
     .message-container{
         overflow-y: scroll;
-        height : 37rem;
+        position: absolute;
+        right:0.01rem;
+        top: 3.6rem;
+        height : 35rem;
     }
     .chatbox{
-        width : 74rem;
-        height : 41rem;
+        width : 82.7%;
+        height : 91.7%;
         position:fixed;
-        top: 5.5rem;
+        top: 4.2rem;
         left: 16rem;
         border-radius: .5rem;
         box-shadow: rgba(0,0,0,0.25) 0px 3px 8px;
@@ -70,7 +83,7 @@
     button
     {
         position: absolute;
-        bottom: 0.5rem;
+        bottom: 1rem;
         right: 0.5rem;
         width : 100px;
         height : 2.75rem;
@@ -92,9 +105,9 @@
     .textbox
     {
         position : absolute;
-        bottom: 0.5rem;
-        right: 48rem;
-        width : 400px;
+        bottom: 1rem;
+        right: 7.5rem;
+        width : 1050px;
         box-sizing: border-box;
         font-size: 16px;
         z-index: 1000;
@@ -111,6 +124,7 @@
     .Title{
         color:black;
         font-size: 30px;
+        
     }
 
     /* .container{

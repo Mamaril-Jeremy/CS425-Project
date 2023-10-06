@@ -6,7 +6,7 @@
   <Navbar>
     <NavBrand href="/home">
       <img src="src/assets/plato_logo.png" class="mr-3 w-10 first-line:sm:w-16" alt="Flowbite Logo" />
-      <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Plato</span>
+      <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"><span class="plato">Plato</span></span>
     </NavBrand>
     <div class="flex items-center md:order-2">
       <Avatar id="avatar-menu" src="src/routes/profile/Mark Marsala.jpg" />
@@ -42,5 +42,11 @@
         left: 0;
         right: 0;
         z-index: 1000; /* You can adjust the z-index as needed */
+    }
+    .plato{
+        background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
     }
 </style>
