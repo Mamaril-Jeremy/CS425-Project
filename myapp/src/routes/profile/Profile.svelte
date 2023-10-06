@@ -2,7 +2,6 @@
     import { Avatar, Label, Input, GradientButton, Checkbox, A } from 'flowbite-svelte';
 </script>
 
-<p>Profile</p>
 
 <div class="flex items-center space-x-10 mt-6">
     <Avatar src="src/routes/profile/Mark Marsala.jpg" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg" dot={{ placement: 'top-right', color: 'green', size: 'lg' }}/>

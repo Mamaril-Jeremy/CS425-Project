@@ -17,7 +17,7 @@
   <div class="card-container">
     <Card class="w-72 max-w-none">
       <form class="flex flex-col space-y-6" on:submit={handleSubmit}>
-        <h3 class="text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
+        <h3 class="text-xl font-medium text-gray-900 dark:text-white">Sign in to Plato</h3>
         <Label class="space-y-2">
           <span>Email</span>
           <Input type="email" bind:value={email} placeholder="name@company.com" required />
