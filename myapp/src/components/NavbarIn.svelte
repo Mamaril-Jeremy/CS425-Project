@@ -44,7 +44,7 @@
         z-index: 1000; /* You can adjust the z-index as needed */
     }
     .plato{
-        background: linear-gradient(to bottom, rgb(76, 133, 250), rgb(39, 89, 221));
+        background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
