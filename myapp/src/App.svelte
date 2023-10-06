@@ -5,49 +5,53 @@
   import Connections from "./routes/connections/Connections.svelte";
   import Event from "./routes/events/Event.svelte";
   import Home from "./routes/home/Home.svelte";
-  import Navbar from "./components/Navbar.svelte";
-  import Opener from "./components/Opener.svelte";
+  import NavbarIn from "./components/NavbarIn.svelte";
+  import NavbarOut from "./components/NavbarOut.svelte";
   import Profile from "./routes/profile/Profile.svelte";
   import SignIn from "./routes/sign-in/Sign-In.svelte";
-
 </script>
 
 <main>
   
   <Router>
 		<Route path="/">
-			<Opener />
-			<Navbar />
+			<Home />
+			<NavbarOut />
 		</Route>
 
-		<Route path="/about">
+		<Route path="/about-out">
 			<About/>
-			<Navbar />
+			<NavbarOut />
+		</Route>
+		
+		<Route path="/about-in">
+			<About/>
+			<NavbarIn />
 		</Route>
 
 		<Route path="/chat">
-			<Navbar />
 			<Chat />
+			<NavbarIn />
 		</Route>
 		
 		<Route path="/connections">
-			<Navbar />
 			<Connections />
+			<NavbarIn />
 		</Route>
 		
 		<Route path="/events">
-			<Navbar />
 			<Event />
+			<NavbarIn />
 		</Route>
 		
 		<Route path="/home">
-			<Navbar />
 			<Home />
+			<NavbarIn />
 		</Route>
 		
 		<Route path="/profile">
-			<Navbar />
 			<Profile />
+			<NavbarIn />
 		</Route>
 		
 		<Route path="/sign-in">
