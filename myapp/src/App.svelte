@@ -11,6 +11,10 @@
   import SignIn from "./routes/sign-in/Sign-In.svelte";
 </script>
 
+<svelte:head>
+	<title>Plato</title>
+</svelte:head>
+
 <main>
   
   <Router>
