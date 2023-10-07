@@ -24,7 +24,7 @@
         </Label>
         <Label class="space-y-2">
           <span>Your password</span>
-          <Input type="password" bind:value={password} placeholder="•••••" required />
+          <Input type="password" bind:value={password} placeholder="••••••••" required />
         </Label>
         <div class="flex items-start">
           <Checkbox>Remember me</Checkbox>

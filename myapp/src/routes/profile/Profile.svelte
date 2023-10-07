@@ -3,7 +3,7 @@
 </script>
 
 
-<div class="flex items-center space-x-10 mt-6">
+<div class="flex items-center space-x-10 mt-12">
     <Avatar src="src/routes/profile/Mark Marsala.jpg" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg" dot={{ placement: 'top-right', color: 'green', size: 'lg' }}/>
     <div class="space-y-1 font-medium dark:text-white">
       <div>Mark Marsala</div>
