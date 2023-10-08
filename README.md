@@ -35,6 +35,19 @@ Ctrl + C    #exits out the app when you want to return to terminal
 
 
 **Github Desktop and Git Branches**
+**When starting a new sitting of work**
+1. Fetch from main branch.
+2. Choose to merge main into your branch.
+3. Open in VSCode
+
+**When wanting to commit**
+1. Create a commit message in the summary field.
+2. Push origin.
+3. Preview pull request.
+4. Create pull request.
+5. Confirm pull request.
+6. Merge pull request.
+7. Confirm merge.
 
 
 **Flowbite**
