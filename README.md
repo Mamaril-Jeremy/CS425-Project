@@ -35,6 +35,7 @@ Ctrl + C    #exits out the app when you want to return to terminal
 
 
 **Github Desktop and Git Branches**
+
 **When starting a new sitting of work**
 1. Fetch from main branch.
 2. Choose to merge main into your branch.
