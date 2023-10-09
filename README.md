@@ -38,8 +38,9 @@ Ctrl + C    #exits out the app when you want to return to terminal
 
 **When starting a new sitting of work**
 1. Fetch from main branch.
-2. Choose to merge main into your branch.
-3. Open in VSCode
+2. Switch to your branch.
+3. Choose to merge main into your branch.
+4. Open in VSCode
 
 **When wanting to commit**
 1. Create a commit message in the summary field.
