@@ -10,7 +10,6 @@
     margin-bottom: 10px;
   }
 
-  /* Apply a vertical gradient text color to specific elements */
   .gradient-text {
     background: linear-gradient(rgb(80, 101, 168), rgb(11, 20, 119));
     -webkit-background-clip: text;
