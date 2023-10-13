@@ -1,7 +1,5 @@
-
-
 {
-  "name": "myapp",
+  "name": "plato",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,7 +12,7 @@
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
     "autoprefixer": "^10.4.14",
     "flowbite": "^1.8.1",
-    "flowbite-svelte": "^0.44.17",
+    "flowbite-svelte": "^0.44.18",
     "flowbite-svelte-icons": "^0.4.4",
     "postcss": "^8.4.24",
     "postcss-load-config": "^4.0.1",
@@ -28,4 +26,3 @@
     "svelte-routing": "^2.4.0"
   }
 }
-
