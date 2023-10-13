@@ -95,7 +95,7 @@
         z-index: 1000;
     } 
 
-    button:hover
+    .button:hover
     {
         z-index: 1000;
         background-color: rgb(255, 203, 144);
