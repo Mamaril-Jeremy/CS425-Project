@@ -49,11 +49,6 @@
     font-size: 1.2rem;
     color: #666;
   }
-
-  /* Hide the carousel thumbnails */
-  .carousel-thumbnails {
-    display: none;
-  }
 </style>
 
 <!-- Carousel at the top -->
@@ -69,7 +64,7 @@
   <h1>Welcome to Plato</h1>
   <p>Your journey to personal and professional growth starts here.</p>
   <!-- Button to learn more -->
-  <GradientButton color="primary" href="/about-out" target="_self">
+  <GradientButton color="blue" href="/about-out" target="_self">
     Discover More
     <ArrowRightOutline />
   </GradientButton>
