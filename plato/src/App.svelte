@@ -13,6 +13,7 @@
 
 <svelte:head>
 	<title>Plato</title>
+	<link rel="icon" type="image/svg+xml" href="src/assets/plato_logo.png" />
 </svelte:head>
 
 <main>

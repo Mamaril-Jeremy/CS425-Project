@@ -1,47 +1,67 @@
-# Svelte + Vite
+**Plato**
 
-This template should help get you started developing with Svelte in Vite.
+**Terminal Commands for reference**
 
-## Recommended IDE Setup
-
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
-
-## Need an official Svelte framework?
-
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
-
-## Technical considerations
-
-**Why use this over SvelteKit?**
-
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
-
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
-
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `checkJs` in the JS template?**
-
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
 ```
+#Do not do these without asking please
+npm create vite@latest myapp -- --template svelte     #Creates a new svelte app
+
+cd myapp    #Goes into the app
+
+npm install -g pnpm    #Installs pnpm
+
+Set-ExecutionPolicy RemoteSigned    #Allows you to use pnpm (run in powershell)
+
+npx svelte-add@latest tailwindcss    #Adds tailwind package
+
+pnpm i    #idk it's related to tailwind
+
+pnpm add save@^2.9.0 svelte-navigator@^3.2.2 svelte-routing@^2.4.0    #allows for navigation to other web pages on the frontend
+
+pnpm add save svelte@4.00.0    #update svelte to 4.0 to meet dependency needs
+
+pnpm i -D flowbite-svelte flowbite    #installs flowbite
+
+pnpm i -D flowbite-svelte-icons    #installs flowbite icons
+
+
+#You will use these more frequently
+pnpm install    #install packages before running (do this if you see errors when running pnpm dev)
+
+pnpm dev    #runs the application. do this frequently to see what the stuff you make looks like
+
+Ctrl + C    #exits out the app when you want to return to terminal
+```
+
+
+**Github Desktop and Git Branches**
+
+**When starting a new sitting of work**
+1. Fetch from main branch.
+2. Switch to your branch.
+3. Choose to merge main into your branch.
+4. Open in VSCode
+
+**When wanting to commit**
+1. Create a commit message in the summary field.
+2. Push origin.
+3. Preview pull request.
+4. Create pull request.
+5. Confirm pull request.
+6. Merge pull request.
+7. Confirm merge.
+
+
+**Flowbite**
+https://flowbite-svelte.com/docs/components/accordion
+
+
+**Training (HTML, CSS, Javascript, and Svelte)**
+These combined are only 20 minutes so no excuses...
+
+
+HTML: https://youtu.be/salY_Sm6mv4?si=BuABgOYFM8QnMeKp <br />
+CSS: https://youtu.be/Z4pCqK-V_Wo?si=S5e3A_Dnm2S80fBe <br />
+Javascript: https://www.youtube.com/watch?v=c-I5S_zTwAc <br />
+Svelte: https://youtu.be/TanFofZBvNI?si=SNs0im2dqQHxEXKP 
+
