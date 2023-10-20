@@ -38,8 +38,6 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const DriverData: string;
 	export const EFC_9924: string;
-	export const FPS_BROWSER_APP_PROFILE_STRING: string;
-	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
 	export const HOMEPATH: string;
@@ -61,6 +59,7 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_event: string;
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
+	export const npm_package_dependencies__event_calendar_day_grid: string;
 	export const npm_package_devDependencies_autoprefixer: string;
 	export const npm_package_devDependencies_flowbite: string;
 	export const npm_package_devDependencies_flowbite_svelte: string;
@@ -156,8 +155,6 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		DriverData: string;
 		EFC_9924: string;
-		FPS_BROWSER_APP_PROFILE_STRING: string;
-		FPS_BROWSER_USER_PROFILE_STRING: string;
 		HOME: string;
 		HOMEDRIVE: string;
 		HOMEPATH: string;
@@ -179,6 +176,7 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_event: string;
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
+		npm_package_dependencies__event_calendar_day_grid: string;
 		npm_package_devDependencies_autoprefixer: string;
 		npm_package_devDependencies_flowbite: string;
 		npm_package_devDependencies_flowbite_svelte: string;
