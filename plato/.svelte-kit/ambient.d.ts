@@ -62,6 +62,7 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_event: string;
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
+	export const npm_package_dependencies_npm: string;
 	export const npm_package_dependencies__event_calendar_day_grid: string;
 	export const npm_package_devDependencies_autoprefixer: string;
 	export const npm_package_devDependencies_flowbite: string;
@@ -91,7 +92,6 @@ declare module '$env/static/private' {
 	export const OS: string;
 	export const Path: string;
 	export const PATHEXT: string;
-	export const PNPM_HOME: string;
 	export const PNPM_SCRIPT_SRC_DIR: string;
 	export const PROCESSOR_ARCHITECTURE: string;
 	export const PROCESSOR_IDENTIFIER: string;
@@ -120,9 +120,6 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
-	export const VSCODE_INJECTION: string;
-	export const windir: string;
-	export const ZES_ENABLE_SYSMAN: string;
 }
 
 /**
@@ -188,6 +185,7 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_event: string;
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
+		npm_package_dependencies_npm: string;
 		npm_package_dependencies__event_calendar_day_grid: string;
 		npm_package_devDependencies_autoprefixer: string;
 		npm_package_devDependencies_flowbite: string;
@@ -217,7 +215,6 @@ declare module '$env/dynamic/private' {
 		OS: string;
 		Path: string;
 		PATHEXT: string;
-		PNPM_HOME: string;
 		PNPM_SCRIPT_SRC_DIR: string;
 		PROCESSOR_ARCHITECTURE: string;
 		PROCESSOR_IDENTIFIER: string;
