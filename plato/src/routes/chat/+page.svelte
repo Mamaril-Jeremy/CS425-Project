@@ -36,7 +36,7 @@
         <div class = "message-container">
         </div>
         <div class = "textbox">
-            <input type="text" placeholder="Enter text here"/>
+            <input type="text" placeholder="Enter message here"/>
         </div>
         <div class ="button"><GradientButton color="blue">Send</GradientButton></div>
         <Banner id="default-banner" position="absolute">
@@ -95,11 +95,6 @@
         z-index: 1000;
     } 
 
-    .button:hover
-    {
-        z-index: 1000;
-        background-color: rgb(255, 203, 144);
-    } 
 
     .textbox
     {

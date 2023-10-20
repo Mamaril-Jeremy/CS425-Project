@@ -1,5 +1,5 @@
 <script>
-    import img from "$lib/assets/RenoRodeo.jpg";
+    //import img from "$lib/assets/RenoRodeo.jpg";
 </script>
 
 <style>
@@ -54,7 +54,7 @@
     <br>
     <h1>Welcome to <a href="/home" class="gradient-text-blue">Plato</a>, the platform that opens the doors to your personal and professional growth journey.</h1> 
     <p>We're not just another networking site; we are your trusted partner in connecting you with the wisdom and guidance you need to thrive in your chosen field on a mentor-mentee basis.</p>
-    <img src={img} alt="Illustration of mentorship" class="about-image">
+    <!-- <img src={img} alt="Illustration of mentorship" class="about-image"> -->
     <br>
     <br>
   
