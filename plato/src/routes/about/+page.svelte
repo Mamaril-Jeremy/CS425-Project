@@ -14,8 +14,9 @@
   }
 
   h1, h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center; /* Center-align the titles */
   }
 
   /* Apply a scale transformation and cursor change on hover for the "Plato" text */
@@ -45,6 +46,10 @@
   <!-- Hero Section -->
   <br>
   <br>
+
+  <br>
+
+  <!-- Hero Section -->
   <br>
   <h1>Welcome to <a href="/home" class="gradient-text-blue">Plato</a>, the platform that opens the doors to your personal and professional growth journey.</h1>
   <br>
