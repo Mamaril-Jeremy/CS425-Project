@@ -8,11 +8,13 @@
     font-size: 16px;
     line-height: 1.5;
     margin-bottom: 20px;
+    text-align: center; /* Center-align the content */
   }
 
   h1, h2 {
     font-size: 24px;
     margin-bottom: 10px;
+    text-align: center; /* Center-align the titles */
   }
 
   /* Apply a scale transformation and cursor change on hover for the "Plato" text */
@@ -47,6 +49,7 @@
 
 <!-- About Page Content -->
 <div class="about-page">
+  <br>
   <br>
   <br>
 
