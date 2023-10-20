@@ -1,5 +1,5 @@
 <script>
-	  import Logo from '$lib/assets/plato_logo.png';
+	import Logo from '$lib/assets/plato_logo.png';
 </script>
   
   <svelte:head>

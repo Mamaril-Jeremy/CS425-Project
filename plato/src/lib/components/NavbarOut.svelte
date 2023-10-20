@@ -38,13 +38,12 @@
 </div> 
 
 <style>
-    /* Apply CSS styles to make Navbar stick to the top */
     .navbar-container {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        z-index: 1000; /* You can adjust the z-index as needed */
+        z-index: 1000; 
         width: 100%;
         top: 0;
         transition: top 0.3s;

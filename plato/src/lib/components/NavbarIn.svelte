@@ -37,7 +37,6 @@
 </div>
 
 <style>
-    /* Apply CSS styles to make Navbar stick to the top */
     .navbar-container {
         position: fixed;
         top: 0;
