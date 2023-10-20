@@ -1,96 +1,96 @@
 <script>
-    import { GradientButton } from 'flowbite-svelte';
-    import { ArrowRightOutline } from 'flowbite-svelte-icons';
-  
-    import { Carousel, Thumbnails } from 'flowbite-svelte';
-    import { images } from '$lib/assets/images.js';
-  
-    // Initialize variables
-    let index = 0;
-    let forward = true;
-  </script>
-  
-  <!-- Apply CSS styles -->
-  <style>
-    .hero {
-      text-align: center;
-      background-color: #f5f5f5;
-      padding: 4rem 0;
-    }
-  
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: #333;
-    }
-  
-    .hero p {
-      font-size: 1.5rem;
-      color: #666;
-    }
-  
-    .features {
-      text-align: center;
-      padding: 2rem 0;
-    }
-  
-    .feature {
-      margin: 2rem 0;
-    }
-  
-    .feature h2 {
-      font-size: 2rem;
-      color: #333;
-    }
-  
-    .feature p {
-      font-size: 1.2rem;
-      color: #666;
-    }
-  </style>
-  
-  <!-- Carousel at the top -->
-  <div class="max-w-4xl space-y-2">
-    <Carousel {images} {forward} let:Indicators let:Controls bind:index>
-      <Controls />
-      <Indicators />
-    </Carousel>
+  import { Carousel, Thumbnails } from 'flowbite-svelte';
+  import { images } from '$lib/assets/images.js';
+</script>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .carousel-container {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .carousel {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .feature {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+
+  .feature h2 {
+    font-size: 2rem;
+    color: #333;
+  }
+
+  .feature p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+
+  .hero {
+    text-align: center;
+    background-color: #f5f5f5;
+    padding: 2rem 0;
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  .journey-begins {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 2rem 0;
+  }
+</style>
+
+<div class="container">
+  <!-- Carousel section -->
+  <div class="carousel-container">
+    <div class="carousel">
+      <Carousel {images}>
+        <!-- Optional: Thumbnails for the carousel -->
+        <Thumbnails />
+      </Carousel>
+    </div>
   </div>
-  
-  <!-- Hero section -->
-  <div class="hero">
-    <h1>Welcome to Plato</h1>
-    <p>Your journey to personal and professional growth starts here.</p>
-    <!-- Button to learn more -->
-    <GradientButton color="blue" href="/about-out" target="_self">
-      Discover More
-      <ArrowRightOutline />
-    </GradientButton>
-  </div>
-  
+
   <!-- Features section -->
-  <div class="max-w-4xl space-y-4 features">
-    <!-- Feature 1 -->
-    <div class="feature">
-      <h2>Why Plato?</h2>
-      <p>Unlock your potential with a mentor by your side, guiding you through your career or academic journey. Mentorship is at the heart of what we do.</p>
-    </div>
-  
-    <!-- Feature 2 -->
-    <div class="feature">
-      <h2>Connecting Dreams and Expertise</h2>
-      <p>Plato brings together passionate learners and seasoned professionals, creating a dynamic synergy that propels you towards greatness.</p>
-    </div>
-  
-    <!-- Feature 3 -->
-    <div class="feature">
-      <h2>Personalized Mentorship</h2>
-      <p>Experience the art of personalization. We pair you with mentors who understand your unique goals and aspirations, providing tailored support.</p>
-    </div>
-  
-    <!-- Feature 4 -->
-    <div class="feature">
-      <h2>Trust and Community</h2>
-      <p>Plato is your sanctuary for forging genuine and meaningful connections. Join our community of learners and mentors and start your journey to success.</p>
-    </div>
+  <div class="features">
+    {#each [
+      { title: 'Why Plato', text: 'Unlock your potential with a mentor by your side, guiding you through your career or academic journey. Mentorship is at the heart of what we do.' },
+      { title: 'Connecting Dreams and Expertise', text: 'Plato brings together passionate learners and seasoned professionals, creating a dynamic synergy that propels you towards greatness.' },
+      { title: 'Personalized Mentorship', text: 'Experience the art of personalization. We pair you with mentors who understand your unique goals and aspirations, providing tailored support.' },
+      { title: 'Trust and Community', text: 'Plato is your sanctuary for forging genuine and meaningful connections. Join our community of learners and mentors and start your journey to success.' }
+    ] as feature}
+      <div class="feature">
+        <h2>{feature.title}</h2>
+        <p>{feature.text}</p>
+      </div>
+    {/each}
   </div>
+
+  <!-- Hero section with Welcome to Plato -->
+  <div class="hero">
+    <p>Your journey to personal and professional growth starts here.</p>
+  </div>
+</div>
