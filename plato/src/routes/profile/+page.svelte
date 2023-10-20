@@ -1,19 +1,38 @@
 <script>
-    import { Avatar, Label, Input, GradientButton, Checkbox, A } from 'flowbite-svelte';
+      import { Avatar, Label, Input, GradientButton, Checkbox, A } from 'flowbite-svelte';
     import Pfp from "$lib/assets/Mark Marsala.jpg";
     let email;
     let password;
 </script>
 
+<style>
+    .user-info-container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
 
-<div class="flex items-center space-x-10 mt-12">
-    <Avatar src={Pfp} data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg" dot={{ placement: 'top-right', color: 'green', size: 'lg' }}/>
-    <div class="space-y-1 font-medium dark:text-white">
-      <div>Mark Marsala</div>
-      <div class="text-sm text-gray-500 dark:text-gray-400">Joined in September 2023</div>
+    .form-container {
+        margin-top: 150px; /* Adjust the margin to provide space for the user info container */
+    }
+</style>
+
+<div class="user-info-container">
+    <div class="flex items-center space-x-10">
+        <Avatar src={Pfp} data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg" dot={{ placement: 'top-right', color: 'green', size: 'lg' }}/>
+        <div class="space-y-1 font-medium dark:text-white">
+            <div>Mark Marsala</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400">Joined in September 2023</div>
+        </div>
     </div>
 </div>
 
+<div class="form-container">
   <form>
     <div class="grid gap-6 mb-6 md:grid-cols-2 mt-6">
       <div>
@@ -56,5 +75,6 @@
     <!-- <Checkbox class="mb-6 space-x-1" required> -->
       <!-- I agree with the <A href="/" class="text-primary-600 dark:text-primary-600 hover:underline">terms and conditions</A>. -->
     <!-- </Checkbox> -->
-    <GradientButton type="submit" color="purpleToBlue">Submit</GradientButton>
+    <GradientButton type="submit" color="purpleToBlue" class="flex justify-center">Submit</GradientButton>
   </form>
+</div>
