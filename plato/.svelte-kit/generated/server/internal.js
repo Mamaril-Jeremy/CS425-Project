@@ -2,7 +2,7 @@
 import root from '../root.svelte';
 import { set_building } from '__sveltekit/environment';
 import { set_assets } from '__sveltekit/paths';
-import { set_private_env, set_public_env } from '../../../node_modules/.pnpm/@sveltejs+kit@1.26.0_svelte@4.2.1_vite@4.5.0/node_modules/@sveltejs/kit/src/runtime/shared-server.js';
+import { set_private_env, set_public_env } from '../../../node_modules/@sveltejs/kit/src/runtime/shared-server.js';
 
 export const options = {
 	app_template_contains_nonce: false,
