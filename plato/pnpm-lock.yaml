@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
+  '@event-calendar/core':
+    specifier: ^2.4.0
+    version: 2.4.0
+  '@event-calendar/time-grid':
+    specifier: ^2.4.0
+    version: 2.4.0
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
     version: 2.1.0(@sveltejs/kit@1.26.0)
@@ -254,6 +260,19 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@event-calendar/core@2.4.0:
+    resolution: {integrity: sha512-LXaQkn/T3bqywz18vrktEWPxxPTmm4r0xjTnldF5z8XQCmyQzkWvExmVyomTXfWHY4BPnxTMWBZFQky+4R4Maw==}
+    dependencies:
+      svelte: 4.2.1
+    dev: true
+
+  /@event-calendar/time-grid@2.4.0:
+    resolution: {integrity: sha512-flAtG70zJVuaIkKM/b+25uK6ucfDDZkhWOTC+zk4WeaRDTS1LDsl/i7g1JGLpGvhwpRW+dvc668WODzig15glw==}
+    dependencies:
+      '@event-calendar/core': 2.4.0
+      svelte: 4.2.1
+    dev: true
 
   /@fastify/busboy@2.0.0:
     resolution: {integrity: sha512-JUFJad5lv7jxj926GPgymrWQxxjPYuJNiNjNMzqT+HiuP6Vl3dk5xzG+8sTX96np0ZAluvaMzPsjhHZ5rNuNQQ==}
