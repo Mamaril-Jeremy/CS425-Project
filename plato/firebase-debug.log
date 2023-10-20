@@ -1,39 +1,40 @@
-[debug] [2023-10-20T00:32:25.325Z] ----------------------------------------------------------------------
-[debug] [2023-10-20T00:32:25.329Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\bryan\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
-[debug] [2023-10-20T00:32:25.329Z] CLI Version:   12.7.0
-[debug] [2023-10-20T00:32:25.330Z] Platform:      win32
-[debug] [2023-10-20T00:32:25.330Z] Node Version:  v18.17.1
-[debug] [2023-10-20T00:32:25.335Z] Time:          Thu Oct 19 2023 17:32:25 GMT-0700 (Pacific Daylight Time)
-[debug] [2023-10-20T00:32:25.335Z] ----------------------------------------------------------------------
+[debug] [2023-10-20T19:22:17.267Z] ----------------------------------------------------------------------
+[debug] [2023-10-20T19:22:17.272Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\marki\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-10-20T19:22:17.273Z] CLI Version:   12.7.0
+[debug] [2023-10-20T19:22:17.274Z] Platform:      win32
+[debug] [2023-10-20T19:22:17.274Z] Node Version:  v18.17.1
+[debug] [2023-10-20T19:22:17.277Z] Time:          Fri Oct 20 2023 12:22:17 GMT-0700 (Pacific Daylight Time)
+[debug] [2023-10-20T19:22:17.277Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2023-10-20T00:32:25.342Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
-[debug] [2023-10-20T00:32:25.423Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-10-20T00:32:25.424Z] > authorizing via signed-in user (jmamaril@nevada.unr.edu)
+[debug] [2023-10-20T19:22:17.473Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-10-20T19:22:17.474Z] > authorizing via signed-in user (markinreno2001@gmail.com)
+[debug] [2023-10-20T19:22:17.475Z] [iam] checking project plato-49d12 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2023-10-20T19:22:17.481Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/plato-49d12:testIamPermissions [none]
+[debug] [2023-10-20T19:22:17.481Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/plato-49d12:testIamPermissions x-goog-quota-user=projects/plato-49d12
+[debug] [2023-10-20T19:22:17.482Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/plato-49d12:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2023-10-20T19:22:17.739Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/plato-49d12:testIamPermissions 200
+[debug] [2023-10-20T19:22:17.741Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/plato-49d12:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2023-10-20T19:22:17.742Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/plato-49d12/serviceAccounts/plato-49d12@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2023-10-20T19:22:17.742Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/plato-49d12/serviceAccounts/plato-49d12@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2023-10-20T19:22:17.908Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/plato-49d12/serviceAccounts/plato-49d12@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2023-10-20T19:22:17.910Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/plato-49d12/serviceAccounts/plato-49d12@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2023-10-20T19:22:17.917Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/plato-49d12 [none]
+[debug] [2023-10-20T19:22:18.383Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/plato-49d12 200
+[debug] [2023-10-20T19:22:18.384Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/plato-49d12 {"projectId":"plato-49d12","projectNumber":"395702157219","displayName":"Plato","name":"projects/plato-49d12","resources":{"hostingSite":"plato-49d12","realtimeDatabaseInstance":"plato-49d12-default-rtdb","storageBucket":"plato-49d12.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_971bf54c-ceb8-4ba4-9a29-75ed9ec0db1d"}
+[debug] [2023-10-20T19:22:18.388Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/plato-49d12 [none]
+[debug] [2023-10-20T19:22:18.687Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/plato-49d12 200
+[debug] [2023-10-20T19:22:18.690Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/plato-49d12 {"projectId":"plato-49d12","projectNumber":"395702157219","displayName":"Plato","name":"projects/plato-49d12","resources":{"hostingSite":"plato-49d12","realtimeDatabaseInstance":"plato-49d12-default-rtdb","storageBucket":"plato-49d12.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_971bf54c-ceb8-4ba4-9a29-75ed9ec0db1d"}
 [info] 
-     ######## #### ########  ######## ########     ###     ######  ########
-     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
-     ######    ##  ########  ######   ########  #########  ######  ######
-     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
-     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+   Thank you for trying our experimental support for SvelteKit on Firebase Hosting.
+   While this integration is maintained by Googlers it is not a supported Firebase product.
+   Issues filed on GitHub will be addressed on a best-effort basis by maintainers and other community members.
 
-You're about to initialize a Firebase project in this directory:
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/frameworks-overview
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
 
-  C:\Users\bryan\Documents\test\plato
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
 
-[debug] [2023-10-20T00:32:25.722Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
-[debug] [2023-10-20T00:32:25.722Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
-[info] 
-=== Project Setup
-[info] 
-[info] First, let's associate this project directory with a Firebase project.
-[info] You can create multiple project aliases by running firebase use --add, 
-[info] but for now we'll just set up a default project.
-[info] 
-[debug] [2023-10-20T00:42:41.011Z] > refreshing access token with scopes: []
-[debug] [2023-10-20T00:42:41.013Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2023-10-20T00:42:41.013Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2023-10-20T00:42:41.238Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2023-10-20T00:42:41.238Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2023-10-20T00:42:41.275Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
-[debug] [2023-10-20T00:42:41.868Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
-[debug] [2023-10-20T00:42:41.868Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2023-10-20T19:22:45.636Z] Error: Could not load C:\GitHub\CS425-Project\plato\src\lib/assets/RenoRodeo.jpg (imported by src/routes/about/+page.svelte): ENOENT: no such file or directory, open 'C:\GitHub\CS425-Project\plato\src\lib\assets\RenoRodeo.jpg'
+[error] 
+[error] Error: An unexpected error has occurred.
