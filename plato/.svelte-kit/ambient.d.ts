@@ -62,6 +62,7 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_event: string;
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
+	export const npm_package_dependencies__event_calendar_day_grid: string;
 	export const npm_package_devDependencies_autoprefixer: string;
 	export const npm_package_devDependencies_flowbite: string;
 	export const npm_package_devDependencies_flowbite_svelte: string;
@@ -72,6 +73,8 @@ declare module '$env/static/private' {
 	export const npm_package_devDependencies_tailwindcss: string;
 	export const npm_package_devDependencies_vite: string;
 	export const npm_package_devDependencies_vitest: string;
+	export const npm_package_devDependencies__event_calendar_core: string;
+	export const npm_package_devDependencies__event_calendar_time_grid: string;
 	export const npm_package_devDependencies__sveltejs_adapter_auto: string;
 	export const npm_package_devDependencies__sveltejs_kit: string;
 	export const npm_package_name: string;
@@ -185,6 +188,7 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_event: string;
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
+		npm_package_dependencies__event_calendar_day_grid: string;
 		npm_package_devDependencies_autoprefixer: string;
 		npm_package_devDependencies_flowbite: string;
 		npm_package_devDependencies_flowbite_svelte: string;
@@ -195,6 +199,8 @@ declare module '$env/dynamic/private' {
 		npm_package_devDependencies_tailwindcss: string;
 		npm_package_devDependencies_vite: string;
 		npm_package_devDependencies_vitest: string;
+		npm_package_devDependencies__event_calendar_core: string;
+		npm_package_devDependencies__event_calendar_time_grid: string;
 		npm_package_devDependencies__sveltejs_adapter_auto: string;
 		npm_package_devDependencies__sveltejs_kit: string;
 		npm_package_name: string;
