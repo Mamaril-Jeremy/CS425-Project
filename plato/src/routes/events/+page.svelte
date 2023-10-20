@@ -8,13 +8,14 @@
   let options = {
       view: 'dayGridMonth',
       height: '600px',
+      allDaySlot: false,
       selectBackgroundColor: 'white',
-      headerToolbar: {start: 'title', center:'dayGridMonth, timeGridWeek, timeGridDay', end: 'today prev,next'},
+      headerToolbar: {start: 'title', center:'dayGridMonth, timeGridWeek, timeGridDay', end: 'today,prev,next'},
       events: [
       ]
   };
 </script>
 
-<div class = Calender style="position: relative; top: 110px;">
+<div class = Calender style="position: absolute; top: 110px; width : 700px;" >
   <Calendar {plugins} {options} />
 </div>
