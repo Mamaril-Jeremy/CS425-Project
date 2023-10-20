@@ -1,6 +1,8 @@
 <script>
     import { Avatar, Label, Input, GradientButton, Checkbox, A } from 'flowbite-svelte';
     import Pfp from "$lib/assets/Mark Marsala.jpg";
+    let email;
+    let password;
 </script>
 
 
@@ -41,11 +43,11 @@
     </div>
     <div class="mb-6">
       <Label for="email" class="mb-2">Email address</Label>
-      <Input type="email" id="email" placeholder="first.last@company.com" required />
+      <Input type="email" id="email" placeholder="first.last@company.com" required bind:value={email} />
     </div>
     <div class="mb-6">
       <Label for="password" class="mb-2">Password</Label>
-      <Input type="password" id="password" placeholder="•••••••••" required />
+      <Input type="password" id="password" placeholder="•••••••••" required bind:value={password}/>
     </div>
     <div class="mb-6">
       <Label for="confirm_password" class="mb-2">Confirm password</Label>
