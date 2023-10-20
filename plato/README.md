@@ -1,67 +1,38 @@
-**Plato**
+# create-svelte
 
-**Terminal Commands for reference**
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-```
-#Do not do these without asking please
-npm create vite@latest myapp -- --template svelte     #Creates a new svelte app
+## Creating a project
 
-cd myapp    #Goes into the app
+If you're seeing this, you've probably already done this step. Congrats!
 
-npm install -g pnpm    #Installs pnpm
+```bash
+# create a new project in the current directory
+npm create svelte@latest
 
-Set-ExecutionPolicy RemoteSigned    #Allows you to use pnpm (run in powershell)
-
-npx svelte-add@latest tailwindcss    #Adds tailwind package
-
-pnpm i    #idk it's related to tailwind
-
-pnpm add save@^2.9.0 svelte-navigator@^3.2.2 svelte-routing@^2.4.0    #allows for navigation to other web pages on the frontend
-
-pnpm add save svelte@4.00.0    #update svelte to 4.0 to meet dependency needs
-
-pnpm i -D flowbite-svelte flowbite    #installs flowbite
-
-pnpm i -D flowbite-svelte-icons    #installs flowbite icons
-
-
-#You will use these more frequently
-pnpm install    #install packages before running (do this if you see errors when running pnpm dev)
-
-pnpm dev    #runs the application. do this frequently to see what the stuff you make looks like
-
-Ctrl + C    #exits out the app when you want to return to terminal
+# create a new project in my-app
+npm create svelte@latest my-app
 ```
 
+## Developing
 
-**Github Desktop and Git Branches**
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-**When starting a new sitting of work**
-1. Fetch from main branch.
-2. Switch to your branch.
-3. Choose to merge main into your branch.
-4. Open in VSCode
+```bash
+npm run dev
 
-**When wanting to commit**
-1. Create a commit message in the summary field.
-2. Push origin.
-3. Preview pull request.
-4. Create pull request.
-5. Confirm pull request.
-6. Merge pull request.
-7. Confirm merge.
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
+## Building
 
-**Flowbite**
-https://flowbite-svelte.com/docs/components/accordion
+To create a production version of your app:
 
+```bash
+npm run build
+```
 
-**Training (HTML, CSS, Javascript, and Svelte)**
-These combined are only 20 minutes so no excuses...
+You can preview the production build with `npm run preview`.
 
-
-HTML: https://youtu.be/salY_Sm6mv4?si=BuABgOYFM8QnMeKp <br />
-CSS: https://youtu.be/Z4pCqK-V_Wo?si=S5e3A_Dnm2S80fBe <br />
-Javascript: https://www.youtube.com/watch?v=c-I5S_zTwAc <br />
-Svelte: https://youtu.be/TanFofZBvNI?si=SNs0im2dqQHxEXKP 
-
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

@@ -1,15 +1,17 @@
 <script>
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownItem, DropdownHeader, DropdownDivider } from 'flowbite-svelte';
+    import Logo from "$lib/assets/plato_logo.png";
+    import Pfp from "$lib/assets/Mark Marsala.jpg";
   </script>
   
   <div class="navbar-container">
   <Navbar>
     <NavBrand href="/home">
-      <img src="src/assets/plato_logo.png" class="mr-3 w-14 first-line:sm:w-16" alt="Flowbite Logo" />
+      <img src={Logo} class="mr-3 w-14 first-line:sm:w-16" alt="Flowbite Logo" />
       <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"><span class="plato">Plato</span></span>
     </NavBrand>
     <div class="flex items-center md:order-2">
-      <Avatar id="avatar-menu" src="src/routes/profile/Mark Marsala.jpg" />
+      <Avatar id="avatar-menu" src={Pfp} />
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
     </div>
     <Dropdown placement="bottom" triggeredBy="#avatar-menu">
@@ -21,7 +23,7 @@
       <DropdownItem>Settings</DropdownItem>
       <DropdownItem>Earnings</DropdownItem>
       <DropdownDivider />
-      <DropdownItem href="/">Sign out</DropdownItem>
+      <DropdownItem href="/home">Sign out</DropdownItem>
     </Dropdown>
     <NavUl>
       <NavLi href="/home"><span class="hover:text-blue-600">Home</span></NavLi>
@@ -29,7 +31,7 @@
       <NavLi href="/connections"><span class="hover:text-blue-600">Connections</span></NavLi>
       <NavLi href="/events"><span class="hover:text-blue-600">Events</span></NavLi>
       <NavLi href="/profile"><span class="hover:text-blue-600">Profile</span></NavLi>
-      <NavLi href="/about-in"><span class="hover:text-blue-600">About</span></NavLi>
+      <NavLi href="/about"><span class="hover:text-blue-600">About</span></NavLi>
     </NavUl>
   </Navbar>
 </div>

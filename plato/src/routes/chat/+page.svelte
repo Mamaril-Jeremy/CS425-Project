@@ -1,7 +1,7 @@
-
 <script>
     import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Banner, Avatar, GradientButton } from 'flowbite-svelte';
     import { ChartPieSolid, GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
+    import Pfp from "$lib/assets/Mark Marsala.jpg";
 </script>
 
 <div class = "Sidebar">
@@ -11,9 +11,9 @@
                 <div class = "Title">
                     <p>Connections</p>
                 </div>
-                <SidebarItem label="Mark Marsala" href="/">
+                <SidebarItem label="Mark Marsala" href="/home">
                     <svelte:fragment slot="icon">
-                    <Avatar src="src/routes/profile/Mark Marsala.jpg" class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    <Avatar src={Pfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
                 <SidebarItem label="Jeremy" href="/docs/components/accordion">
