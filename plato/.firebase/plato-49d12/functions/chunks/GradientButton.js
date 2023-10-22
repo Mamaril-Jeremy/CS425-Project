@@ -1,6 +1,6 @@
-import { c as create_ssr_component, a as compute_rest_props, i as getContext, f as add_attribute, v as validate_component } from "./ssr.js";
-import { twMerge } from "tailwind-merge";
+import { c as create_ssr_component, a as compute_rest_props, g as getContext, f as add_attribute, v as validate_component } from "./ssr.js";
 import { B as Button } from "./Button.js";
+import { t as twMerge } from "./tw-merge.js";
 const GradientButton = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["color", "shadow"]);
   const group = getContext("group");

@@ -1,7 +1,7 @@
-import { c as create_ssr_component, a as compute_rest_props, b as spread, e as escape_object, d as escape_attribute_value, f as add_attribute, i as getContext, v as validate_component, l as escape, h as compute_slots } from "../../../chunks/ssr.js";
+import { c as create_ssr_component, a as compute_rest_props, b as spread, e as escape_object, d as escape_attribute_value, f as add_attribute, g as getContext, v as validate_component, h as escape, j as compute_slots } from "../../../chunks/ssr.js";
 import { P as Pfp, A as Avatar } from "../../../chunks/Mark Marsala.js";
 import { G as GradientButton } from "../../../chunks/GradientButton.js";
-import { twMerge } from "tailwind-merge";
+import { t as twMerge } from "../../../chunks/tw-merge.js";
 import { W as Wrapper } from "../../../chunks/Wrapper.js";
 const Label = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let labelClass;
@@ -134,155 +134,192 @@ const Input = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
   )} `;
 });
+const _page_svelte_svelte_type_style_lang = "";
+const css = {
+  code: ".user-info-container.s-zqG5o-EiPySZ{position:absolute;top:0;left:50%;transform:translateX(-50%);background-color:white;padding:20px;border-radius:10px;box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1)}.form-container.s-zqG5o-EiPySZ{margin-top:150px}",
+  map: null
+};
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<div class="flex items-center space-x-10 mt-12">${validate_component(Avatar, "Avatar").$$render(
-    $$result,
-    {
-      src: Pfp,
-      "data-name": "Mark Marsala",
-      border: true,
-      class: "ring-blue-600 dark:ring-blue-300",
-      size: "lg",
-      dot: {
-        placement: "top-right",
-        color: "green",
-        size: "lg"
+  let email;
+  let password;
+  $$result.css.add(css);
+  let $$settled;
+  let $$rendered;
+  let previous_head = $$result.head;
+  do {
+    $$settled = true;
+    $$result.head = previous_head;
+    $$rendered = `<div class="user-info-container s-zqG5o-EiPySZ"><div class="flex items-center space-x-10">${validate_component(Avatar, "Avatar").$$render(
+      $$result,
+      {
+        src: Pfp,
+        "data-name": "Mark Marsala",
+        border: true,
+        class: "ring-blue-600 dark:ring-blue-300",
+        size: "lg",
+        dot: {
+          placement: "top-right",
+          color: "green",
+          size: "lg"
+        }
+      },
+      {},
+      {}
+    )} <div class="space-y-1 font-medium dark:text-white"><div data-svelte-h="svelte-12i1jlu">Mark Marsala</div> <div class="text-sm text-gray-500 dark:text-gray-400" data-svelte-h="svelte-17ve2fu">Joined in September 2023</div></div></div></div> <div class="form-container s-zqG5o-EiPySZ"><form><div class="grid gap-6 mb-6 md:grid-cols-2 mt-6"><div>${validate_component(Label, "Label").$$render($$result, { for: "first_name", class: "mb-2" }, {}, {
+      default: () => {
+        return `First name`;
       }
-    },
-    {},
-    {}
-  )} <div class="space-y-1 font-medium dark:text-white"><div data-svelte-h="svelte-12i1jlu">Mark Marsala</div> <div class="text-sm text-gray-500 dark:text-gray-400" data-svelte-h="svelte-17ve2fu">Joined in September 2023</div></div></div> <form><div class="grid gap-6 mb-6 md:grid-cols-2 mt-6"><div>${validate_component(Label, "Label").$$render($$result, { for: "first_name", class: "mb-2" }, {}, {
-    default: () => {
-      return `First name`;
-    }
-  })} ${validate_component(Input, "Input").$$render(
-    $$result,
-    {
-      type: "text",
-      id: "first_name",
-      placeholder: "First",
-      required: true
-    },
-    {},
-    {}
-  )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "last_name", class: "mb-2" }, {}, {
-    default: () => {
-      return `Last name`;
-    }
-  })} ${validate_component(Input, "Input").$$render(
-    $$result,
-    {
-      type: "text",
-      id: "last_name",
-      placeholder: "Last",
-      required: true
-    },
-    {},
-    {}
-  )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "company", class: "mb-2" }, {}, {
-    default: () => {
-      return `Company`;
-    }
-  })} ${validate_component(Input, "Input").$$render(
-    $$result,
-    {
-      type: "text",
-      id: "company",
-      placeholder: "Plato",
-      required: true
-    },
-    {},
-    {}
-  )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "phone", class: "mb-2" }, {}, {
-    default: () => {
-      return `Phone number`;
-    }
-  })} ${validate_component(Input, "Input").$$render(
-    $$result,
-    {
-      type: "tel",
-      id: "phone",
-      placeholder: "123-45-678",
-      pattern: "[0-9]{3}-[0-9]{2}-[0-9]{3}",
-      required: true
-    },
-    {},
-    {}
-  )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "website", class: "mb-2" }, {}, {
-    default: () => {
-      return `Website URL`;
-    }
-  })} ${validate_component(Input, "Input").$$render(
-    $$result,
-    {
-      type: "url",
-      id: "website",
-      placeholder: "plato.com",
-      required: true
-    },
-    {},
-    {}
-  )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "visitors", class: "mb-2" }, {}, {
-    default: () => {
-      return `Unique visitors (per month)`;
-    }
-  })} ${validate_component(Input, "Input").$$render(
-    $$result,
-    {
-      type: "number",
-      id: "visitors",
-      placeholder: "",
-      required: true
-    },
-    {},
-    {}
-  )}</div></div> <div class="mb-6">${validate_component(Label, "Label").$$render($$result, { for: "email", class: "mb-2" }, {}, {
-    default: () => {
-      return `Email address`;
-    }
-  })} ${validate_component(Input, "Input").$$render(
-    $$result,
-    {
-      type: "email",
-      id: "email",
-      placeholder: "first.last@company.com",
-      required: true
-    },
-    {},
-    {}
-  )}</div> <div class="mb-6">${validate_component(Label, "Label").$$render($$result, { for: "password", class: "mb-2" }, {}, {
-    default: () => {
-      return `Password`;
-    }
-  })} ${validate_component(Input, "Input").$$render(
-    $$result,
-    {
-      type: "password",
-      id: "password",
-      placeholder: "•••••••••",
-      required: true
-    },
-    {},
-    {}
-  )}</div> <div class="mb-6">${validate_component(Label, "Label").$$render($$result, { for: "confirm_password", class: "mb-2" }, {}, {
-    default: () => {
-      return `Confirm password`;
-    }
-  })} ${validate_component(Input, "Input").$$render(
-    $$result,
-    {
-      type: "password",
-      id: "confirm_password",
-      placeholder: "•••••••••",
-      required: true
-    },
-    {},
-    {}
-  )}</div>    ${validate_component(GradientButton, "GradientButton").$$render($$result, { type: "submit", color: "purpleToBlue" }, {}, {
-    default: () => {
-      return `Submit`;
-    }
-  })}</form>`;
+    })} ${validate_component(Input, "Input").$$render(
+      $$result,
+      {
+        type: "text",
+        id: "first_name",
+        placeholder: "First",
+        required: true
+      },
+      {},
+      {}
+    )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "last_name", class: "mb-2" }, {}, {
+      default: () => {
+        return `Last name`;
+      }
+    })} ${validate_component(Input, "Input").$$render(
+      $$result,
+      {
+        type: "text",
+        id: "last_name",
+        placeholder: "Last",
+        required: true
+      },
+      {},
+      {}
+    )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "company", class: "mb-2" }, {}, {
+      default: () => {
+        return `Company`;
+      }
+    })} ${validate_component(Input, "Input").$$render(
+      $$result,
+      {
+        type: "text",
+        id: "company",
+        placeholder: "Plato",
+        required: true
+      },
+      {},
+      {}
+    )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "phone", class: "mb-2" }, {}, {
+      default: () => {
+        return `Phone number`;
+      }
+    })} ${validate_component(Input, "Input").$$render(
+      $$result,
+      {
+        type: "tel",
+        id: "phone",
+        placeholder: "123-45-678",
+        pattern: "[0-9]{3}-[0-9]{2}-[0-9]{3}",
+        required: true
+      },
+      {},
+      {}
+    )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "website", class: "mb-2" }, {}, {
+      default: () => {
+        return `Website URL`;
+      }
+    })} ${validate_component(Input, "Input").$$render(
+      $$result,
+      {
+        type: "url",
+        id: "website",
+        placeholder: "plato.com",
+        required: true
+      },
+      {},
+      {}
+    )}</div> <div>${validate_component(Label, "Label").$$render($$result, { for: "visitors", class: "mb-2" }, {}, {
+      default: () => {
+        return `Unique visitors (per month)`;
+      }
+    })} ${validate_component(Input, "Input").$$render(
+      $$result,
+      {
+        type: "number",
+        id: "visitors",
+        placeholder: "",
+        required: true
+      },
+      {},
+      {}
+    )}</div></div> <div class="mb-6">${validate_component(Label, "Label").$$render($$result, { for: "email", class: "mb-2" }, {}, {
+      default: () => {
+        return `Email address`;
+      }
+    })} ${validate_component(Input, "Input").$$render(
+      $$result,
+      {
+        type: "email",
+        id: "email",
+        placeholder: "first.last@company.com",
+        required: true,
+        value: email
+      },
+      {
+        value: ($$value) => {
+          email = $$value;
+          $$settled = false;
+        }
+      },
+      {}
+    )}</div> <div class="mb-6">${validate_component(Label, "Label").$$render($$result, { for: "password", class: "mb-2" }, {}, {
+      default: () => {
+        return `Password`;
+      }
+    })} ${validate_component(Input, "Input").$$render(
+      $$result,
+      {
+        type: "password",
+        id: "password",
+        placeholder: "•••••••••",
+        required: true,
+        value: password
+      },
+      {
+        value: ($$value) => {
+          password = $$value;
+          $$settled = false;
+        }
+      },
+      {}
+    )}</div> <div class="mb-6">${validate_component(Label, "Label").$$render($$result, { for: "confirm_password", class: "mb-2" }, {}, {
+      default: () => {
+        return `Confirm password`;
+      }
+    })} ${validate_component(Input, "Input").$$render(
+      $$result,
+      {
+        type: "password",
+        id: "confirm_password",
+        placeholder: "•••••••••",
+        required: true
+      },
+      {},
+      {}
+    )}</div>    ${validate_component(GradientButton, "GradientButton").$$render(
+      $$result,
+      {
+        type: "submit",
+        color: "purpleToBlue",
+        class: "flex justify-center"
+      },
+      {},
+      {
+        default: () => {
+          return `Submit`;
+        }
+      }
+    )}</form></div>`;
+  } while (!$$settled);
+  return $$rendered;
 });
 export {
   Page as default
