@@ -1,6 +1,6 @@
-import { c as create_ssr_component, a as compute_rest_props, i as getContext, b as spread, d as escape_attribute_value, e as escape_object } from "./ssr.js";
+import { c as create_ssr_component, a as compute_rest_props, g as getContext, b as spread, d as escape_attribute_value, e as escape_object } from "./ssr.js";
 import { v as validate_dynamic_element, a as validate_void_dynamic_element, i as is_void } from "./dev.js";
-import { twMerge } from "tailwind-merge";
+import { t as twMerge } from "./tw-merge.js";
 const Button = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["pill", "outline", "size", "href", "type", "color", "shadow"]);
   const group = getContext("group");

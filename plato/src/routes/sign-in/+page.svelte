@@ -48,4 +48,4 @@
 </style> -->
 
 
-<Button color="dark" href="/home">Mariooo HeHe</Button>
+<Button color="dark" on:click{handleSubmit}>Mariooo HeHe</Button>

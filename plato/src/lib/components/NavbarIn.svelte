@@ -2,6 +2,9 @@
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownItem, DropdownHeader, DropdownDivider } from 'flowbite-svelte';
     import Logo from "$lib/assets/plato_logo.png";
     import Pfp from "$lib/assets/Mark Marsala.jpg";
+    const pClicked = async (event) => {
+      window.location.href = "/profile";
+    }
   </script>
   
   <div class="navbar-container">
@@ -21,7 +24,7 @@
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
       <DropdownItem>Settings</DropdownItem>
-      <DropdownItem>Earnings</DropdownItem>
+      <DropdownItem on:click={pClicked}>Profile</DropdownItem>
       <DropdownDivider />
       <DropdownItem href="/home">Sign out</DropdownItem>
     </Dropdown>
@@ -30,7 +33,6 @@
       <NavLi href="/chat"><span class="hover:text-blue-600">Chat</span></NavLi>
       <NavLi href="/connections"><span class="hover:text-blue-600">Connections</span></NavLi>
       <NavLi href="/events"><span class="hover:text-blue-600">Events</span></NavLi>
-      <NavLi href="/profile"><span class="hover:text-blue-600">Profile</span></NavLi>
       <NavLi href="/about"><span class="hover:text-blue-600">About</span></NavLi>
     </NavUl>
   </Navbar>
@@ -42,7 +44,12 @@
         top: 0;
         left: 0;
         right: 0;
-        z-index: 1000; /* You can adjust the z-index as needed */
+        z-index: 1000; 
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+        height: 30px;
+        margin: 15px auto;
     }
     .plato{
         background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));;

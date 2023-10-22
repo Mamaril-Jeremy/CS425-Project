@@ -1,5 +1,5 @@
 <script>
-      import { Avatar, Label, Input, GradientButton, Checkbox, A } from 'flowbite-svelte';
+    import { Avatar, Label, Input, GradientButton, Checkbox, A } from 'flowbite-svelte';
     import Pfp from "$lib/assets/Mark Marsala.jpg";
     let email;
     let password;
@@ -15,10 +15,19 @@
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        margin-top: 60px;
     }
 
     .form-container {
-        margin-top: 150px; /* Adjust the margin to provide space for the user info container */
+      position: relative;
+      margin-top: 200px;
+    }
+
+    .centered-button{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
     }
 </style>
 
@@ -75,6 +84,7 @@
     <!-- <Checkbox class="mb-6 space-x-1" required> -->
       <!-- I agree with the <A href="/" class="text-primary-600 dark:text-primary-600 hover:underline">terms and conditions</A>. -->
     <!-- </Checkbox> -->
-    <GradientButton type="submit" color="purpleToBlue" class="flex justify-center">Submit</GradientButton>
+    <div class="centered-button"><GradientButton type="submit" color="purpleToBlue">Submit</GradientButton>
+    </div>
   </form>
 </div>

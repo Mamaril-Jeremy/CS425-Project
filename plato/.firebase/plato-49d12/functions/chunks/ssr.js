@@ -1,5 +1,6 @@
 function noop() {
 }
+const identity = (x) => x;
 function run(fn) {
   return fn();
 }
@@ -8,6 +9,9 @@ function blank_object() {
 }
 function run_all(fns) {
   fns.forEach(run);
+}
+function is_function(thing) {
+  return typeof thing === "function";
 }
 function safe_not_equal(a, b) {
   return a != a ? b == b : a !== b || a && typeof a === "object" || typeof a === "function";
@@ -27,6 +31,11 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+function get_store_value(store) {
+  let value;
+  subscribe(store, (_) => value = _)();
+  return value;
+}
 function compute_rest_props(props, keys) {
   const rest = {};
   keys = new Set(keys);
@@ -41,6 +50,10 @@ function compute_slots(slots) {
     result[key] = true;
   }
   return result;
+}
+function set_store_value(store, ret, value) {
+  store.set(value);
+  return ret;
 }
 function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
   return new CustomEvent(type, { detail, bubbles, cancelable });
@@ -267,24 +280,36 @@ function add_attribute(name, value, boolean) {
 function style_object_to_string(style_object) {
   return Object.keys(style_object).filter((key) => style_object[key]).map((key) => `${key}: ${escape_attribute_value(style_object[key])};`).join(" ");
 }
+function add_styles(style_object) {
+  const styles = style_object_to_string(style_object);
+  return styles ? ` style="${styles}"` : "";
+}
 export {
+  safe_not_equal as A,
   compute_rest_props as a,
   spread as b,
   create_ssr_component as c,
   escape_attribute_value as d,
   escape_object as e,
   add_attribute as f,
-  get_current_component as g,
-  compute_slots as h,
-  getContext as i,
-  validate_store as j,
-  subscribe as k,
-  escape as l,
+  getContext as g,
+  escape as h,
+  get_current_component as i,
+  compute_slots as j,
+  validate_store as k,
+  subscribe as l,
   missing_component as m,
-  createEventDispatcher as n,
-  each as o,
-  noop as p,
-  safe_not_equal as q,
+  set_current_component as n,
+  current_component as o,
+  is_function as p,
+  get_store_value as q,
+  run_all as r,
   setContext as s,
-  validate_component as v
+  noop as t,
+  identity as u,
+  validate_component as v,
+  each as w,
+  add_styles as x,
+  set_store_value as y,
+  createEventDispatcher as z
 };

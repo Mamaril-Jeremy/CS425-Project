@@ -1,5 +1,5 @@
-import { c as create_ssr_component, f as add_attribute, h as compute_slots } from "./ssr.js";
-import { twMerge } from "tailwind-merge";
+import { c as create_ssr_component, f as add_attribute, j as compute_slots } from "./ssr.js";
+import { t as twMerge } from "./tw-merge.js";
 const Indicator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$slots = compute_slots(slots);
   let { color = "gray" } = $$props;
