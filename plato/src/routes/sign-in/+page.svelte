@@ -13,7 +13,7 @@
   };
 </script>
 
-<!-- <div class="body-background h-screen w-screen flex items-center justify-center">
+<div class="body-background h-screen w-screen flex items-center justify-center">
   <div class="card-container">
     <Card class="w-72 max-w-none">
       <form class="flex flex-col space-y-6" on:submit={handleSubmit}>
@@ -41,11 +41,11 @@
 
 <style>
   .body-background {
-    background-image: url('../../assets/placeholderbackground_login.png');
+    background-image: url('../../lib/assets/placeholderbackground_login.png');
     background-size: cover;
     background-repeat: no-repeat;
   }
-</style> -->
+</style>
 
 
-<Button color="dark" on:click{handleSubmit}>Mariooo HeHe</Button>
+<!-- <Button color="dark" on:click{handleSubmit}>Mariooo HeHe</Button> -->

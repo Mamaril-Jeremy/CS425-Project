@@ -29,11 +29,11 @@
       <DropdownItem href="/home">Sign out</DropdownItem>
     </Dropdown>
     <NavUl>
-      <NavLi href="/home"><span class="hover:text-blue-600">Home</span></NavLi>
-      <NavLi href="/chat"><span class="hover:text-blue-600">Chat</span></NavLi>
-      <NavLi href="/connections"><span class="hover:text-blue-600">Connections</span></NavLi>
-      <NavLi href="/events"><span class="hover:text-blue-600">Events</span></NavLi>
-      <NavLi href="/about"><span class="hover:text-blue-600">About</span></NavLi>
+      <NavLi href="/home"><span class="hover:text-blue-600 text-base">Home</span></NavLi>
+      <NavLi href="/chat"><span class="hover:text-blue-600 text-base">Chat</span></NavLi>
+      <NavLi href="/connections"><span class="hover:text-blue-600 text-base">Connections</span></NavLi>
+      <NavLi href="/events"><span class="hover:text-blue-600 text-base">Events</span></NavLi>
+      <NavLi href="/about"><span class="hover:text-blue-600 text-base">About</span></NavLi>
     </NavUl>
   </Navbar>
 </div>
@@ -48,7 +48,7 @@
         display: flex;
         justify-content: space-between; 
         align-items: center;
-        height: 30px;
+        height: 40px;
         margin: 15px auto;
     }
     .plato{
