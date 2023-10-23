@@ -2,18 +2,18 @@
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, GradientButton } from 'flowbite-svelte';
     import Logo from "$lib/assets/plato_logo.png";
 
-    let lastScrollTop = 0;
     let navbar;
+    // let lastScrollTop = 0;
 
-    window.addEventListener('scroll', () => {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) {
-            navbar.style.top = `-${navbar.offsetHeight}px`;
-        } else {
-            navbar.style.top = '0';
-        }
-        lastScrollTop = scrollTop;
-    });
+    // window.addEventListener('scroll', () => {
+    //     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    //     if (scrollTop > lastScrollTop) {
+    //         navbar.style.top = `-${navbar.offsetHeight}px`;
+    //     } else {
+    //         navbar.style.top = '0';
+    //     }
+    //     lastScrollTop = scrollTop;
+    // });
 </script>
   
 <div class="navbar-container" bind:this={navbar}>
