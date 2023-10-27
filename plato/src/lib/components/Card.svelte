@@ -1,56 +1,57 @@
 <body>
-    <div class="container">
-        <div class="quadrant"></div>
-        <div class="quadrant"></div>
-        <div class="quadrant"></div>
-        <div class="quadrant"></div>
+    <div class="name">Jeremy Mamaril</div>
+    <div class="card">
+        <div class="section">Resume</div>
+        <div class="section">Interests</div>
+        <div class="section">Accolades</div>
+        <div class="section">Education</div>
+        <div class="circle"></div>
     </div>
 </body>
 
 <style>
+    .card {
+        width: 600px;
+        height: 400px;
+        border: 1px solid #000;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: absolute;
+        top: 350px;
+        left: 750px;
+        transform: translate(-50%, -50%);
+    }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+    .name{
+        position: relative;
+        top: 100px;
+        left: 0px;
+        align-items: center;
+        font-size: 18px;
+    }
 
-.container {
-    width: 450px;
-    height: 300px;
-    position: relative;
-}
-
-.quadrant {
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    border: solid;
-}
-
-.quadrant:nth-child(1) {
-    top: 0;
-    left: 0;
-    border: solid;
-}
-
-.quadrant:nth-child(2) {
-    top: 0;
-    left: 50%;
-    border: solid;
-}
-
-.quadrant:nth-child(3) {
-    top: 50%;
-    left: 0;
-    border: solid;
-}
-
-.quadrant:nth-child(4) {
-    top: 50%;
-    left: 50%;
-}
-
+    .section {
+        width: 50%;
+        height: 50%;
+        box-sizing: border-box;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .circle {
+        width: 30%; 
+        height: 40%; 
+        background-color: #FFFFFF; 
+        border-radius: 50%; 
+        border: 1px solid #000;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 </style>
