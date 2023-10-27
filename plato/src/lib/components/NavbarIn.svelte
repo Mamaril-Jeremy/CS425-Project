@@ -24,7 +24,7 @@
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
       <DropdownItem>Settings</DropdownItem>
-      <DropdownItem on:click={pClicked}>Profile</DropdownItem>
+      <DropdownItem class="h-8 p-5" on:click={pClicked}>Profile</DropdownItem>
       <DropdownDivider />
       <DropdownItem href="/home">Sign out</DropdownItem>
     </Dropdown>
@@ -41,20 +41,20 @@
 <style>
     .navbar-container {
         position: fixed;
-        top: 0;
+        top: 17px;
         left: 0;
         right: 0;
         z-index: 1000; 
         display: flex;
         justify-content: space-between; 
         align-items: center;
-        height: 40px;
-        margin: 15px auto;
+        height: 30px;
     }
     .plato{
         background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
+        font-size: large;
     }
 </style>
