@@ -14,6 +14,8 @@
     //     }
     //     lastScrollTop = scrollTop;
     // });
+
+    
 </script>
   
 <div class="navbar-container" bind:this={navbar}>
@@ -31,7 +33,6 @@
             <NavLi href="/sign-in"><span class="hover:text-blue-600">Chat</span></NavLi>
             <NavLi href="/sign-in"><span class="hover:text-blue-600">Connections</span></NavLi>
             <NavLi href="/sign-in"><span class="hover:text-blue-600">Events</span></NavLi>
-            <NavLi href="/sign-in"><span class="hover:text-blue-600">Profile</span></NavLi>
             <NavLi href="/about"><span class="hover:text-blue-600">About</span></NavLi>
         </NavUl>
     </Navbar>

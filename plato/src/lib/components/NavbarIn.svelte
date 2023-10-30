@@ -2,6 +2,11 @@
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownItem, DropdownHeader, DropdownDivider } from 'flowbite-svelte';
     import Logo from "$lib/assets/plato_logo.png";
     import Pfp from "$lib/assets/Mark Marsala.jpg";
+    import { clicked } from '$lib/store.js';
+
+    function handleClick() {
+      clicked.set(false);
+    }
     const pClicked = async (event) => {
       window.location.href = "/profile";
     }
@@ -26,7 +31,7 @@
       <DropdownItem>Settings</DropdownItem>
       <DropdownItem class="h-8 p-5" on:click={pClicked}>Profile</DropdownItem>
       <DropdownDivider />
-      <DropdownItem href="/home">Sign out</DropdownItem>
+      <DropdownItem href="/home" on:click={handleClick}>Sign out</DropdownItem>
     </Dropdown>
     <NavUl>
       <NavLi href="/home"><span class="hover:text-blue-600 text-base">Home</span></NavLi>
