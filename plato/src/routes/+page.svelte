@@ -1,11 +1,9 @@
 <script>
-	import Logo from '$lib/assets/plato_logo.png';
-  import Home from "$lib/components/Home.svelte";
+  import Home from "../lib/components/Home.svelte";
+  import NavbarOut from './../lib/components/NavbarOut.svelte';
 </script>
-  
-  <svelte:head>
-      <title>Plato</title>
-      <link rel="icon" type="image/svg+xml" href={Logo} />
-  </svelte:head>
 
+<main>
   <Home/>
+</main>
+  

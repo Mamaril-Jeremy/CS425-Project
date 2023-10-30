@@ -1,19 +1,18 @@
 <script>
   import { Card, Button, Label, Input, Checkbox } from 'flowbite-svelte';
+  import { clicked } from '$lib/store.js';
 
   let email = '';
   let password = '';
 
   const handleSubmit = async (event) => {
-    // event.preventDefault();
-    // Perform form data processing, validation, and submission logic here
-
-    // Redirect the user to the home page after successful login
-    window.location.href = '/home';
+     event.preventDefault();
+    //Perform form data processing, validation, and submission logic here
+    clicked.set(true);
   };
 </script>
 
-<div class="body-background h-screen w-screen flex items-center justify-center">
+<!-- <div class="body-background h-screen w-screen flex items-center justify-center">
   <div class="card-container">
     <Card class="w-72 max-w-none">
       <form class="flex flex-col space-y-6" on:submit={handleSubmit}>
@@ -45,7 +44,18 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
+</style> -->
+
+<div class="button-container" >
+  <Button color="dark" on:click={handleSubmit}>Mariooo HeHe</Button>
+</div>
+
+<style>
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
 </style>
-
-
-<!-- <Button color="dark" on:click{handleSubmit}>Mariooo HeHe</Button> -->

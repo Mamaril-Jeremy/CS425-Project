@@ -1,4 +1,3 @@
-// place files you want to import through the `$lib` alias in this folder.
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
 

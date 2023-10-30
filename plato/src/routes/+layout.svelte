@@ -1,6 +1,8 @@
 <script>
-  import NavbarIn from "../lib/components/NavbarIn.svelte";
   import "../app.postcss";
+  import { clicked } from '$lib/store.js';
+  import NavbarIn from "../lib/components/NavbarIn.svelte";
+  import NavbarOut from './../lib/components/NavbarOut.svelte';
   import Logo from '$lib/assets/plato_logo.png';
 </script>
 
@@ -9,5 +11,9 @@
   <link rel="icon" type="image/svg+xml" href={Logo} />
 </svelte:head>
 
-<NavbarIn/>
+{#if $clicked}
+  <NavbarIn />
+{:else}
+  <NavbarOut />
+{/if}
 <slot />
