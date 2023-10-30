@@ -1,5 +1,6 @@
 <script>
   import { Card, Button, Label, Input, Checkbox } from 'flowbite-svelte';
+  import { goto } from '$app/navigation';
   import { clicked } from '$lib/store.js';
 
   let email = '';
@@ -9,6 +10,7 @@
      event.preventDefault();
     //Perform form data processing, validation, and submission logic here
     clicked.set(true);
+    goto('/home');
   };
 </script>
 
@@ -46,9 +48,12 @@
   }
 </style> -->
 
-<div class="button-container" >
-  <Button color="dark" on:click={handleSubmit}>Mariooo HeHe</Button>
-</div>
+
+ <div class="button-container" >
+    <Button color="dark" on:click={handleSubmit}>Mariooo HeHe</Button>
+  </div>
+
+
 
 <style>
   .button-container {
