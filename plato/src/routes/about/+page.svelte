@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <style>
   /* Base styles for the About page */
   .about-page {
