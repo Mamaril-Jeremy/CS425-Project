@@ -3,25 +3,23 @@
   .about-page {
       font-size: 16px;
       line-height: 1.5;
-      margin: 0 auto; /* Center the content horizontally with margins on the sides */
-      max-width: 800px; /* Limit the maximum width of the content */
-      padding: 20px; /* Add padding for spacing inside the container */
-      text-align: justify; /* Justify text within the container */
+      margin: 0 auto; 
+      max-width: 800px; 
+      padding: 20px; 
+      text-align: justify; 
   }
 
   h1, h2 {
     font-size: 24px;
     margin-bottom: 10px;
-    text-align: center; /* Center-align the titles */
+    text-align: center; 
   }
 
-  /* Apply a scale transformation and cursor change on hover for the "Plato" text */
   .about-page .gradient-text-blue:hover {
-      transform: scale(1.05); /* Enlarge on hover */
-      cursor: pointer; /* Change cursor on hover to indicate interaction */
+      transform: scale(1.05); 
+      cursor: pointer; 
   }
 
-  /* Styling for text with a gradient effect */
   .gradient-text {
       background: linear-gradient(rgb(80, 101, 168), rgb(11, 20, 119));
       -webkit-background-clip: text;
@@ -37,7 +35,6 @@
   }
 </style>
 
-<!-- About Page Content -->
 <div class="about-page">
   <!-- Hero Section -->
   <br>
