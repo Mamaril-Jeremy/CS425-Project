@@ -29,7 +29,7 @@
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
       <DropdownItem>Settings</DropdownItem>
-      <DropdownItem class="h-8 p-5" on:click={pClicked}>Profile</DropdownItem>
+      <DropdownItem on:click={pClicked}>Profile</DropdownItem>
       <DropdownDivider />
       <DropdownItem href="/home" on:click={handleClick}>Sign out</DropdownItem>
     </Dropdown>
