@@ -12,6 +12,9 @@
     const pClicked = async (event) => {
       goto('/profile');
     }
+    const sClicked = async (event) => {
+      goto('/settings');
+    }
   </script>
   
   <div class="navbar-container">
@@ -30,7 +33,7 @@
         <span class="block truncate text-sm font-medium">markymark@nevada.unr.edu</span>
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
-      <DropdownItem>Settings</DropdownItem>
+      <DropdownItem on:click={sClicked}>Settings</DropdownItem>
       <DropdownItem on:click={pClicked}>Profile</DropdownItem>
       <DropdownDivider />
       <DropdownItem href="/home" on:click={handleClick}>Sign out</DropdownItem>
