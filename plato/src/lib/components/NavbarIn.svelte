@@ -1,14 +1,16 @@
 <script>
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownItem, DropdownHeader, DropdownDivider } from 'flowbite-svelte';
+    import { clicked } from '$lib/store.js';
+    import { goto } from '$app/navigation';
     import Logo from "$lib/assets/plato_logo.png";
     import Pfp from "$lib/assets/Mark Marsala.jpg";
-    import { clicked } from '$lib/store.js';
+    
 
     function handleClick() {
       clicked.set(false);
     }
     const pClicked = async (event) => {
-      window.location.href = "/profile";
+      goto('/profile');
     }
   </script>
   
