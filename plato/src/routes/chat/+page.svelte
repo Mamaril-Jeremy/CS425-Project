@@ -16,12 +16,12 @@
                     <Avatar src={Pfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
-                <SidebarItem label="Jeremy" href="/docs/components/accordion">
+                <SidebarItem label="Jeremy" href="/home">
                     <svelte:fragment slot="icon">
                     <GridSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
-                <SidebarItem label="Richard" href="/docs/components/alert">
+                <SidebarItem label="Richard"href="/home">
                     <svelte:fragment slot="icon">
                     <MailBoxSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
