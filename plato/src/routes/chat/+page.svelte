@@ -1,21 +1,21 @@
 <script>
-    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Banner, Avatar, GradientButton, Navbar, NavBrand, NavLi, NavUl, NavHamburger, onMount } from 'flowbite-svelte';
+    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, GradientButton, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import { GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
-    import { localStore } from 'svelte-local-storage-store';
+    // import { localStore } from 'svelte-local-storage-store';
     import Pfp from "$lib/assets/Mark Marsala.jpg";
     // import jeremy from "$lib/assets/"
-    let messages = localStore('chat-messages', []);
-    let newMessage = '';
-    function sendMessage() {
-        if (newMessage.trim()) {
-            messages = [...messages, newMessage]; // We add the new message to our canvas.
-            newMessage = ''; // Our brush is ready for the next stroke.
-        }
-    }
-    onMount(() => {
-    const chatContainer = document.getElementById('chat-container');
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-    });
+    // let messages = localStore('chat-messages', []);
+    // let newMessage = '';
+    // function sendMessage() {
+    //     if (newMessage.trim()) {
+    //         messages = [...messages, newMessage]; // We add the new message to our canvas.
+    //         newMessage = ''; // Our brush is ready for the next stroke.
+    //     }
+    // }
+    // onMount(() => {
+    // const chatContainer = document.getElementById('chat-container');
+    // chatContainer.scrollTop = chatContainer.scrollHeight;
+    // });
     
 </script>
 
@@ -50,7 +50,7 @@
     <div class = "dashboard">
         <Navbar rounded color="form">
             <NavBrand href="/">
-              <img src={Pfp} class="mr-3 h-6 sm:h-9" alt="Mark Marsala profile picture" />
+              <img src={Pfp} class="mr-3 h-6 sm:h-9" alt="Mark Marsala profile picture" aria-hidden="false"/>
               <span class="self-center whitespace-nowrap text-xl font-semibold dark text-black">Mark Marsala</span>
             </NavBrand>
             <NavHamburger  />
@@ -61,16 +61,24 @@
             </NavUl>
           </Navbar>
     </div>
-    <div class = "chatbox">
+    <!-- <div class = "chatbox">
         <div id="chatbox" class="chatbox">
             {#each messages as message}
-                <div class="message">{message}</div> <!-- Each message is a unique stroke on our canvas. -->
+                <div class="message">{message}</div>
             {/each}
         </div>
         <div class = "textbox">
             <input bind:value={newMessage} type="text" placeholder="Enter message here"/>
         </div>
-        <div on:click={sendMessage} class ="button"><GradientButton color="blue">Send</GradientButton></div>
+        <div class ="button"><GradientButton color="blue" aria-hidden="false" on:click={sendMessage} on:keypress={sendMessage} class ="button">Send</GradientButton></div>
+    </div> -->
+    <div class = "chatbox">
+        <div class = message-container>
+        </div>
+        <div class = "textbox">
+            <input type="text" placeholder="Enter message here"/>
+        </div>
+        <div class = "button"><GradientButton color="blue">Send</GradientButton></div>
     </div>
 </div>
 
