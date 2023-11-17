@@ -27,6 +27,7 @@
   "type": "module",
   "dependencies": {
     "@event-calendar/day-grid": "^2.4.0",
-    "npm": "^10.2.1"
+    "npm": "^10.2.1",
+    "svelte-local-storage-store": "^0.6.4"
   }
 }

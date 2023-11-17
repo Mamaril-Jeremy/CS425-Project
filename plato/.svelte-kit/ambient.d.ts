@@ -31,7 +31,6 @@ declare module '$env/static/private' {
 	export const ChocolateyInstall: string;
 	export const ChocolateyLastPathUpdate: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
-	export const CLion: string;
 	export const COLORTERM: string;
 	export const CommonProgramFiles: string;
 	export const CommonProgramW6432: string;
@@ -62,6 +61,7 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
 	export const npm_package_dependencies_npm: string;
+	export const npm_package_dependencies_svelte_local_storage_store: string;
 	export const npm_package_dependencies__event_calendar_day_grid: string;
 	export const npm_package_devDependencies_autoprefixer: string;
 	export const npm_package_devDependencies_flowbite: string;
@@ -92,7 +92,6 @@ declare module '$env/static/private' {
 	export const OS: string;
 	export const Path: string;
 	export const PATHEXT: string;
-	export const PNPM_HOME: string;
 	export const PNPM_SCRIPT_SRC_DIR: string;
 	export const PROCESSOR_ARCHITECTURE: string;
 	export const PROCESSOR_IDENTIFIER: string;
@@ -115,10 +114,6 @@ declare module '$env/static/private' {
 	export const USERDOMAIN_ROAMINGPROFILE: string;
 	export const USERNAME: string;
 	export const USERPROFILE: string;
-	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
-	export const VSCODE_GIT_ASKPASS_MAIN: string;
-	export const VSCODE_GIT_ASKPASS_NODE: string;
-	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const VSCODE_INJECTION: string;
 	export const windir: string;
 	export const ZES_ENABLE_SYSMAN: string;
@@ -156,7 +151,6 @@ declare module '$env/dynamic/private' {
 		ChocolateyInstall: string;
 		ChocolateyLastPathUpdate: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
-		CLion: string;
 		COLORTERM: string;
 		CommonProgramFiles: string;
 		CommonProgramW6432: string;
@@ -187,6 +181,7 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
 		npm_package_dependencies_npm: string;
+		npm_package_dependencies_svelte_local_storage_store: string;
 		npm_package_dependencies__event_calendar_day_grid: string;
 		npm_package_devDependencies_autoprefixer: string;
 		npm_package_devDependencies_flowbite: string;
@@ -217,7 +212,6 @@ declare module '$env/dynamic/private' {
 		OS: string;
 		Path: string;
 		PATHEXT: string;
-		PNPM_HOME: string;
 		PNPM_SCRIPT_SRC_DIR: string;
 		PROCESSOR_ARCHITECTURE: string;
 		PROCESSOR_IDENTIFIER: string;
@@ -240,10 +234,6 @@ declare module '$env/dynamic/private' {
 		USERDOMAIN_ROAMINGPROFILE: string;
 		USERNAME: string;
 		USERPROFILE: string;
-		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
-		VSCODE_GIT_ASKPASS_MAIN: string;
-		VSCODE_GIT_ASKPASS_NODE: string;
-		VSCODE_GIT_IPC_HANDLE: string;
 		VSCODE_INJECTION: string;
 		windir: string;
 		ZES_ENABLE_SYSMAN: string;
