@@ -1,18 +1,18 @@
-import BR from "../assets/Balloon Races.jpg";
-import HAG from "../assets/HotAugustNights.jpg";
-import RR from "../assets/RenoRodeo.jpg";
+import Coach from "../assets/coach.jpg";
+import ShakingHands from "../assets/shaking-hands.jpg";
+import Teacher from "../assets/teacher.jpg";
 
 export const images = [
   {
-    alt: 'Balloon Races',
-    src: BR,
+    alt: 'Coach',
+    src: Coach,
   },
   {
-    alt: 'Hot August Nights',
-    src: HAG,
+    alt: 'Shaking Hands',
+    src: ShakingHands,
   },
   {
-    alt: 'Reno Rodeo',
-    src: RR,
+    alt: 'Teacher',
+    src: Teacher,
   }
 ];
