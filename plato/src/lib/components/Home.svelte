@@ -57,7 +57,7 @@
 
   </style>
   
-  <main class="w-screen">
+  <main class="flex items-center justify-center h-screen bg-gray-100 dark:bg-gray-800 w-screen">
     <div class="container">
       <!-- Carousel section -->
       <div class="carousel-container">
