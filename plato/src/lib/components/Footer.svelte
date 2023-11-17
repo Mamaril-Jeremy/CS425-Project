@@ -18,10 +18,10 @@
     <Footer>
       <FooterCopyright href="/" by="Plato™" year={2023} />
       <FooterLinkGroup ulClass="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
-        <FooterLink href="/">Licensing</FooterLink>
-        <FooterLink href="/">Contact</FooterLink>
-        <FooterLink href="/">Privacy Policy</FooterLink>
-        <FooterLink href="/">Community Guidelines</FooterLink>
+        <FooterLink href="/licensing">Licensing</FooterLink>
+        <FooterLink href="/contact">Contact</FooterLink>
+        <FooterLink href="/privacy">Privacy Policy</FooterLink>
+        <FooterLink href="/guidelines">Community Guidelines</FooterLink>
       </FooterLinkGroup>
     </Footer>
   </div>
