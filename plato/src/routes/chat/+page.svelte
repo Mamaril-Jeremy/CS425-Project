@@ -1,7 +1,22 @@
 <script>
-    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Banner, Avatar, GradientButton } from 'flowbite-svelte';
-    import { ChartPieSolid, GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
+    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, GradientButton, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
+    import { GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
+    // import { localStore } from 'svelte-local-storage-store';
     import Pfp from "$lib/assets/Mark Marsala.jpg";
+    // import jeremy from "$lib/assets/"
+    // let messages = localStore('chat-messages', []);
+    // let newMessage = '';
+    // function sendMessage() {
+    //     if (newMessage.trim()) {
+    //         messages = [...messages, newMessage]; // We add the new message to our canvas.
+    //         newMessage = ''; // Our brush is ready for the next stroke.
+    //     }
+    // }
+    // onMount(() => {
+    // const chatContainer = document.getElementById('chat-container');
+    // chatContainer.scrollTop = chatContainer.scrollHeight;
+    // });
+    
 </script>
 
 <div class = "Sidebar">
@@ -32,14 +47,38 @@
 </div>
 
 <div class = "container>">
+    <div class = "dashboard">
+        <Navbar rounded color="form">
+            <NavBrand href="/">
+              <img src={Pfp} class="mr-3 h-6 sm:h-9" alt="Mark Marsala profile picture" aria-hidden="false"/>
+              <span class="self-center whitespace-nowrap text-xl font-semibold dark text-black">Mark Marsala</span>
+            </NavBrand>
+            <NavHamburger  />
+            <NavUl >
+              <NavLi href="/">View Details</NavLi>
+              <NavLi href="/about">Schedule Appointment</NavLi>
+              <NavLi href="/docs/components/navbar">Disconnect</NavLi>
+            </NavUl>
+          </Navbar>
+    </div>
+    <!-- <div class = "chatbox">
+        <div id="chatbox" class="chatbox">
+            {#each messages as message}
+                <div class="message">{message}</div>
+            {/each}
+        </div>
+        <div class = "textbox">
+            <input bind:value={newMessage} type="text" placeholder="Enter message here"/>
+        </div>
+        <div class ="button"><GradientButton color="blue" aria-hidden="false" on:click={sendMessage} on:keypress={sendMessage} class ="button">Send</GradientButton></div>
+    </div> -->
     <div class = "chatbox">
-        <div class = "message-container">
+        <div class = message-container>
         </div>
         <div class = "textbox">
             <input type="text" placeholder="Enter message here"/>
         </div>
-        <div class ="button"><GradientButton color="blue">Send</GradientButton></div>
-      
+        <div class = "button"><GradientButton color="blue">Send</GradientButton></div>
     </div>
 </div>
 
@@ -56,8 +95,8 @@
         overflow-y: scroll;
         position: absolute;
         right:0.01rem;
-        top: 8.5rem;
-        height : 70%;
+        top: 14%;
+        height : 80%;
     }
     .chatbox{
         width : 82.7%;
@@ -70,14 +109,21 @@
         background: white;
         z-index: 500;
     }  
-    
+    .dashboard{
+        position:fixed;
+        z-index:2000;
+        top:11%;
+        left:18%;
+        width: 81%;
+        height: 40%;
+    }
     
     .button{
         position: absolute;
         bottom: 1rem;
         right: 0.5rem;
         width : 100px;
-        height : 2.75rem;
+        height : 2.8rem;
         color:rgb(0, 0, 0); 
         cursor:pointer;
         border-radius: .25rem;

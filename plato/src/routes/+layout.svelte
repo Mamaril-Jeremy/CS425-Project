@@ -4,12 +4,15 @@
   import NavbarIn from "../lib/components/NavbarIn.svelte";
   import NavbarOut from './../lib/components/NavbarOut.svelte';
   import Logo from '$lib/assets/plato_logo.png';
+  import Footer from '$lib/components/Footer.svelte';
 </script>
 
 <svelte:head>
   <title>Plato</title>
   <link rel="icon" type="image/svg+xml" href={Logo} />
 </svelte:head>
+
+<Footer />
 
 {#if $clicked}
   <NavbarIn />
