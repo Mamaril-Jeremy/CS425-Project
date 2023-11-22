@@ -19,7 +19,9 @@
       <form on:submit|preventDefault={handleSubmit}>
         <!-- Username -->
         <div class="mb-4">
-          <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
+          <label for="username" class="block text-sm font-medium text-gray-600">
+            Username
+          </label>
           <input type="text" id="username" name="username" autocomplete="username" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.username} required />
         </div>
   
