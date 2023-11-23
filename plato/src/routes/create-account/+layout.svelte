@@ -1,9 +1,9 @@
-<!-- THIS FILE IS USED FOR AUTHORIZATION BUT IS BUGGED-->
-
-<!-- <script>
+<script>
+    //import "../app.postcss";
     import { onMount } from 'svelte'
-    import { auth } from './lib/firebase/firebase.client.js'
-    import { authStore } from './stores/authStore.js'
+    import { auth } from '../../lib/firebase/firebase.client'
+    import { authStore } from '../../stores/authStore'
+  
     onMount(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             console.log(user)
@@ -12,5 +12,7 @@
             });
         });
     });
+  
 </script>
-<slot/> -->
+
+<slot />

@@ -1,4 +1,5 @@
 <script>
+    import { authHandlers } from "../../stores/authStore.js"
     let formData = {
       username: '',
       email: '',
@@ -6,9 +7,27 @@
       confirmPassword: '',
     };
   
-    function handleSubmit() {
+    async function handleSubmit() {
       // Add your account creation logic here
-      console.log('Form submitted:', formData);
+      //console.log('Form submitted:', formData);
+      if(!username || !email || !password || !confirmPassword)
+      {
+        return
+      }
+
+      if(password === confirmPassword) {
+        try {
+          await authHandlers.signup(email, password);
+        } catch (err) {
+          console.log(err)
+        }
+      } else {
+        try {
+          await authHandlers.login(email, password)
+        } catch (err) {
+          console.log(err);
+        }
+      }
     }
   </script>
   

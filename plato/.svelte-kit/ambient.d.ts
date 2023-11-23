@@ -26,6 +26,13 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const VITE_APIKEY: string;
+	export const VITE_AUTHDOMAIN: string;
+	export const VITE_PROJECTID: string;
+	export const VITE_STORAGEBUCKET: string;
+	export const VITE_MESSAGINGSENDERID: string;
+	export const VITE_APPID: string;
+	export const VITE_MEASUREMENTID: string;
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
 	export const ChocolateyInstall: string;
@@ -39,7 +46,8 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const configsetroot: string;
 	export const DriverData: string;
-	export const EFC_11864: string;
+	export const EDITOR: string;
+	export const EFC_8160: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -70,23 +78,7 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_event: string;
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
-	export const npm_package_dependencies_npm: string;
-	export const npm_package_dependencies_svelte_local_storage_store: string;
-	export const npm_package_dependencies__event_calendar_day_grid: string;
-	export const npm_package_devDependencies_autoprefixer: string;
-	export const npm_package_devDependencies_flowbite: string;
-	export const npm_package_devDependencies_flowbite_svelte: string;
-	export const npm_package_devDependencies_flowbite_svelte_icons: string;
-	export const npm_package_devDependencies_postcss: string;
-	export const npm_package_devDependencies_postcss_load_config: string;
-	export const npm_package_devDependencies_svelte: string;
-	export const npm_package_devDependencies_tailwindcss: string;
-	export const npm_package_devDependencies_vite: string;
-	export const npm_package_devDependencies_vitest: string;
-	export const npm_package_devDependencies__event_calendar_core: string;
-	export const npm_package_devDependencies__event_calendar_time_grid: string;
-	export const npm_package_devDependencies__sveltejs_adapter_auto: string;
-	export const npm_package_devDependencies__sveltejs_kit: string;
+	export const npm_package_json: string;
 	export const npm_package_name: string;
 	export const npm_package_version: string;
 	export const NPM_PREFIX_NPM_CLI_JS: string;
@@ -156,6 +148,13 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		VITE_APIKEY: string;
+		VITE_AUTHDOMAIN: string;
+		VITE_PROJECTID: string;
+		VITE_STORAGEBUCKET: string;
+		VITE_MESSAGINGSENDERID: string;
+		VITE_APPID: string;
+		VITE_MEASUREMENTID: string;
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
 		ChocolateyInstall: string;
@@ -169,7 +168,8 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		configsetroot: string;
 		DriverData: string;
-		EFC_11864: string;
+		EDITOR: string;
+		EFC_8160: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
@@ -200,23 +200,7 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_event: string;
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
-		npm_package_dependencies_npm: string;
-		npm_package_dependencies_svelte_local_storage_store: string;
-		npm_package_dependencies__event_calendar_day_grid: string;
-		npm_package_devDependencies_autoprefixer: string;
-		npm_package_devDependencies_flowbite: string;
-		npm_package_devDependencies_flowbite_svelte: string;
-		npm_package_devDependencies_flowbite_svelte_icons: string;
-		npm_package_devDependencies_postcss: string;
-		npm_package_devDependencies_postcss_load_config: string;
-		npm_package_devDependencies_svelte: string;
-		npm_package_devDependencies_tailwindcss: string;
-		npm_package_devDependencies_vite: string;
-		npm_package_devDependencies_vitest: string;
-		npm_package_devDependencies__event_calendar_core: string;
-		npm_package_devDependencies__event_calendar_time_grid: string;
-		npm_package_devDependencies__sveltejs_adapter_auto: string;
-		npm_package_devDependencies__sveltejs_kit: string;
+		npm_package_json: string;
 		npm_package_name: string;
 		npm_package_version: string;
 		NPM_PREFIX_NPM_CLI_JS: string;
