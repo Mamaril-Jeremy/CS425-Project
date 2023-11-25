@@ -2,6 +2,7 @@
     import { authHandlers } from "../../stores/authStore.js"
     import { authStore } from '../../stores/authStore'
     import { goto } from '$app/navigation';
+    import { auth } from "../../lib/firebase/firebase.client.js";
 
     let formData = {
       username: '',
@@ -25,6 +26,7 @@
       if(password === confirmPassword) {
         try {
           await authHandlers.signup(email, password);
+          await authHandlers.verifyEmail();
           goto('/home')
         } catch (err) {
           console.log(err)

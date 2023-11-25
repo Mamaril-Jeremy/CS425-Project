@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import { auth } from '../lib/firebase/firebase.client.js'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail, updatePassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail, updatePassword, sendEmailVerification, verifyBeforeUpdateEmail } from 'firebase/auth';
 
 export const authStore = writable({
     isLoading: true,
@@ -17,13 +17,19 @@ export const authHandlers = {
     logout: async () => {
         await signOut(auth)
     },
+    verifyEmail: async() => {
+        await sendEmailVerification(auth.currentUser)
+    },
+    verifyNewEmail: async(newEmail) => {
+        verifyBeforeUpdateEmail(auth.currentUser, newEmail)
+    },
     resetPassword: async (email) => {
         await sendPasswordResetEmail(auth, email)
     },
     updateEmail: async (email) => {
-        await updateEmail(auth, email)
+        await updateEmail(auth.currentUser, email)
     },
     updatePassword: async (password) => {
-        await updatePassword(auth, password)
+        await updatePassword(auth.currentUser, password)
     }
 }

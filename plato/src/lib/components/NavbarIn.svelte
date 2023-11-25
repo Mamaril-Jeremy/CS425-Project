@@ -1,4 +1,5 @@
 <script>
+    import { authHandlers } from "../../stores/authStore.js"
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownItem, DropdownHeader, DropdownDivider } from 'flowbite-svelte';
     import { clicked } from '$lib/store.js';
     import { goto } from '$app/navigation';
@@ -6,7 +7,13 @@
     import Pfp from "$lib/assets/Mark Marsala.jpg";
     
 
-    function handleClick() {
+    async function handleClick() {
+      try {
+        await authHandlers.logout()
+        goto('/home')
+      } catch (err) {
+        console.log(err);
+      }
       clicked.set(false);
     }
     const pClicked = async (event) => {
@@ -36,7 +43,7 @@
       <DropdownItem on:click={sClicked}>Settings</DropdownItem>
       <DropdownItem on:click={pClicked}>Profile</DropdownItem>
       <DropdownDivider />
-      <DropdownItem href="/home" on:click={handleClick}>Sign out</DropdownItem>
+      <DropdownItem on:click={handleClick}>Sign out</DropdownItem>
     </Dropdown>
     <NavUl>
       <NavLi href="/home"><span class="hover:text-blue-600 text-base">Home</span></NavLi>

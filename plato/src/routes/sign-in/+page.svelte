@@ -1,4 +1,5 @@
 <script>
+  import { authHandlers } from "../../stores/authStore.js"
   import { Card, Button, Label, Input, Checkbox } from 'flowbite-svelte';
   import { goto } from '$app/navigation';
   import { clicked } from '$lib/store.js';
@@ -9,8 +10,18 @@
   const handleSubmit = async (event) => {
      event.preventDefault();
     //Perform form data processing, validation, and submission logic here
+
+    if(!email || !password) {
+      return
+    }
+
+    try {
+      await authHandlers.login(email, password)
+      goto('/home')
+    } catch (err) {
+      console.log(err);
+    }
     clicked.set(true);
-    goto('/home');
   };
 </script>
 
