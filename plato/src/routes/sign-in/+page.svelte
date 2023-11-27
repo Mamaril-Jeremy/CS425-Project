@@ -2,7 +2,6 @@
   import { authHandlers } from "../../stores/authStore.js"
   import { Card, Button, Label, Input, Checkbox } from 'flowbite-svelte';
   import { goto } from '$app/navigation';
-  import { clicked } from '$lib/store.js';
 
   let email = '';
   let password = '';
@@ -21,8 +20,13 @@
     } catch (err) {
       console.log(err);
     }
-    clicked.set(true);
+    
   };
+
+  // const handleSubmit = async (event) => {
+  //     goto('/home')
+  //     clicked.set(true);
+  // };
 </script>
 
 <div class="body-background h-screen w-screen flex items-center justify-center">

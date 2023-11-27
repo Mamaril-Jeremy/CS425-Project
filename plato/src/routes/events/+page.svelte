@@ -16,6 +16,6 @@
   };
 </script>
 
-<div class = Calendar style="position: absolute; top: 110px; width : 700px;" >
+<div class = Calendar style="position: absolute; top: 110px; width : 700px; display: flex; align-items: center;" >
   <Calendar {plugins} {options} />
 </div>
