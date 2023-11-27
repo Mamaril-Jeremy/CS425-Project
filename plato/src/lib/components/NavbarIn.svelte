@@ -14,7 +14,6 @@
       } catch (err) {
         console.log(err);
       }
-      clicked.set(false);
     }
     const pClicked = async (event) => {
       goto('/profile');
