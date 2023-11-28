@@ -29,9 +29,18 @@
       align-items: center;
       margin: auto;
     }
+
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 </style>
 
-<div class="user-info-container">
+<body>
+  <div class="user-info-container">
     <div class="flex items-center space-x-10">
         <Avatar src={Pfp} data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg" dot={{ placement: 'top-right', color: 'green', size: 'lg' }}/>
         <div class="space-y-1 font-medium dark:text-white">
@@ -88,3 +97,4 @@
     </div>
   </form>
 </div>
+</body>
