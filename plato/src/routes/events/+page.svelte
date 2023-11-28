@@ -16,6 +16,18 @@
   };
 </script>
 
-<div class = Calendar style="position: absolute; top: 110px; width : 700px; display: flex; align-items: center;" >
-  <Calendar {plugins} {options} />
-</div>
+<body>
+  <div class = Calendar style="position: absolute; top: 110px; width : 800px; display: flex; align-items: center;" >
+    <Calendar {plugins} {options} />
+  </div>
+</body>
+
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+</style>
