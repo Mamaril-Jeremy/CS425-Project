@@ -25,9 +25,7 @@
   <link rel="icon" type="image/svg+xml" href={Logo} />
 </svelte:head>
 
-<Footer />
-
-{#if $clicked}
+{#if $authStore.currentUser}
   <NavbarIn />
 {:else}
   <NavbarOut />
