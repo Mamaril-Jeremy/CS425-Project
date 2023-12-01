@@ -1,7 +1,6 @@
 <script>
     import { authHandlers } from "../../stores/authStore.js"
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownItem, DropdownHeader, DropdownDivider } from 'flowbite-svelte';
-    import { clicked } from '$lib/store.js';
     import { goto } from '$app/navigation';
     import Logo from "$lib/assets/plato_logo.png";
     import Pfp from "$lib/assets/Mark Marsala.jpg";

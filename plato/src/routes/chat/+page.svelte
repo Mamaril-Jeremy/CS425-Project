@@ -8,7 +8,7 @@
     // let newMessage = '';
     // function sendMessage() {
     //     if (newMessage.trim()) {
-    //         messages = [...messages, newMessage]; // We add the new message to our canvas.
+    //         messages = [...messages, newMessage]; 
     //         newMessage = ''; // Our brush is ready for the next stroke.
     //     }
     // }
