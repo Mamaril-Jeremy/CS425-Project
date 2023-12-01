@@ -131,9 +131,9 @@
 
   <div class="section section1">
     <div>
-      <h1>{animatedText}</h1>
-      <p>We establish mentor to mentee relationships.</p>
       <img src={Logo} alt="Logo" />
+      <h1>{animatedText}</h1>
+      <p>Establishing mentor to mentee relationships.</p>
     </div>
   </div>
 
@@ -146,8 +146,8 @@
 
   <div class="section section3">
     <div>
-      <h1>ENTER PLATO</h1>
-      <p>We believe in establishing mentor to mentee relationships.</p>
+      <h1>We believe in changing that.</h1>
+      <p></p>
     </div>
   </div>
 
