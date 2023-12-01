@@ -2,7 +2,7 @@
     import { authHandlers } from "../../stores/authStore.js"
     import { authStore } from '../../stores/authStore'
     import { goto } from '$app/navigation';
-    import { auth } from "../../lib/firebase/firebase.client.js";
+    import { auth } from "$lib/firebase/firebase.client.js";
 
     let formData = {
       username: '',
@@ -47,7 +47,7 @@
 
 </script>
   
-<main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800 w-screen">
+<main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
   <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
     <h1 class="text-3xl font-semibold mb-6">Create Account</h1>
   
