@@ -1,6 +1,7 @@
 <script>
     import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, GradientButton, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import { GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
+    import { writable } from "svelte/store";
     // import { localStore } from 'svelte-local-storage-store';
     import Pfp from "$lib/assets/Mark Marsala.jpg";
     // import jeremy from "$lib/assets/"
@@ -16,7 +17,24 @@
     // const chatContainer = document.getElementById('chat-container');
     // chatContainer.scrollTop = chatContainer.scrollHeight;
     // });
-    
+    const messages = writable([]);
+    let messageInput = "";
+    function sendMessage() {
+    if (!messageInput.trim()) return;
+
+    // Add the new message to the store
+    messages.update((prevMessages) => [
+      ...prevMessages,
+      {
+        user: "Mark Marsala",
+        text: messageInput,
+        timestamp: new Date().toLocaleString(),
+      },
+    ]);
+    //Clear the message box
+    messageInput = "";
+
+    }
 </script>
 
 <div class = "Sidebar">
@@ -73,16 +91,29 @@
         <div class ="button"><GradientButton color="blue" aria-hidden="false" on:click={sendMessage} on:keypress={sendMessage} class ="button">Send</GradientButton></div>
     </div> -->
     <div class = "chatbox">
+        <ul>
+            {#each $messages as { text, timestamp, user }}
+              <li>----------------------------------------------------------------------------------------------</li>
+              <li class = "font:30">{user} {timestamp}:</li>
+              <li>{text}</li>
+            {/each}
+          </ul>
         <div class = message-container>
         </div>
         <div class = "textbox">
-            <input type="text" placeholder="Enter message here"/>
+            <input type="text" bind:value={messageInput} placeholder="Enter message here" />
         </div>
-        <div class = "button"><GradientButton color="blue">Send</GradientButton></div>
+        <div class = "button"><GradientButton color="blue" on:click={sendMessage}>Send</GradientButton></div>
     </div>
 </div>
-
 <style>
+    ul{
+        color:black;
+        z-index:100000;
+        bottom:10%;
+        position:absolute;
+        left:2%;
+    }
     .Sidebar{
         position : fixed;
         top : 4.5rem;
