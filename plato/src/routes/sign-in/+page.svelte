@@ -8,7 +8,6 @@
 
   const handleSubmit = async (event) => {
      event.preventDefault();
-    //Perform form data processing, validation, and submission logic here
 
     if(!email || !password) {
       return

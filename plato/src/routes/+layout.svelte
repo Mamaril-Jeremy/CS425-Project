@@ -1,10 +1,8 @@
 <script>
   import "../app.postcss";
-  import { clicked } from '$lib/store.js';
   import NavbarIn from "../lib/components/NavbarIn.svelte";
   import NavbarOut from './../lib/components/NavbarOut.svelte';
   import Logo from '$lib/assets/plato_logo.png';
-  import Footer from '$lib/components/Footer.svelte';
   import { onMount } from 'svelte';
   import { auth } from '../lib/firebase/firebase.client';
   import { authStore } from '../stores/authStore';
