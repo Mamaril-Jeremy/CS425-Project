@@ -1,120 +1,146 @@
-<script>
-    
-</script>
-
-
-<body>
-    <div class="section section1">
-        <div>
-            <h1>Section 1</h1>
-            <p>This is the first section of our scrolling website.</p>
-        </div>
-        <div>
-            yo
-        </div>
-    </div>
-    
-    <div class="section section2">
-        <div>
-            <h1>76% of people think mentors are important</h1>
-            <p>x</p>
-        </div>
-        <div>
-            yo
-        </div>  
-    </div>
-
-
-    <div class="section section3">
-        <div>
-            <h1>Section 2</h1>
-            <p>Explore amazing content in this section.</p>
-        </div>
-        <div>       
-            yo
-        </div>
-    </div>
-
-    <div class="section section4">
-        <div>
-            <h1>Section 3</h1>
-            <p>Learn more about our services here.</p>
-        </div>
-        <div>
-            yo
-        </div>
-    </div>
-
-    <div class="section section5">
-        <div>
-            <h1>Contact Us</h1>
-            <p>Reach out to us for any inquiries or collaborations.</p>
-        </div>
-        <div>
-            yo
-        </div>
-    </div>
-</body>
-
 <style>
     body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: Georgia;
     }
-
+  
     .section {
-        height: 300px;
-        background-color: #3498db;
-        color: #fff;
-        text-align: center;
-        display: flex;
-        flex-direction: row;
-        font-size: 36px;
-        border: 2px solid black;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      white-space: nowrap;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+      width: 100%;
     }
-
-    .section > div {
-        box-sizing: border-box;
+  
+    .section1{
+      height: 600px;
+      background-color: #3498db;
+      color: #fff;
     }
-
-    .section1,
-    .section3,
-    .section5 > div:nth-child(1) {
-        width: 25%;
-        background-color: #3498db;
-        border-right: black;
+  
+    .section2,
+    .section3 {
+      height: 400px;
+      background-color: #FEF9FF;
+      color: #3498db;
     }
-
-    .section1,
-    .section3,
-    .section5 > div:nth-child(2) {
-        width: 75%;
-        background-color: #2ecc71;
+  
+    .section4,
+    .section6 {
+      height: 450px;
+      background-color: #3498db;
+      color: #fff;
+      flex-direction: row;
     }
-
+  
+    .section4 div {
+      flex: 1; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
     
-    .section2,
-    .section4 > div:nth-child(1) {
-        width: 25%;
-        background-color: #3498db;
-        border-right: black;
+    .section5 {
+      height: 700px;
+      background-color: #FEF9FF;
+      color: #3498db;
     }
-
-    .section2,
-    .section4 > div:nth-child(2) {
-        width: 75%;
-        background-color: #2ecc71;
-    }
-
+  
     h1 {
-        margin-top: 15px;
-        font-size: 36px;
+      font-size: 48px;
+      font-family: Georgia;
+      margin-bottom: 10px;
     }
-
+  
     p {
-        font-size: 20px;
-        margin-top: 20px;
-        position: absolute;
+      font-size: 25px;
+      margin-top: 25px;
+      position: relative;
     }
-</style>
+  
+    img {
+      width: 200px;
+      margin: 20px auto;
+      display: block;
+    }
+  
+    .material-icons,
+    .material-symbols-outlined {
+      font-size: 40px;
+      margin: 0 10px;
+    }
+  
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+  
+  <body>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+    <div class="section section1">
+      <div>
+        <h1>Yo</h1>
+        <p>Establishing mentor to mentee relationships.</p>
+      </div>
+    </div>
+  
+    <div class="section section2">
+      <div>
+        <h1>76% of people think mentors are important</h1>
+        <p>But only 37% of people currently have one.</p>
+        <p>We believe in changing that.</p>
+        <img src="" alt="">
+      </div>
+    </div>
+  
+    <div class="section section3">
+      <div>
+        <h1>Yo</h1>
+        <p>Yo</p>
+      </div>
+    </div>
+  
+    <div class="section section4">
+      <div>
+        <span class="material-icons">mode_comment</span>
+        <h1>Chat</h1>
+        <p>with your connections.</p>
+      </div>
+      <div>
+        <span class="material-icons">person_add</span>
+        <h1>Connect</h1>
+        <p>with your next potential mentor.</p>
+      </div>
+      <div>
+        <span class="material-symbols-outlined">person_play</span>
+        <h1>Participate</h1>
+        <p>in engaging weekly events.</p>
+      </div>
+    </div>
+  
+    <div class="section section5">
+      <div>
+        <h1>Our strongest values are <strong>trust</strong> and <strong>community</strong>.</h1>
+        <p>Ready to get started?</p>
+      </div>
+      <div></div>
+    </div>
+  
+    <div class="section section6">
+      <div>
+        <h1>Contact Us</h1>
+        <p>Reach out to us for any inquiries or collaborations.</p>
+      </div>
+      <div></div>
+    </div>
+  </body>

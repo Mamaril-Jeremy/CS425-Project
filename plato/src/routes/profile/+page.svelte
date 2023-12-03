@@ -43,7 +43,7 @@
   <div class="user-info-container">
     <div class="flex items-center space-x-10">
         <Avatar src={Pfp} data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg" dot={{ placement: 'top-right', color: 'green', size: 'lg' }}/>
-        <div class="space-y-1 font-medium dark:text-white">
+        <div class="space-y-1 font-medium dark:text-black">
             <div>Mark Marsala</div>
             <div class="text-sm text-gray-500 dark:text-gray-400">Joined in September 2023</div>
         </div>

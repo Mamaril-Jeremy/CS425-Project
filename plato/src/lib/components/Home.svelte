@@ -1,10 +1,13 @@
 <script>
-  import Logo from '$lib/assets/plato_logo.png';
   import { onMount } from "svelte";
   import { goto } from '$app/navigation';
+  import { fade } from 'svelte/transition';
+
+  import Logo from '$lib/assets/plato_logo.png';
 
   let text = "Welcome to Plato!";
   let animatedText = "";
+  let fadeIn = false;
 
   onMount(() => {
     const typeAnimation = (text, speed) => {
@@ -16,15 +19,20 @@
 
         if (index > text.length) {
           clearInterval(intervalId);
+          fadeIn = true; 
         }
       }, speed);
     };
 
-    typeAnimation(text, 70);
+    typeAnimation(text, 60);
   });
 
-  const handleClick = async (event) => {
+  const joinClick = async (event) => {
     goto("/create-account");
+  };
+
+  const aboutClick = async (event) => {
+    goto("/about");
   };
 </script>
 
@@ -46,9 +54,10 @@
     box-sizing: border-box;
     text-align: center;
     width: 100%;
+    border-top: 2px solid #888;
   }
 
-  .section1{
+  .section1 {
     height: 600px;
     background-color: #3498db;
     color: #fff;
@@ -70,27 +79,32 @@
   }
 
   .section4 div {
-    flex: 1; 
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  
+
   .section5 {
-    height: 700px;
+    height: 500px;
     background-color: #FEF9FF;
     color: #3498db;
+  }
+
+  .section6 {
+    height: 700px;
   }
 
   h1 {
     font-size: 48px;
     font-family: Georgia;
     margin-bottom: 10px;
+    margin-top: 20px;
   }
 
   p {
-    font-size: 25px;
+    font-size: 27px;
     margin-top: 25px;
     position: relative;
   }
@@ -105,7 +119,7 @@
     background-color: #3498db;
     border: none;
     color: #FEF9FF;
-    padding: 15px 32px;
+    padding: 12px 28px;
     text-align: center;
     font-size: 16px;
     margin: 20px auto;
@@ -133,7 +147,9 @@
     <div>
       <img src={Logo} alt="Logo" />
       <h1>{animatedText}</h1>
-      <p>Establishing mentor to mentee relationships.</p>
+      {#if fadeIn}
+        <p in:fade={{delay: 5, duration: 1600}}>Establishing mentor to mentee relationships.</p>
+      {/if}
     </div>
   </div>
 
@@ -141,13 +157,14 @@
     <div>
       <h1>76% of people think mentors are important</h1>
       <p>But only 37% of people currently have one.</p>
+      <p>We believe in changing that.</p>
     </div>
   </div>
 
   <div class="section section3">
     <div>
-      <h1>We believe in changing that.</h1>
-      <p></p>
+      <h1>Learn More About Our Values Here</h1>
+      <button on:click={aboutClick}>Learn More</button>
     </div>
   </div>
 
@@ -173,7 +190,7 @@
     <div>
       <h1>Our strongest values are <strong>trust</strong> and <strong>community</strong>.</h1>
       <p>Ready to get started?</p>
-      <button on:click={handleClick}>Join Now</button>
+      <button on:click={joinClick}>Join Now</button>
     </div>
     <div></div>
   </div>
