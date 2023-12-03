@@ -23,9 +23,14 @@
   <link rel="icon" type="image/svg+xml" href={Logo} />
 </svelte:head>
 
-{#if $authStore.currentUser}
-  <NavbarIn />
+{#if $authStore.isLoading}
+  <p>Loading...</p>
 {:else}
-  <NavbarOut />
+  {#if $authStore.currentUser}
+    <NavbarIn />
+  {:else}
+    <NavbarOut />
+  {/if}
 {/if}
+
 <slot />

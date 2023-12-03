@@ -41,7 +41,7 @@
       <DropdownItem on:click={sClicked}>Settings</DropdownItem>
       <DropdownItem on:click={pClicked}>Profile</DropdownItem>
       <DropdownDivider />
-      <DropdownItem on:click={handleClick}>Sign out</DropdownItem>
+      <DropdownItem on:click={handleClick}><span class="text-blue-600">Sign out</span></DropdownItem>
     </Dropdown>
     <NavUl>
       <NavLi href="/home"><span class="hover:text-blue-600 text-base">Home</span></NavLi>
@@ -66,7 +66,7 @@
         height: 30px;
     }
     .plato{
-        background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));;
+        background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;

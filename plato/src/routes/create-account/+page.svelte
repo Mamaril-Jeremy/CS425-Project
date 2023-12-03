@@ -1,6 +1,6 @@
 <script>
     import { authHandlers } from "../../stores/authStore.js"
-    import { authStore } from '../../stores/authStore'
+    import { authStore } from '../../stores/authStore';
     import { goto } from '$app/navigation';
     import { auth } from "$lib/firebase/firebase.client.js";
 
