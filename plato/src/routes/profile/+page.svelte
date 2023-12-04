@@ -1,27 +1,30 @@
 <script>
-  import { doc, setDoc, getFirestore } from 'firebase/firestore';
+  import { db, doc, setDoc, getFirestore } from 'firebase/firestore';
   import { Avatar, Label, Input, GradientButton, Checkbox, A } from 'flowbite-svelte';
   import Pfp from "$lib/assets/Mark Marsala.jpg";
-  import { auth } from '$lib/firebase/firebase.client.js';
+  import { onAuthStateChanged } from 'firebase/auth';
+  import { auth } from '$lib/firebase/firebase.client.js'
 
-  // Assuming auth.getUser returns the user UID
-  const userUID = auth.getUser(); // Removed 'uid' parameter
+  let currentUser, userUID, firstName, lastName, email, phoneNumber, occupation, role, connectsRemaining, passesRemaining;
 
-  const db = getFirestore();
+  onAuthStateChanged(auth, (user) => {
+    currentUser = user;
 
-  let firstName, lastName, email, phoneNumber, occupation, role, connectsRemaining, passesRemaining;
+    if (user) {
+      userUID = user.uid;
+    }
+  });
 
   const handleClick = async (e) => {
-    // Check if the user is authenticated before proceeding
     if (!userUID) {
       console.error('User not authenticated');
       return;
     }
 
-    const userRef = doc(db, 'users', userUID);
+  const userRef = doc(db, 'users');
 
-    try {
-      await setDoc(userRef, {
+  try {
+    await setDoc(userRef, {
         userLastName: lastName,
         userEmailAddress: email,
         userOccupation: occupation,
