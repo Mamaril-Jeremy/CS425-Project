@@ -102,7 +102,7 @@
     margin-bottom: 10px;
     margin-top: 20px;
   }
-
+  
   p {
     font-size: 27px;
     margin-top: 25px;
@@ -146,7 +146,7 @@
   <div class="section section1">
     <div>
       <img src={Logo} alt="Logo" />
-      <h1>{animatedText}</h1>
+      <h1 class="welcome">{animatedText}</h1>
       {#if fadeIn}
         <p in:fade={{delay: 5, duration: 1600}}>Establishing mentor to mentee relationships.</p>
       {/if}
