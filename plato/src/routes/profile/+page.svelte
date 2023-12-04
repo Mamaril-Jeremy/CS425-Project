@@ -1,8 +1,44 @@
 <script>
-    import { Avatar, Label, Input, GradientButton, Checkbox, A } from 'flowbite-svelte';
-    import Pfp from "$lib/assets/Mark Marsala.jpg";
-    let email;
-    let password;
+  import { doc, setDoc, getFirestore } from 'firebase/firestore';
+  import { Avatar, Label, Input, GradientButton, Checkbox, A } from 'flowbite-svelte';
+  import Pfp from "$lib/assets/Mark Marsala.jpg";
+  import { auth } from '$lib/firebase/firebase.client.js';
+
+  // Assuming auth.getUser returns the user UID
+  const userUID = auth.getUser(); // Removed 'uid' parameter
+
+  const db = getFirestore();
+
+  let firstName, lastName, email, phoneNumber, occupation, role, connectsRemaining, passesRemaining;
+
+  const handleClick = async (e) => {
+    // Check if the user is authenticated before proceeding
+    if (!userUID) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const userRef = doc(db, 'users', userUID);
+
+    try {
+      await setDoc(userRef, {
+        userLastName: lastName,
+        userEmailAddress: email,
+        userOccupation: occupation,
+        userRole: role.toLowerCase() === 'mentor', 
+        userConnectsRemaining: connectsRemaining,
+        userPhoneNumber: phoneNumber,
+        userPassesRemaining: passesRemaining,
+        userID: userUID,
+        userFirstName: firstName,
+        id: 'ZlRl26FnOkOttj30vpMl',
+      });
+
+      console.log('User information updated successfully');
+    } catch (error) {
+      console.error('Error updating user information:', error);
+    }
+  };
 </script>
 
 <style>
@@ -20,14 +56,14 @@
 
     .form-container {
       position: relative;
-      margin-top: 200px;
+      margin-top: 150px;
     }
 
     .centered-button{
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: auto;
+      margin: 25px auto;
     }
 
     body {
@@ -52,48 +88,45 @@
 
 <div class="form-container">
   <form>
-    <div class="grid gap-6 mb-6 md:grid-cols-2 mt-6">
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
       <div>
         <Label for="first_name" class="mb-2">First name</Label>
-        <Input type="text" id="first_name" placeholder="First" required />
+        <Input type="text" id="first_name" placeholder="First" bind:value={firstName} required />
       </div>
       <div>
         <Label for="last_name" class="mb-2">Last name</Label>
-        <Input type="text" id="last_name" placeholder="Last" required />
+        <Input type="text" id="last_name" placeholder="Last"  bind:value={lastName} required />
       </div>
       <div>
-        <Label for="company" class="mb-2">Company</Label>
-        <Input type="text" id="company" placeholder="Plato" required />
+        <Label for="company" class="mb-2">Occupation</Label>
+        <Input type="text" id="company" placeholder="Plato" bind:value={occupation} required />
       </div>
       <div>
         <Label for="phone" class="mb-2">Phone number</Label>
-        <Input type="tel" id="phone" placeholder="123-45-678" pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"} required />
+        <Input type="tel" id="phone" placeholder="123-456-7890" pattern={"[0-9]{3}-[0-9]{3}-[0-9]{4}"} bind:value={phoneNumber} required />
       </div>
       <div>
-        <Label for="website" class="mb-2">Website URL</Label>
-        <Input type="url" id="website" placeholder="plato.com" required />
+        <Label for="website" class="mb-2">Role</Label>
+        <Input type="url" id="website" placeholder="plato.com" bind:value={role} required />
       </div>
       <div>
-        <Label for="visitors" class="mb-2">Unique visitors (per month)</Label>
-        <Input type="number" id="visitors" placeholder="" required />
+        <Label for="visitors" class="mb-2">Connects Remaining</Label>
+        <Input type="number" id="visitors" placeholder="" bind:value={connectsRemaining} required />
       </div>
     </div>
-    <div class="mb-6">
-      <Label for="email" class="mb-2">Email address</Label>
-      <Input type="email" id="email" placeholder="first.last@company.com" required bind:value={email} />
+    <div>
+      <Label for="visitors" class="mb-2">Passes Remaining</Label>
+      <Input class="mb-3" type="number" id="visitors" placeholder="" bind:value={passesRemaining} required />
     </div>
-    <div class="mb-6">
-      <Label for="password" class="mb-2">Password</Label>
-      <Input type="password" id="password" placeholder="•••••••••" required bind:value={password}/>
-    </div>
-    <div class="mb-6">
-      <Label for="confirm_password" class="mb-2">Confirm password</Label>
-      <Input type="password" id="confirm_password" placeholder="•••••••••" required />
+    <div>
+      <Label for="visitors" class="mb-2">Email</Label>
+      <Input  class="mb-3" type="email" id="email" placeholder="name@domain.com" bind:value={email} required />
     </div>
     <!-- <Checkbox class="mb-6 space-x-1" required> -->
       <!-- I agree with the <A href="/" class="text-primary-600 dark:text-primary-600 hover:underline">terms and conditions</A>. -->
     <!-- </Checkbox> -->
-    <div class="centered-button"><GradientButton type="submit" color="purpleToBlue">Submit</GradientButton>
+    <div class="centered-button">
+      <GradientButton type="submit" color="purpleToBlue" on:submit={handleClick}>Submit</GradientButton>
     </div>
   </form>
 </div>
