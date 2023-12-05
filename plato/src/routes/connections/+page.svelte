@@ -36,30 +36,34 @@
     }
 </script>
 
-<div class="pass">
-    <Button color="red" class="ml-100" on:click={updateLimit}>Pass</Button>
-</div>
 <div class="container">
+    <div class="pass">
+        <Button color="red" class="tinder-button">Pass</Button>
+    </div>
     <Card />
 </div>
 <div class="connect">
-    <Button color="green" class="mr-100" on:click={updateLimit}>Connect</Button>
+    <Button color="green" class="tinder-button" on:click={updateLimit}>Connect</Button>
+ </div>
 </div>
 
 <style>
     .container {
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
         height: 100vh;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .pass {
-        margin-left: 450px;
+        text-align: center;
+        padding-right: 10px;
     }
 
     .connect {
-        margin-right: 450px;
+        text-align: center;
+        padding-left: 10px;
     }
 </style>
