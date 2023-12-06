@@ -6,8 +6,8 @@
     import { auth, db } from '$lib/firebase/firebase.client.js';
 
     let userUID;
-    let userConnectsRemaining = 5; // Set your initial values
-    let userPassesRemaining = 10; // Set your initial values
+    let userConnectsRemaining = 5; 
+    let userPassesRemaining = 10; 
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -45,7 +45,6 @@
 <div class="connect">
     <Button color="green" class="tinder-button" on:click={updateLimit}>Connect</Button>
  </div>
-</div>
 
 <style>
     .container {

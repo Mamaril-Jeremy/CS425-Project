@@ -1,40 +1,48 @@
 <script>
-  import { collection, setDoc, getDoc, doc } from 'firebase/firestore';
-  import { Avatar, Label, Input, GradientButton } from 'flowbite-svelte';
+  // import { onMount } from 'svelte';
+  import { collection, updateDoc, getDocs, doc, query, where } from 'firebase/firestore';
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
-  import Pfp from "$lib/assets/Mark Marsala.jpg";
+  import { Avatar, Label, Input, GradientButton } from 'flowbite-svelte';
+  import Pfp from '$lib/assets/Mark Marsala.jpg';
 
   let userUID, firstName, lastName, email, phoneNumber, occupation, role, connectsRemaining = 5, passesRemaining = 10;
   let localFirstName, localLastName, localEmail, localPhoneNumber, localOccupation, localRole;
+  let success = false;
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       userUID = user.uid;
+      fetchData();
     }
   });
 
   const fetchData = async () => {
-    const docRef = doc(db, "users", userUID);
-    const docSnap = await getDoc(docRef);
+    const userRef = collection(db, "users");
+    const q = query(userRef, where("userID", "==", userUID));
 
-    if (docSnap.exists()) {
-      lastName = data.userLastName
-      emailAddress = data.userEmailAddress
-      occupation = data.userOccupation
-      role = data.userRole
-      connectsRemaining = data.userConnectsRemaining
-      phoneNumber = data.userPhoneNumber
-      passesRemaining = data.userPassesRemaining
-      userUID = data.userID
-      firstName = data.userFirstName
+    const querySnapshot = await getDocs(q);
 
+    if (!querySnapshot.empty) {
+      const data = querySnapshot.docs[0].data();
+      firstName = data.userFirstName;
+      lastName = data.userLastName;
+      email = data.userEmailAddress;
+      occupation = data.userOccupation;
+      role = data.userRole;
+      connectsRemaining = data.userConnectsRemaining;
+      phoneNumber = data.userPhoneNumber;
+      passesRemaining = data.userPassesRemaining;
+      userUID = data.userID;
+      console.log(firstName);
     } else {
-      console.log("No such document!");
+      console.log('No such document!');
     }
   };
 
   const handleClick = async (e) => {
+    e.preventDefault();
+
     if (!userUID) {
       console.error('User not authenticated');
       return;
@@ -47,21 +55,32 @@
     occupation = localOccupation;
     role = localRole;
 
-    const docRef = await setDoc(collection(db, "users", userUID), {
-      userLastName: lastName,
-      userEmailAddress: email,
-      userOccupation: occupation,
-      userRole: role.toLowerCase(),
-      userConnectsRemaining: connectsRemaining,
-      userPhoneNumber: phoneNumber,
-      userPassesRemaining: passesRemaining,
-      userID: userUID,
-      userFirstName: firstName
-    });
-    console.log("Document written with ID: ", docRef.id);
-  };
+    const userRef = collection(db, "users");
+    const q = query(userRef, where("userID", "==", userUID));
 
-  $: fetchData();
+    const querySnapshot = await getDocs(q);
+    const docRef = querySnapshot.docs[0].ref;
+
+    try {
+      await updateDoc(docRef, {
+        userLastName: lastName,
+        userEmailAddress: email,
+        userOccupation: occupation,
+        userRole: role.toLowerCase(),
+        userConnectsRemaining: connectsRemaining,
+        userPhoneNumber: phoneNumber,
+        userPassesRemaining: passesRemaining,
+        userID: userUID,
+        userFirstName: firstName,
+      });
+
+      console.log('Document updated with ID:', docRef.id);
+      success = true;
+    } catch (error) {
+      console.error('Error updating document:', error.message);
+      success = false;
+    }
+  };
 </script>
 
 <style>
@@ -79,7 +98,7 @@
 
   .form-container {
     position: relative;
-    margin-top: 200px;
+    margin-top: 300px;
   }
 
   .centered-button {
@@ -89,10 +108,18 @@
     margin: 25px auto;
   }
 
-  .constants{
+  .constants {
     display: flex;
     margin: 25px auto;
     font-size: 20px;
+  }
+
+  .success {
+    display: flex;
+    margin: 25px auto;
+    font-size: 20px;
+    color: rgb(113, 174, 21);
+    text-align: center;
   }
 
   body {
@@ -133,16 +160,11 @@
         </div>
         <div>
           <Label for="phone" class="mb-2">Phone number</Label>
-          <Input type="tel" id="phone" placeholder="123-456-7890"
-            bind:value={localPhoneNumber} required />
+          <Input type="tel" id="phone" placeholder="123-456-7890" bind:value={localPhoneNumber} required />
         </div>
         <div>
           <Label for="role" class="mb-2">Role</Label>
           <Input type="text" id="role" placeholder="mentor/mentee" bind:value={localRole} required />
-        </div>
-        <div>
-          <Label for="role" class="mb-2">Role</Label>
-          <Input type="text" id="role" placeholder="mentor/mentee" required />
         </div>
         <div>
           <Label for="visitors" class="mb-2">Connects Remaining</Label>
@@ -161,5 +183,10 @@
         <GradientButton type="submit" color="purpleToBlue">Submit</GradientButton>
       </div>
     </form>
+    {#if success}
+      <div class="success">
+        Successfully updated profile!
+      </div>
+    {/if}
   </div>
 </body>
