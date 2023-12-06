@@ -5,8 +5,7 @@
     import { auth, db } from '$lib/firebase/firebase.client.js';
     import { goto } from '$app/navigation';
   
-    let userUID, firstName, lastName, email, phoneNumber, occupation, role, connectsRemaining = 5, passesRemaining = 10;
-    let localFirstName, localLastName, localEmail, localPhoneNumber, localOccupation, localRole;
+    let userUID, username, firstName, lastName, email, phoneNumber, occupation, role, connectsRemaining = 5, passesRemaining = 10;
     let success = false;
   
     onAuthStateChanged(auth, (user) => {
@@ -30,7 +29,6 @@
         passesRemaining = data.userPassesRemaining;
         userUID = data.userID;
         firstName = data.userFirstName;
-  
       } else {
         console.log("No such document!");
       }
@@ -38,18 +36,11 @@
   
     fetchData();
   
-    const handleClick = async (e) => {
+    const handleSubmit = async (e) => {
       if (!userUID) {
         console.error('User not authenticated');
         return;
       }
-  
-      firstName = localFirstName;
-      lastName = localLastName;
-      email = localEmail;
-      phoneNumber = localPhoneNumber;
-      occupation = localOccupation;
-      role = localRole;
   
       const docRef = await addDoc(collection(db, "users"), {
         userLastName: lastName,
@@ -68,105 +59,68 @@
     };
   </script>
   
-  <style>
-    .user-info-container {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-      margin-top: 60px;
-    }
-  
-    .form-container {
-      position: relative;
-      margin-top: 300px;
-    }
-  
-    .centered-button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 25px auto;
-    }
-  
-    .constants {
-      display: flex;
-      margin: 25px auto;
-      font-size: 20px;
-    }
-  
-    .success {
-      display: flex;
-      margin: 25px auto;
-      font-size: 20px;
-      color: rgb(113, 174, 21);
-      text-align: center;
-    }
-  
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-  </style>
-  
-  <body>
-    <div class="user-info-container">
-      <div class="flex items-center space-x-20">
-        We just need a few more details about you!
-    </div>
-  
-    <div class="form-container">
-      <form on:submit={handleClick}>
+  <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
+    <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
+      <h1 class="text-3xl font-semibold mb-6">Create Your Profile</h1>
+    
+      <form on:submit={handleSubmit}>
         <div class="grid gap-6 mb-6 md:grid-cols-2">
           <div>
             <Label for="first_name" class="mb-2">First name</Label>
-            <Input type="text" id="first_name" placeholder="First" bind:value={localFirstName} required />
+            <Input type="text" id="first_name" placeholder="First" bind:value={firstName} required />
           </div>
           <div>
             <Label for="last_name" class="mb-2">Last name</Label>
-            <Input type="text" id="last_name" placeholder="Last" bind:value={localLastName} required />
+            <Input type="text" id="last_name" placeholder="Last" bind:value={lastName} required />
           </div>
           <div>
             <Label for="company" class="mb-2">Occupation</Label>
-            <Input type="text" id="company" placeholder="Plato" bind:value={localOccupation} required />
+            <Input type="text" id="company" placeholder="Plato" bind:value={occupation} required />
           </div>
           <div>
             <Label for="phone" class="mb-2">Phone number</Label>
-            <Input type="tel" id="phone" placeholder="123-456-7890" bind:value={localPhoneNumber} required />
+            <Input type="tel" id="phone" placeholder="123-456-7890" bind:value={phoneNumber} required />
           </div>
           <div>
             <Label for="role" class="mb-2">Role</Label>
-            <Input type="text" id="role" placeholder="mentor/mentee" bind:value={localRole} required />
-          </div>
-          <div>
-            <Label for="visitors" class="mb-2">Connects Remaining</Label>
-            <div class="constants">{connectsRemaining}</div>
-          </div>
-          <div>
-            <Label for="visitors" class="mb-2">Passes Remaining</Label>
-            <div class="constants">{passesRemaining}</div>
+            <Input type="text" id="role" placeholder="mentor/mentee" bind:value={role} required />
           </div>
         </div>
         <div>
           <Label for="email" class="mb-2">Email</Label>
-          <Input class="mb-3" type="email" id="email" placeholder="name@domain.com" bind:value={localEmail} required />
+          <Input class="mb-3" type="email" id="email" placeholder="name@domain.com" bind:value={email} required />
         </div>
-        <div class="centered-button">
-          <GradientButton type="submit" color="purpleToBlue">Submit</GradientButton>
+  
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+          Create Account
+        </button>
+  
+        <div class="mt-6">
+         Already have an account? <a href="/sign-in">Sign In</a> Instead!
         </div>
       </form>
-      {#if success}
-        <div class="success">
-          Successfully created profile!
-        </div>
-      {/if}
+    </section>
+  </main>
+  
+  <style>
+    main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    section {
+      background: white;
+    }
+
+    button {
+      cursor: pointer;
+    }
+  </style>
+
+  {#if success}
+    <div class="success">
+      Successfully created profile!
     </div>
-  </body>
+  {/if}
   

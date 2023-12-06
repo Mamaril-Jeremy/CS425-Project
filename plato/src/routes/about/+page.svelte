@@ -1,146 +1,117 @@
+<script>
+  let sections = [
+    { title: 'Why Plato', text: 'Unlock your potential with a mentor by your side, guiding you through your career or academic journey. Mentorship is at the heart of what we do.' },
+    { title: 'Connecting Dreams and Expertise', text: 'Plato brings together passionate learners and seasoned professionals, creating a dynamic synergy that propels you towards greatness.' },
+    { title: 'Personalized Mentorship', text: 'Experience the art of personalization. We pair you with mentors who understand your unique goals and aspirations, providing tailored support.' },
+    { title: 'Trust and Community', text: 'Plato is your sanctuary for forging genuine and meaningful connections. Join our community of learners and mentors and start your journey to success.' }
+  ];
+</script>
+
 <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Georgia;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Georgia;
+  }
+
+  .section {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+    border-top: 2px solid #888;
+  }
+
+  .section1 {
+    height: 600px;
+    background-color: #3498db;
+    color: #fff;
+  }
+
+  .section2,
+  .section3 {
+    height: 400px;
+    background-color: #FEF9FF;
+    color: #3498db;
+  }
+
+  .section4{
+    height: 450px;
+    background-color: #3498db;
+    color: #fff;
+    flex-direction: row;
+  }
+
+  .section4 div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  .section5 {
+    height: 500px;
+    background-color: #FEF9FF;
+    color: #3498db;
+  }
+
+  h1 {
+    font-size: 48px;
+    font-family: Georgia;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
   
-    .section {
-      overflow: hidden;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      white-space: nowrap;
-      padding: 20px;
-      box-sizing: border-box;
-      text-align: center;
-      width: 100%;
-    }
-  
-    .section1{
-      height: 600px;
-      background-color: #3498db;
-      color: #fff;
-    }
-  
-    .section2,
-    .section3 {
-      height: 400px;
-      background-color: #FEF9FF;
-      color: #3498db;
-    }
-  
-    .section4,
-    .section6 {
-      height: 450px;
-      background-color: #3498db;
-      color: #fff;
-      flex-direction: row;
-    }
-  
-    .section4 div {
-      flex: 1; 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    
-    .section5 {
-      height: 700px;
-      background-color: #FEF9FF;
-      color: #3498db;
-    }
-  
-    h1 {
-      font-size: 48px;
-      font-family: Georgia;
-      margin-bottom: 10px;
-    }
-  
-    p {
-      font-size: 25px;
-      margin-top: 25px;
-      position: relative;
-    }
-  
-    img {
-      width: 200px;
-      margin: 20px auto;
-      display: block;
-    }
-  
-    .material-icons,
-    .material-symbols-outlined {
-      font-size: 40px;
-      margin: 0 10px;
-    }
-  
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-  </style>
-  
-  <body>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  
-    <div class="section section1">
-      <div>
-        <h1>Yo</h1>
-        <p>Establishing mentor to mentee relationships.</p>
-      </div>
+  p {
+    font-size: 27px;
+    margin-top: 25px;
+    position: relative;
+  }
+</style>
+
+<body>
+  <div class="section section1">
+    <div>
+      <h1 class="welcome">Why Plato?</h1>
+      <p>Unlock your potential with a mentor by your side, guiding you through your career or academic journey.</p>
+      <p>Mentorship is at the heart of what we do.</p>
     </div>
-  
-    <div class="section section2">
-      <div>
-        <h1>76% of people think mentors are important</h1>
-        <p>But only 37% of people currently have one.</p>
-        <p>We believe in changing that.</p>
-        <img src="" alt="">
-      </div>
+  </div>
+
+  <div class="section section2">
+    <div>
+      <h1>Connecting Dreams and Expertise</h1>
+      <p>Plato brings together passionate learners and seasoned professionals,</p>
+      <p>creating a dynamic synergy that propels you towards greatness.</p>
     </div>
-  
-    <div class="section section3">
-      <div>
-        <h1>Yo</h1>
-        <p>Yo</p>
-      </div>
+  </div>
+
+  <div class="section section3">
+    <div>
+      <h1>Personalized Mentorship</h1>
+      <p>Experience the art of personalization.</p>
+      <p>We pair you with mentors who understand your unique goals and aspirations, providing tailored support.</p>
     </div>
-  
-    <div class="section section4">
-      <div>
-        <span class="material-icons">mode_comment</span>
-        <h1>Chat</h1>
-        <p>with your connections.</p>
-      </div>
-      <div>
-        <span class="material-icons">person_add</span>
-        <h1>Connect</h1>
-        <p>with your next potential mentor.</p>
-      </div>
-      <div>
-        <span class="material-symbols-outlined">person_play</span>
-        <h1>Participate</h1>
-        <p>in engaging weekly events.</p>
-      </div>
+  </div>
+
+  <div class="section section4">
+    <div>
+      <h1>Trust and Community</h1>
+      <p>Plato is your sanctuary for forging genuine and meaningful connections.</p>
+      <p>Join our community of learners and mentors and start your journey to success.</p>
     </div>
-  
-    <div class="section section5">
-      <div>
-        <h1>Our strongest values are <strong>trust</strong> and <strong>community</strong>.</h1>
-        <p>Ready to get started?</p>
-      </div>
-      <div></div>
+  </div>
+
+  <div class="section section5">
+    <div>
+      <h1>Thank You for Allowing Us to Share About Our Values</h1>
     </div>
-  
-    <div class="section section6">
-      <div>
-        <h1>Contact Us</h1>
-        <p>Reach out to us for any inquiries or collaborations.</p>
-      </div>
-      <div></div>
-    </div>
-  </body>
+  </div>
+</body>
