@@ -27,14 +27,14 @@
         try {
           await authHandlers.signup(email, password);
           await authHandlers.verifyEmail();
-          goto('/home')
+          goto('/create-profile')
         } catch (err) {
           console.log(err)
         }
       } else {
         try {
           await authHandlers.login(email, password)
-          goto('/home')
+          goto('/create-profile')
         } catch (err) {
           console.log(err);
         }

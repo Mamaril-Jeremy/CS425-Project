@@ -3,6 +3,7 @@
   import NavbarIn from "../lib/components/NavbarIn.svelte";
   import NavbarOut from './../lib/components/NavbarOut.svelte';
   import Logo from '$lib/assets/plato_logo.png';
+  import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
   import { auth } from '../lib/firebase/firebase.client';
   import { authStore } from '../stores/authStore';
@@ -28,9 +29,10 @@
 {:else}
   {#if $authStore.currentUser}
     <NavbarIn />
+    <slot />
   {:else}
     <NavbarOut />
+    <slot />
   {/if}
 {/if}
 
-<slot />
