@@ -15,7 +15,7 @@
       }
     }
     const pClicked = async (event) => {
-      goto('/profile');
+      goto('/create-profile');
     }
     const sClicked = async (event) => {
       goto('/settings');

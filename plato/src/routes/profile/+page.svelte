@@ -84,21 +84,29 @@
 </script>
 
 <style>
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .user-info-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    margin-top: 60px;
+    margin-top: 150px;
+  }
+
+  .success {
+    margin: 25px auto;
+    font-size: 20px;
+    color: rgb(113, 174, 21);
+    text-align: center;
   }
 
   .form-container {
-    position: relative;
-    margin-top: 300px;
+    margin-top: 20px; 
   }
 
   .centered-button {
@@ -114,14 +122,6 @@
     font-size: 20px;
   }
 
-  .success {
-    display: flex;
-    margin: 25px auto;
-    font-size: 20px;
-    color: rgb(113, 174, 21);
-    text-align: center;
-  }
-
   body {
     margin: 0;
     display: flex;
@@ -132,16 +132,23 @@
 </style>
 
 <body>
-  <div class="user-info-container">
-    <div class="flex items-center space-x-10">
-      <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
-        dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
-      <div class="space-y-1 font-medium dark:text-black">
-        <div>{firstName} {lastName}</div>
-        <div class="text-sm text-gray-500 dark:text-gray-400">Joined in September 2023</div>
+  <div class="wrapper">
+    <div class="user-info-container">
+      <div class="flex items-center space-x-10">
+        <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
+          dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
+        <div class="space-y-1 font-medium dark:text-black">
+          <div>{firstName} {lastName}</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Joined in September 2023</div>
+        </div>
       </div>
     </div>
-  </div>
+
+    {#if success}
+    <div class="success">
+      Successfully updated profile!
+    </div>
+    {/if}
 
   <div class="form-container">
     <form on:submit={handleClick}>
@@ -180,13 +187,8 @@
         <Input class="mb-3" type="email" id="email" placeholder="name@domain.com" bind:value={localEmail} required />
       </div>
       <div class="centered-button">
-        <GradientButton type="submit" color="purpleToBlue">Submit</GradientButton>
+        <GradientButton type="submit" color="purpleToBlue">Update</GradientButton>
       </div>
     </form>
-    {#if success}
-      <div class="success">
-        Successfully updated profile!
-      </div>
-    {/if}
   </div>
 </body>
