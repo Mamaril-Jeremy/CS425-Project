@@ -1,5 +1,5 @@
 <script>
-    import { collection, setDoc, getDoc, doc, addDoc } from 'firebase/firestore';
+    import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
     import { Avatar, Label, Input, GradientButton } from 'flowbite-svelte';
     import { onAuthStateChanged } from 'firebase/auth';
     import { auth, db } from '$lib/firebase/firebase.client.js';
@@ -15,27 +15,39 @@
     });
   
     const handleSubmit = async (e) => {
+      e.preventDefault();
+
       if (!userUID) {
         console.error('User not authenticated');
         return;
       }
   
-      const docRef = await addDoc(collection(db, "users"), {
-        userLastName: lastName,
-        userOccupation: occupation,
-        userRole: role.toLowerCase(),
-        userConnectsRemaining: connectsRemaining,
-        userPhoneNumber: phoneNumber,
-        userPassesRemaining: passesRemaining,
-        userID: userUID,
-        userFirstName: firstName,
-        userMajor: major,
-        userCity: city,
-        userState: state
-      });
-      console.log("Document written with ID:", docRef.id);
-      success = true;
-      goto("/home")
+      const userRef = collection(db, "users");
+      const q = query(userRef, where("userID", "==", userUID));
+
+      const querySnapshot = await getDocs(q);
+      const docRef = querySnapshot.docs[0].ref;
+
+      try {
+        await updateDoc(docRef, {
+          userLastName: lastName,
+          userOccupation: occupation,
+          userRole: role.toLowerCase(),
+          userConnectsRemaining: connectsRemaining,
+          userPhoneNumber: phoneNumber,
+          userPassesRemaining: passesRemaining,
+          userFirstName: firstName,
+          userMajor: major,
+          userCity: city,
+          userState: state
+        });
+          console.log('Document updated with ID:', docRef.id);
+          success = true;
+        } catch (error) {
+          console.error('Error updating document:', error.message);
+          success = false;
+        }
+        goto("/home");
     };
   </script>
   

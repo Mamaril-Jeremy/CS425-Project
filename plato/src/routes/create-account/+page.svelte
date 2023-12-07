@@ -1,6 +1,17 @@
 <script>
-    import { authHandlers } from "../../stores/authStore.js"
+    import { collection, addDoc} from 'firebase/firestore';
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { auth, db } from '$lib/firebase/firebase.client.js';
+    import { authHandlers} from "../../stores/authStore.js"
     import { goto } from '$app/navigation';
+
+    let userUID;
+  
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userUID = user.uid;
+      }
+    });
 
     let formData = {
       username: '',
@@ -37,12 +48,22 @@
           console.log(err);
         }
       }
+
+      if (!userUID) {
+        console.error('User not authenticated');
+        return;
+      }
+  
+      const docRef = await addDoc(collection(db, "users"), {
+        userID: userUID,
+        userEmailAddress: formData.email
+      });
+      console.log("Document written with ID:", docRef.id);
     }
 
     //if($authStore.currentUser) {
       //goto('/home')
     //}
-
 </script>
   
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
