@@ -26,6 +26,7 @@
     }
 
     
+
     onAuthStateChanged(auth, (user) => {
       if (user) {
         userUID = user.uid;
@@ -33,25 +34,21 @@
       }
     });
 
-    async function fetchData() {
-      const userRef = collection(db, "users");
-      const q = query(userRef, where("userID", "==", userUID));
+  const fetchData = async () => {
+    const userRef = collection(db, "users");
+    const q = query(userRef, where("userID", "==", userUID));
 
-      try {
-        const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(q);
 
-        if (!querySnapshot.empty) {
-          const data = querySnapshot.docs[0].data();
-          firstName = data.userFirstName;
-          lastName = data.userLastName;
-          email = data.userEmailAddress;
-        } else {
-          console.log('No such document!');
-        }
-      } catch (error) {
-        console.error(error);
-      }
+    if (!querySnapshot.empty) {
+      const data = querySnapshot.docs[0].data();
+      firstName = data.userFirstName;
+      lastName = data.userLastName;
+      email = data.userEmailAddress;
+    } else {
+      console.log('No such document!');
     }
+  };
   </script>
   
   <div class="navbar-container">
@@ -67,7 +64,7 @@
     <Dropdown placement="bottom" triggeredBy="#avatar-menu">
       <DropdownHeader>
         <span class="block text-sm">{firstName} {lastName}</span>
-        <span class="block truncate text-sm font-medium">markymark@nevada.unr.edu</span>
+        <span class="block truncate text-sm font-medium">{email}</span>
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
       <DropdownItem on:click={sClicked}>Settings</DropdownItem>
