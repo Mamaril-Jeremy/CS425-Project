@@ -1,13 +1,12 @@
 <script>
-  // import { onMount } from 'svelte';
-  import { collection, updateDoc, getDocs, doc, query, where } from 'firebase/firestore';
+  import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
   import { Avatar, Label, Input, GradientButton } from 'flowbite-svelte';
   import Pfp from '$lib/assets/Mark Marsala.jpg';
 
-  let userUID, firstName, lastName, email, phoneNumber, occupation, role, connectsRemaining = 5, passesRemaining = 10;
-  let localFirstName, localLastName, localEmail, localPhoneNumber, localOccupation, localRole;
+  let userUID, firstName, lastName, email, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
+  let localFirstName, localLastName, localEmail, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
   let success = false;
 
   onAuthStateChanged(auth, (user) => {
@@ -34,7 +33,9 @@
       phoneNumber = data.userPhoneNumber;
       passesRemaining = data.userPassesRemaining;
       userUID = data.userID;
-      console.log(firstName);
+      major = data.userMajor;
+      city = data.userCity;
+      state = data.userState;
     } else {
       console.log('No such document!');
     }
@@ -54,6 +55,9 @@
     phoneNumber = localPhoneNumber;
     occupation = localOccupation;
     role = localRole;
+    major = localMajor;
+    city = localCity;
+    state = localState;
 
     const userRef = collection(db, "users");
     const q = query(userRef, where("userID", "==", userUID));
@@ -72,8 +76,10 @@
         userPassesRemaining: passesRemaining,
         userID: userUID,
         userFirstName: firstName,
+        userMajor: major,
+        userCity: city,
+        userState: state
       });
-
       console.log('Document updated with ID:', docRef.id);
       success = true;
     } catch (error) {
@@ -163,7 +169,7 @@
         </div>
         <div>
           <Label for="company" class="mb-2">Occupation</Label>
-          <Input type="text" id="company" placeholder="Plato" bind:value={localOccupation} required />
+          <Input type="text" id="company" placeholder="Tutor" bind:value={localOccupation} required />
         </div>
         <div>
           <Label for="phone" class="mb-2">Phone number</Label>
@@ -171,7 +177,21 @@
         </div>
         <div>
           <Label for="role" class="mb-2">Role</Label>
-          <Input type="text" id="role" placeholder="mentor/mentee" bind:value={localRole} required />
+          <Input type="text" id="role" placeholder="Mentor/Mentee" bind:value={localRole} required />
+        </div>
+        <div>
+          <Label for="major" class="mb-2">Major</Label>
+          <Input type="text" id="major" placeholder="Engineering" bind:value={localMajor} required />
+        </div>
+        <div>
+          <Label for="city" class="mb-2">City</Label>
+          <Input type="text" id="city" placeholder="Dallas" bind:value={localCity} required />
+        </div>
+        <div>
+          <div>
+            <Label for="state" class="mb-2">State</Label>
+            <Input type="text" id="state" placeholder="Texas" bind:value={localState} required />
+          </div>
         </div>
         <div>
           <Label for="visitors" class="mb-2">Connects Remaining</Label>
@@ -191,4 +211,5 @@
       </div>
     </form>
   </div>
+
 </body>

@@ -1,10 +1,14 @@
 <script>
     import { authHandlers } from "../../stores/authStore.js"
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownItem, DropdownHeader, DropdownDivider } from 'flowbite-svelte';
+    import { collection, getDocs, query, where } from 'firebase/firestore';
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { auth, db } from '$lib/firebase/firebase.client.js';
     import { goto } from '$app/navigation';
     import Logo from "$lib/assets/plato_logo.png";
     import Pfp from "$lib/assets/Mark Marsala.jpg";
     
+    let userUID, firstName, lastName, email;
 
     async function handleClick() {
       try {
@@ -15,10 +19,38 @@
       }
     }
     const pClicked = async (event) => {
-      goto('/create-profile');
+      goto('/profile');
     }
     const sClicked = async (event) => {
       goto('/settings');
+    }
+
+    
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userUID = user.uid;
+        fetchData();
+      }
+    });
+
+    async function fetchData() {
+      const userRef = collection(db, "users");
+      const q = query(userRef, where("userID", "==", userUID));
+
+      try {
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          const data = querySnapshot.docs[0].data();
+          firstName = data.userFirstName;
+          lastName = data.userLastName;
+          email = data.userEmailAddress;
+        } else {
+          console.log('No such document!');
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   </script>
   
@@ -34,7 +66,7 @@
     </div>
     <Dropdown placement="bottom" triggeredBy="#avatar-menu">
       <DropdownHeader>
-        <span class="block text-sm">Mark Marsala</span>
+        <span class="block text-sm">{firstName} {lastName}</span>
         <span class="block truncate text-sm font-medium">markymark@nevada.unr.edu</span>
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
