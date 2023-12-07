@@ -7,6 +7,7 @@
       email: '',
       password: '',
       confirmPassword: '',
+      phoneNumber: '',
     };
   
     async function handleSubmit() {
