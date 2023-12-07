@@ -2,12 +2,12 @@
     import { Button } from 'flowbite-svelte';
     import Card from '$lib/components/Card.svelte';
     import { onAuthStateChanged } from 'firebase/auth';
-    import { collection, setDoc, doc } from 'firebase/firestore';
+    import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
     import { auth, db } from '$lib/firebase/firebase.client.js';
 
     let userUID;
-    let userConnectsRemaining = 5; 
-    let userPassesRemaining = 10; 
+    let connectsRemaining;
+    let passesRemaining;
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -15,36 +15,41 @@
         }
     });
 
-    const updateLimit = async (e) => {
-        if (!userUID) {
-            console.error('User not authenticated');
-            return;
-        }
+    const updateLimit = async (action) => {
+        const userRef = collection(db, "users");
+        const q = query(userRef, where("userID", "==", userUID));
 
-        const userDocRef = doc(db, "users", userUID);
+        const querySnapshot = await getDocs(q);
+        const docRef = querySnapshot.docs[0].ref;
 
         try {
-            await setDoc(userDocRef, {
-                userConnectsRemaining: userConnectsRemaining - 1,
-                userPassesRemaining: userPassesRemaining - 1,
-            }, { merge: true });
-
-            console.log("Document updated successfully");
+            if (action === 'connect' && connectsRemaining > 0) {
+                connectsRemaining = data.userConnectsRemaining - 1;
+                await updateDoc(docRef, {
+                    userConnectsRemaining: connectsRemaining,
+                });
+            } else if (action === 'pass' && passesRemaining > 0) {
+                passesRemaining = data.userPassesRemaining - 1;
+                await updateDoc(docRef, {
+                    userPassesRemaining: passesRemaining,
+                });
+            }
+            console.log('Document updated with ID:', docRef.id);
         } catch (error) {
-            console.error("Error updating document: ", error);
+            console.error('Error updating document:', error.message);
         }
     }
 </script>
 
 <div class="container">
     <div class="pass">
-        <Button color="red" class="tinder-button">Pass</Button>
+        <Button color="red" class="tinder-button" on:click={() => updateLimit('pass')}>Pass</Button>
     </div>
     <Card />
+    <div class="connect">
+        <Button color="green" class="tinder-button" on:click={() => updateLimit('connect')}>Connect</Button>
+     </div>
 </div>
-<div class="connect">
-    <Button color="green" class="tinder-button" on:click={updateLimit}>Connect</Button>
- </div>
 
 <style>
     .container {

@@ -5,7 +5,7 @@
     import { auth, db } from '$lib/firebase/firebase.client.js';
     import { goto } from '$app/navigation';
   
-    let userUID, username, firstName, lastName, email, phoneNumber, occupation, role, connectsRemaining = 5, passesRemaining = 10;
+    let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
     let success = false;
   
     onAuthStateChanged(auth, (user) => {
@@ -13,28 +13,6 @@
         userUID = user.uid;
       }
     });
-  
-    const fetchData = async () => {
-      const docRef = doc(db, "users", userUID);
-      const docSnap = await getDoc(docRef);
-  
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        lastName = data.userLastName;
-        email = data.userEmailAddress;
-        occupation = data.userOccupation;
-        role = data.userRole;
-        connectsRemaining = data.userConnectsRemaining;
-        phoneNumber = data.userPhoneNumber;
-        passesRemaining = data.userPassesRemaining;
-        userUID = data.userID;
-        firstName = data.userFirstName;
-      } else {
-        console.log("No such document!");
-      }
-    };
-  
-    fetchData();
   
     const handleSubmit = async (e) => {
       if (!userUID) {
@@ -44,14 +22,16 @@
   
       const docRef = await addDoc(collection(db, "users"), {
         userLastName: lastName,
-        userEmailAddress: email,
         userOccupation: occupation,
         userRole: role.toLowerCase(),
         userConnectsRemaining: connectsRemaining,
         userPhoneNumber: phoneNumber,
         userPassesRemaining: passesRemaining,
         userID: userUID,
-        userFirstName: firstName
+        userFirstName: firstName,
+        userMajor: major,
+        userCity: city,
+        userState: state
       });
       console.log("Document written with ID:", docRef.id);
       success = true;
@@ -85,11 +65,22 @@
             <Label for="role" class="mb-2">Role</Label>
             <Input type="text" id="role" placeholder="mentor/mentee" bind:value={role} required />
           </div>
+          <div>
+            <Label for="major" class="mb-2">Major</Label>
+            <Input type="text" id="major" placeholder="engineering" bind:value={major} required />
+          </div>
+          <div>
+            <Label for="city" class="mb-2">City</Label>
+            <Input type="text" id="city" placeholder="Dallas" bind:value={city} required />
+          </div>
+          <div>
+            <div>
+              <Label for="state" class="mb-2">State</Label>
+              <Input type="text" id="state" placeholder="Texas" bind:value={state} required />
+            </div>
+          </div>
         </div>
-        <div>
-          <Label for="email" class="mb-2">Email</Label>
-          <Input class="mb-3" type="email" id="email" placeholder="name@domain.com" bind:value={email} required />
-        </div>
+
   
         <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
           Create Account

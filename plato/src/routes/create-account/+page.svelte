@@ -1,8 +1,6 @@
 <script>
     import { authHandlers } from "../../stores/authStore.js"
-    import { authStore } from '../../stores/authStore';
     import { goto } from '$app/navigation';
-    import { auth } from "$lib/firebase/firebase.client.js";
 
     let formData = {
       username: '',
@@ -82,10 +80,6 @@
       <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
         Create Account
       </button>
-
-      <div class="mt-6">
-       Already have an account? <a href="/sign-in">Sign In</a> Instead!
-      </div>
     </form>
   </section>
 </main>
