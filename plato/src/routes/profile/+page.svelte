@@ -137,7 +137,7 @@
 <body>
   <div class="wrapper">
     <div class="user-info-container">
-      <div class="flex items-center space-x-10">
+      <div class="flex items-center space-x-10 text-xl">
         <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
           dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
         <div class="space-y-1 font-medium dark:text-black">
@@ -157,45 +157,45 @@
     <form on:submit={handleClick}>
       <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div>
-          <Label for="first_name" class="mb-2">First name: {firstName}</Label>
+          <Label for="first_name" class="mb-2 text-xl">First name: {firstName}</Label>
           <Input type="text" id="first_name" placeholder="First" bind:value={localFirstName} required />
         </div>
         <div>
-          <Label for="last_name" class="mb-2">Last name: {lastName}</Label>
+          <Label for="last_name" class="mb-2 text-xl">Last name: {lastName}</Label>
           <Input type="text" id="last_name" placeholder="Last" bind:value={localLastName} required />
         </div>
         <div>
-          <Label for="company" class="mb-2">Occupation: {occupation}</Label>
+          <Label for="company" class="mb-2 text-xl">Occupation: {occupation}</Label>
           <Input type="text" id="company" placeholder="Tutor" bind:value={localOccupation} required />
         </div>
         <div>
-          <Label for="phone" class="mb-2">Phone number: {phoneNumber}</Label>
-          <Input type="tel" id="phone" placeholder="123-456-7890" bind:value={localPhoneNumber} required />
-        </div>
+          <label for="phone" class="mb-2 text-xl">Phone number:</label>
+          <Input type="tel" id="phone" placeholder="123-456-7890" pattern="\d{3}-\d{3}-\d{4}" title="Please enter a valid phone number (e.g., 123-456-7890)" required />
+        </div>        
         <div>
-          <Label for="role" class="mb-2">Role: {role}</Label>
+          <Label for="role" class="mb-2 text-xl">Role: {role}</Label>
           <Input type="text" id="role" placeholder="Mentor/Mentee" bind:value={localRole} required />
         </div>
         <div>
-          <Label for="major" class="mb-2">Major: {major}</Label>
+          <Label for="major" class="mb-2 text-xl">Major: {major}</Label>
           <Input type="text" id="major" placeholder="Engineering" bind:value={localMajor} required />
         </div>
         <div>
-          <Label for="city" class="mb-2">City: {city}</Label>
+          <Label for="city" class="mb-2 text-xl">City: {city}</Label>
           <Input type="text" id="city" placeholder="Dallas" bind:value={localCity} required />
         </div>
         <div>
           <div>
-            <Label for="state" class="mb-2">State: {state}</Label>
+            <Label for="state" class="mb-2 text-xl">State: {state}</Label>
             <Input type="text" id="state" placeholder="Texas" bind:value={localState} required />
           </div>
         </div>
         <div>
-          <Label for="visitors" class="mb-2">Connects Remaining</Label>
+          <Label for="visitors" class="mb-2 text-xl">Connects Remaining</Label>
           <div class="constants">{connectsRemaining}</div>
         </div>
         <div>
-          <Label for="visitors" class="mb-2">Passes Remaining</Label>
+          <Label for="visitors" class="mb-2 text-xl">Passes Remaining</Label>
           <div class="constants">{passesRemaining}</div>
         </div>
       </div>
