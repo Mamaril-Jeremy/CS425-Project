@@ -2,26 +2,15 @@
     import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, GradientButton, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import { GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
     import { writable } from "svelte/store";
+    import axios from 'axios';
+    import FormData from 'form-data';
     // import { localStore } from 'svelte-local-storage-store';
     import Pfp from "$lib/assets/Mark Marsala.jpg";
-    // import jeremy from "$lib/assets/"
-    // let messages = localStore('chat-messages', []);
-    // let newMessage = '';
-    // function sendMessage() {
-    //     if (newMessage.trim()) {
-    //         messages = [...messages, newMessage]; 
-    //         newMessage = ''; // Our brush is ready for the next stroke.
-    //     }
-    // }
-    // onMount(() => {
-    // const chatContainer = document.getElementById('chat-container');
-    // chatContainer.scrollTop = chatContainer.scrollHeight;
-    // });
     const messages = writable([]);
     let messageInput = "";
     function sendMessage() {
     if (!messageInput.trim()) return;
-
+    checkMessage(messageInput)
     // Add the new message to the store
     messages.update((prevMessages) => [
       ...prevMessages,
@@ -34,6 +23,32 @@
     //Clear the message box
     messageInput = "";
 
+    }
+    function checkMessage(message){
+        console.log(message);
+
+        let data = new FormData();
+        data.append('text', message);
+        data.append('lang', 'en');
+        data.append('mode', 'ml');
+        data.append('api_user', '97089180');
+        data.append('api_secret', 'HBP5e2F44A275VqTL5iGcAagL6');
+        let header = {'Content-Type': 'multipart/form-data',};
+        axios({
+        url: 'https://api.sightengine.com/1.0/text/check.json',
+        method:'post',
+        data: data,
+        headers: header
+        })
+        .then(function (response) {
+        // on success: handle response
+        console.log(response.data);
+        })
+        .catch(function (error) {
+        // handle error
+        if (error.response) console.log(error.response.data);
+        else console.log(error.message);
+        });
     }
 </script>
 

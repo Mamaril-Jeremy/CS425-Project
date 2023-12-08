@@ -66,7 +66,10 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_event: string;
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
+	export const npm_package_dependencies_axios: string;
 	export const npm_package_dependencies_firebase: string;
+	export const npm_package_dependencies_form_data: string;
+	export const npm_package_dependencies_http: string;
 	export const npm_package_dependencies_npm: string;
 	export const npm_package_dependencies_svelte_local_storage_store: string;
 	export const npm_package_dependencies__event_calendar_day_grid: string;
@@ -193,7 +196,10 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_event: string;
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
+		npm_package_dependencies_axios: string;
 		npm_package_dependencies_firebase: string;
+		npm_package_dependencies_form_data: string;
+		npm_package_dependencies_http: string;
 		npm_package_dependencies_npm: string;
 		npm_package_dependencies_svelte_local_storage_store: string;
 		npm_package_dependencies__event_calendar_day_grid: string;
