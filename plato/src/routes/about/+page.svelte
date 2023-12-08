@@ -2,72 +2,6 @@
     
 </script>
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-    }
-
-    .section {
-        height: 300px;
-        background-color: #3498db;
-        color: #fff;
-        text-align: center;
-        display: flex;
-        flex-direction: row;
-        font-size: 36px;
-        border-top: 2px solid #000;
-    }
-
-    .section1 {
-        overflow: hidden;
-        height: 250px;
-    }
-
-    .section1 > div {
-        height: 250px;
-        background-color: #fff;
-        color: #3498db;
-        text-align: center;
-        display: flex;
-        flex-direction: row;
-        font-size: 36px;
-        border-bottom: 2px solid #000;
-        border-top: 2px solid #000;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        border-right: 2px solid #000;
-        white-space: nowrap;
-    }
-
-    .section > div {
-        width: 25%;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-
-    .section > div:nth-child(1) {
-        background-color: #3498db;
-    }
-
-    .section > div:nth-child(2) {
-        width: 75%;
-        background-color: #2ecc71;
-    }
-
-    h1 {
-        margin-bottom: 20px;
-        font-size: 48px;
-    }
-
-    p {
-        font-size: 20px;
-        margin-top: 50px;
-        position: absolute;
-    }
-</style>
 
 <body>
     <div class="section">
@@ -80,7 +14,7 @@
         </div>
     </div>
     
-    <div class="section1">
+    <div class="section section1">
         <div>
             <h1>76% of people think mentors are important</h1>
             <p>x</p>
@@ -119,3 +53,53 @@
         </div>
     </div>
 </body>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .section {
+        height: 300px;
+        background-color: #3498db;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        font-size: 36px;
+        border: 2px solid black;
+    }
+
+    .section1 {
+        overflow: hidden;
+    }
+
+    .section > div {
+        width: 25%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .section > div:nth-child(1) {
+        background-color: #3498db;
+        border-right: black;
+    }
+
+    .section > div:nth-child(2) {
+        width: 75%;
+        background-color: #2ecc71;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 48px;
+    }
+
+    p {
+        font-size: 20px;
+        margin-top: 50px;
+        position: absolute;
+    }
+</style>
