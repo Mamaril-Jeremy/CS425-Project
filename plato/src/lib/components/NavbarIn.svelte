@@ -81,7 +81,7 @@
         {#if firstName && lastName}
           <span class="block text-sm">{firstName} {lastName}</span>
         {/if}
-        <span class="block truncate text-sm font-medium">{email}</span>
+        <span class="block truncate text-sm font-medium">markinreno2001@gmail.com</span>
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
       <DropdownItem on:click={sClicked}>Settings</DropdownItem>
