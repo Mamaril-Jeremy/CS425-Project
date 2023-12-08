@@ -6,14 +6,15 @@
         width: 600px;
         height: 400px;
         background-color: #ffffff;
-        border: 1px solid #ccc;
+        border: 2px solid #ccc;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         position: relative;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
+        border-radius: 20px;
+        
     }
 
     .name {
@@ -31,7 +32,7 @@
 
     .section {
         width: 50%;
-        height: 50%;
+        height: 40%;
         box-sizing: border-box;
         border: 1px solid #ccc;
         display: flex;
@@ -64,14 +65,14 @@
     }
 
     .circle {
-        width: 30%;
+        width: 27.5%;
         height: 40%;
-        border: 4px solid #333; 
-        border-radius: 50%;
+        border: 2px solid #ccc; 
+        border-radius: 70%;
         background-image: url("$lib/assets/Mark Marsala.jpg"); 
         background-position: center;
         position: absolute;
-        top: 50%;
+        top: 42.5%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 2;

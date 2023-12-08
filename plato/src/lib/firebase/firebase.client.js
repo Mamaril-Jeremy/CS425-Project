@@ -1,6 +1,6 @@
 import { deleteApp, getApp, getApps, initializeApp } from 'firebase/app';
 import { getAuth, setPersistence, inMemoryPersistence } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APIKEY,
@@ -27,19 +27,6 @@ else
 export const auth = getAuth(firebaseApp);
 
 //init firebase app
-export const db = getFirestore()
+export const db = getFirestore();
 
-// const colRef = collection(db, 'users')
-
-//get collection data
-// getDocs(colRef)
-//   .then((snapshot) => {
-//     let users = []
-//     snapshot.docs.forEach((doc) => {
-//       users.push({...doc.data(), id: doc.id})
-//     });
-//     console.log(users)
-//   })
-//   .catch((error) => {
-//     console.log('Error getting documents: ', error.message);
-//   });
+const colRef = collection(db, 'users')

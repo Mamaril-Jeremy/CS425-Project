@@ -1,26 +1,70 @@
 <script>
-    import { authHandlers } from "../../stores/authStore.js"
-    import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownItem, DropdownHeader, DropdownDivider } from 'flowbite-svelte';
-    import { goto } from '$app/navigation';
-    import Logo from "$lib/assets/plato_logo.png";
-    import Pfp from "$lib/assets/Mark Marsala.jpg";
-    
+  import {onMount, onDestroy} from 'svelte';
+  import { authHandlers } from "../../stores/authStore.js";
+  import {
+    Avatar,
+    Dropdown,
+    DropdownDivider,
+    DropdownHeader,
+    DropdownItem,
+    NavBrand,
+    NavHamburger,
+    NavLi,
+    Navbar,
+    NavUl
+  } from 'flowbite-svelte';
+  import { collection, getDocs, query, where } from 'firebase/firestore';
+  import { onAuthStateChanged } from 'firebase/auth';
+  import { auth, db } from '$lib/firebase/firebase.client.js';
+  import { goto } from '$app/navigation';
+  import Logo from '$lib/assets/plato_logo.png';
+  import Pfp from '$lib/assets/Mark Marsala.jpg';
 
-    async function handleClick() {
-      try {
-        await authHandlers.logout()
-        goto('/home')
-      } catch (err) {
-        console.log(err);
+  async function handleClick() {
+    try {
+      await authHandlers.logout();
+      goto('/home');
+    } catch (err) {
+      console.error('Error during logout:', err);
+    }
+  }
+
+  const pClicked = async () => {
+    goto('/profile');
+  };
+
+  const sClicked = async () => {
+    goto('/settings');
+  };
+
+  let userUID, firstName, lastName, email;
+
+  onMount(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        userUID = user.uid;
+        fetchData();
       }
+    });
+  });
+
+  const fetchData = async () => {
+    const userRef = collection(db, "users");
+    const q = query(userRef, where("userID", "==", userUID));
+
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const data = querySnapshot.docs[0].data();
+      firstName = data.userFirstName;
+      lastName = data.userLastName;
+      email = data.userEmail;
+      userUID = data.userID;
+    } else {
+      console.log('No such document!');
     }
-    const pClicked = async (event) => {
-      goto('/profile');
-    }
-    const sClicked = async (event) => {
-      goto('/settings');
-    }
-  </script>
+  };
+</script>
   
   <div class="navbar-container">
   <Navbar>
@@ -34,14 +78,16 @@
     </div>
     <Dropdown placement="bottom" triggeredBy="#avatar-menu">
       <DropdownHeader>
-        <span class="block text-sm">Mark Marsala</span>
-        <span class="block truncate text-sm font-medium">markymark@nevada.unr.edu</span>
+        {#if firstName && lastName}
+          <span class="block text-sm">{firstName} {lastName}</span>
+        {/if}
+        <span class="block truncate text-sm font-medium">{email}</span>
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
       <DropdownItem on:click={sClicked}>Settings</DropdownItem>
       <DropdownItem on:click={pClicked}>Profile</DropdownItem>
       <DropdownDivider />
-      <DropdownItem on:click={handleClick}>Sign out</DropdownItem>
+      <DropdownItem on:click={handleClick}><span class="text-blue-600">Sign out</span></DropdownItem>
     </Dropdown>
     <NavUl>
       <NavLi href="/home"><span class="hover:text-blue-600 text-base">Home</span></NavLi>
@@ -66,7 +112,7 @@
         height: 30px;
     }
     .plato{
-        background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));;
+        background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
