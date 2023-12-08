@@ -23,7 +23,7 @@
         const docRef = querySnapshot.docs[0].ref;
 
         try {
-            const data = querySnapshot.docs[0].data
+            const data = querySnapshot.docs[0].data();
             if (action === 'connect' && connectsRemaining > 0) {
                 connectsRemaining = data.userConnectsRemaining - 1;
                 await updateDoc(docRef, {
