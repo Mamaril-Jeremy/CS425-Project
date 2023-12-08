@@ -18,7 +18,7 @@
   import { auth, db } from '$lib/firebase/firebase.client.js';
   import { goto } from '$app/navigation';
   import Logo from '$lib/assets/plato_logo.png';
-  import Pfp from '$lib/assets/Mark Marsala.jpg';
+  import Pfp from "$lib/assets/jeremy.png";
 
   async function handleClick() {
     try {
@@ -105,7 +105,7 @@
         top: 17px;
         left: 0;
         right: 0;
-        z-index: 1000; 
+        z-index: 1000000; 
         display: flex;
         justify-content: space-between; 
         align-items: center;

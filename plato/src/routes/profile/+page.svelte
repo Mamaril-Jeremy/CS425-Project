@@ -145,7 +145,7 @@
           dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
         <div class="space-y-1 font-medium dark:text-black">
           <div>{firstName} {lastName}</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">Joined in September 2023</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2023</div>
         </div>
       </div>
     </div>
