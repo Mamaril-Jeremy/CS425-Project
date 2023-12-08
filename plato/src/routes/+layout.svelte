@@ -7,6 +7,8 @@
   import { onMount } from 'svelte';
   import { auth } from '../lib/firebase/firebase.client';
   import { authStore } from '../stores/authStore';
+
+  let loggedIn;
   
   onMount(() => {
       const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -16,6 +18,7 @@
           });
       });
   });
+
   
 </script>
 
