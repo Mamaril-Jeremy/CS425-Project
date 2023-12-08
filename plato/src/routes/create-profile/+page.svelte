@@ -1,5 +1,5 @@
 <script>
-    import { collection, setDoc, getDoc, doc, addDoc } from 'firebase/firestore';
+    import { collection, addDoc } from 'firebase/firestore';
     import { Avatar, Label, Input, GradientButton } from 'flowbite-svelte';
     import { onAuthStateChanged } from 'firebase/auth';
     import { auth, db } from '$lib/firebase/firebase.client.js';
@@ -15,27 +15,29 @@
     });
   
     const handleSubmit = async (e) => {
+      e.preventDefault();
+
       if (!userUID) {
         console.error('User not authenticated');
         return;
       }
   
       const docRef = await addDoc(collection(db, "users"), {
-        userLastName: lastName,
-        userOccupation: occupation,
-        userRole: role.toLowerCase(),
-        userConnectsRemaining: connectsRemaining,
-        userPhoneNumber: phoneNumber,
-        userPassesRemaining: passesRemaining,
-        userID: userUID,
-        userFirstName: firstName,
-        userMajor: major,
         userCity: city,
+        userConnectsRemaining: connectsRemaining,
+        userEmailAddress: "users",
+        userFirstName: firstName,
+        userID: userUID,
+        userLastName: lastName,
+        userMajor: major,
+        userOccupation: occupation,
+        userPassesRemaining: passesRemaining,
+        userPhoneNumber: phoneNumber,
+        userRole: role.toLowerCase(),
         userState: state
       });
       console.log("Document written with ID:", docRef.id);
-      success = true;
-      goto("/home")
+      goto("/home");
     };
   </script>
   
@@ -55,7 +57,7 @@
           </div>
           <div>
             <Label for="company" class="mb-2">Occupation</Label>
-            <Input type="text" id="company" placeholder="Plato" bind:value={occupation} required />
+            <Input type="text" id="company" placeholder="Tutor" bind:value={occupation} required />
           </div>
           <div>
             <Label for="phone" class="mb-2">Phone number</Label>
@@ -63,11 +65,11 @@
           </div>
           <div>
             <Label for="role" class="mb-2">Role</Label>
-            <Input type="text" id="role" placeholder="mentor/mentee" bind:value={role} required />
+            <Input type="text" id="role" placeholder="Mentor/Mentee" bind:value={role} required />
           </div>
           <div>
             <Label for="major" class="mb-2">Major</Label>
-            <Input type="text" id="major" placeholder="engineering" bind:value={major} required />
+            <Input type="text" id="major" placeholder="Engineering" bind:value={major} required />
           </div>
           <div>
             <Label for="city" class="mb-2">City</Label>

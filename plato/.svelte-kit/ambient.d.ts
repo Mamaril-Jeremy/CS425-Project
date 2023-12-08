@@ -33,7 +33,9 @@ declare module '$env/static/private' {
 	export const VITE_MESSAGINGSENDERID: string;
 	export const VITE_APPID: string;
 	export const VITE_MEASUREMENTID: string;
+	export const ACSvcPort: string;
 	export const ALLUSERSPROFILE: string;
+	export const AMDRMPATH: string;
 	export const APPDATA: string;
 	export const ChocolateyInstall: string;
 	export const ChocolateyLastPathUpdate: string;
@@ -46,10 +48,7 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const configsetroot: string;
 	export const DriverData: string;
-	export const EDITOR: string;
-	export const EFC_9684: string;
-	export const FPS_BROWSER_APP_PROFILE_STRING: string;
-	export const FPS_BROWSER_USER_PROFILE_STRING: string;
+	export const EFC_12080: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -79,14 +78,32 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_event: string;
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
-	export const npm_package_json: string;
+	export const npm_package_dependencies_axios: string;
+	export const npm_package_dependencies_firebase: string;
+	export const npm_package_dependencies_form_data: string;
+	export const npm_package_dependencies_http: string;
+	export const npm_package_dependencies_npm: string;
+	export const npm_package_dependencies_svelte_local_storage_store: string;
+	export const npm_package_dependencies__event_calendar_day_grid: string;
+	export const npm_package_devDependencies_autoprefixer: string;
+	export const npm_package_devDependencies_flowbite: string;
+	export const npm_package_devDependencies_flowbite_svelte: string;
+	export const npm_package_devDependencies_flowbite_svelte_icons: string;
+	export const npm_package_devDependencies_postcss: string;
+	export const npm_package_devDependencies_postcss_load_config: string;
+	export const npm_package_devDependencies_svelte: string;
+	export const npm_package_devDependencies_tailwindcss: string;
+	export const npm_package_devDependencies_vite: string;
+	export const npm_package_devDependencies_vitest: string;
+	export const npm_package_devDependencies__event_calendar_core: string;
+	export const npm_package_devDependencies__event_calendar_time_grid: string;
+	export const npm_package_devDependencies__sveltejs_adapter_auto: string;
+	export const npm_package_devDependencies__sveltejs_kit: string;
 	export const npm_package_name: string;
 	export const npm_package_version: string;
 	export const NPM_PREFIX_NPM_CLI_JS: string;
 	export const NUMBER_OF_PROCESSORS: string;
 	export const OneDrive: string;
-	export const OneDriveCommercial: string;
-	export const OneDriveConsumer: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const OS: string;
 	export const Path: string;
@@ -101,6 +118,7 @@ declare module '$env/static/private' {
 	export const PROMPT: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
+	export const RlsSvcPort: string;
 	export const SESSIONNAME: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
@@ -112,6 +130,7 @@ declare module '$env/static/private' {
 	export const USERDOMAIN_ROAMINGPROFILE: string;
 	export const USERNAME: string;
 	export const USERPROFILE: string;
+	export const VBOX_HWVIRTEX_IGNORE_SVM_IN_USE: string;
 	export const VBOX_MSI_INSTALL_PATH: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
@@ -119,7 +138,6 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const VSCODE_INJECTION: string;
 	export const windir: string;
-	export const ZES_ENABLE_SYSMAN: string;
 }
 
 /**
@@ -156,7 +174,9 @@ declare module '$env/dynamic/private' {
 		VITE_MESSAGINGSENDERID: string;
 		VITE_APPID: string;
 		VITE_MEASUREMENTID: string;
+		ACSvcPort: string;
 		ALLUSERSPROFILE: string;
+		AMDRMPATH: string;
 		APPDATA: string;
 		ChocolateyInstall: string;
 		ChocolateyLastPathUpdate: string;
@@ -169,10 +189,7 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		configsetroot: string;
 		DriverData: string;
-		EDITOR: string;
-		EFC_9684: string;
-		FPS_BROWSER_APP_PROFILE_STRING: string;
-		FPS_BROWSER_USER_PROFILE_STRING: string;
+		EFC_12080: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
@@ -202,14 +219,32 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_event: string;
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
-		npm_package_json: string;
+		npm_package_dependencies_axios: string;
+		npm_package_dependencies_firebase: string;
+		npm_package_dependencies_form_data: string;
+		npm_package_dependencies_http: string;
+		npm_package_dependencies_npm: string;
+		npm_package_dependencies_svelte_local_storage_store: string;
+		npm_package_dependencies__event_calendar_day_grid: string;
+		npm_package_devDependencies_autoprefixer: string;
+		npm_package_devDependencies_flowbite: string;
+		npm_package_devDependencies_flowbite_svelte: string;
+		npm_package_devDependencies_flowbite_svelte_icons: string;
+		npm_package_devDependencies_postcss: string;
+		npm_package_devDependencies_postcss_load_config: string;
+		npm_package_devDependencies_svelte: string;
+		npm_package_devDependencies_tailwindcss: string;
+		npm_package_devDependencies_vite: string;
+		npm_package_devDependencies_vitest: string;
+		npm_package_devDependencies__event_calendar_core: string;
+		npm_package_devDependencies__event_calendar_time_grid: string;
+		npm_package_devDependencies__sveltejs_adapter_auto: string;
+		npm_package_devDependencies__sveltejs_kit: string;
 		npm_package_name: string;
 		npm_package_version: string;
 		NPM_PREFIX_NPM_CLI_JS: string;
 		NUMBER_OF_PROCESSORS: string;
 		OneDrive: string;
-		OneDriveCommercial: string;
-		OneDriveConsumer: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		OS: string;
 		Path: string;
@@ -224,6 +259,7 @@ declare module '$env/dynamic/private' {
 		PROMPT: string;
 		PSModulePath: string;
 		PUBLIC: string;
+		RlsSvcPort: string;
 		SESSIONNAME: string;
 		SystemDrive: string;
 		SystemRoot: string;
@@ -235,6 +271,7 @@ declare module '$env/dynamic/private' {
 		USERDOMAIN_ROAMINGPROFILE: string;
 		USERNAME: string;
 		USERPROFILE: string;
+		VBOX_HWVIRTEX_IGNORE_SVM_IN_USE: string;
 		VBOX_MSI_INSTALL_PATH: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
@@ -242,7 +279,6 @@ declare module '$env/dynamic/private' {
 		VSCODE_GIT_IPC_HANDLE: string;
 		VSCODE_INJECTION: string;
 		windir: string;
-		ZES_ENABLE_SYSMAN: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}

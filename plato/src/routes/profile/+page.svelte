@@ -5,8 +5,8 @@
   import { Avatar, Label, Input, GradientButton } from 'flowbite-svelte';
   import Pfp from '$lib/assets/Mark Marsala.jpg';
 
-  let userUID, firstName, lastName, email, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
-  let localFirstName, localLastName, localEmail, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
+  let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
+  let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
   let success = false;
 
   onAuthStateChanged(auth, (user) => {
@@ -26,7 +26,6 @@
       const data = querySnapshot.docs[0].data();
       firstName = data.userFirstName;
       lastName = data.userLastName;
-      email = data.userEmailAddress;
       occupation = data.userOccupation;
       role = data.userRole;
       connectsRemaining = data.userConnectsRemaining;
@@ -51,7 +50,6 @@
 
     firstName = localFirstName;
     lastName = localLastName;
-    email = localEmail;
     phoneNumber = localPhoneNumber;
     occupation = localOccupation;
     role = localRole;
@@ -68,7 +66,6 @@
     try {
       await updateDoc(docRef, {
         userLastName: lastName,
-        userEmailAddress: email,
         userOccupation: occupation,
         userRole: role.toLowerCase(),
         userConnectsRemaining: connectsRemaining,
@@ -115,7 +112,7 @@
   }
 
   .form-container {
-    margin-top: 20px; 
+    margin-top: 50px; 
   }
 
   .centered-button {
@@ -163,36 +160,36 @@
     <form on:submit={handleClick}>
       <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div>
-          <Label for="first_name" class="mb-2">First name</Label>
+          <Label for="first_name" class="mb-2">First name: {firstName}</Label>
           <Input type="text" id="first_name" placeholder="First" bind:value={localFirstName} required />
         </div>
         <div>
-          <Label for="last_name" class="mb-2">Last name</Label>
+          <Label for="last_name" class="mb-2">Last name: {lastName}</Label>
           <Input type="text" id="last_name" placeholder="Last" bind:value={localLastName} required />
         </div>
         <div>
-          <Label for="company" class="mb-2">Occupation</Label>
+          <Label for="company" class="mb-2">Occupation: {occupation}</Label>
           <Input type="text" id="company" placeholder="Tutor" bind:value={localOccupation} required />
         </div>
         <div>
-          <Label for="phone" class="mb-2">Phone number</Label>
+          <Label for="phone" class="mb-2">Phone number: {phoneNumber}</Label>
           <Input type="tel" id="phone" placeholder="123-456-7890" bind:value={localPhoneNumber} required />
         </div>
         <div>
-          <Label for="role" class="mb-2">Role</Label>
+          <Label for="role" class="mb-2">Role: {role}</Label>
           <Input type="text" id="role" placeholder="Mentor/Mentee" bind:value={localRole} required />
         </div>
         <div>
-          <Label for="major" class="mb-2">Major</Label>
+          <Label for="major" class="mb-2">Major: {major}</Label>
           <Input type="text" id="major" placeholder="Engineering" bind:value={localMajor} required />
         </div>
         <div>
-          <Label for="city" class="mb-2">City</Label>
+          <Label for="city" class="mb-2">City: {city}</Label>
           <Input type="text" id="city" placeholder="Dallas" bind:value={localCity} required />
         </div>
         <div>
           <div>
-            <Label for="state" class="mb-2">State</Label>
+            <Label for="state" class="mb-2">State: {state}</Label>
             <Input type="text" id="state" placeholder="Texas" bind:value={localState} required />
           </div>
         </div>
@@ -204,10 +201,6 @@
           <Label for="visitors" class="mb-2">Passes Remaining</Label>
           <div class="constants">{passesRemaining}</div>
         </div>
-      </div>
-      <div>
-        <Label for="email" class="mb-2">Email</Label>
-        <Input class="mb-3" type="email" id="email" placeholder="name@domain.com" bind:value={localEmail} required />
       </div>
       <div class="centered-button">
         <GradientButton type="submit" color="purpleToBlue">Update</GradientButton>

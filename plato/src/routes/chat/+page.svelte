@@ -2,38 +2,80 @@
     import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, GradientButton, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import { GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
     import { writable } from "svelte/store";
-    // import { localStore } from 'svelte-local-storage-store';
+    import axios from 'axios';
+    import FormData from 'form-data';
     import Pfp from "$lib/assets/Mark Marsala.jpg";
-    // import jeremy from "$lib/assets/"
-    // let messages = localStore('chat-messages', []);
-    // let newMessage = '';
-    // function sendMessage() {
-    //     if (newMessage.trim()) {
-    //         messages = [...messages, newMessage]; 
-    //         newMessage = ''; // Our brush is ready for the next stroke.
-    //     }
-    // }
-    // onMount(() => {
-    // const chatContainer = document.getElementById('chat-container');
-    // chatContainer.scrollTop = chatContainer.scrollHeight;
-    // });
+    let currentUser = '';
+    setCurrentChatUser('Mark Marsala');
     const messages = writable([]);
+    let tempUser = '';
     let messageInput = "";
     function sendMessage() {
     if (!messageInput.trim()) return;
-
     // Add the new message to the store
     messages.update((prevMessages) => [
       ...prevMessages,
       {
-        user: "Mark Marsala",
+        user: currentUser,
         text: messageInput,
         timestamp: new Date().toLocaleString(),
       },
     ]);
     //Clear the message box
+    setCurrentChatUser(tempUser);
     messageInput = "";
 
+    }
+    function checkMessage(message){
+        console.log(message);
+
+        let data = new FormData();
+        data.append('text', message);
+        data.append('lang', 'en');
+        data.append('mode', 'ml');
+        data.append('api_user', '97089180');
+        data.append('api_secret', 'HBP5e2F44A275VqTL5iGcAagL6');
+        let header = {'Content-Type': 'multipart/form-data',};
+        axios({
+        url: 'https://api.sightengine.com/1.0/text/check.json',
+        method:'post',
+        data: data,
+        headers: header
+        })
+        .then(function (response) {
+        // on success: handle response
+        console.log(response.data);
+        tempUser = currentUser;
+        if(response.data.moderation_classes.discriminatory > 0.2){
+            setCurrentChatUser('Console');
+            messageInput = 'Can not be displayed due to unprofessional behavior';
+        }
+        else if(response.data.moderation_classes.insulting > 0.2){
+            setCurrentChatUser('Console');
+            messageInput = 'Can not be displayed due to unprofessional behavior';
+        }
+        else if(response.data.moderation_classes.sexual > 0.2){
+            setCurrentChatUser('Console');
+            messageInput = 'Can not be displayed due to unprofessional behavior';
+        }
+        else if(response.data.moderation_classes.toxic > 0.2){
+            setCurrentChatUser('Console');
+            messageInput = 'Can not be displayed due to unprofessional behavior';
+        }
+        else if(response.data.moderation_classes.violent > 0.2){
+            setCurrentChatUser('Console');
+            messageInput = 'Can not be displayed due to unprofessional behavior';
+        }
+        sendMessage(messageInput);
+        })
+        .catch(function (error) {
+        // handle error
+        if (error.response) console.log(error.response.data);
+        else console.log(error.message);
+        });
+    }
+    function setCurrentChatUser(user){
+        currentUser = user;
     }
 </script>
 
@@ -79,17 +121,7 @@
             </NavUl>
           </Navbar>
     </div>
-    <!-- <div class = "chatbox">
-        <div id="chatbox" class="chatbox">
-            {#each messages as message}
-                <div class="message">{message}</div>
-            {/each}
-        </div>
-        <div class = "textbox">
-            <input bind:value={newMessage} type="text" placeholder="Enter message here"/>
-        </div>
-        <div class ="button"><GradientButton color="blue" aria-hidden="false" on:click={sendMessage} on:keypress={sendMessage} class ="button">Send</GradientButton></div>
-    </div> -->
+
     <div class = "chatbox">
         <ul>
             {#each $messages as { text, timestamp, user }}
@@ -103,7 +135,7 @@
         <div class = "textbox">
             <input type="text" bind:value={messageInput} placeholder="Enter message here" />
         </div>
-        <div class = "button"><GradientButton color="blue" on:click={sendMessage}>Send</GradientButton></div>
+        <div class = "button"><GradientButton color="blue" on:click={checkMessage(messageInput)}>Send</GradientButton></div>
     </div>
 </div>
 <style>
@@ -118,7 +150,7 @@
         position : fixed;
         top : 4.5rem;
         left : 0rem;
-        height : 44rem;
+        height : 100%;
         box-shadow: rgba(0,0,0,25) 0px 3px 8px;
         background: white;
     }
@@ -130,11 +162,11 @@
         height : 80%;
     }
     .chatbox{
-        width : 82.7%;
-        height : 91.7%;
-        position:fixed;
+        width : 87%;
+        height : 93%;
+        position:absolute;
         top: 4.2rem;
-        left: 16rem;
+        right: 0rem;
         border-radius: .5rem;
         box-shadow: rgba(0,0,0,0.25) 0px 3px 8px;
         background: white;
@@ -144,8 +176,8 @@
         position:fixed;
         z-index:2000;
         top:11%;
-        left:18%;
-        width: 81%;
+        left:13%;
+        width: 90%;
         height: 40%;
     }
     

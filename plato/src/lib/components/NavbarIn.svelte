@@ -1,58 +1,70 @@
 <script>
-    import { authHandlers } from "../../stores/authStore.js"
-    import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Avatar, Dropdown, DropdownItem, DropdownHeader, DropdownDivider } from 'flowbite-svelte';
-    import { collection, getDocs, query, where } from 'firebase/firestore';
-    import { onAuthStateChanged } from 'firebase/auth';
-    import { auth, db } from '$lib/firebase/firebase.client.js';
-    import { goto } from '$app/navigation';
-    import Logo from "$lib/assets/plato_logo.png";
-    import Pfp from "$lib/assets/Mark Marsala.jpg";
-    
-    let userUID, firstName, lastName, email;
+  import {onMount, onDestroy} from 'svelte';
+  import { authHandlers } from "../../stores/authStore.js";
+  import {
+    Avatar,
+    Dropdown,
+    DropdownDivider,
+    DropdownHeader,
+    DropdownItem,
+    NavBrand,
+    NavHamburger,
+    NavLi,
+    Navbar,
+    NavUl
+  } from 'flowbite-svelte';
+  import { collection, getDocs, query, where } from 'firebase/firestore';
+  import { onAuthStateChanged } from 'firebase/auth';
+  import { auth, db } from '$lib/firebase/firebase.client.js';
+  import { goto } from '$app/navigation';
+  import Logo from '$lib/assets/plato_logo.png';
+  import Pfp from '$lib/assets/Mark Marsala.jpg';
 
-    async function handleClick() {
-      try {
-        await authHandlers.logout()
-        goto('/home')
-      } catch (err) {
-        console.log(err);
-      }
+  async function handleClick() {
+    try {
+      await authHandlers.logout();
+      goto('/home');
+    } catch (err) {
+      console.error('Error during logout:', err);
     }
-    const pClicked = async (event) => {
-      goto('/profile');
-    }
-    const sClicked = async (event) => {
-      goto('/settings');
-    }
+  }
 
-    
-    onAuthStateChanged(auth, (user) => {
+  const pClicked = async () => {
+    goto('/profile');
+  };
+
+  const sClicked = async () => {
+    goto('/settings');
+  };
+
+  let userUID, firstName, lastName, email;
+
+  onMount(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         userUID = user.uid;
         fetchData();
       }
     });
+  });
 
-    async function fetchData() {
-      const userRef = collection(db, "users");
-      const q = query(userRef, where("userID", "==", userUID));
+  const fetchData = async () => {
+    const userRef = collection(db, "users");
+    const q = query(userRef, where("userID", "==", userUID));
 
-      try {
-        const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(q);
 
-        if (!querySnapshot.empty) {
-          const data = querySnapshot.docs[0].data();
-          firstName = data.userFirstName;
-          lastName = data.userLastName;
-          email = data.userEmailAddress;
-        } else {
-          console.log('No such document!');
-        }
-      } catch (error) {
-        console.error(error);
-      }
+    if (!querySnapshot.empty) {
+      const data = querySnapshot.docs[0].data();
+      firstName = data.userFirstName;
+      lastName = data.userLastName;
+      email = data.userEmail;
+      userUID = data.userID;
+    } else {
+      console.log('No such document!');
     }
-  </script>
+  };
+</script>
   
   <div class="navbar-container">
   <Navbar>
@@ -66,8 +78,10 @@
     </div>
     <Dropdown placement="bottom" triggeredBy="#avatar-menu">
       <DropdownHeader>
-        <span class="block text-sm">{firstName} {lastName}</span>
-        <span class="block truncate text-sm font-medium">markymark@nevada.unr.edu</span>
+        {#if firstName && lastName}
+          <span class="block text-sm">{firstName} {lastName}</span>
+        {/if}
+        <span class="block truncate text-sm font-medium">{email}</span>
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
       <DropdownItem on:click={sClicked}>Settings</DropdownItem>
