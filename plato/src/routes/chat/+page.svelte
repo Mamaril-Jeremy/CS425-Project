@@ -4,9 +4,12 @@
     import { writable } from "svelte/store";
     import axios from 'axios';
     import FormData from 'form-data';
-    import Pfp from "$lib/assets/Mark Marsala.jpg";
+    import Mpfp from "$lib/assets/Mark Marsala.jpg";
+    import Mipfp from "$lib/assets/mike.png";
+    import Rpfp from "$lib/assets/Richard Cao.png";
+
     let currentUser = '';
-    setCurrentChatUser('Mark Marsala');
+    setCurrentChatUser('Jeremy Mamaril');
     let messages = writable([]);
     let tempUser = '';
     let messageInput = "";
@@ -37,11 +40,11 @@
         data.append('api_user', '97089180');
         data.append('api_secret', 'HBP5e2F44A275VqTL5iGcAagL6');
         let header = {'Content-Type': 'multipart/form-data',};
-        axios({
-        url: 'https://api.sightengine.com/1.0/text/check.json',
-        method:'post',
-        data: data,
-        headers: header
+            axios({
+            url: 'https://api.sightengine.com/1.0/text/check.json',
+            method:'post',
+            data: data,
+            headers: header
         })
         .then(function (response) {
         // on success: handle response
@@ -95,17 +98,17 @@
                 </div>
                 <SidebarItem label="Mark Marsala" on:click={() => setCurrentRecipient('Mark Marsala')}>
                     <svelte:fragment slot="icon">
-                    <Avatar src={Pfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    <Avatar src={Mpfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
                 <SidebarItem label="Michael Nia" on:click={() => setCurrentRecipient('Michael Nia')}>
                     <svelte:fragment slot="icon">
-                    <GridSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    <Avatar src={Mipfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
                 <SidebarItem label="Richard Cao" on:click={() => setCurrentRecipient('Richard Cao')}>
                     <svelte:fragment slot="icon">
-                    <MailBoxSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    <Avatar src={Rpfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
             </SidebarGroup>
@@ -117,7 +120,7 @@
     <div class = "dashboard">
         <Navbar rounded color="form">
             <NavBrand>
-              <img src={Pfp} class="mr-3 h-6 sm:h-9" alt="Mark Marsala profile picture" aria-hidden="false"/>
+              <img src={Mpfp} class="mr-3 h-6 sm:h-9" alt="Mark Marsala profile picture" aria-hidden="false"/>
               <span class="self-center whitespace-nowrap text-xl font-semibold dark text-black">{currentRecipient}</span>
             </NavBrand>
             <NavHamburger  />
@@ -184,7 +187,7 @@
         z-index:2000;
         top:11%;
         left:13%;
-        width: 90%;
+        width: 85%;
         height: 40%;
     }
     
