@@ -1,4 +1,5 @@
 <script>
+
 </script>
 
 <style>
@@ -69,7 +70,7 @@
         height: 40%;
         border: 2px solid #ccc; 
         border-radius: 70%;
-        background-image: url("$lib/assets/Mark Marsala.jpg"); 
+        background-image: url("$lib/assets/jeremy.png"); 
         background-position: center;
         position: absolute;
         top: 42.5%;
