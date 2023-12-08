@@ -10,9 +10,10 @@
 
     let currentUser = '';
     setCurrentChatUser('Jeremy Mamaril');
-    const messages = writable([]);
+    let messages = writable([]);
     let tempUser = '';
     let messageInput = "";
+    let currentRecipient = 'Mark Marsala';
     function sendMessage() {
     if (!messageInput.trim()) return;
     // Add the new message to the store
@@ -80,6 +81,12 @@
     function setCurrentChatUser(user){
         currentUser = user;
     }
+    function setCurrentRecipient(user){
+        if (currentRecipient !== user){
+            messages.set([]);
+        }
+        currentRecipient = user;
+    }
 </script>
 
 <div class = "Sidebar">
@@ -89,17 +96,17 @@
                 <div class = "Title">
                     <p>Connections</p>
                 </div>
-                <SidebarItem label="Mark Marsala" href="/home">
+                <SidebarItem label="Mark Marsala" on:click={() => setCurrentRecipient('Mark Marsala')}>
                     <svelte:fragment slot="icon">
                     <Avatar src={Mpfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
-                <SidebarItem label="Michael Nia" href="/home">
+                <SidebarItem label="Michael Nia" on:click={() => setCurrentRecipient('Michael Nia')}>
                     <svelte:fragment slot="icon">
                     <Avatar src={Mipfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
-                <SidebarItem label="Richard Cao" href="/home">
+                <SidebarItem label="Richard Cao" on:click={() => setCurrentRecipient('Richard Cao')}>
                     <svelte:fragment slot="icon">
                     <Avatar src={Rpfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
@@ -112,15 +119,15 @@
 <div class = "container>">
     <div class = "dashboard">
         <Navbar rounded color="form">
-            <NavBrand href="/">
+            <NavBrand>
               <img src={Mpfp} class="mr-3 h-6 sm:h-9" alt="Mark Marsala profile picture" aria-hidden="false"/>
-              <span class="self-center whitespace-nowrap text-xl font-semibold dark text-black">Mark Marsala</span>
+              <span class="self-center whitespace-nowrap text-xl font-semibold dark text-black">{currentRecipient}</span>
             </NavBrand>
             <NavHamburger  />
             <NavUl >
-              <NavLi href="/">View Details</NavLi>
-              <NavLi href="/about">Schedule Appointment</NavLi>
-              <NavLi href="/docs/components/navbar">Disconnect</NavLi>
+              <NavLi>View Details</NavLi>
+              <NavLi>Schedule Appointment</NavLi>
+              <NavLi>Disconnect</NavLi>
             </NavUl>
           </Navbar>
     </div>
