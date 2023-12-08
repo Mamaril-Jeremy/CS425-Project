@@ -80,7 +80,7 @@
     }
     function setCurrentRecipient(user){
         if (currentRecipient !== user){
-            messages = [];
+            messages.set([]);
         }
         currentRecipient = user;
     }
@@ -93,17 +93,17 @@
                 <div class = "Title">
                     <p>Connections</p>
                 </div>
-                <SidebarItem label="Mark Marsala" on:click={() => setCurrentChatUser('Mark Marsala')}>
+                <SidebarItem label="Mark Marsala" on:click={() => setCurrentRecipient('Mark Marsala')}>
                     <svelte:fragment slot="icon">
                     <Avatar src={Pfp} class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
-                <SidebarItem label="Michael Nia" on:click={() => setCurrentChatUser('Michael Nia')}>
+                <SidebarItem label="Michael Nia" on:click={() => setCurrentRecipient('Michael Nia')}>
                     <svelte:fragment slot="icon">
                     <GridSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                 </SidebarItem>
-                <SidebarItem label="Richard Cao" on:click={() => setCurrentChatUser('Richard Cao')}>
+                <SidebarItem label="Richard Cao" on:click={() => setCurrentRecipient('Richard Cao')}>
                     <svelte:fragment slot="icon">
                     <MailBoxSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
