@@ -3,7 +3,7 @@
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
   import { Avatar, Label, Input, GradientButton } from 'flowbite-svelte';
-  import Pfp from '$lib/assets/Mark Marsala.jpg';
+  import Pfp from '$lib/assets/jeremy.png';
 
   let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
   let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
@@ -160,45 +160,45 @@
     <form on:submit={handleClick}>
       <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div>
-          <Label for="first_name" class="mb-2 text-xl">First name: {firstName}</Label>
+          <Label for="first_name" class="mb-2 text-l">First name: {firstName}</Label>
           <Input type="text" id="first_name" placeholder="First" bind:value={localFirstName} required />
         </div>
         <div>
-          <Label for="last_name" class="mb-2 text-xl">Last name: {lastName}</Label>
+          <Label for="last_name" class="mb-2 text-l">Last name: {lastName}</Label>
           <Input type="text" id="last_name" placeholder="Last" bind:value={localLastName} required />
         </div>
         <div>
-          <Label for="company" class="mb-2 text-xl">Occupation: {occupation}</Label>
+          <Label for="company" class="mb-2 text-l">Occupation: {occupation}</Label>
           <Input type="text" id="company" placeholder="Tutor" bind:value={localOccupation} required />
         </div>
         <div>
-          <label for="phone" class="mb-2 text-xl">Phone number:</label>
-          <Input type="tel" id="phone" placeholder="123-456-7890" pattern="\d{3}-\d{3}-\d{4}" title="Please enter a valid phone number (e.g., 123-456-7890)" required />
+          <Label for="phone" class="mb-2 text-l">Phone number: {phoneNumber}</Label>
+          <Input type="tel" id="phone" placeholder="123-456-7890" title="Please enter a valid phone number (e.g., 123-456-7890)" bind:value={localPhoneNumber} required />
         </div>        
         <div>
-          <Label for="role" class="mb-2 text-xl">Role: {role}</Label>
+          <Label for="role" class="mb-2 text-l">Role: {role}</Label>
           <Input type="text" id="role" placeholder="Mentor/Mentee" bind:value={localRole} required />
         </div>
         <div>
-          <Label for="major" class="mb-2 text-xl">Major: {major}</Label>
+          <Label for="major" class="mb-2 text-l">Major: {major}</Label>
           <Input type="text" id="major" placeholder="Engineering" bind:value={localMajor} required />
         </div>
         <div>
-          <Label for="city" class="mb-2 text-xl">City: {city}</Label>
+          <Label for="city" class="mb-2 text-l">City: {city}</Label>
           <Input type="text" id="city" placeholder="Dallas" bind:value={localCity} required />
         </div>
         <div>
           <div>
-            <Label for="state" class="mb-2 text-xl">State: {state}</Label>
+            <Label for="state" class="mb-2 text-l">State: {state}</Label>
             <Input type="text" id="state" placeholder="Texas" bind:value={localState} required />
           </div>
         </div>
         <div>
-          <Label for="visitors" class="mb-2 text-xl">Connects Remaining</Label>
+          <Label for="visitors" class="mb-2 text-l">Connects Remaining</Label>
           <div class="constants">{connectsRemaining}</div>
         </div>
         <div>
-          <Label for="visitors" class="mb-2 text-xl">Passes Remaining</Label>
+          <Label for="visitors" class="mb-2 text-l">Passes Remaining</Label>
           <div class="constants">{passesRemaining}</div>
         </div>
       </div>
