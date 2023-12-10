@@ -149,51 +149,70 @@ async function updatePassword() {
 }
 </script>
 
-<div class="form-container">
-<form on:submit|preventDefault={handleSubmit}>
-<div class="mb-6">
-  <Label for="email" class="mb-2">Email address</Label>
-  <Input type="email" id="email" placeholder="first.last@company.com" required bind:value={email} />
-</div>
-<div class="mb-6">
-  <Label for="password" class="mb-2">New password</Label>
-  <Input type="password" id="password" placeholder="•••••••••" required bind:value={newPassword}/>
-</div>
-<div class="mb-6">
-  <Label for="confirm_password" class="mb-2">Confirm new password</Label>
-  <Input type="password" id="confirm_password" placeholder="•••••••••" required bind:value={confirmNewPassword}/>
-</div>
+<body>
+  <div class="title">Update Your Password</div>
+  <div class="form-container">
+    <form on:submit|preventDefault={handleSubmit}>
+    <div class="mb-6">
+      <Label for="email" class="mb-2">Email address</Label>
+      <Input type="email" id="email" placeholder="first.last@company.com" required bind:value={email} />
+    </div>
+    <div class="mb-6">
+      <Label for="password" class="mb-2">New password</Label>
+      <Input type="password" id="password" placeholder="•••••••••" required bind:value={newPassword}/>
+    </div>
+    <div class="mb-6">
+      <Label for="confirm_password" class="mb-2">Confirm new password</Label>
+      <Input type="password" id="confirm_password" placeholder="•••••••••" required bind:value={confirmNewPassword}/>
+    </div>
+    
+    {#if passwordMatchError}
+      <p class="text-red-500 mb-2">Passwords must match</p>
+    {/if}
+    
+    {#if passwordLengthError}
+      <p class="text-red-500 mb-2">Password must be at least {MIN_PASSWORD_LENGTH} characters long</p>
+    {/if}
+    
+    {#if passwordRequirementsError}
+      <p class="text-red-500 mb-2">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character</p>
+    {/if}
+    
+    <div class="centered-button">
+      <GradientButton type="submit" color="purpleToBlue">Submit</GradientButton>
+    </div>
+    </form>
+    
+    {#if showConfirmationDialog}
+    <div class="confirmation-dialog">
+      <p>Are you sure you want to change your password?</p>
+      <button on:click={() => handleConfirmation(true)}>Yes</button>
+      <button on:click={() => handleConfirmation(false)}>No</button>
+    </div>
+    {/if}
+    </div>
+</body>
 
-{#if passwordMatchError}
-  <p class="text-red-500 mb-2">Passwords must match</p>
-{/if}
-
-{#if passwordLengthError}
-  <p class="text-red-500 mb-2">Password must be at least {MIN_PASSWORD_LENGTH} characters long</p>
-{/if}
-
-{#if passwordRequirementsError}
-  <p class="text-red-500 mb-2">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character</p>
-{/if}
-
-<div class="centered-button">
-  <GradientButton type="submit" color="purpleToBlue">Submit</GradientButton>
-</div>
-</form>
-
-{#if showConfirmationDialog}
-<div class="confirmation-dialog">
-  <p>Are you sure you want to change your password?</p>
-  <button on:click={() => handleConfirmation(true)}>Yes</button>
-  <button on:click={() => handleConfirmation(false)}>No</button>
-</div>
-{/if}
-</div>
 
 <style>
+body {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 60px;
+}
+
 .form-container {
-  position: relative;
-  margin-top: 75px;
+  text-align: center;
+  width: 50%;
 }
 
 .centered-button {
