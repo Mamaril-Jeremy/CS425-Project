@@ -1,4 +1,5 @@
 <script>
+  //This code was developed by Mark Marsala
   import { authHandlers } from "../../stores/authStore.js"
   import { goto } from '$app/navigation';
 

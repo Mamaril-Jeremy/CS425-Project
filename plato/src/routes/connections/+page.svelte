@@ -1,4 +1,5 @@
 <script>
+    //This code was developed by Michael Nia and Jeremy Mamaril
     import { Button } from 'flowbite-svelte';
     import Card from '$lib/components/Card.svelte';
     import { onAuthStateChanged } from 'firebase/auth';

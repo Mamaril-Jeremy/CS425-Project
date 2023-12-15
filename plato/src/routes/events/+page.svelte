@@ -1,4 +1,5 @@
 <script>
+  //This code was imported from a github repository. All code was inputed by Richard Cao
   import Calendar from '@event-calendar/core';
   import TimeGrid from '@event-calendar/time-grid';
   import dayGrid from '@event-calendar/day-grid';

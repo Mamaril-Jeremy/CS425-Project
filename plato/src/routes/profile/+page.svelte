@@ -1,4 +1,5 @@
 <script>
+  //This code was developed by Jeremy Mamaril
   import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';

@@ -1,3 +1,4 @@
+//This code was developed by Mark Marsala
 import { writable } from 'svelte/store';
 import { auth } from '../lib/firebase/firebase.client.js'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail, updatePassword, sendEmailVerification, verifyBeforeUpdateEmail } from 'firebase/auth';

@@ -1,3 +1,6 @@
+<script>
+  //This code was developed by Michael Nia
+</script>
 <style>
   .privacy-policy-page {
     font-size: 16px;
