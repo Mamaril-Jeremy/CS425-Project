@@ -1,4 +1,5 @@
 <script>
+  //This code was developed by Jeremy Mamaril
   import Home from "$lib/components/Home.svelte";
   import { auth } from '../../lib/firebase/firebase.client';
   import { authStore } from '../../stores/authStore';

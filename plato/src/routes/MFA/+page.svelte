@@ -1,4 +1,5 @@
 <script>
+  //This code was developed by Mark Marsala
     import { authHandlers } from "../../stores/authStore.js"
     import { Label, Input, GradientButton } from 'flowbite-svelte';
     import { RecaptchaVerifier } from "firebase/auth";

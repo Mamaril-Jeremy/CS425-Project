@@ -1,4 +1,5 @@
 <script>
+  //This code is developed by Jeremy Mamaril
   import "../app.postcss";
   import NavbarIn from "../lib/components/NavbarIn.svelte";
   import NavbarOut from './../lib/components/NavbarOut.svelte';

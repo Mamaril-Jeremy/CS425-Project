@@ -1,3 +1,6 @@
+<script>
+  //This code was developed by Michael
+</script>
 <style>
   .licensing-page {
     font-size: 16px;

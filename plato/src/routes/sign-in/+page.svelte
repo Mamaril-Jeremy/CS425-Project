@@ -1,4 +1,5 @@
 <script>
+  //This code was developed by Jeremy Mamaril
   import { authHandlers } from "../../stores/authStore.js"
   import { Card, Button, Label, Input, Checkbox } from 'flowbite-svelte';
   import { goto } from '$app/navigation';

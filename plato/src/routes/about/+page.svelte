@@ -1,4 +1,5 @@
 <script>
+  //This code was developed by Michael Nia and Jeremy Mamaril
   let sections = [
     { title: 'Why Plato', text: 'Unlock your potential with a mentor by your side, guiding you through your career or academic journey. Mentorship is at the heart of what we do.' },
     { title: 'Connecting Dreams and Expertise', text: 'Plato brings together passionate learners and seasoned professionals, creating a dynamic synergy that propels you towards greatness.' },

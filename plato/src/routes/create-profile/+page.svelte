@@ -1,4 +1,5 @@
 <script>
+  //This code was developed by Jeremy Mamaril
     import { collection, addDoc } from 'firebase/firestore';
     import { Avatar, Label, Input, GradientButton } from 'flowbite-svelte';
     import { onAuthStateChanged } from 'firebase/auth';

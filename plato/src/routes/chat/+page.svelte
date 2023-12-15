@@ -1,6 +1,6 @@
 <script>
+    //This code was developed by Richard Cao
     import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, GradientButton, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
-    import { GridSolid, MailBoxSolid } from 'flowbite-svelte-icons';
     import { writable } from "svelte/store";
     import axios from 'axios';
     import FormData from 'form-data';

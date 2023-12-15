@@ -1,3 +1,6 @@
+<script>
+  //This code was developed by Michael Nia
+</script>
 <style>
   .contact-page {
     font-size: 16px;
