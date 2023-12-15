@@ -143,7 +143,7 @@
         <div class = message-container>
         </div>
         <div class = "textbox">
-            <input type="text" bind:value={messageInput} placeholder="Enter message here" />
+            <input type="text" bind:value={messageInput} placeholder="Enter message here" on:keydown={(event) => event.key === 'Enter' && checkMessage(messageInput)} />
         </div>
         <div class = "button"><GradientButton color="blue" on:click={checkMessage(messageInput)}>Send</GradientButton></div>
     </div>

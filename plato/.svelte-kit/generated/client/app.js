@@ -20,13 +20,15 @@ export const nodes = [
 	() => import('./nodes/16'),
 	() => import('./nodes/17'),
 	() => import('./nodes/18'),
-	() => import('./nodes/19')
+	() => import('./nodes/19'),
+	() => import('./nodes/20')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [3],
+		"/MFA": [16],
 		"/about": [4],
 		"/change-email": [5],
 		"/change-password": [6],
@@ -39,10 +41,10 @@ export const dictionary = {
 		"/guidelines": [13],
 		"/home": [14],
 		"/licensing": [15],
-		"/privacy": [16],
-		"/profile": [17],
-		"/settings": [18],
-		"/sign-in": [19]
+		"/privacy": [17],
+		"/profile": [18],
+		"/settings": [19],
+		"/sign-in": [20]
 	};
 
 export const hooks = {
