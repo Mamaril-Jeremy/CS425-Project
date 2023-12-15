@@ -10,7 +10,7 @@
 
     let currentUser = '';
     setCurrentChatUser('Jeremy Mamaril');
-    const messages = writable([]);
+    let messages = writable([]);
     let tempUser = '';
     let messageInput = "";
     let currentRecipient = 'Mark Marsala';
