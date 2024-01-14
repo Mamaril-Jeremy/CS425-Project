@@ -109,7 +109,7 @@
         display: flex;
         justify-content: space-between; 
         align-items: center;
-        height: 30px;
+        height: 40px;
     }
     .plato{
         background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));

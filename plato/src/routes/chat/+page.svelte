@@ -1,6 +1,6 @@
 <script>
     //This code was developed by Richard Cao
-    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, GradientButton, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
+    import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, Button, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import { writable } from "svelte/store";
     import axios from 'axios';
     import FormData from 'form-data';
@@ -125,9 +125,9 @@
             </NavBrand>
             <NavHamburger  />
             <NavUl >
-              <NavLi>View Details</NavLi>
-              <NavLi>Schedule Appointment</NavLi>
-              <NavLi>Disconnect</NavLi>
+              <NavLi class="cursor-pointer hover:cursor-pointer">View Profile</NavLi>
+              <NavLi class="cursor-pointer hover:cursor-pointer">Schedule Appointment</NavLi>
+              <NavLi class="cursor-pointer hover:cursor-pointer">Disconnect</NavLi>
             </NavUl>
           </Navbar>
     </div>
@@ -145,7 +145,7 @@
         <div class = "textbox">
             <input type="text" bind:value={messageInput} placeholder="Enter message here" on:keydown={(event) => event.key === 'Enter' && checkMessage(messageInput)} />
         </div>
-        <div class = "button"><GradientButton color="blue" on:click={checkMessage(messageInput)}>Send</GradientButton></div>
+        <div class = "button"><Button color="blue" on:click={checkMessage(messageInput)}>Send</Button></div>
     </div>
 </div>
 <style>
