@@ -5,7 +5,8 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, se
 
 export const authStore = writable({
     isLoading: true,
-    currentUser: null
+    currentUser: null,
+    loggedIn: false       
 })
 
 export const authHandlers = {

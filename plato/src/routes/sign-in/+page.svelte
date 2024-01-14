@@ -1,7 +1,8 @@
 <script>
   //This code was developed by Jeremy Mamaril
-  import { authHandlers } from "../../stores/authStore.js"
-  import { Card, Button, Label, Input, Checkbox } from 'flowbite-svelte';
+  import { writable } from 'svelte/store';
+  import { authHandlers, authStore} from "../../stores/authStore.js"
+  import { Card, Button, Label, Input} from 'flowbite-svelte';
   import { goto } from '$app/navigation';
 
   let email = '';
@@ -11,11 +12,17 @@
      event.preventDefault();
 
     if(!email || !password) {
-      return
+      return;
     }
 
     try {
       await authHandlers.login(email, password)
+      authStore.update((curr) => {
+        return {
+          ...curr,
+          loggedIn: true
+        };
+      });
       goto('/home')
     } catch (err) {
       console.log(err);
@@ -31,7 +38,7 @@
 
 <div class="body-background h-screen w-screen flex items-center justify-center">
   <div class="card-container">
-    <Card class="w-72 max-w-none">
+    <Card class="w-96 max-w-none">
       <form class="flex flex-col space-y-6" on:submit={handleSubmit}>
         <h3 class="text-xl font-medium text-gray-900 dark:text-white">Sign in to Plato</h3>
         <Label class="space-y-2">
@@ -40,7 +47,7 @@
         </Label>
         <Label class="space-y-2">
           <span>Your password</span>
-          <Input type="password" bind:value={password} placeholder="••••••••" required />
+          <Input type="password" bind:value={password} placeholder="••••••••••••" required />
         </Label>
         <div class="flex items-start">
           <input type="checkbox" id="demoCheckbox" name="checkbox" value="1"><a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500">Remember me</a>

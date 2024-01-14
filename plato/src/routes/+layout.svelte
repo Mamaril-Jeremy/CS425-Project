@@ -1,26 +1,21 @@
 <script>
   //This code is developed by Jeremy Mamaril
   import "../app.postcss";
-  import NavbarIn from "../lib/components/NavbarIn.svelte";
-  import NavbarOut from './../lib/components/NavbarOut.svelte';
-  import Logo from '$lib/assets/plato_logo.png';
-  import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
-  import { auth } from '../lib/firebase/firebase.client';
+  import { auth } from '$lib/firebase/firebase.client';
   import { authStore } from '../stores/authStore';
-
-  let loggedIn;
+  import NavbarIn from "$lib/components/NavbarIn.svelte";
+  import NavbarOut from '$lib/components/NavbarOut.svelte';
+  import Logo from '$lib/assets/plato_logo.png';
   
   onMount(() => {
       const unsubscribe = auth.onAuthStateChanged((user) => {
           console.log(user)
           authStore.update((curr) => {
-              return { ...curr, isLoading: false, currentUser: user };
+              return { ...curr, isLoading: false, currentUser: user, loggedIn: false};
           });
       });
-  });
-
-  
+  });  
 </script>
 
 <svelte:head>
@@ -29,9 +24,9 @@
 </svelte:head>
 
 {#if $authStore.isLoading}
-  <p>Loading...</p>
+  <div><p>Loading...</p></div>
 {:else}
-  {#if $authStore.currentUser}
+  {#if $authStore.loggedIn}
     <NavbarIn />
     <slot />
   {:else}
@@ -40,3 +35,16 @@
   {/if}
 {/if}
 
+<style>
+  div {
+    display: flex;
+    height: 100vh; 
+    justify-content: center;
+    align-items: center;
+  }
+
+  p {
+    font-size: 34px;
+    text-align: center;
+  }
+</style>

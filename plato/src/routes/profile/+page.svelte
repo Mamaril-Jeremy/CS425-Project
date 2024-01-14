@@ -3,7 +3,7 @@
   import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
-  import { Avatar, Label, Input, GradientButton } from 'flowbite-svelte';
+  import { Avatar, Label, Input, Button } from 'flowbite-svelte';
   import Pfp from '$lib/assets/jeremy.png';
 
   let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
@@ -204,7 +204,7 @@
         </div>
       </div>
       <div class="centered-button">
-        <GradientButton type="submit" color="purpleToBlue">Update</GradientButton>
+        <Button type="submit" color="blue">Update</Button>
       </div>
     </form>
   </div>

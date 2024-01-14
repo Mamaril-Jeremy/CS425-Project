@@ -1,6 +1,6 @@
 <script>
   //This code was developed by Mark Marsala
-  import { Label, Input, GradientButton } from 'flowbite-svelte';
+  import { Label, Input, Button } from 'flowbite-svelte';
   import { authHandlers } from "../../stores/authStore.js"
   import { goto } from '$app/navigation';
 
@@ -38,7 +38,7 @@
         <Input type="password" id="password" placeholder="•••••••••" required bind:value={formData.password}/>
       </div>
       <div class="centered-button">
-        <GradientButton type="submit" color="purpleToBlue">Submit</GradientButton>
+        <Button type="submit" color="blue">Submit</Button>
       </div>
     </form>
   </div>

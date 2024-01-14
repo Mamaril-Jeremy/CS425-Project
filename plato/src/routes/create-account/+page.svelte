@@ -25,7 +25,7 @@
 
     if(!username || !email || !password || !confirmPassword)
     {
-      return
+      return;
     }
 
     if (password === confirmPassword) {

@@ -1,5 +1,5 @@
 <script>
-    import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, GradientButton } from 'flowbite-svelte';
+    import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button } from 'flowbite-svelte';
     import Logo from "$lib/assets/plato_logo.png";
 
     let navbar;
@@ -25,7 +25,7 @@
             <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Plato</span>
         </NavBrand>
         <div class="flex md:order-2">
-            <GradientButton color="blue" href="/sign-in">Sign In</GradientButton>
+            <Button color="blue" href="/sign-in">Sign In</Button>
             <NavHamburger on:click={toggle} />
         </div>
         <NavUl {hidden} class="order-1">
@@ -48,5 +48,6 @@
         width: 100%;
         top: 0;
         transition: top 0.3s;
+        height: 40px;
     }
 </style>
