@@ -139,6 +139,7 @@
 </style>
 
 <body>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <div class="wrapper">
     <div class="user-info-container">
       <div class="flex items-center space-x-10 text-xl">
@@ -147,6 +148,7 @@
         <div class="space-y-1 font-medium dark:text-black">
           <div>{firstName} {lastName}</div>
           <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2023</div>
+          <div class="text-sm dark:text-black"><span class="material-symbols-outlined">edit</span>Edit Profile</div>
         </div>
       </div>
     </div>
