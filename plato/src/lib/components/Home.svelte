@@ -4,6 +4,7 @@
   import { fade } from 'svelte/transition';
 
   import Logo from '$lib/assets/plato_logo.png';
+  import videoBackground from '$lib/assets/video.mp4';
 
   let text = "Welcome to Plato!";
   let animatedText = "";
@@ -36,6 +37,8 @@
   };
 </script>
 
+
+
 <style>
   body {
     margin: 0;
@@ -59,8 +62,11 @@
 
   .section1 {
     height: 600px;
-    background-color: #3498db;
     color: #fff;
+  }
+
+  .section1 > div > h1{
+    font-size: 108px;
   }
 
   .section2,
@@ -100,19 +106,13 @@
     font-size: 48px;
     font-family: Georgia;
     margin-bottom: 10px;
-    margin-top: 20px;
+    margin-top: 0 auto;
   }
   
   p {
     font-size: 27px;
-    margin-top: 25px;
+    margin-top: 30px;
     position: relative;
-  }
-
-  img {
-    width: 200px;
-    margin: 20px auto;
-    display: block;
   }
 
   button {
@@ -136,6 +136,17 @@
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   }
+
+  
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -1000;
+  }
 </style>
 
 <body>
@@ -145,12 +156,16 @@
 
   <div class="section section1">
     <div>
-      <img src={Logo} alt="Logo" />
-      <h1 class="welcome">{animatedText}</h1>
+      <!-- <h1 class="welcome">{animatedText}</h1> -->
+      <h1 class="welcome">Welcome to Plato!</h1>
       {#if fadeIn}
         <p in:fade={{delay: 5, duration: 1600}}>Establishing mentor to mentee relationships.</p>
       {/if}
     </div>
+    <video autoplay loop muted>
+      <source src={videoBackground} type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 
   <div class="section section2">
