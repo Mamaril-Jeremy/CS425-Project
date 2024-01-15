@@ -1,6 +1,5 @@
 <script>
   //This code was developed by Jeremy Mamaril
-  import { writable } from 'svelte/store';
   import { authHandlers, authStore} from "../../stores/authStore.js"
   import { Card, Button, Label, Input} from 'flowbite-svelte';
   import { goto } from '$app/navigation';
@@ -38,7 +37,7 @@
 
 <div class="body-background h-screen w-screen flex items-center justify-center">
   <div class="card-container">
-    <Card class="w-96 max-w-none">
+    <Card class="w-80 max-w-none">
       <form class="flex flex-col space-y-6" on:submit={handleSubmit}>
         <h3 class="text-xl font-medium text-gray-900 dark:text-white">Sign in to Plato</h3>
         <Label class="space-y-2">
@@ -50,7 +49,7 @@
           <Input type="password" bind:value={password} placeholder="••••••••••••" required />
         </Label>
         <div class="flex items-start">
-          <input type="checkbox" id="demoCheckbox" name="checkbox" value="1"><a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500">Remember me</a>
+          <div><input type="checkbox" id="demoCheckbox" name="checkbox" value="1"><a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500">Remember me</a></div>
           <a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500"> Lost password? </a>
         </div>
         <Button type="submit" class="w-full bg-blue-600 hover:opacity-75 hover:bg-blue-600">Login to your account</Button>
@@ -67,6 +66,10 @@
     background-image: url('../../lib/assets/placeholderbackground_login.png');
     background-size: cover;
     background-repeat: no-repeat;
+  }
+
+  a{
+    margin-left: 10px;
   }
 </style>
 

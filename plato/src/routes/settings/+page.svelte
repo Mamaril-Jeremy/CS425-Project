@@ -48,9 +48,9 @@
         <h2 class="text-xl font-semibold mb-2">Account Settings</h2>
         <div class="flex items-center justify-between">
           <p>Change Email</p>
-          <a href="/change-email" class="text-blue-500">Change</a>
+          <a href="/settings/change-email" class="text-blue-500">Change</a>
           <p>Change Password</p>
-          <a href="/change-password" class="text-blue-500">Change</a>
+          <a href="/settings/change-password" class="text-blue-500">Change</a>
         </div>
         <!-- Add more account-related settings as needed -->
       </div>

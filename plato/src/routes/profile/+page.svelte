@@ -151,7 +151,7 @@
       </div>
     </div>
 
-    {#if success}
+  {#if success}
     <div class="success">
       Successfully updated profile!
     </div>
