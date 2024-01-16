@@ -85,10 +85,62 @@
       success = false;
     }
   };
-
-
-  
 </script>
+
+<body>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <div class="wrapper">
+    <div class="user-info-container">
+      <div class="flex items-center space-x-10 text-xl">
+        <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
+          dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
+        <div class="space-y-1 font-medium dark:text-black">
+          <div>{firstName} {lastName}</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2023</div>
+          <div class="text-sm dark:text-black"><span class="material-symbols-outlined">edit</span><a href="/profile/edit-profile">Edit Profile</a></div>
+        </div>
+      </div>
+    </div>
+
+  <div class="form-container">
+    <form on:submit={handleClick}>
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div>
+          <Label for="first_name" class="mb-2 text-l">Name: {firstName} {lastName}</Label>
+        </div>
+        <div>
+          <Label for="company" class="mb-2 text-l">Occupation: {occupation}</Label>
+        </div>
+        <div>
+          <Label for="phone" class="mb-2 text-l">Phone number: {phoneNumber}</Label>
+        </div>        
+        <div>
+          <Label for="role" class="mb-2 text-l">Role: {role}</Label>
+        </div>
+        <div>
+          <Label for="major" class="mb-2 text-l">Major: {major}</Label>
+        </div>
+        <div>
+          <Label for="city" class="mb-2 text-l">City: {city}</Label>
+        </div>
+        <div>
+          <div>
+            <Label for="state" class="mb-2 text-l">State: {state}</Label>
+          </div>
+        </div>
+        <div>
+          <Label for="visitors" class="mb-2 text-l">Connects Remaining</Label>
+          <div class="constants">{connectsRemaining}</div>
+        </div>
+        <div>
+          <Label for="visitors" class="mb-2 text-l">Passes Remaining</Label>
+          <div class="constants">{passesRemaining}</div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body>
 
 <style>
   .wrapper {
@@ -105,22 +157,8 @@
     margin-top: 150px;
   }
 
-  .success {
-    margin: 25px auto;
-    font-size: 20px;
-    color: rgb(113, 174, 21);
-    text-align: center;
-  }
-
   .form-container {
     margin-top: 50px; 
-  }
-
-  .centered-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 25px auto;
   }
 
   .constants {
@@ -136,79 +174,15 @@
     align-items: center;
     height: 100vh;
   }
+
+  .material-symbols-outlined {
+    font-size: 20px; 
+    margin: 10px px auto;
+  }
+
+  a{
+    color: black;
+  }
 </style>
 
-<body>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <div class="wrapper">
-    <div class="user-info-container">
-      <div class="flex items-center space-x-10 text-xl">
-        <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
-          dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
-        <div class="space-y-1 font-medium dark:text-black">
-          <div>{firstName} {lastName}</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2023</div>
-          <div class="text-sm dark:text-black"><span class="material-symbols-outlined">edit</span>Edit Profile</div>
-        </div>
-      </div>
-    </div>
 
-  {#if success}
-    <div class="success">
-      Successfully updated profile!
-    </div>
-    {/if}
-
-  <div class="form-container">
-    <form on:submit={handleClick}>
-      <div class="grid gap-6 mb-6 md:grid-cols-2">
-        <div>
-          <Label for="first_name" class="mb-2 text-l">First name: {firstName}</Label>
-          <Input type="text" id="first_name" placeholder="First" bind:value={localFirstName} required />
-        </div>
-        <div>
-          <Label for="last_name" class="mb-2 text-l">Last name: {lastName}</Label>
-          <Input type="text" id="last_name" placeholder="Last" bind:value={localLastName} required />
-        </div>
-        <div>
-          <Label for="company" class="mb-2 text-l">Occupation: {occupation}</Label>
-          <Input type="text" id="company" placeholder="Tutor" bind:value={localOccupation} required />
-        </div>
-        <div>
-          <Label for="phone" class="mb-2 text-l">Phone number: {phoneNumber}</Label>
-          <Input type="tel" id="phone" placeholder="123-456-7890" title="Please enter a valid phone number (e.g., 123-456-7890)" bind:value={localPhoneNumber} required />
-        </div>        
-        <div>
-          <Label for="role" class="mb-2 text-l">Role: {role}</Label>
-          <Input type="text" id="role" placeholder="Mentor/Mentee" bind:value={localRole} required />
-        </div>
-        <div>
-          <Label for="major" class="mb-2 text-l">Major: {major}</Label>
-          <Input type="text" id="major" placeholder="Engineering" bind:value={localMajor} required />
-        </div>
-        <div>
-          <Label for="city" class="mb-2 text-l">City: {city}</Label>
-          <Input type="text" id="city" placeholder="Dallas" bind:value={localCity} required />
-        </div>
-        <div>
-          <div>
-            <Label for="state" class="mb-2 text-l">State: {state}</Label>
-            <Input type="text" id="state" placeholder="Texas" bind:value={localState} required />
-          </div>
-        </div>
-        <div>
-          <Label for="visitors" class="mb-2 text-l">Connects Remaining</Label>
-          <div class="constants">{connectsRemaining}</div>
-        </div>
-        <div>
-          <Label for="visitors" class="mb-2 text-l">Passes Remaining</Label>
-          <div class="constants">{passesRemaining}</div>
-        </div>
-      </div>
-      <div class="centered-button">
-        <Button type="submit" color="blue">Update</Button>
-      </div>
-    </form>
-  </div>
-
-</body>
