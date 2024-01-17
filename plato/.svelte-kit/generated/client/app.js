@@ -22,31 +22,33 @@ export const nodes = [
 	() => import('./nodes/18'),
 	() => import('./nodes/19'),
 	() => import('./nodes/20'),
-	() => import('./nodes/21')
+	() => import('./nodes/21'),
+	() => import('./nodes/22')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [3],
-		"/MFA": [15],
+		"/MFA": [16],
 		"/about": [4],
 		"/chat": [5],
 		"/connections": [6],
 		"/create-account": [7,[2]],
 		"/create-profile": [8],
-		"/events": [9],
-		"/footer/contact": [10],
-		"/footer/guidelines": [11],
-		"/footer/licensing": [12],
-		"/footer/privacy": [13],
-		"/home": [14],
-		"/profile": [16],
-		"/profile/edit-profile": [17],
-		"/settings": [18],
-		"/settings/change-email": [19],
-		"/settings/change-password": [20],
-		"/sign-in": [21]
+		"/create-profile/upload-pfp": [9],
+		"/events": [10],
+		"/footer/contact": [11],
+		"/footer/guidelines": [12],
+		"/footer/licensing": [13],
+		"/footer/privacy": [14],
+		"/home": [15],
+		"/profile": [17],
+		"/profile/edit-profile": [18],
+		"/settings": [19],
+		"/settings/change-email": [20],
+		"/settings/change-password": [21],
+		"/sign-in": [22]
 	};
 
 export const hooks = {

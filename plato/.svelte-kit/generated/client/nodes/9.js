@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/events/+page.svelte";
+export { default as component } from "../../../../src/routes/create-profile/upload-pfp/+page.svelte";
