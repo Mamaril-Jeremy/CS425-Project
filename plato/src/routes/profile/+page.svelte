@@ -3,7 +3,7 @@
   import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
-  import { Avatar, Label, Input, Button } from 'flowbite-svelte';
+  import { Avatar } from 'flowbite-svelte';
   import Pfp from '$lib/assets/jeremy.png';
 
   let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
@@ -40,51 +40,6 @@
       console.log('No such document!');
     }
   };
-
-  const handleClick = async (e) => {
-    e.preventDefault();
-
-    if (!userUID) {
-      console.error('User not authenticated');
-      return;
-    }
-
-    firstName = localFirstName;
-    lastName = localLastName;
-    phoneNumber = localPhoneNumber;
-    occupation = localOccupation;
-    role = localRole;
-    major = localMajor;
-    city = localCity;
-    state = localState;
-
-    const userRef = collection(db, "users");
-    const q = query(userRef, where("userID", "==", userUID));
-
-    const querySnapshot = await getDocs(q);
-    const docRef = querySnapshot.docs[0].ref;
-
-    try {
-      await updateDoc(docRef, {
-        userLastName: lastName,
-        userOccupation: occupation,
-        userRole: role.toLowerCase(),
-        userConnectsRemaining: connectsRemaining,
-        userPhoneNumber: phoneNumber,
-        userPassesRemaining: passesRemaining,
-        userID: userUID,
-        userFirstName: firstName,
-        userMajor: major,
-        userCity: city,
-        userState: state
-      });
-      console.log('Document updated with ID:', docRef.id);
-      success = true;
-    } catch (error) {
-      console.error('Error updating document:', error.message);
-      success = false;
-    }
-  };
 </script>
 
 <body>
@@ -102,42 +57,39 @@
       </div>
     </div>
 
-  <div class="form-container">
-    <form on:submit={handleClick}>
-      <div class="grid gap-6 mb-6 md:grid-cols-2">
+      <div>
         <div>
-          <Label for="first_name" class="mb-2 text-l">Name: {firstName} {lastName}</Label>
+          <p for="first_name" class="mb-2 text-l">Name: {firstName} {lastName}</p>
         </div>
         <div>
-          <Label for="company" class="mb-2 text-l">Occupation: {occupation}</Label>
+          <p for="company" class="mb-2 text-l">Occupation: {occupation}</p>
         </div>
         <div>
-          <Label for="phone" class="mb-2 text-l">Phone number: {phoneNumber}</Label>
+          <p for="phone" class="mb-2 text-l">Phone number: {phoneNumber}</p>
         </div>        
         <div>
-          <Label for="role" class="mb-2 text-l">Role: {role}</Label>
+          <p for="role" class="mb-2 text-l">Role: {role}</p>
         </div>
         <div>
-          <Label for="major" class="mb-2 text-l">Major: {major}</Label>
+          <p for="major" class="mb-2 text-l">Major: {major}</p>
         </div>
         <div>
-          <Label for="city" class="mb-2 text-l">City: {city}</Label>
+          <p for="city" class="mb-2 text-l">City: {city}</p>
         </div>
         <div>
           <div>
-            <Label for="state" class="mb-2 text-l">State: {state}</Label>
+            <p for="state" class="mb-2 text-l">State: {state}</p>
           </div>
         </div>
         <div>
-          <Label for="visitors" class="mb-2 text-l">Connects Remaining</Label>
+          <p for="visitors" class="mb-2 text-l">Connects Remaining</p>
           <div class="constants">{connectsRemaining}</div>
         </div>
         <div>
-          <Label for="visitors" class="mb-2 text-l">Passes Remaining</Label>
+          <p for="visitors" class="mb-2 text-l">Passes Remaining</p>
           <div class="constants">{passesRemaining}</div>
         </div>
       </div>
-    </form>
   </div>
 
 </body>
@@ -155,10 +107,6 @@
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     margin-top: 150px;
-  }
-
-  .form-container {
-    margin-top: 50px; 
   }
 
   .constants {
