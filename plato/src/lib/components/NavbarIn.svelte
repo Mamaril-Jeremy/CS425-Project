@@ -70,10 +70,10 @@
   <Navbar>
     <NavBrand href="/home">
       <img src={Logo} class="mr-3 w-14 first-line:sm:w-16" alt="Flowbite Logo" />
-      <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"><span class="plato">Plato</span></span>
+      <span class="self-center whitespace-nowrap font-semibolddark:text-white"><span class="plato">Plato</span></span>
     </NavBrand>
     <div class="flex items-center md:order-2">
-      <Avatar id="avatar-menu" src={Pfp} />
+      <div class="avatar"><Avatar id="avatar-menu" class="w" src={Pfp} /></div>
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
     </div>
     <Dropdown placement="bottom" triggeredBy="#avatar-menu">
@@ -90,11 +90,11 @@
       <DropdownItem on:click={handleClick}><span class="text-blue-600">Sign out</span></DropdownItem>
     </Dropdown>
     <NavUl>
-      <NavLi href="/home"><span class="hover:text-blue-600 text-base">Home</span></NavLi>
-      <NavLi href="/chat"><span class="hover:text-blue-600 text-base">Chat</span></NavLi>
-      <NavLi href="/connections"><span class="hover:text-blue-600 text-base">Connections</span></NavLi>
-      <NavLi href="/events"><span class="hover:text-blue-600 text-base">Events</span></NavLi>
-      <NavLi href="/about"><span class="hover:text-blue-600 text-base">About</span></NavLi>
+      <NavLi href="/home"><span class="hover:text-blue-600 text-lg">Home</span></NavLi>
+      <NavLi href="/chat"><span class="hover:text-blue-600 text-lg">Chat</span></NavLi>
+      <NavLi href="/connections"><span class="hover:text-blue-600 text-lg">Connections</span></NavLi>
+      <NavLi href="/events"><span class="hover:text-blue-600 text-lg">Events</span></NavLi>
+      <NavLi href="/about"><span class="hover:text-blue-600 text-lg">About</span></NavLi>
     </NavUl>
   </Navbar>
 </div>
