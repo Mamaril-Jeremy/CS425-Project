@@ -1,54 +1,118 @@
 <script>
-    //This code was developed by Jeremy Mamaril
-    import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
-    import { onAuthStateChanged } from 'firebase/auth';
-    import { auth, db } from '$lib/firebase/firebase.client.js';
-    import { Avatar, Label, Input, Button } from 'flowbite-svelte';
-    import Pfp from '$lib/assets/jeremy.png';
-  
-    let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
-    let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
-    let success = false;
-  
-    onAuthStateChanged(auth, (user) => {
+  // This code was developed by Jeremy Mamaril
+  import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
+  import { onAuthStateChanged } from 'firebase/auth';
+  import { auth, db } from '$lib/firebase/firebase.client.js';
+  import { Avatar, Label, Input, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
+  import { ChevronDownSolid } from 'flowbite-svelte-icons';
+  import Pfp from '$lib/assets/jeremy.png';
+
+  let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
+  let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
+  let success = false;
+
+  let config = {
+      cUrl: 'https://api.countrystatecity.in/v1/countries',
+      ckey: ''
+  }
+
+  let countrySelect, stateSelect, citySelect;
+
+  onAuthStateChanged(auth, (user) => {
       if (user) {
-        userUID = user.uid;
-        fetchData();
+          userUID = user.uid;
+          fetchData();
+          loadCountries();
       }
-    });
-  
-    const fetchData = async () => {
+  });
+
+  function loadCountries() {
+      let apiEndPoint = config.cUrl
+
+      fetch(apiEndPoint, { headers: { "X-CSCAPI-KEY": config.ckey } })
+          .then(response => response.json())
+          .then(data => {
+              countrySelect = data.map(country => ({ value: country.iso2, text: country.name }));
+          })
+          .catch(error => console.error('Error loading countries:', error))
+
+      stateSelect = [];
+      citySelect = [];
+  }
+
+  function loadStates() {
+      stateSelectDisabled = false;
+      citySelectDisabled = true;
+      stateSelectPointerEvents = 'auto';
+      citySelectPointerEvents = 'none';
+
+      const selectedCountryCode = countrySelect.value;
+      // Clear existing states and city options using Svelte bindings
+      stateSelect = [{ value: '', text: 'Select State' }];
+      citySelect = [{ value: '', text: 'Select City' }];
+
+      fetch(`${config.cUrl}/${selectedCountryCode}/states`, { headers: { "X-CSCAPI-KEY": config.ckey } })
+          .then(response => response.json())
+          .then(data => {
+              stateSelect = data.map(state => ({ value: state.iso2, text: state.name }));
+          })
+          .catch(error => console.error('Error loading states:', error))
+  }
+
+  function loadCities() {
+      // Enable/disable and set pointer events for Svelte bindings
+      citySelectDisabled = false;
+      citySelectPointerEvents = 'auto';
+
+      const selectedCountryCode = countrySelect.value;
+      const selectedStateCode = stateSelect.value;
+
+      // Clear existing city options using Svelte bindings
+      citySelect = [{ value: '', text: 'Select City' }];
+
+      fetch(`${config.cUrl}/${selectedCountryCode}/states/${selectedStateCode}/cities`, { headers: { "X-CSCAPI-KEY": config.ckey } })
+          .then(response => response.json())
+          .then(data => {
+              // Replace document.createElement with Svelte binding
+              citySelect = data.map(city => ({ value: city.iso2, text: city.name }));
+          })
+          .catch(error => console.error('Error loading cities:', error))
+  }
+
+  const fetchData = async () => {
       const userRef = collection(db, "users");
       const q = query(userRef, where("userID", "==", userUID));
-  
+
       const querySnapshot = await getDocs(q);
-  
+
       if (!querySnapshot.empty) {
-        const data = querySnapshot.docs[0].data();
-        firstName = data.userFirstName;
-        lastName = data.userLastName;
-        occupation = data.userOccupation;
-        role = data.userRole;
-        connectsRemaining = data.userConnectsRemaining;
-        phoneNumber = data.userPhoneNumber;
-        passesRemaining = data.userPassesRemaining;
-        userUID = data.userID;
-        major = data.userMajor;
-        city = data.userCity;
-        state = data.userState;
+          const data = querySnapshot.docs[0].data();
+          {
+              firstName = data.userFirstName;
+              lastName = data.userLastName;
+              occupation = data.userOccupation;
+              role = data.userRole;
+              connectsRemaining = data.userConnectsRemaining;
+              phoneNumber = data.userPhoneNumber;
+              passesRemaining = data.userPassesRemaining;
+              userUID = data.userID;
+              major = data.userMajor;
+              city = data.userCity;
+              state = data.userState;
+          }
       } else {
-        console.log('No such document!');
+          console.log('No such document!');
       }
-    };
-  
-    const handleClick = async (e) => {
+  };
+
+  const handleClick = async (e) => {
       e.preventDefault();
-  
+
       if (!userUID) {
-        console.error('User not authenticated');
-        return;
+          console.error('User not authenticated');
+          return;
       }
-  
+
       firstName = localFirstName;
       lastName = localLastName;
       phoneNumber = localPhoneNumber;
@@ -57,83 +121,83 @@
       major = localMajor;
       city = localCity;
       state = localState;
-  
+
       const userRef = collection(db, "users");
       const q = query(userRef, where("userID", "==", userUID));
-  
+
       const querySnapshot = await getDocs(q);
       const docRef = querySnapshot.docs[0].ref;
-  
+
       try {
-        await updateDoc(docRef, {
-          userLastName: lastName,
-          userOccupation: occupation,
-          userRole: role.toLowerCase(),
-          userConnectsRemaining: connectsRemaining,
-          userPhoneNumber: phoneNumber,
-          userPassesRemaining: passesRemaining,
-          userID: userUID,
-          userFirstName: firstName,
-          userMajor: major,
-          userCity: city,
-          userState: state
-        });
-        console.log('Document updated with ID:', docRef.id);
-        success = true;
+          await updateDoc(docRef, {
+              userLastName: lastName,
+              userOccupation: occupation,
+              userRole: role.toLowerCase(),
+              userConnectsRemaining: connectsRemaining,
+              userPhoneNumber: phoneNumber,
+              userPassesRemaining: passesRemaining,
+              userID: userUID,
+              userFirstName: firstName,
+              userMajor: major,
+              userCity: city,
+              userState: state
+          });
+          console.log('Document updated with ID:', docRef.id);
+          success = true;
       } catch (error) {
-        console.error('Error updating document:', error.message);
-        success = false;
+          console.error('Error updating document:', error.message);
+          success = false;
       }
-    };
-  </script>
-  
-  <style>
-    .wrapper {
+  };
+</script>
+
+<style>
+  .wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-  
-    .user-info-container {
+  }
+
+  .user-info-container {
       background-color: white;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
       margin-top: 150px;
-    }
-  
-    .success {
+  }
+
+  .success {
       margin: 25px auto;
       font-size: 20px;
       color: rgb(113, 174, 21);
       text-align: center;
-    }
-  
-    .form-container {
-      margin-top: 50px; 
-    }
-  
-    .centered-button {
+  }
+
+  .form-container {
+      margin-top: 50px;
+  }
+
+  .centered-button {
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 25px auto;
-    }
-  
-    .constants {
+  }
+
+  .constants {
       display: flex;
       margin: 25px auto;
       font-size: 20px;
-    }
-  
-    body {
+  }
+
+  body {
       margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-    }
-  </style>
+  }
+</style>
   
   <body>
     <div class="wrapper">
@@ -180,6 +244,42 @@
           <div>
             <Label for="major" class="mb-2 text-l">Major: {major}</Label>
             <Input type="text" id="major" placeholder="Engineering" bind:value={localMajor} required />
+          </div>
+          <div>
+            <Button>Select Country<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" /></Button>
+            <Dropdown>
+              <DropdownItem>Dashboard</DropdownItem>
+              <DropdownItem>Settings</DropdownItem>
+              <DropdownItem>Earnings</DropdownItem>
+              <DropdownItem>Sign out</DropdownItem>
+            </Dropdown>
+          </div>
+          <div>
+            <Button>Select Country<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" bind:value={countrySelect} /></Button>
+            <Dropdown>
+              <DropdownItem>Dashboard</DropdownItem>
+              <DropdownItem>Settings</DropdownItem>
+              <DropdownItem>Earnings</DropdownItem>
+              <DropdownItem>Sign out</DropdownItem>
+            </Dropdown>
+          </div>
+          <div>
+            <Button>Select City<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" bind:value={stateSelect}/></Button>
+            <Dropdown>
+              <DropdownItem>Dashboard</DropdownItem>
+              <DropdownItem>Settings</DropdownItem>
+              <DropdownItem>Earnings</DropdownItem>
+              <DropdownItem>Sign out</DropdownItem>
+            </Dropdown>
+          </div>
+          <div>
+            <Button>Select State<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" bind:value={citySelect}/></Button>
+            <Dropdown>
+              <DropdownItem>Dashboard</DropdownItem>
+              <DropdownItem>Settings</DropdownItem>
+              <DropdownItem>Earnings</DropdownItem>
+              <DropdownItem>Sign out</DropdownItem>
+            </Dropdown>
           </div>
           <div>
             <Label for="city" class="mb-2 text-l">City: {city}</Label>
