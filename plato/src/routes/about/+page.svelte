@@ -1,14 +1,14 @@
 <script>
-  import { fade } from 'svelte/transition';
+  //import { fade } from 'svelte/transition'; //Not in use
   //This code was developed by Michael Nia and Jeremy Mamaril
   import { onMount } from 'svelte';
 
   onMount(() => {
     const welcomeTitle = document.querySelector('.welcome');
     setTimeout(() => {
-    welcomeTitle.style.opacity = '1';
-    }, 2000); // Delay of 2 seconds
-  });
+      welcomeTitle.style.opacity = '1';
+    }, 1000); // Delay of 1 second
+ });
 
   let sections = [
     { title: 'Why Plato', text: 'Unlock your potential with a mentor by your side, guiding you through your career or academic journey. Mentorship is at the heart of what we do.' },
@@ -26,10 +26,22 @@
   }
 
   .welcome {
-    opacity: 0;
-    transition: opacity 2s;
+      position: relative;
+      top: -10px;
+      margin-bottom: 10px;
+      animation: fadeIn ease-in 2s;
   }
-  
+
+  .fade-in {
+      opacity: 0;
+      animation: fadeInStretchOut ease-in-out 4s;
+      animation-delay: 2s;
+      animation-fill-mode: forwards;
+      line-height: 2;
+      margin: 10px 0;
+      font-size: 25px;
+  }
+
   .section {
     overflow: hidden;
     display: flex;
@@ -85,10 +97,19 @@
     margin-top: 20px;
   }
   
+  @keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+
+  @keyframes fadeInStretchOut {
+      0% {opacity: 0; transform: scale(0);}
+      100% {opacity: 1;}
+  }
+
   p {
-    font-size: 27px;
-    margin-top: 25px;
-    position: relative;
+      animation: fadeInStretchOut ease-in-out 4s;
+      animation-delay: 2s; /* Same as the duration of the fadeIn animation */
   }
 </style>
 
@@ -96,8 +117,8 @@
   <div class="section section1">
     <div>
       <h1 class="welcome">Why Plato?</h1>
-      <p>Unlock your potential with a mentor by your side, guiding you through your career or academic journey.</p>
-      <p>Mentorship is at the heart of what we do.</p>
+      <p class="fade-in">Unlock your potential with a mentor by your side, guiding you through your career or academic journey.</p>
+      <p class="fade-in">Mentorship is at the heart of what we do.</p>      
     </div>
   </div>
 
