@@ -1,6 +1,15 @@
 <script>
   import { fade } from 'svelte/transition';
   //This code was developed by Michael Nia and Jeremy Mamaril
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    const welcomeTitle = document.querySelector('.welcome');
+    setTimeout(() => {
+    welcomeTitle.style.opacity = '1';
+    }, 2000); // Delay of 2 seconds
+  });
+
   let sections = [
     { title: 'Why Plato', text: 'Unlock your potential with a mentor by your side, guiding you through your career or academic journey. Mentorship is at the heart of what we do.' },
     { title: 'Connecting Dreams and Expertise', text: 'Plato brings together passionate learners and seasoned professionals, creating a dynamic synergy that propels you towards greatness.' },
@@ -16,6 +25,11 @@
     font-family: Georgia;
   }
 
+  .welcome {
+    opacity: 0;
+    transition: opacity 2s;
+  }
+  
   .section {
     overflow: hidden;
     display: flex;
@@ -81,7 +95,7 @@
 <body>
   <div class="section section1">
     <div>
-      <h1 class="welcome" transition:fade={{duration: 2000}}>Why Plato?</h1>
+      <h1 class="welcome">Why Plato?</h1>
       <p>Unlock your potential with a mentor by your side, guiding you through your career or academic journey.</p>
       <p>Mentorship is at the heart of what we do.</p>
     </div>
