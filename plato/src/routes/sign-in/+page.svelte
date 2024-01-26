@@ -6,6 +6,7 @@
 
   let email = '';
   let password = '';
+  let incorrectEmailOrPassword = false;
 
   const handleSubmit = async (event) => {
      event.preventDefault();
@@ -25,8 +26,8 @@
       goto('/home')
     } catch (err) {
       console.log(err);
+      incorrectEmailOrPassword = true;
     }
-    
   };
 
   // const handleSubmit = async (event) => {
@@ -48,6 +49,9 @@
           <span>Your password</span>
           <Input type="password" bind:value={password} placeholder="••••••••••••" required />
         </Label>
+        {#if incorrectEmailOrPassword}
+          <p class="text-red-500 mb-4">Invalid email or password</p>
+        {/if}
         <div class="flex items-start">
           <div><input type="checkbox" id="demoCheckbox" name="checkbox" value="1"><a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500">Remember me</a></div>
           <a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500"> Lost password? </a>
