@@ -1,4 +1,5 @@
 <script>
+  import { fade } from 'svelte/transition';
   //This code was developed by Michael Nia and Jeremy Mamaril
   let sections = [
     { title: 'Why Plato', text: 'Unlock your potential with a mentor by your side, guiding you through your career or academic journey. Mentorship is at the heart of what we do.' },
@@ -80,7 +81,7 @@
 <body>
   <div class="section section1">
     <div>
-      <h1 class="welcome">Why Plato?</h1>
+      <h1 class="welcome" transition:fade={{duration: 2000}}>Why Plato?</h1>
       <p>Unlock your potential with a mentor by your side, guiding you through your career or academic journey.</p>
       <p>Mentorship is at the heart of what we do.</p>
     </div>
