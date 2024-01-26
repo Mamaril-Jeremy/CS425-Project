@@ -7,6 +7,9 @@
     import Mpfp from "$lib/assets/Mark Marsala.jpg";
     import Mipfp from "$lib/assets/mike.png";
     import Rpfp from "$lib/assets/Richard Cao.png";
+    import { auth, db } from '$lib/firebase/firebase.client.js';
+    import { collection, addDoc } from 'firebase/firestore';
+
 
     let currentUser = '';
     setCurrentChatUser('Jeremy Mamaril');
@@ -14,6 +17,7 @@
     let tempUser = '';
     let messageInput = "";
     let currentRecipient = 'Mark Marsala';
+    let ID = "e7Wee661lbq5bP5nlxD2", userID = -1, order = 1, messageCount = 0;
     function sendMessage() {
     if (!messageInput.trim()) return;
     // Add the new message to the store
@@ -70,6 +74,8 @@
             setCurrentChatUser('Console');
             messageInput = 'Can not be displayed due to unprofessional behavior';
         }
+        handleMessageSubmit();
+        order++;
         sendMessage(messageInput);
         })
         .catch(function (error) {
@@ -87,6 +93,46 @@
         }
         currentRecipient = user;
     }
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      if (!chatID) {
+        console.error('Chat does not exist');
+        return;
+      }
+  
+      const docRef = await addDoc(collection(db, "chat"), {
+        chatID: ID,
+        numMessages: messageCount
+      });
+    };
+    const handleMessageSubmit = async () => {
+
+    //   if (!chatID) {
+    //     console.error('Chat does not exist');
+    //     return;
+    //   }
+  
+      const ref = await addDoc(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"), {
+        message: messageInput,
+        user: currentUser,
+        messageTime: new Date().toLocaleString(),
+        messageOrder: order
+      });
+    };
+    const fetchData = async () => {
+        const chatRef = collection(db, "chat");
+        const q = query(chatRef, where("chatID", "==", ID));
+        const messagesRef = collection(q, "messages");
+        const querySnapshot = await getDocs(messagesRef);
+
+        if (!querySnapshot.empty) {
+            const data = querySnapshot.docs[0].data();
+            
+        } else {
+            console.log('No such document!');
+        }
+    };
 </script>
 
 <div class = "Sidebar">
@@ -174,7 +220,7 @@
     .chatbox{
         width : 87%;
         height : 93%;
-        position:absolute;
+        position: fixed;
         top: 4.2rem;
         right: 0rem;
         border-radius: .5rem;
