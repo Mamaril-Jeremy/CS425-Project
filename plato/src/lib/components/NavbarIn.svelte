@@ -73,7 +73,7 @@
       <span class="self-center whitespace-nowrap font-semibolddark:text-white"><span class="plato">Plato</span></span>
     </NavBrand>
     <div class="flex items-center md:order-2">
-      <div class="avatar"><Avatar id="avatar-menu" class="w" src={Pfp} /></div>
+      <Avatar id="avatar-menu" class="h-13 w-11" src={Pfp} />
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
     </div>
     <Dropdown placement="bottom" triggeredBy="#avatar-menu">
@@ -116,6 +116,6 @@
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        font-size: large;
+        font-size: x-large;
     }
 </style>

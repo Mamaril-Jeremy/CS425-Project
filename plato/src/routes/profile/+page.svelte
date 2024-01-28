@@ -57,7 +57,7 @@
       </div>
     </div>
 
-      <div>
+      <div class="grid gap-6 mt-10 md:grid-cols-2">
         <div>
           <p for="first_name" class="mb-2 text-l">Name: {firstName} {lastName}</p>
         </div>
@@ -82,12 +82,10 @@
           </div>
         </div>
         <div>
-          <p for="visitors" class="mb-2 text-l">Connects Remaining</p>
-          <div class="constants">{connectsRemaining}</div>
+          <p for="visitors" class="mb-2 text-l">Connects Remaining: {connectsRemaining}</p>
         </div>
         <div>
-          <p for="visitors" class="mb-2 text-l">Passes Remaining</p>
-          <div class="constants">{passesRemaining}</div>
+          <p for="visitors" class="mb-2 text-l">Passes Remaining: {passesRemaining}</p>
         </div>
       </div>
   </div>
@@ -95,6 +93,22 @@
 </body>
 
 <style>
+  a{
+    color: black;
+  }
+
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    height: 100vh;
+  }
+
+  div > p{
+    font-size: 20px;
+  }
+
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -106,30 +120,12 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    margin-top: 150px;
-  }
-
-  .constants {
-    display: flex;
-    margin: 25px auto;
-    font-size: 20px;
-  }
-
-  body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    margin-top: 100px;
   }
 
   .material-symbols-outlined {
-    font-size: 20px; 
-    margin: 10px px auto;
-  }
-
-  a{
-    color: black;
+    font-size: 15px; 
+    margin: 10px auto;
   }
 </style>
 
