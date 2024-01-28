@@ -7,8 +7,6 @@
   import Pfp from '$lib/assets/jeremy.png';
 
   let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
-  let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
-  let success = false;
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -47,8 +45,11 @@
   <div class="wrapper">
     <div class="user-info-container">
       <div class="flex items-center space-x-10 text-xl">
-        <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
-          dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
+          <div style="position: relative; display: inline-block;">
+            <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
+            dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
+            <!-- <span class="material-symbols-outlined" style="position: absolute; top: 0; left: 0;">edit</span> -->
+        </div>
         <div class="space-y-1 font-medium dark:text-black">
           <div>{firstName} {lastName}</div>
           <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2023</div>

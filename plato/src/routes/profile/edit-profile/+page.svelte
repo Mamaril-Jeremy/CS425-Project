@@ -11,12 +11,6 @@
   let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
   let success = false;
 
-  let config = {
-      cUrl: 'https://api.countrystatecity.in/v1/countries',
-      ckey: ''
-  }
-
-  let countrySelect, stateSelect, citySelect;
 
   onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -26,57 +20,86 @@
       }
   });
 
+    let config = {
+      cUrl: 'https://api.countrystatecity.in/v1/countries',
+      ckey: 'Wk5MTzFkRGJvUEx3eExmVjZrWEhJRzFlazZiTE9LYUtFUFJqcWIyWQ=='
+    };
+
+  let countrySelect = document.querySelector('.country'),
+      stateSelect = document.querySelector('.state'),
+      citySelect = document.querySelector('.city');
+
   function loadCountries() {
-      let apiEndPoint = config.cUrl
+    let apiEndPoint = config.cUrl;
 
-      fetch(apiEndPoint, { headers: { "X-CSCAPI-KEY": config.ckey } })
-          .then(response => response.json())
-          .then(data => {
-              countrySelect = data.map(country => ({ value: country.iso2, text: country.name }));
-          })
-          .catch(error => console.error('Error loading countries:', error))
+    fetch(apiEndPoint, { headers: { "X-CSCAPI-KEY": config.ckey } })
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country.iso2;
+          option.textContent = country.name;
+          countrySelect.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error loading countries:', error));
 
-      stateSelect = [];
-      citySelect = [];
+    stateSelect.disabled = true;
+    citySelect.disabled = true;
+    stateSelect.style.pointerEvents = 'none';
+    citySelect.style.pointerEvents = 'none';
   }
+
 
   function loadStates() {
-      stateSelectDisabled = false;
-      citySelectDisabled = true;
-      stateSelectPointerEvents = 'auto';
-      citySelectPointerEvents = 'none';
+      stateSelect.disabled = false
+      citySelect.disabled = true
+      stateSelect.style.pointerEvents = 'auto'
+      citySelect.style.pointerEvents = 'none'
 
-      const selectedCountryCode = countrySelect.value;
-      // Clear existing states and city options using Svelte bindings
-      stateSelect = [{ value: '', text: 'Select State' }];
-      citySelect = [{ value: '', text: 'Select City' }];
+      const selectedCountryCode = countrySelect.value
+      // console.log(selectedCountryCode);
+      stateSelect.innerHTML = '<option value="">Select State</option>' // for clearing the existing states
+      citySelect.innerHTML = '<option value="">Select City</option>' // Clear existing city options
 
-      fetch(`${config.cUrl}/${selectedCountryCode}/states`, { headers: { "X-CSCAPI-KEY": config.ckey } })
-          .then(response => response.json())
-          .then(data => {
-              stateSelect = data.map(state => ({ value: state.iso2, text: state.name }));
+      fetch(`${config.cUrl}/${selectedCountryCode}/states`, {headers: {"X-CSCAPI-KEY": config.ckey}})
+      .then(response => response.json())
+      .then(data => {
+          // console.log(data);
+
+          data.forEach(state => {
+              const option = document.createElement('option')
+              option.value = state.iso2
+              option.textContent = state.name 
+              stateSelect.appendChild(option)
           })
-          .catch(error => console.error('Error loading states:', error))
+      })
+      .catch(error => console.error('Error loading countries:', error))
   }
 
+
   function loadCities() {
-      // Enable/disable and set pointer events for Svelte bindings
-      citySelectDisabled = false;
-      citySelectPointerEvents = 'auto';
+      citySelect.disabled = false
+      citySelect.style.pointerEvents = 'auto'
 
-      const selectedCountryCode = countrySelect.value;
-      const selectedStateCode = stateSelect.value;
+      const selectedCountryCode = countrySelect.value
+      const selectedStateCode = stateSelect.value
+      // console.log(selectedCountryCode, selectedStateCode);
 
-      // Clear existing city options using Svelte bindings
-      citySelect = [{ value: '', text: 'Select City' }];
+      citySelect.innerHTML = '<option value="">Select City</option>' // Clear existing city options
 
-      fetch(`${config.cUrl}/${selectedCountryCode}/states/${selectedStateCode}/cities`, { headers: { "X-CSCAPI-KEY": config.ckey } })
-          .then(response => response.json())
-          .then(data => {
-              // Replace document.createElement with Svelte binding
-              citySelect = data.map(city => ({ value: city.iso2, text: city.name }));
+      fetch(`${config.cUrl}/${selectedCountryCode}/states/${selectedStateCode}/cities`, {headers: {"X-CSCAPI-KEY": config.ckey}})
+      .then(response => response.json())
+      .then(data => {
+          // console.log(data);
+
+          data.forEach(city => {
+              const option = document.createElement('option')
+              option.value = city.iso2
+              option.textContent = city.name 
+              citySelect.appendChild(option)
           })
-          .catch(error => console.error('Error loading cities:', error))
+      })
   }
 
   const fetchData = async () => {
@@ -245,41 +268,16 @@
             <Label for="major" class="mb-2 text-l">Major: {major}</Label>
             <Input type="text" id="major" placeholder="Engineering" bind:value={localMajor} required />
           </div>
-          <div>
-            <Button>Select Country<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" /></Button>
-            <Dropdown>
-              <DropdownItem>Dashboard</DropdownItem>
-              <DropdownItem>Settings</DropdownItem>
-              <DropdownItem>Earnings</DropdownItem>
-              <DropdownItem>Sign out</DropdownItem>
-            </Dropdown>
-          </div>
-          <div>
-            <Button>Select Country<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" bind:value={countrySelect} /></Button>
-            <Dropdown>
-              <DropdownItem>Dashboard</DropdownItem>
-              <DropdownItem>Settings</DropdownItem>
-              <DropdownItem>Earnings</DropdownItem>
-              <DropdownItem>Sign out</DropdownItem>
-            </Dropdown>
-          </div>
-          <div>
-            <Button>Select City<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" bind:value={stateSelect}/></Button>
-            <Dropdown>
-              <DropdownItem>Dashboard</DropdownItem>
-              <DropdownItem>Settings</DropdownItem>
-              <DropdownItem>Earnings</DropdownItem>
-              <DropdownItem>Sign out</DropdownItem>
-            </Dropdown>
-          </div>
-          <div>
-            <Button>Select State<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" bind:value={citySelect}/></Button>
-            <Dropdown>
-              <DropdownItem>Dashboard</DropdownItem>
-              <DropdownItem>Settings</DropdownItem>
-              <DropdownItem>Earnings</DropdownItem>
-              <DropdownItem>Sign out</DropdownItem>
-            </Dropdown>
+          <div class="select_option">
+            <select class="form-select country" aria-label="Default select example" on:change={loadCountries}>
+              <option selected>Select Country</option>
+            </select>
+            <select class="form-select state" aria-label="Default select example" on:change={loadStates}>
+              <option selected>Select State</option>
+            </select>
+            <select class="form-select city" aria-label="Default select example" on:change={loadCities}>
+              <option selected>Select City</option>
+            </select>
           </div>
           <div>
             <Label for="city" class="mb-2 text-l">City: {city}</Label>
