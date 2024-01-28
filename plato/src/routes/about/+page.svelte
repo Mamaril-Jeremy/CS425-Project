@@ -1,5 +1,4 @@
 <script>
-  //import { fade } from 'svelte/transition'; //Not in use
   //This code was developed by Michael Nia and Jeremy Mamaril
   import { onMount } from 'svelte';
 
@@ -7,7 +6,7 @@
     const welcomeTitle = document.querySelector('.welcome');
     setTimeout(() => {
       welcomeTitle.style.opacity = '1';
-    }, 1000); // Delay of 1 second
+    }, 1000); 
  });
 
   let sections = [
@@ -37,9 +36,7 @@
       animation: fadeInStretchOut ease-in-out 4s;
       animation-delay: 2s;
       animation-fill-mode: forwards;
-      line-height: 2;
       margin: 10px 0;
-      font-size: 25px;
   }
 
   .section {
@@ -54,6 +51,7 @@
     text-align: center;
     width: 100%;
     border-top: 2px solid #888;
+    line-height: 3;
   }
 
   .section1 {
@@ -108,8 +106,9 @@
   }
 
   p {
-      animation: fadeInStretchOut ease-in-out 4s;
-      animation-delay: 2s; /* Same as the duration of the fadeIn animation */
+      animation: fadeInStretchOut ease-in-out 3s;
+      animation-delay: 1s;
+      font-size: 25px;
   }
 </style>
 
