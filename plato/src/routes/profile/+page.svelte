@@ -60,33 +60,33 @@
 
       <div class="grid gap-6 mt-10 md:grid-cols-2">
         <div>
-          <p for="first_name" class="mb-2 text-l">Name: {firstName} {lastName}</p>
+          <p for="first_name" class="mb-2 text-l"><span class="material-symbols-outlined main">account_circle</span>Name: {firstName} {lastName}</p>
         </div>
         <div>
-          <p for="company" class="mb-2 text-l">Occupation: {occupation}</p>
+          <p for="company" class="mb-2 text-l"><span class="material-symbols-outlined main">work</span>Occupation: {occupation}</p>
         </div>
         <div>
-          <p for="phone" class="mb-2 text-l">Phone number: {phoneNumber}</p>
+          <p for="phone" class="mb-2 text-l"><span class="material-symbols-outlined main">phone</span>Phone number: {phoneNumber}</p>
         </div>        
         <div>
-          <p for="role" class="mb-2 text-l">Role: {role}</p>
+          <p for="role" class="mb-2 text-l"><span class="material-symbols-outlined main">supervised_user_circle</span>Role: {role}</p>
         </div>
         <div>
-          <p for="major" class="mb-2 text-l">Major: {major}</p>
+          <p for="major" class="mb-2 text-l"><span class="material-symbols-outlined main">school</span>Major: {major}</p>
         </div>
         <div>
-          <p for="city" class="mb-2 text-l">City: {city}</p>
+          <p for="city" class="mb-2 text-l"><span class="material-symbols-outlined main">apartment</span>City: {city}</p>
         </div>
         <div>
           <div>
-            <p for="state" class="mb-2 text-l">State: {state}</p>
+            <p for="state" class="mb-2 text-l"><span class="material-symbols-outlined main">public</span>State: {state}</p>
           </div>
         </div>
         <div>
-          <p for="visitors" class="mb-2 text-l">Connects Remaining: {connectsRemaining}</p>
+          <p for="visitors" class="mb-2 text-l"><span class="material-symbols-outlined main">person_add</span>Connects Remaining: {connectsRemaining}</p>
         </div>
         <div>
-          <p for="visitors" class="mb-2 text-l">Passes Remaining: {passesRemaining}</p>
+          <p for="visitors" class="mb-2 text-l"><span class="material-symbols-outlined main">person_remove</span>Passes Remaining: {passesRemaining}</p>
         </div>
       </div>
   </div>
@@ -127,6 +127,13 @@
   .material-symbols-outlined {
     font-size: 15px; 
     margin: 10px auto;
+  }
+
+  .main{
+    position: relative;
+    font-size: 24px;
+    margin-right: 10px;
+    top: 5px;
   }
 </style>
 
