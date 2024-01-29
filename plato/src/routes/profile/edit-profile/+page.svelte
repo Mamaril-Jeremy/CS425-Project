@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   // This code was developed by Jeremy Mamaril
   import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
   import { onAuthStateChanged } from 'firebase/auth';
@@ -304,4 +304,188 @@
       </form>
     </div>
   </body>
+   -->
+
+  <script>
+    import { onMount } from 'svelte';
   
+    let countries = [];
+    let states = [];
+    let cities = [];
+  
+    let selectedCountry = '';
+    let selectedState = '';
+  
+    const API_KEY = 'Wk5MTzFkRGJvUEx3eExmVjZrWEhJRzFlazZiTE9LYUtFUFJqcWIyWQ==';
+  
+    onMount(() => {
+      fetchCountries();
+    });
+  
+    const fetchCountries = () => {
+      fetch("https://api.countrystatecity.in/v1/countries", getRequestOptions())
+        .then(response => response.json())
+        .then(data => {
+          countries = data;
+        })
+        .catch(error => console.error('Error fetching countries:', error));
+    };
+  
+    const fetchStates = () => {
+      if (!selectedCountry) return;
+  
+      fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states`, getRequestOptions())
+        .then(response => response.json())
+        .then(data => {
+          states = data;
+        })
+        .catch(error => console.error('Error fetching states:', error));
+    };
+  
+    const fetchCities = () => {
+      if (!selectedCountry || !selectedState) return;
+  
+      fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states/${selectedState}/cities`, getRequestOptions())
+        .then(response => response.json())
+        .then(data => {
+          cities = data;
+        })
+        .catch(error => console.error('Error fetching cities:', error));
+    };
+  
+    const getRequestOptions = () => {
+      return {
+        method: 'GET',
+        headers: {
+          'X-CSCAPI-KEY': API_KEY
+        },
+        redirect: 'follow'
+      };
+    };
+  </script>
+  
+ <main>
+  <select bind:value={selectedCountry} on:change={fetchStates}>
+    <option value="">Select Country</option>
+    {#each countries as country (country.iso2)}
+      <option value={country.iso2} key={country.iso2}>{country.name}</option>
+    {/each}
+  </select>
+
+  <select bind:value={selectedState} on:change={fetchCities} if={states.length}>
+    <option value="">Select State</option>
+    {#each states as state (state.id)}
+      <option value={state.id} key={state.id}>{state.name}</option>
+    {/each}
+  </select>
+  
+  <select if={cities.length}>
+    <option value="">Select City</option>
+    {#each cities as city (city.id)}
+      <option value={city.id} key={city.id}>{city.name}</option>
+    {/each}
+  </select>
+ </main> 
+
+
+  <style>
+      main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+    }
+  </style>
+
+  <!-- <script>
+    import { onMount } from 'svelte';
+    
+    let countrySelected;
+    let stateSelected;
+    let citySelected;
+    
+    onMount(() => {
+      fetchCountries();
+    });
+    
+    function fetchCountries() {
+      var headers = new Headers();
+      headers.append("X-CSCAPI-KEY", "Wk5MTzFkRGJvUEx3eExmVjZrWEhJRzFlazZiTE9LYUtFUFJqcWIyWQ==");
+    
+      var requestOptions = {
+        method: 'GET',
+        headers: headers,
+        redirect: 'follow'
+      };
+    
+      fetch("https://api.countrystatecity.in/v1/countries", requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          data.sort((a, b) => a.name.localeCompare(b.name));
+    
+          var dropdown = document.getElementById("countryDropdown");
+    
+          data.forEach(country => {
+            var option = document.createElement("option");
+            option.value = country.iso2;
+            option.text = country.name;
+            dropdown.add(option);
+          });
+        })
+        .catch(error => console.log('error', error));
+    }
+    
+    function fetchStates() {
+      var headers = new Headers();
+      headers.append("X-CSCAPI-KEY", "Wk5MTzFkRGJvUEx3eExmVjZrWEhJRzFlazZiTE9LYUtFUFJqcWIyWQ==");
+    
+      var requestOptions = {
+        method: 'GET',
+        headers: headers,
+        redirect: 'follow'
+      };
+    
+      let selectedCountryCode = countrySelected;
+      console.log(selectedCountryCode);
+    
+      fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountryCode}/states`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          result.sort((a, b) => a.name.localeCompare(b.name));
+    
+          var dropdown = document.getElementById("stateDropdown");
+          dropdown.innerHTML = ""; // Clear existing options
+    
+          result.forEach(state => {
+            var option = document.createElement("option");
+            option.value = state.iso2;
+            option.text = state.name;
+            dropdown.add(option);
+          });
+        })
+        .catch(error => console.log('error', error));
+    }
+  </script>
+  
+  <main>
+    <select id="countryDropdown" bind:value={countrySelected} on:change={fetchStates}>
+    </select>
+    <select name="state" id="stateDropdown" bind:value={stateSelected}></select>
+  </main>
+  
+
+<style>
+  main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+  }
+</style> -->
+
+
+
+
+
