@@ -343,7 +343,9 @@
     };
   
     const fetchCities = () => {
-      if (!selectedCountry || !selectedState) return;
+      // if (!selectedCountry || !selectedState) return;
+      console.log(selectedCountry);
+      console.log(selectedState)
   
       fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states/${selectedState}/cities`, getRequestOptions())
         .then(response => response.json())
@@ -375,7 +377,7 @@
   <select bind:value={selectedState} on:change={fetchCities} if={states.length}>
     <option value="">Select State</option>
     {#each states as state (state.id)}
-      <option value={state.id} key={state.id}>{state.name}</option>
+      <option value={state.iso2} key={state.id}>{state.name}</option>
     {/each}
   </select>
   
