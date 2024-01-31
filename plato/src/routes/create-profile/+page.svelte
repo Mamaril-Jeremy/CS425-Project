@@ -1,5 +1,5 @@
 <script>
-  //This code was developed by Jeremy Mamaril
+    //This code was developed by Jeremy Mamaril
     import { onMount } from 'svelte';
     import { collection, addDoc } from 'firebase/firestore';
     import { Label, Input } from 'flowbite-svelte';
@@ -7,13 +7,11 @@
     import { auth, db } from '$lib/firebase/firebase.client.js';
     import { goto } from '$app/navigation';
   
-    let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
+    let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
     let success = false;
 
     let countries = [], states = [], cities = [];
-
-    let selectedCountry = '', selectedState = '';
-
+    let selectedCountry = '', selectedState = '', selectedCity = '';
 
     const API_KEY = 'Wk5MTzFkRGJvUEx3eExmVjZrWEhJRzFlazZiTE9LYUtFUFJqcWIyWQ==';
 
@@ -67,6 +65,7 @@
     onAuthStateChanged(auth, (user) => {
       if (user) {
         userUID = user.uid;
+        userEmail = user.email;
       }
     });
   
@@ -79,9 +78,11 @@
       }
   
       const docRef = await addDoc(collection(db, "users"), {
-        userCity: city,
+        userCity: selectedCity,
         userConnectsRemaining: connectsRemaining,
-        userEmailAddress: "users",
+        userCountry: selectedCountry,
+        // userDateCreated: serverTimestamp(), 
+        userEmailAddress: userEmail,
         userFirstName: firstName,
         userID: userUID,
         userLastName: lastName,
@@ -90,7 +91,7 @@
         userPassesRemaining: passesRemaining,
         userPhoneNumber: phoneNumber,
         userRole: role.toLowerCase(),
-        userState: state
+        userState: selectedState
       });
       console.log("Document written with ID:", docRef.id);
       goto("/home");
@@ -140,10 +141,10 @@
                 <option value={state.iso2} key={state.id}>{state.name}</option>
               {/each}
             </select>
-            <select class="text-gray-900 bg-gray-50 mb-5" if={cities.length}>
+            <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedCity} if={cities.length}>
               <option value="">Select City</option>
               {#each cities as city (city.id)}
-                <option value={city.id} key={city.id}>{city.name}</option>
+                <option value={city.name} key={city.id}>{city.name}</option>
               {/each}
             </select>
           </div>

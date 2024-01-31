@@ -37,12 +37,13 @@
     goto('/settings');
   };
 
-  let userUID, firstName, lastName, email;
+  let userUID, firstName, lastName, userEmail;
 
   onMount(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         userUID = user.uid;
+        userEmail = user.email;
         fetchData();
       }
     });
@@ -58,7 +59,6 @@
       const data = querySnapshot.docs[0].data();
       firstName = data.userFirstName;
       lastName = data.userLastName;
-      email = data.userEmail;
       userUID = data.userID;
     } else {
       console.log('No such document!');
@@ -81,7 +81,7 @@
         {#if firstName && lastName}
           <span class="block text-sm">{firstName} {lastName}</span>
         {/if}
-        <span class="block truncate text-sm font-medium">markinreno2001@gmail.com</span>
+        <span class="block truncate text-sm font-medium">{userEmail}</span>
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
       <DropdownItem on:click={sClicked}>Settings</DropdownItem>

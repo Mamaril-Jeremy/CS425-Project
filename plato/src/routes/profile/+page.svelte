@@ -6,7 +6,7 @@
   import { Avatar } from 'flowbite-svelte';
   import Pfp from '$lib/assets/jeremy.png';
 
-  let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
+  let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, country, state, connectsRemaining = 5, passesRemaining = 10;
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -33,6 +33,7 @@
       userUID = data.userID;
       major = data.userMajor;
       city = data.userCity;
+      country = data.userCountry;
       state = data.userState;
     } else {
       console.log('No such document!');
@@ -58,7 +59,7 @@
       </div>
     </div>
 
-      <div class="grid gap-6 mt-10 md:grid-cols-2">
+      <div class="grid gap-8 mt-10 md:grid-cols-2">
         <div>
           <p for="first_name" class="mb-2 text-l"><span class="material-symbols-outlined main">account_circle</span>Name: {firstName} {lastName}</p>
         </div>
@@ -75,12 +76,13 @@
           <p for="major" class="mb-2 text-l"><span class="material-symbols-outlined main">school</span>Major: {major}</p>
         </div>
         <div>
-          <p for="city" class="mb-2 text-l"><span class="material-symbols-outlined main">apartment</span>City: {city}</p>
+          <p for="country" class="mb-2 text-l"><span class="material-symbols-outlined main">public</span>Country: {country}</p>
+      </div>
+        <div>
+          <p for="state" class="mb-2 text-l"><span class="material-symbols-outlined main">flag</span>State: {state}</p>
         </div>
         <div>
-          <div>
-            <p for="state" class="mb-2 text-l"><span class="material-symbols-outlined main">public</span>State: {state}</p>
-          </div>
+          <p for="city" class="mb-2 text-l"><span class="material-symbols-outlined main">apartment</span>City: {city}</p>
         </div>
         <div>
           <p for="visitors" class="mb-2 text-l"><span class="material-symbols-outlined main">person_add</span>Connects Remaining: {connectsRemaining}</p>

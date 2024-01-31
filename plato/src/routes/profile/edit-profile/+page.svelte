@@ -7,19 +7,25 @@
   import { Avatar, Label, Input, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
   import Pfp from '$lib/assets/jeremy.png';
 
-  let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
-  let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
+  let userUID, firstName, lastName, phoneNumber, occupation, role, major, country, connectsRemaining = 5, passesRemaining = 10;
+  let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor;
   let success = false;
 
   let countries = [], states = [], cities = [];
 
-  let selectedCountry = '', selectedState = '';
-  
+  let selectedCountry = '', selectedState = '', selectedCity = '';
   
   const API_KEY = 'Wk5MTzFkRGJvUEx3eExmVjZrWEhJRzFlazZiTE9LYUtFUFJqcWIyWQ==';
 
   onMount(() => {
     fetchCountries();
+  });
+
+  onAuthStateChanged(auth, (user) => {
+      if (user) {
+          userUID = user.uid;
+          fetchData();
+      }
   });
 
   const fetchCountries = () => {
@@ -65,13 +71,6 @@
     };
   };
 
-  onAuthStateChanged(auth, (user) => {
-      if (user) {
-          userUID = user.uid;
-          fetchData();
-      }
-  });
-
   const fetchData = async () => {
       const userRef = collection(db, "users");
       const q = query(userRef, where("userID", "==", userUID));
@@ -92,6 +91,7 @@
               major = data.userMajor;
               city = data.userCity;
               state = data.userState;
+              country = data.userCountry;
           }
       } else {
           console.log('No such document!');
@@ -112,8 +112,6 @@
       occupation = localOccupation;
       role = localRole;
       major = localMajor;
-      city = localCity;
-      state = localState;
 
       const userRef = collection(db, "users");
       const q = query(userRef, where("userID", "==", userUID));
@@ -132,8 +130,9 @@
               userID: userUID,
               userFirstName: firstName,
               userMajor: major,
-              userCity: city,
-              userState: state
+              userCountry: selectedCountry,
+              userCity: selectedCity,
+              userState: selectedState
           });
           console.log('Document updated with ID:', docRef.id);
           success = true;
@@ -253,10 +252,10 @@
                 <option value={state.iso2} key={state.id}>{state.name}</option>
               {/each}
             </select>
-            <select class="text-gray-900 bg-gray-50" if={cities.length}>
+            <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} if={cities.length}>
               <option value="">Select City</option>
               {#each cities as city (city.id)}
-                <option value={city.id} key={city.id}>{city.name}</option>
+                <option value={city.name} key={city.id}>{city.name}</option>
               {/each}
             </select>
           </div>
