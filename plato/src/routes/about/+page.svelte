@@ -6,7 +6,7 @@
     const welcomeTitle = document.querySelector('.welcome');
     setTimeout(() => {
       welcomeTitle.style.opacity = '1';
-    }, 1000); 
+    }, 1000); // Delay of 1 second
  });
 
   let sections = [
@@ -36,7 +36,9 @@
       animation: fadeInStretchOut ease-in-out 4s;
       animation-delay: 2s;
       animation-fill-mode: forwards;
+      line-height: 2;
       margin: 10px 0;
+      font-size: 25px;
   }
 
   .section {
@@ -106,9 +108,8 @@
   }
 
   p {
-      animation: fadeInStretchOut ease-in-out 3s;
-      animation-delay: 1s;
-      font-size: 25px;
+      animation: fadeInStretchOut ease-in-out 4s;
+      animation-delay: 2s; /* Same as the duration of the fadeIn animation */
   }
 </style>
 
