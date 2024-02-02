@@ -86,7 +86,71 @@
 
   
 
-<!-- function isContentLikelyBlocked(safeSearchAnnotation) {
+<!-- const { ImageAnnotatorClient } = require('@google-cloud/vision');
+const fs = require('fs');
+
+// Assuming the credentials JSON file is named 'your-credentials-file.json' in the same directory.
+const credentialsPath = './safesearch-api-test-978a34fe91ce.json';
+
+// Check if the credentials file exists before creating the client.
+if (!fs.existsSync(credentialsPath)) {
+  console.error('Error: Credentials file not found. Make sure it exists in the current directory.');
+  process.exit(1);
+}
+
+const client = new ImageAnnotatorClient({ keyFilename: credentialsPath });
+
+// Get the command-line arguments
+const command = process.argv[2];
+const input = process.argv[3];
+
+// Decide whether to use a link or a local file based on the command-line argument
+if (command === 'link') {
+  testExplicitContentDetection(input);
+} else if (command === 'file') {
+  testExplicitContentDetectionFromFile(input);
+} else {
+  console.error('Error: Please specify whether to use "link" or "file" and provide the corresponding input.');
+  console.error('Link: node vision-api-proof.js link <insertimagelinkhere>');
+  console.error('Image: node vision-api-proof.js file <path/to/local/file>');
+  process.exit(1);
+}
+
+async function testExplicitContentDetection(input) {
+  try {
+    const [result] = await client.safeSearchDetection(input);
+    processResults(result.safeSearchAnnotation);
+  } catch (err) {
+    console.error('Error:', err.message || err);
+  }
+}
+
+async function testExplicitContentDetectionFromFile(input) {
+  try {
+    const content = fs.readFileSync(input);
+    const [result] = await client.safeSearchDetection(content);
+    processResults(result.safeSearchAnnotation);
+  } catch (err) {
+    console.error('Error:', err.message || err);
+  }
+}
+
+function processResults(safeSearchAnnotation) {
+  console.log('Safe Search Annotation:');
+  console.log(`Adult: ${safeSearchAnnotation.adult}`);
+  console.log(`Spoof: ${safeSearchAnnotation.spoof}`);
+  console.log(`Medical: ${safeSearchAnnotation.medical}`);
+  console.log(`Violence: ${safeSearchAnnotation.violence}`);
+  console.log(`Racy: ${safeSearchAnnotation.racy}`);
+
+  if (isContentLikelyBlocked(safeSearchAnnotation)) {
+    console.log('Content has been blocked.');
+  } else {
+    console.log('Content is allowed.');
+  }
+}
+
+function isContentLikelyBlocked(safeSearchAnnotation) {
   // Check if any category is likely
   if (
     safeSearchAnnotation.adult === 'LIKELY' ||
