@@ -125,24 +125,24 @@
   <div class="section section2">
     <div>
       <h1>Connecting Dreams and Expertise</h1>
-      <p>Plato brings together passionate learners and seasoned professionals,</p>
-      <p>creating a dynamic synergy that propels you towards greatness.</p>
+      <p class="fade-in">Plato brings together passionate learners and seasoned professionals,</p>
+      <p class="fade-in">creating a dynamic synergy that propels you towards greatness.</p>
     </div>
   </div>
 
   <div class="section section3">
     <div>
       <h1>Personalized Mentorship</h1>
-      <p>Experience the art of personalization.</p>
-      <p>We pair you with mentors who understand your unique goals and aspirations, providing tailored support.</p>
+      <p class="fade-in">Experience the art of personalization.</p>
+      <p class="fade-in">We pair you with mentors who understand your unique goals and aspirations, providing tailored support.</p>
     </div>
   </div>
 
   <div class="section section4">
     <div>
       <h1>Trust and Community</h1>
-      <p>Plato is your sanctuary for forging genuine and meaningful connections.</p>
-      <p>Join our community of learners and mentors and start your journey to success.</p>
+      <p class="fade-in">Plato is your sanctuary for forging genuine and meaningful connections.</p>
+      <p class="fade-in">Join our community of learners and mentors and start your journey to success.</p>
     </div>
   </div>
 
