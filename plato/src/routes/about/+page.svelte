@@ -1,5 +1,4 @@
 <script>
-  //import { fade } from 'svelte/transition'; //Not in use
   //This code was developed by Michael Nia and Jeremy Mamaril
   import { onMount } from 'svelte';
 
@@ -54,6 +53,7 @@
     text-align: center;
     width: 100%;
     border-top: 2px solid #888;
+    line-height: 3;
   }
 
   .section1 {

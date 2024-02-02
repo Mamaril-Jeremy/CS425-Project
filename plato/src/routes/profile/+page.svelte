@@ -6,9 +6,7 @@
   import { Avatar } from 'flowbite-svelte';
   import Pfp from '$lib/assets/jeremy.png';
 
-  let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
-  let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor, localCity, localState;
-  let success = false;
+  let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, country, state, connectsRemaining = 5, passesRemaining = 10;
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -35,6 +33,7 @@
       userUID = data.userID;
       major = data.userMajor;
       city = data.userCity;
+      country = data.userCountry;
       state = data.userState;
     } else {
       console.log('No such document!');
@@ -47,8 +46,11 @@
   <div class="wrapper">
     <div class="user-info-container">
       <div class="flex items-center space-x-10 text-xl">
-        <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
-          dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
+          <div style="position: relative; display: inline-block;">
+            <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
+            dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
+            <!-- <span class="material-symbols-outlined" style="position: absolute; top: 0; left: 0;">edit</span> -->
+        </div>
         <div class="space-y-1 font-medium dark:text-black">
           <div>{firstName} {lastName}</div>
           <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2023</div>
@@ -57,37 +59,36 @@
       </div>
     </div>
 
-      <div>
+      <div class="grid gap-8 mt-10 md:grid-cols-2">
         <div>
-          <p for="first_name" class="mb-2 text-l">Name: {firstName} {lastName}</p>
+          <p for="first_name" class="mb-2 text-l"><span class="material-symbols-outlined main">account_circle</span>Name: {firstName} {lastName}</p>
         </div>
         <div>
-          <p for="company" class="mb-2 text-l">Occupation: {occupation}</p>
+          <p for="company" class="mb-2 text-l"><span class="material-symbols-outlined main">work</span>Occupation: {occupation}</p>
         </div>
         <div>
-          <p for="phone" class="mb-2 text-l">Phone number: {phoneNumber}</p>
+          <p for="phone" class="mb-2 text-l"><span class="material-symbols-outlined main">phone</span>Phone number: {phoneNumber}</p>
         </div>        
         <div>
-          <p for="role" class="mb-2 text-l">Role: {role}</p>
+          <p for="role" class="mb-2 text-l"><span class="material-symbols-outlined main">supervised_user_circle</span>Role: {role}</p>
         </div>
         <div>
-          <p for="major" class="mb-2 text-l">Major: {major}</p>
+          <p for="major" class="mb-2 text-l"><span class="material-symbols-outlined main">school</span>Major: {major}</p>
         </div>
         <div>
-          <p for="city" class="mb-2 text-l">City: {city}</p>
+          <p for="country" class="mb-2 text-l"><span class="material-symbols-outlined main">public</span>Country: {country}</p>
+      </div>
+        <div>
+          <p for="state" class="mb-2 text-l"><span class="material-symbols-outlined main">flag</span>State: {state}</p>
         </div>
         <div>
-          <div>
-            <p for="state" class="mb-2 text-l">State: {state}</p>
-          </div>
+          <p for="city" class="mb-2 text-l"><span class="material-symbols-outlined main">apartment</span>City: {city}</p>
         </div>
         <div>
-          <p for="visitors" class="mb-2 text-l">Connects Remaining</p>
-          <div class="constants">{connectsRemaining}</div>
+          <p for="visitors" class="mb-2 text-l"><span class="material-symbols-outlined main">person_add</span>Connects Remaining: {connectsRemaining}</p>
         </div>
         <div>
-          <p for="visitors" class="mb-2 text-l">Passes Remaining</p>
-          <div class="constants">{passesRemaining}</div>
+          <p for="visitors" class="mb-2 text-l"><span class="material-symbols-outlined main">person_remove</span>Passes Remaining: {passesRemaining}</p>
         </div>
       </div>
   </div>
@@ -95,6 +96,22 @@
 </body>
 
 <style>
+  a{
+    color: black;
+  }
+
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    height: 100vh;
+  }
+
+  div > p{
+    font-size: 20px;
+  }
+
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -106,30 +123,19 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    margin-top: 150px;
-  }
-
-  .constants {
-    display: flex;
-    margin: 25px auto;
-    font-size: 20px;
-  }
-
-  body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    margin-top: 100px;
   }
 
   .material-symbols-outlined {
-    font-size: 20px; 
-    margin: 10px px auto;
+    font-size: 15px; 
+    margin: 10px auto;
   }
 
-  a{
-    color: black;
+  .main{
+    position: relative;
+    font-size: 24px;
+    margin-right: 10px;
+    top: 5px;
   }
 </style>
 

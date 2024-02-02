@@ -48,7 +48,7 @@
     </div>
     <div>
       {#if fadeIn}
-      <p in:fade={{delay: 5, duration: 1600}}>Establishing mentor to mentee relationships.</p>
+      <p in:fade={{delay: 5, duration: 1600}}>Establishing mentor to mentee relationships</p>
       {/if}
     </div>
     <video autoplay loop muted>
@@ -98,6 +98,7 @@
     </div>
     <div></div>
   </div>
+  
 
   <div class="section section6">
     <div>
@@ -107,6 +108,7 @@
     <div></div>
   </div>
 </body>
+
 
 <style>
   body {
@@ -126,7 +128,6 @@
     box-sizing: border-box;
     text-align: center;
     width: 100%;
-    border-top: 2px solid #888;
   }
 
   .section1 {
@@ -138,6 +139,7 @@
   .section1 > div > h1{
     margin-top: 150px;
     font-size: 108px;
+    text-align: center;
   }
 
   .section2,
@@ -166,6 +168,7 @@
     height: 500px;
     background-color: #FEF9FF;
     color: #3498db;
+    line-height: 2;
   }
 
   .section6 {
@@ -189,9 +192,9 @@
     background-color: #3498db;
     border: none;
     color: #FEF9FF;
-    padding: 12px 28px;
+    padding: 12px 24px;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     margin: 20px auto;
     cursor: pointer;
     border-radius: 12px;
