@@ -37,12 +37,13 @@
     goto('/settings');
   };
 
-  let userUID, firstName, lastName, email;
+  let userUID, firstName, lastName, userEmail;
 
   onMount(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         userUID = user.uid;
+        userEmail = user.email;
         fetchData();
       }
     });
@@ -58,7 +59,6 @@
       const data = querySnapshot.docs[0].data();
       firstName = data.userFirstName;
       lastName = data.userLastName;
-      email = data.userEmail;
       userUID = data.userID;
     } else {
       console.log('No such document!');
@@ -73,7 +73,7 @@
       <span class="self-center whitespace-nowrap font-semibolddark:text-white"><span class="plato">Plato</span></span>
     </NavBrand>
     <div class="flex items-center md:order-2">
-      <div class="avatar"><Avatar id="avatar-menu" class="w" src={Pfp} /></div>
+      <Avatar id="avatar-menu" class="h-13 w-11" src={Pfp} />
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
     </div>
     <Dropdown placement="bottom" triggeredBy="#avatar-menu">
@@ -81,7 +81,7 @@
         {#if firstName && lastName}
           <span class="block text-sm">{firstName} {lastName}</span>
         {/if}
-        <span class="block truncate text-sm font-medium">markinreno2001@gmail.com</span>
+        <span class="block truncate text-sm font-medium">{userEmail}</span>
       </DropdownHeader>
       <DropdownItem>Dashboard</DropdownItem>
       <DropdownItem on:click={sClicked}>Settings</DropdownItem>
@@ -116,6 +116,6 @@
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        font-size: large;
+        font-size: x-large;
     }
 </style>

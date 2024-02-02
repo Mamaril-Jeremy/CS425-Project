@@ -50,12 +50,14 @@
           <Input type="password" bind:value={password} placeholder="••••••••••••" required />
         </Label>
         {#if incorrectEmailOrPassword}
-          <p class="text-red-500 mb-4">Invalid email or password</p>
+          <p class="text-red-500 mb-4 text-center">Invalid email or password</p>
         {/if}
         <div class="flex items-start">
-          <div><input type="checkbox" id="demoCheckbox" name="checkbox" value="1"><a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500">Remember me</a></div>
-          <a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500"> Lost password? </a>
-        </div>
+          <div>
+            <input type="checkbox" id="demoCheckbox" name="checkbox" value="1">
+            <p class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500">Remember me</p>
+            <a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500"> Lost password? </a></div>
+          </div>
         <Button type="submit" class="w-full bg-blue-600 hover:opacity-75 hover:bg-blue-600">Login to your account</Button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
           Not registered? <a href="/create-account" class="ml-10 text-blue-600 hover:underline dark:text-primary-500"> Create account </a>
@@ -72,8 +74,13 @@
     background-repeat: no-repeat;
   }
 
-  a{
+  p{
+    display: inline;
     margin-left: 10px;
+  }
+
+  a{
+    margin-left: 45px;
   }
 </style>
 
