@@ -69,7 +69,7 @@
 
 <style>
   .body-background {
-    background-image: url('../../lib/assets/placeholderbackground_login.png');
+    background-image: url('../../lib/assets/backgroundlogin2.png');
     background-size: cover;
     background-repeat: no-repeat;
   }
