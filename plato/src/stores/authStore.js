@@ -33,5 +33,8 @@ export const authHandlers = {
     },
     updatePassword: async (password) => {
         await updatePassword(auth.currentUser, password)
+    },
+    forgotPasswordReset: async (email) => {
+        await sendPasswordResetEmail(auth, email)
     }
 }
