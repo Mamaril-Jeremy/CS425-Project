@@ -1,5 +1,5 @@
 <script>
-  //This code was developed by Jeremy Mamaril
+  //This code was developed by Jeremy Mamaril & Mark Marsala
   import { authHandlers, authStore} from "../../stores/authStore.js"
   import { Card, Button, Label, Input} from 'flowbite-svelte';
   import { goto } from '$app/navigation';
@@ -29,11 +29,6 @@
       incorrectEmailOrPassword = true;
     }
   };
-
-  // const handleSubmit = async (event) => {
-  //     goto('/home')
-  //     clicked.set(true);
-  // };
 </script>
 
 <div class="body-background h-screen w-screen flex items-center justify-center">
@@ -56,7 +51,7 @@
           <div>
             <input type="checkbox" id="demoCheckbox" name="checkbox" value="1">
             <p class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500">Remember me</p>
-            <a href="/" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500"> Lost password? </a></div>
+            <a href="/forgot-password" class="ml-auto text-sm text-blue-600 hover:underline dark:text-primary-500">Lost password?</a></div>
           </div>
         <Button type="submit" class="w-full bg-blue-600 hover:opacity-75 hover:bg-blue-600">Login to your account</Button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
@@ -83,20 +78,3 @@
     margin-left: 45px;
   }
 </style>
-
-
- <!-- <div class="button-container" >
-    <Button color="dark" on:click={handleSubmit}>Mariooo HeHe</Button>
-  </div>
-
-
-
-<style>
-  .button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-</style> -->
