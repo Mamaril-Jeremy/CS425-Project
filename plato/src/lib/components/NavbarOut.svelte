@@ -25,7 +25,7 @@
             <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Plato</span>
         </NavBrand>
         <div class="flex md:order-2">
-            <Button color="blue" href="/sign-in" class="text-base">Sign In</Button>
+            <Button color="blue" href="/create-profile/upload-pfp" class="text-base">Sign In</Button>
             <NavHamburger on:click={toggle} />
         </div>
         <NavUl {hidden} class="order-1">

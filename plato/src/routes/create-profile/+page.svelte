@@ -94,7 +94,7 @@
         userState: selectedState
       });
       console.log("Document written with ID:", docRef.id);
-      goto("/home");
+      goto("/create-profile/upload-pfp");
     };
   </script>
   
