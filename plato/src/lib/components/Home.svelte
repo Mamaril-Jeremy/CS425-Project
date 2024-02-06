@@ -48,7 +48,7 @@
     </div>
     <div>
       {#if fadeIn}
-      <p in:fade={{delay: 5, duration: 1600}}>Establishing mentor to mentee relationships</p>
+      <p in:fade={{delay: 5, duration: 1600}}><strong>We're committed to establishing mentor-to-mentee relationships.</strong></p>
       {/if}
     </div>
     <video autoplay loop muted>
