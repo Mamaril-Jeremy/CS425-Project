@@ -332,7 +332,7 @@
             </select>
           </div>
           <div>
-            <select class="text-gray-900 bg-gray-50" bind:value={selectedState} on:change={fetchCities} if={states.length}>
+            <select class="text-gray-900 bg-gray-50 w-6/12" bind:value={selectedState} on:change={fetchCities} if={states.length}>
               <option value="">Select State</option>
               {#each states as state (state.id)}
                 <option value={state.iso2} key={state.id}>{state.name}</option>
