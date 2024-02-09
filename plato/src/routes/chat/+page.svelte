@@ -8,7 +8,7 @@
     import Mipfp from "$lib/assets/mike.png";
     import Rpfp from "$lib/assets/Richard Cao.png";
     import { auth, db } from '$lib/firebase/firebase.client.js';
-    import { collection, addDoc } from 'firebase/firestore';
+    import { collection, updateDoc, getDocs, addDoc, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 
 
     let currentUser = '';
@@ -17,16 +17,18 @@
     let tempUser = '';
     let messageInput = "";
     let currentRecipient = 'Mark Marsala';
-    let ID = "e7Wee661lbq5bP5nlxD2", userID = -1, order = 1, messageCount = 0;
+    let timestamp = "";
+    let ID = "e7Wee661lbq5bP5nlxD2", userID = -1, order = 2, messageCount = 0, chatID = 'a';
+
     function sendMessage() {
-    if (!messageInput.trim()) return;
+    // if (!messageInput.trim()) return;
     // Add the new message to the store
     messages.update((prevMessages) => [
       ...prevMessages,
       {
         user: currentUser,
         text: messageInput,
-        timestamp: new Date().toLocaleString(),
+        timestamp: timestamp,
       },
     ]);
     //Clear the message box
@@ -35,8 +37,6 @@
 
     }
     function checkMessage(message){
-        console.log(message);
-
         let data = new FormData();
         data.append('text', message);
         data.append('lang', 'en');
@@ -74,9 +74,8 @@
             setCurrentChatUser('Console');
             messageInput = 'Can not be displayed due to unprofessional behavior';
         }
-        handleMessageSubmit();
+        handleMessageSubmit(ID);
         order++;
-        sendMessage(messageInput);
         })
         .catch(function (error) {
         // handle error
@@ -84,15 +83,19 @@
         else console.log(error.message);
         });
     }
+
     function setCurrentChatUser(user){
         currentUser = user;
     }
+
     function setCurrentRecipient(user){
         if (currentRecipient !== user){
             messages.set([]);
+            fetchData(ID);
         }
         currentRecipient = user;
     }
+
     const handleSubmit = async (e) => {
       e.preventDefault();
 
@@ -106,33 +109,67 @@
         numMessages: messageCount
       });
     };
-    const handleMessageSubmit = async () => {
+
+    const handleMessageSubmit = async (ID) => {
 
     //   if (!chatID) {
     //     console.error('Chat does not exist');
     //     return;
     //   }
-  
-      const ref = await addDoc(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"), {
+        timestamp = new Date().toLocaleString();
+        messageCount++;
+      const ref = await addDoc(collection(db, `chat/${ID}/messages`), {
         message: messageInput,
         user: currentUser,
         messageTime: new Date().toLocaleString(),
         messageOrder: order
       });
-    };
-    const fetchData = async () => {
-        const chatRef = collection(db, "chat");
-        const q = query(chatRef, where("chatID", "==", ID));
-        const messagesRef = collection(q, "messages");
-        const querySnapshot = await getDocs(messagesRef);
+      const chatUpdate = collection(db, 'chat');
+      const q = query(chatUpdate, where("chatID", "==", chatID))
 
+      const querySnapshot = await getDocs(q);
+      const docuRef = querySnapshot.docs[0].ref;
+      try{
+        await updateDoc(docuRef, {
+            numMessages: messageCount
+        })
+      sendMessage();
+      } catch (error){
+        console.error("An error has been detected");
+      }
+    //   await chatUpdate.docRef(ID).set({
+    //     numMessages: messageCount
+    //   });
+    };
+
+    const fetchData = async (ID) => {
+        const chatRef = collection(db, `chat/${ID}/messages`);
+        const orderedChatRef = query(chatRef,orderBy("messageOrder", "asc"));
+        const querySnapshot = await getDocs(orderedChatRef);
+        const numMessages = collection(db, `chat`)
+        const queryNumSnapshot = await getDocs(numMessages);
+
+        if (!queryNumSnapshot.empty) {
+            const data1 = queryNumSnapshot.docs[0].data();
+            messageCount = data1.numMessages;
+        } else {
+            console.log('No such document!');
+        }
+        console.log(messageCount);
         if (!querySnapshot.empty) {
-            const data = querySnapshot.docs[0].data();
-            
+            for(let i = 1; i <= messageCount; i++){
+                const data = querySnapshot.docs[i].data();
+                timestamp = data.messageTime;
+                currentUser = data.user;
+                messageInput = data.message;
+                sendMessage();
+            }
         } else {
             console.log('No such document!');
         }
     };
+    const unsubscribe = onSnapshot(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"), (querySnapshot) => {
+    });
 </script>
 
 <div class = "Sidebar">
