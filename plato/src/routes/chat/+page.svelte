@@ -19,7 +19,6 @@
     let currentRecipient = 'Mark Marsala';
     let timestamp = "";
     let ID = "e7Wee661lbq5bP5nlxD2", userID = -1, order = 2, messageCount = 0, chatID = 'a';
-
     function sendMessage() {
     // if (!messageInput.trim()) return;
     // Add the new message to the store
@@ -168,8 +167,28 @@
             console.log('No such document!');
         }
     };
-    const unsubscribe = onSnapshot(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"), (querySnapshot) => {
-    });
+
+    const startDataSync = async () => {
+        const numMessages = collection(db, `chat`)
+        const queryNumSnapshot = await getDocs(numMessages);
+        if (!queryNumSnapshot.empty) {
+            const data1 = queryNumSnapshot.docs[0].data();
+            messageCount = data1.numMessages;
+        } else {
+            console.log('No such document!');
+        }
+        const subscribe = onSnapshot(query(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"),orderBy("messageOrder", "asc")), (querySnapshot) => {
+            // Update local data with changes from Firestore
+            querySnapshot.docs.slice(1).forEach((doc) => {
+                const data = doc.data();
+                timestamp = data.messageTime;
+                currentUser = data.user;
+                messageInput = data.message;
+                sendMessage();
+            })
+        });
+    };
+    startDataSync();
 </script>
 
 <div class = "Sidebar">
