@@ -1,19 +1,28 @@
 <script>
+  import { onAuthStateChanged } from 'firebase/auth';
+  import { auth, db } from '$lib/firebase/firebase.client.js';
   import { getStorage, ref, uploadBytes } from 'firebase/storage';
+  import { testExplicitContentDetectionFromFile } from '$lib/assets/imagefilter.js'; // Import content detection functions
   import { goto } from '$app/navigation';
 
   let image;
-  let isButtonBlue = false;
+  let isButtonBlue = false, userUID;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      userUID = user.uid;
+    }
+  });
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
-    const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "application/pdf"];
+    const allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
 
     if (file && allowedTypes.includes(file.type)) {
       image = file;
       isButtonBlue = true;
     } else {
-      alert("Please upload a valid image file (png, jpg, jpeg, pdf).");
+      alert("Please upload a valid image file (png, jpg, jpeg).");
       isButtonBlue = false;
     }
   };
@@ -21,13 +30,30 @@
   const handleContinue = async () => {
     if (image) {
       const storage = getStorage();
-      const storageRef = ref(storage, 'images/' + image.name);
+      const storageRef = ref(storage, `images/${userUID}/${image.name}`);
 
-      await uploadBytes(storageRef, image);
+      const metadata = {
+        contentType: image.type
+      }
+      const uploadTask = uploadBytes(storageRef, image, metadata);
 
-      goto("/home");
+      uploadTask.then(async () => {
+        // Call content detection function
+        const contentBlocked = await testExplicitContentDetectionFromFile(storageRef);
+        
+        if (!contentBlocked) {
+          // Proceed to the next page
+          goto("/home");
+        } else {
+          // Content is blocked, handle accordingly
+          alert("Content is blocked due to explicit content. Please upload a different image.");
+        }
+      }).catch((error) => {
+        console.error("Error uploading image:", error);
+        alert("An error occurred while uploading the image. Please try again later.");
+      });
     } else {
-      alert("Please upload a valid image file (png, jpg, jpeg, pdf) before continuing.");
+      alert("Please upload a valid image file (png, jpg, jpeg) before continuing.");
     }
   };
 </script>
@@ -36,8 +62,8 @@
   <div class="center">
     <h1>Upload A Professional Image</h1>
 
-    <label for="upload">Upload Image (png, jpg, jpeg, pdf):</label>
-    <input type="file" id="upload" accept=".png, .jpg, .jpeg, .pdf" on:change={handleImageUpload} />
+    <label for="upload">Upload Image (png, jpg, jpeg):</label>
+    <input type="file" id="upload" accept=".png, .jpg, .jpeg" on:change={handleImageUpload} />
 
     <button on:click={handleContinue} class="{isButtonBlue ? 'continue' : 'no-continue'}">Continue</button>
   </div>
@@ -66,8 +92,6 @@
   }
 
   button {
-    background-color: #007bff;
-    color: white;
     padding: 0.5rem 1rem;
     border: none;
     cursor: pointer;
@@ -83,6 +107,7 @@
     color: #007bff;
   }
 </style>
+
 
   
 
