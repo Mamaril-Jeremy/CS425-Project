@@ -24,33 +24,35 @@ export const nodes = [
 	() => import('./nodes/20'),
 	() => import('./nodes/21'),
 	() => import('./nodes/22'),
-	() => import('./nodes/23')
+	() => import('./nodes/23'),
+	() => import('./nodes/24')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [3],
-		"/MFA": [17],
+		"/MFA": [18],
 		"/about": [4],
 		"/chat": [5],
 		"/connections": [6],
 		"/create-account": [7,[2]],
 		"/create-profile": [8],
 		"/create-profile/upload-pfp": [9],
-		"/events": [10],
-		"/footer/contact": [11],
-		"/footer/guidelines": [12],
-		"/footer/licensing": [13],
-		"/footer/privacy": [14],
-		"/forgot-password": [15],
-		"/home": [16],
-		"/profile": [18],
-		"/profile/edit-profile": [19],
-		"/settings": [20],
-		"/settings/change-email": [21],
-		"/settings/change-password": [22],
-		"/sign-in": [23]
+		"/create-profile/upload-resume": [10],
+		"/events": [11],
+		"/footer/contact": [12],
+		"/footer/guidelines": [13],
+		"/footer/licensing": [14],
+		"/footer/privacy": [15],
+		"/forgot-password": [16],
+		"/home": [17],
+		"/profile": [19],
+		"/profile/edit-profile": [20],
+		"/settings": [21],
+		"/settings/change-email": [22],
+		"/settings/change-password": [23],
+		"/sign-in": [24]
 	};
 
 export const hooks = {
