@@ -1,8 +1,7 @@
 <script>
   import { onAuthStateChanged } from 'firebase/auth';
-  import { auth, db } from '$lib/firebase/firebase.client.js';
+  import { auth } from '$lib/firebase/firebase.client.js';
   import { getStorage, ref, uploadBytes } from 'firebase/storage';
-  import { testExplicitContentDetectionFromFile } from '$lib/assets/imagefilter.js'; // Import content detection functions
   import { goto } from '$app/navigation';
 
   let image;
@@ -35,25 +34,8 @@
       const metadata = {
         contentType: image.type
       }
-      const uploadTask = uploadBytes(storageRef, image, metadata);
-
-      uploadTask.then(async () => {
-        // Call content detection function
-        const contentBlocked = await testExplicitContentDetectionFromFile(storageRef);
-        
-        if (!contentBlocked) {
-          // Proceed to the next page
-          goto("/home");
-        } else {
-          // Content is blocked, handle accordingly
-          alert("Content is blocked due to explicit content. Please upload a different image.");
-        }
-      }).catch((error) => {
-        console.error("Error uploading image:", error);
-        alert("An error occurred while uploading the image. Please try again later.");
-      });
-    } else {
-      alert("Please upload a valid image file (png, jpg, jpeg) before continuing.");
+      const uploadTask = uploadBytes(storageRef, image, metadata);  
+      goto("/create-profile/upload-resume")
     }
   };
 </script>
