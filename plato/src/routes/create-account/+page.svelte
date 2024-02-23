@@ -35,7 +35,7 @@
           try {
             await authHandlers.signup(email, password);
             await authHandlers.verifyEmail();
-            goto('/create-profile');
+            goto('/verify-email');
           } catch (err) {
             console.log(err);
           }

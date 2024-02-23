@@ -5,11 +5,16 @@
   "type": "module",
   "dependencies": {
     "@event-calendar/day-grid": "^2.4.0",
+    "axios": "^1.6.2",
+    "firebase": "^10.7.0",
+    "form-data": "^4.0.0",
+    "http": "0.0.1-security",
     "npm": "^10.2.1",
+    "svelte-local-storage-store": "^0.6.4",
     "@sveltejs/kit": "^1.20.4",
-    "firebase-frameworks": "^0.10.4",
-    "firebase-functions": "^4.3.0",
-    "firebase-admin": "^11.0.1"
+    "firebase-frameworks": "^0.11.0",
+    "firebase-functions": "^4.5.0",
+    "firebase-admin": "^11.11.1"
   },
   "main": "server.js",
   "engines": {

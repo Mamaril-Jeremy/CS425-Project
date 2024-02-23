@@ -1,6 +1,6 @@
-import { c as create_ssr_component, a as compute_rest_props, g as getContext, b as spread, d as escape_attribute_value, e as escape_object } from "./ssr.js";
-import { v as validate_dynamic_element, a as validate_void_dynamic_element, i as is_void } from "./dev.js";
-import { t as twMerge } from "./tw-merge.js";
+import { c as create_ssr_component, a as compute_rest_props, i as getContext, e as spread, h as escape_attribute_value, f as escape_object } from "./ssr.js";
+import { i as is_void } from "./names.js";
+import { twMerge } from "tailwind-merge";
 const Button = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["pill", "outline", "size", "href", "type", "color", "shadow"]);
   const group = getContext("group");
@@ -100,26 +100,22 @@ const Button = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$props.class
   );
   return `${((tag) => {
-    validate_dynamic_element(tag);
-    return tag ? (() => {
-      validate_void_dynamic_element(tag);
-      return `<${href ? "a" : "button"}${spread(
-        [
-          {
-            type: escape_attribute_value(href ? void 0 : type)
-          },
-          { href: escape_attribute_value(href) },
-          {
-            role: escape_attribute_value(href ? "link" : "button")
-          },
-          escape_object($$restProps),
-          {
-            class: escape_attribute_value(buttonClass)
-          }
-        ],
-        {}
-      )}>${is_void(tag) ? "" : `${slots.default ? slots.default({}) : ``}`}${is_void(tag) ? "" : `</${tag}>`}`;
-    })() : "";
+    return tag ? `<${href ? "a" : "button"}${spread(
+      [
+        {
+          type: escape_attribute_value(href ? void 0 : type)
+        },
+        { href: escape_attribute_value(href) },
+        {
+          role: escape_attribute_value(href ? "link" : "button")
+        },
+        escape_object($$restProps),
+        {
+          class: escape_attribute_value(buttonClass)
+        }
+      ],
+      {}
+    )}>${is_void(tag) ? "" : `${slots.default ? slots.default({}) : ``}`}${is_void(tag) ? "" : `</${tag}>`}` : "";
   })(href ? "a" : "button")} `;
 });
 export {
