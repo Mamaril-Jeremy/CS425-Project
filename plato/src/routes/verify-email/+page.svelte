@@ -1,7 +1,7 @@
 <script>
     //This code was developed by Mark Marsala
     import { Button } from 'flowbite-svelte';
-    import { authHandlers } from "../../stores/authStore.js"
+    import { authHandlers } from "../../stores/authStore"
     import { auth } from '$lib/firebase/firebase.client.js';
     import { goto } from '$app/navigation';
     import { onAuthStateChanged } from 'firebase/auth';
@@ -34,7 +34,8 @@
       try {
         if(isEmailVerified)
         {
-          goto('/home');
+          //goto('/create-profile');
+          goto('/MFA');
         }
         else{
           emailVerifiedWarning = true;
