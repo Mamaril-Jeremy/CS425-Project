@@ -123,7 +123,7 @@
           await updateDoc(docRef, {
               userLastName: lastName,
               userOccupation: occupation,
-              userRole: role.toLowerCase(),
+              userRole: role,
               userConnectsRemaining: connectsRemaining,
               userPhoneNumber: phoneNumber,
               userPassesRemaining: passesRemaining,
@@ -223,7 +223,59 @@
           </div>
           <div>
             <Label for="company" class="mb-2 text-l">Occupation: {occupation}</Label>
-            <Input type="text" id="company" placeholder="Tutor" bind:value={localOccupation} required />
+            <select class="text-gray-900 bg-gray-50 w-full" bind:value={localOccupation}>
+              <option value="Accountant">Accountant</option>
+              <option value="Actor">Actor</option>
+              <option value="Archaeologist">Archaeologist</option>
+              <option value="Architect">Architect</option>
+              <option value="Artist">Artist</option>
+              <option value="Astronomer">Astronomer</option>
+              <option value="Athlete">Athlete</option>
+              <option value="Biologist">Biologist</option>
+              <option value="Chemist">Chemist</option>
+              <option value="Chef">Chef</option>
+              <option value="Civil Engineer">Civil Engineer</option>
+              <option value="Data Scientist">Data Scientist</option>
+              <option value="Dentist">Dentist</option>
+              <option value="Detective">Detective</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Electrician">Electrician</option>
+              <option value="Entrepreneur">Entrepreneur</option>
+              <option value="Event Planner">Event Planner</option>
+              <option value="Fashion Designer">Fashion Designer</option>
+              <option value="Filmmaker">Filmmaker</option>
+              <option value="Financial Analyst">Financial Analyst</option>
+              <option value="Geologist">Geologist</option>
+              <option value="Graphic Designer">Graphic Designer</option>
+              <option value="Historian">Historian</option>
+              <option value="Interior Designer">Interior Designer</option>
+              <option value="Journalist">Journalist</option>
+              <option value="Lawyer">Lawyer</option>
+              <option value="Marketing Specialist">Marketing Specialist</option>
+              <option value="Mathematician">Mathematician</option>
+              <option value="Mechanic">Mechanic</option>
+              <option value="Mechanical Engineer">Mechanical Engineer</option>
+              <option value="Musician">Musician</option>
+              <option value="Network Administrator">Network Administrator</option>
+              <option value="Nurse">Nurse</option>
+              <option value="Paramedic">Paramedic</option>
+              <option value="Pharmacist">Pharmacist</option>
+              <option value="Phlebotomist">Phlebotomist</option>
+              <option value="Photographer">Photographer</option>
+              <option value="Physicist">Physicist</option>
+              <option value="Pilot">Pilot</option>
+              <option value="Police Officer">Police Officer</option>
+              <option value="Psychologist">Psychologist</option>
+              <option value="Sales Manager">Sales Manager</option>
+              <option value="Software Architect">Software Architect</option>
+              <option value="Software Engineer">Software Engineer</option>
+              <option value="Social Worker">Social Worker</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Veterinarian">Veterinarian</option>
+              <option value="Web Developer">Web Developer</option>
+              <option value="Writer">Writer</option>
+              <option value="Zoologist">Zoologist</option>
+          </select>
           </div>
           <div>
             <Label for="phone" class="mb-2 text-l">Phone number: {phoneNumber}</Label>
@@ -231,11 +283,45 @@
           </div>        
           <div>
             <Label for="role" class="mb-2 text-l">Role: {role}</Label>
-            <Input type="text" id="role" placeholder="Mentor/Mentee" bind:value={localRole} required />
+            <select class="text-gray-900 bg-gray-50 w-full" bind:value={localRole}>
+              <option value="Mentor">Mentor</option>
+              <option value="Mentee">Mentee</option>
+            </select>
           </div>
           <div>
             <Label for="major" class="mb-2 text-l">Major: {major}</Label>
-            <Input type="text" id="major" placeholder="Engineering" bind:value={localMajor} required />
+            <select class="text-gray-900 bg-gray-50 w-full" bind:value={localMajor}>
+              <option value="accounting">Accounting</option>
+              <option value="agriculture">Agriculture</option>
+              <option value="anthropology">Anthropology</option>
+              <option value="architecture">Architecture</option>
+              <option value="art">Art and Design</option>
+              <option value="biology">Biology</option>
+              <option value="business">Business Administration</option>
+              <option value="chemistry">Chemistry</option>
+              <option value="communication">Communication Studies</option>
+              <option value="computerScience">Computer Science</option>
+              <option value="economics">Economics</option>
+              <option value="education">Education</option>
+              <option value="engineering">Engineering</option>
+              <option value="english">English Literature</option>
+              <option value="environmentalScience">Environmental Science</option>
+              <option value="finance">Finance</option>
+              <option value="geography">Geography</option>
+              <option value="healthScience">Health Science</option>
+              <option value="internationalRelations">International Relations</option>
+              <option value="linguistics">Linguistics</option>
+              <option value="management">Management</option>
+              <option value="marineBiology">Marine Biology</option>
+              <option value="microbiology">Microbiology</option>
+              <option value="nutrition">Nutrition</option>
+              <option value="philosophy">Philosophy</option>
+              <option value="physics">Physics</option>
+              <option value="politicalScience">Political Science</option>
+              <option value="psychology">Psychology</option>
+              <option value="graphicDesign">Graphic Design</option>
+              <option value="sociology">Sociology</option>
+          </select>
           </div>
           <div>
             <select class="text-gray-900 bg-gray-50" bind:value={selectedCountry} on:change={fetchStates}>
@@ -246,7 +332,7 @@
             </select>
           </div>
           <div>
-            <select class="text-gray-900 bg-gray-50" bind:value={selectedState} on:change={fetchCities} if={states.length}>
+            <select class="text-gray-900 bg-gray-50 w-6/12" bind:value={selectedState} on:change={fetchCities} if={states.length}>
               <option value="">Select State</option>
               {#each states as state (state.id)}
                 <option value={state.iso2} key={state.id}>{state.name}</option>
