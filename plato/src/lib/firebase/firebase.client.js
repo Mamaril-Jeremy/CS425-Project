@@ -1,5 +1,5 @@
 import { deleteApp, getApp, getApps, initializeApp } from 'firebase/app';
-import { getAuth, setPersistence, inMemoryPersistence } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { getFirestore, collection } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
