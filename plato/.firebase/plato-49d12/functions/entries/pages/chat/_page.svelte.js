@@ -1,8 +1,12 @@
-import { c as create_ssr_component, a as compute_rest_props, s as setContext, b as spread, e as escape_object, d as escape_attribute_value, g as getContext, f as add_attribute, h as escape, j as compute_slots, v as validate_component } from "../../../chunks/ssr.js";
-import { P as Pfp, A as Avatar } from "../../../chunks/Mark Marsala.js";
-import { G as GradientButton } from "../../../chunks/GradientButton.js";
+import { c as create_ssr_component, a as compute_rest_props, s as setContext, e as spread, f as escape_object, h as escape_attribute_value, i as getContext, b as add_attribute, j as escape, d as compute_slots, k as subscribe, v as validate_component, l as each } from "../../../chunks/ssr.js";
 import { w as writable } from "../../../chunks/index.js";
-import { t as twMerge } from "../../../chunks/tw-merge.js";
+import { A as Avatar } from "../../../chunks/Avatar.js";
+import { B as Button } from "../../../chunks/Button.js";
+import { N as Navbar, a as NavBrand, b as NavHamburger, c as NavUl, d as NavLi } from "../../../chunks/NavUl.js";
+import { twMerge } from "tailwind-merge";
+import "form-data";
+import "../../../chunks/firebase.client.js";
+import "firebase/firestore";
 const Sidebar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["activeUrl", "asideClass", "nonActiveClass", "activeClass", "ariaLabel"]);
   const activeUrlStore = writable("");
@@ -120,148 +124,118 @@ const SidebarWrapper = create_ssr_component(($$result, $$props, $$bindings, slot
     {}
   )}>${slots.default ? slots.default({}) : ``}</div> `;
 });
-const GridSolid = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $$restProps = compute_rest_props($$props, ["size", "role", "ariaLabel"]);
-  const ctx = getContext("iconCtx") ?? {};
-  const sizes = {
-    xs: "w-3 h-3",
-    sm: "w-4 h-4",
-    md: "w-5 h-5",
-    lg: "w-6 h-6",
-    xl: "w-8 h-8"
-  };
-  let { size = ctx.size || "md" } = $$props;
-  let { role = ctx.role || "img" } = $$props;
-  let { ariaLabel = "grid solid" } = $$props;
-  if ($$props.size === void 0 && $$bindings.size && size !== void 0)
-    $$bindings.size(size);
-  if ($$props.role === void 0 && $$bindings.role && role !== void 0)
-    $$bindings.role(role);
-  if ($$props.ariaLabel === void 0 && $$bindings.ariaLabel && ariaLabel !== void 0)
-    $$bindings.ariaLabel(ariaLabel);
-  return `<svg${spread(
-    [
-      { xmlns: "http://www.w3.org/2000/svg" },
-      { fill: "currentColor" },
-      escape_object($$restProps),
-      {
-        class: escape_attribute_value(twMerge("shrink-0", sizes[size], $$props.class))
-      },
-      { role: escape_attribute_value(role) },
-      {
-        "aria-label": escape_attribute_value(ariaLabel)
-      },
-      { viewBox: "0 0 18 18" }
-    ],
-    {}
-  )}><path fill="currentColor" d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"></path></svg> `;
-});
-const MailBoxSolid = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $$restProps = compute_rest_props($$props, ["size", "role", "ariaLabel"]);
-  const ctx = getContext("iconCtx") ?? {};
-  const sizes = {
-    xs: "w-3 h-3",
-    sm: "w-4 h-4",
-    md: "w-5 h-5",
-    lg: "w-6 h-6",
-    xl: "w-8 h-8"
-  };
-  let { size = ctx.size || "md" } = $$props;
-  let { role = ctx.role || "img" } = $$props;
-  let { ariaLabel = "mail box solid" } = $$props;
-  if ($$props.size === void 0 && $$bindings.size && size !== void 0)
-    $$bindings.size(size);
-  if ($$props.role === void 0 && $$bindings.role && role !== void 0)
-    $$bindings.role(role);
-  if ($$props.ariaLabel === void 0 && $$bindings.ariaLabel && ariaLabel !== void 0)
-    $$bindings.ariaLabel(ariaLabel);
-  return `<svg${spread(
-    [
-      { xmlns: "http://www.w3.org/2000/svg" },
-      { fill: "currentColor" },
-      escape_object($$restProps),
-      {
-        class: escape_attribute_value(twMerge("shrink-0", sizes[size], $$props.class))
-      },
-      { role: escape_attribute_value(role) },
-      {
-        "aria-label": escape_attribute_value(ariaLabel)
-      },
-      { viewBox: "0 0 20 20" }
-    ],
-    {}
-  )}><path fill="currentColor" d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"></path></svg> `;
-});
+const Mpfp = "/_app/immutable/assets/Mark Marsala.b795bb3e.jpg";
+const Mipfp = "/_app/immutable/assets/mike.0837461f.png";
+const Rpfp = "/_app/immutable/assets/Richard Cao.134e1db4.png";
 const _page_svelte_svelte_type_style_lang = "";
 const css = {
-  code: '.Sidebar.s-x1Clvj2bit-Q.s-x1Clvj2bit-Q{position:fixed;top:4.5rem;left:0rem;height:44rem;box-shadow:rgba(0,0,0,25) 0px 3px 8px;background:white}.message-container.s-x1Clvj2bit-Q.s-x1Clvj2bit-Q{overflow-y:scroll;position:absolute;right:0.01rem;top:8.5rem;height:70%}.chatbox.s-x1Clvj2bit-Q.s-x1Clvj2bit-Q{width:82.7%;height:91.7%;position:fixed;top:4.2rem;left:16rem;border-radius:.5rem;box-shadow:rgba(0,0,0,0.25) 0px 3px 8px;background:white;z-index:500}.button.s-x1Clvj2bit-Q.s-x1Clvj2bit-Q{position:absolute;bottom:1rem;right:0.5rem;width:100px;height:2.75rem;color:rgb(0, 0, 0);cursor:pointer;border-radius:.25rem;border:black;transition:all ease .25s;z-index:1000}.textbox.s-x1Clvj2bit-Q.s-x1Clvj2bit-Q{position:absolute;bottom:1rem;left:1rem;width:89%;box-sizing:border-box;font-size:16px;z-index:1000;background-color:black;border:1px solid black;padding:0;margin:0}.textbox.s-x1Clvj2bit-Q input[type="text"].s-x1Clvj2bit-Q{width:100%;color:black}.Title.s-x1Clvj2bit-Q.s-x1Clvj2bit-Q{color:black;font-size:30px}',
+  code: 'ul.svelte-1hpcyjx.svelte-1hpcyjx{color:black;z-index:100000;bottom:10%;position:absolute;left:2%}.Sidebar.svelte-1hpcyjx.svelte-1hpcyjx{position:fixed;top:4.5rem;left:0rem;height:100%;box-shadow:rgba(0,0,0,25) 0px 3px 8px;background:white}.message-container.svelte-1hpcyjx.svelte-1hpcyjx{overflow-y:scroll;position:absolute;right:0.01rem;top:14%;height:80%}.chatbox.svelte-1hpcyjx.svelte-1hpcyjx{width:87%;height:93%;position:fixed;top:4.2rem;right:0rem;border-radius:.5rem;box-shadow:rgba(0,0,0,0.25) 0px 3px 8px;background:white;z-index:500}.dashboard.svelte-1hpcyjx.svelte-1hpcyjx{position:fixed;z-index:2000;top:11%;left:13%;width:85%;height:40%}.button.svelte-1hpcyjx.svelte-1hpcyjx{position:absolute;bottom:1rem;right:0.5rem;width:100px;height:2.8rem;color:rgb(0, 0, 0);cursor:pointer;border-radius:.25rem;border:black;transition:all ease .25s;z-index:1000}.textbox.svelte-1hpcyjx.svelte-1hpcyjx{position:absolute;bottom:1rem;left:1rem;width:89%;box-sizing:border-box;font-size:16px;z-index:1000;background-color:black;border:1px solid black;padding:0;margin:0}.textbox.svelte-1hpcyjx input[type="text"].svelte-1hpcyjx{width:100%;color:black}.Title.svelte-1hpcyjx.svelte-1hpcyjx{color:black;font-size:30px}',
   map: null
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $messages, $$unsubscribe_messages;
+  let messages = writable([]);
+  $$unsubscribe_messages = subscribe(messages, (value) => $messages = value);
+  let messageInput = "";
+  let currentRecipient = "Mark Marsala";
   $$result.css.add(css);
-  return `<div class="Sidebar s-x1Clvj2bit-Q">${validate_component(Sidebar, "Sidebar").$$render($$result, {}, {}, {
+  $$unsubscribe_messages();
+  return `<div class="Sidebar svelte-1hpcyjx">${validate_component(Sidebar, "Sidebar").$$render($$result, {}, {}, {
     default: () => {
       return `${validate_component(SidebarWrapper, "SidebarWrapper").$$render($$result, {}, {}, {
         default: () => {
           return `${validate_component(SidebarGroup, "SidebarGroup").$$render($$result, {}, {}, {
             default: () => {
-              return `<div class="Title s-x1Clvj2bit-Q"><p data-svelte-h="svelte-fimsax">Connections</p></div> ${validate_component(SidebarItem, "SidebarItem").$$render($$result, { label: "Mark Marsala", href: "/home" }, {}, {
+              return `<div class="Title svelte-1hpcyjx" data-svelte-h="svelte-g5cdi9"><p>Connections</p></div> ${validate_component(SidebarItem, "SidebarItem").$$render($$result, { label: "Mark Marsala" }, {}, {
                 icon: () => {
                   return `${validate_component(Avatar, "Avatar").$$render(
                     $$result,
                     {
-                      src: Pfp,
+                      src: Mpfp,
                       class: "w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     },
                     {},
                     {}
                   )}`;
                 }
-              })} ${validate_component(SidebarItem, "SidebarItem").$$render(
-                $$result,
-                {
-                  label: "Jeremy",
-                  href: "/docs/components/accordion"
-                },
-                {},
-                {
-                  icon: () => {
-                    return `${validate_component(GridSolid, "GridSolid").$$render(
-                      $$result,
-                      {
-                        class: "w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                      },
-                      {},
-                      {}
-                    )}`;
-                  }
+              })} ${validate_component(SidebarItem, "SidebarItem").$$render($$result, { label: "Michael Nia" }, {}, {
+                icon: () => {
+                  return `${validate_component(Avatar, "Avatar").$$render(
+                    $$result,
+                    {
+                      src: Mipfp,
+                      class: "w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    },
+                    {},
+                    {}
+                  )}`;
                 }
-              )} ${validate_component(SidebarItem, "SidebarItem").$$render(
-                $$result,
-                {
-                  label: "Richard",
-                  href: "/docs/components/alert"
-                },
-                {},
-                {
-                  icon: () => {
-                    return `${validate_component(MailBoxSolid, "MailBoxSolid").$$render(
-                      $$result,
-                      {
-                        class: "w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                      },
-                      {},
-                      {}
-                    )}`;
-                  }
+              })} ${validate_component(SidebarItem, "SidebarItem").$$render($$result, { label: "Richard Cao" }, {}, {
+                icon: () => {
+                  return `${validate_component(Avatar, "Avatar").$$render(
+                    $$result,
+                    {
+                      src: Rpfp,
+                      class: "w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    },
+                    {},
+                    {}
+                  )}`;
                 }
-              )}`;
+              })}`;
             }
           })}`;
         }
       })}`;
     }
-  })}</div> <div class="container>"><div class="chatbox s-x1Clvj2bit-Q"><div class="message-container s-x1Clvj2bit-Q" data-svelte-h="svelte-17d3mis"></div> <div class="textbox s-x1Clvj2bit-Q"><input type="text" placeholder="Enter message here" class="s-x1Clvj2bit-Q"></div> <div class="button s-x1Clvj2bit-Q">${validate_component(GradientButton, "GradientButton").$$render($$result, { color: "blue" }, {}, {
+  })}</div> <div class="container>"><div class="dashboard svelte-1hpcyjx">${validate_component(Navbar, "Navbar").$$render($$result, { rounded: true, color: "form" }, {}, {
+    default: () => {
+      return `${validate_component(NavBrand, "NavBrand").$$render($$result, {}, {}, {
+        default: () => {
+          return `<img${add_attribute("src", Mpfp, 0)} class="mr-3 h-6 sm:h-9" alt="Mark Marsala profile picture" aria-hidden="false"> <span class="self-center whitespace-nowrap text-xl font-semibold dark text-black">${escape(currentRecipient)}</span>`;
+        }
+      })} ${validate_component(NavHamburger, "NavHamburger").$$render($$result, {}, {}, {})} ${validate_component(NavUl, "NavUl").$$render($$result, {}, {}, {
+        default: () => {
+          return `${validate_component(NavLi, "NavLi").$$render(
+            $$result,
+            {
+              class: "cursor-pointer hover:cursor-pointer"
+            },
+            {},
+            {
+              default: () => {
+                return `View Profile`;
+              }
+            }
+          )} ${validate_component(NavLi, "NavLi").$$render(
+            $$result,
+            {
+              class: "cursor-pointer hover:cursor-pointer"
+            },
+            {},
+            {
+              default: () => {
+                return `Schedule Appointment`;
+              }
+            }
+          )} ${validate_component(NavLi, "NavLi").$$render(
+            $$result,
+            {
+              class: "cursor-pointer hover:cursor-pointer"
+            },
+            {},
+            {
+              default: () => {
+                return `Disconnect`;
+              }
+            }
+          )}`;
+        }
+      })}`;
+    }
+  })}</div> <div class="chatbox svelte-1hpcyjx"><ul class="svelte-1hpcyjx">${each($messages, ({ text, timestamp, user }) => {
+    return `<li data-svelte-h="svelte-ztesza">----------------------------------------------------------------------------------------------</li> <li class="font:30">${escape(user)} ${escape(timestamp)}:</li> <li>${escape(text)}</li>`;
+  })}</ul> <div class="message-container svelte-1hpcyjx" data-svelte-h="svelte-r49ms2"></div> <div class="textbox svelte-1hpcyjx"><input type="text" placeholder="Enter message here" class="svelte-1hpcyjx"${add_attribute("value", messageInput, 0)}></div> <div class="button svelte-1hpcyjx">${validate_component(Button, "Button").$$render($$result, { color: "blue" }, {}, {
     default: () => {
       return `Send`;
     }

@@ -16,11 +16,6 @@ function is_function(thing) {
 function safe_not_equal(a, b) {
   return a != a ? b == b : a !== b || a && typeof a === "object" || typeof a === "function";
 }
-function validate_store(store, name) {
-  if (store != null && typeof store.subscribe !== "function") {
-    throw new Error(`'${name}' is not a store with a 'subscribe' method`);
-  }
-}
 function subscribe(store, ...callbacks) {
   if (store == null) {
     for (const callback of callbacks) {
@@ -50,6 +45,9 @@ function compute_slots(slots) {
     result[key] = true;
   }
   return result;
+}
+function null_to_empty(value) {
+  return value == null ? "" : value;
 }
 function set_store_value(store, ret, value) {
   store.set(value);
@@ -287,28 +285,28 @@ function add_styles(style_object) {
 export {
   safe_not_equal as A,
   compute_rest_props as a,
-  spread as b,
+  add_attribute as b,
   create_ssr_component as c,
-  escape_attribute_value as d,
-  escape_object as e,
-  add_attribute as f,
-  getContext as g,
-  escape as h,
-  get_current_component as i,
-  compute_slots as j,
-  validate_store as k,
-  subscribe as l,
+  compute_slots as d,
+  spread as e,
+  escape_object as f,
+  get_current_component as g,
+  escape_attribute_value as h,
+  getContext as i,
+  escape as j,
+  subscribe as k,
+  each as l,
   missing_component as m,
-  set_current_component as n,
-  current_component as o,
-  is_function as p,
-  get_store_value as q,
+  null_to_empty as n,
+  set_current_component as o,
+  current_component as p,
+  is_function as q,
   run_all as r,
   setContext as s,
-  noop as t,
-  identity as u,
+  get_store_value as t,
+  noop as u,
   validate_component as v,
-  each as w,
+  identity as w,
   add_styles as x,
   set_store_value as y,
   createEventDispatcher as z

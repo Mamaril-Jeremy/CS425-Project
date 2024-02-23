@@ -1,7 +1,7 @@
-import { c as create_ssr_component, f as add_attribute } from "../../chunks/ssr.js";
-import { L as Logo } from "../../chunks/plato_logo.js";
+import { c as create_ssr_component, v as validate_component } from "../../chunks/ssr.js";
+import { H as Home } from "../../chunks/Home.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${$$result.head += `<!-- HEAD_svelte-bxfw4h_START -->${$$result.title = `<title>Plato</title>`, ""}<link rel="icon" type="image/svg+xml"${add_attribute("href", Logo, 0)}><!-- HEAD_svelte-bxfw4h_END -->`, ""}`;
+  return `<main>${validate_component(Home, "Home").$$render($$result, {}, {}, {})}</main>`;
 });
 export {
   Page as default

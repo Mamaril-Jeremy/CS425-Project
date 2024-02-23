@@ -1,7 +1,7 @@
 //This code was developed by Mark Marsala
 import { writable } from 'svelte/store';
 import { auth } from '../lib/firebase/firebase.client.js'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail, updatePassword, sendEmailVerification, verifyBeforeUpdateEmail } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser, signOut, sendPasswordResetEmail, updateEmail, updatePassword, sendEmailVerification, verifyBeforeUpdateEmail } from 'firebase/auth';
 
 export const authStore = writable({
     isLoading: true,
@@ -36,5 +36,8 @@ export const authHandlers = {
     },
     forgotPasswordReset: async (email) => {
         await sendPasswordResetEmail(auth, email)
+    },
+    deleteUser: async() => {
+        await deleteUser(auth.currentUser)
     }
 }
