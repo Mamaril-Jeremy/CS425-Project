@@ -12,7 +12,6 @@
 
 
     let currentUser = '';
-    setCurrentChatUser('Jeremy Mamaril');
     let messages = writable([]);
     let tempUser = '';
     let messageInput = "";
@@ -110,7 +109,7 @@
     };
 
     const handleMessageSubmit = async (ID) => {
-
+        setCurrentChatUser('Jeremy Mamaril');
     //   if (!chatID) {
     //     console.error('Chat does not exist');
     //     return;
@@ -132,7 +131,7 @@
         await updateDoc(docuRef, {
             numMessages: messageCount
         })
-      sendMessage();
+    //    sendMessage();
       } catch (error){
         console.error("An error has been detected");
       }
@@ -178,6 +177,7 @@
             console.log('No such document!');
         }
         const subscribe = onSnapshot(query(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"),orderBy("messageOrder", "asc")), (querySnapshot) => {
+            messages.set([]);
             // Update local data with changes from Firestore
             querySnapshot.docs.slice(1).forEach((doc) => {
                 const data = doc.data();
