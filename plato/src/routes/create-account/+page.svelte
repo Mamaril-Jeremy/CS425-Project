@@ -8,8 +8,6 @@
     email: '',
     password: '',
     confirmPassword: '',
-    //phoneNumber: '',
-    //verificationCode: ''
   };
 
   let passwordMatchError = false;
@@ -93,19 +91,6 @@
       {#if passwordRequirementsError}
         <p class="text-red-500 mb-4">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character</p>
       {/if}
-
-      <!-- Phone Number -->
-      <!-- <div class="mb-6">
-        <label for="phoneNumber" class="block text-sm font-medium text-gray-600">Phone Number</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" autocomplete="tel" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.phoneNumber} required />
-      </div>
-
-       Verification Code
-      <div class="mb-6">
-        <label for="verificationCode" class="block text-sm font-medium text-gray-600">Verification Code</label>
-        <input type="text" id="verificationCode" name="verificationCode" autocomplete="off" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.verificationCode} required />
-      </div> -->
-  
       <!-- Submit Button -->
       <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
         Create Account
