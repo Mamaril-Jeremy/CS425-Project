@@ -1,4 +1,4 @@
-import { g as getContext, c as create_ssr_component, k as validate_store, l as subscribe, h as escape } from "../../chunks/ssr.js";
+import { i as getContext, c as create_ssr_component, k as subscribe, j as escape } from "../../chunks/ssr.js";
 const getStores = () => {
   const stores = getContext("__svelte__");
   return {
@@ -22,7 +22,6 @@ const page = {
 };
 const Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
-  validate_store(page, "page");
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_page();
   return `<h1>${escape($page.status)}</h1> <p>${escape($page.error?.message)}</p>`;

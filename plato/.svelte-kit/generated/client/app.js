@@ -47,12 +47,13 @@ export const dictionary = {
 		"/footer/privacy": [15],
 		"/forgot-password": [16],
 		"/home": [17],
-		"/profile": [19],
-		"/profile/edit-profile": [20],
-		"/settings": [21],
-		"/settings/change-email": [22],
-		"/settings/change-password": [23],
-		"/sign-in": [24]
+		"/profile": [18],
+		"/profile/edit-profile": [19],
+		"/settings": [20],
+		"/settings/change-email": [21],
+		"/settings/change-password": [22],
+		"/sign-in": [23],
+		"/verify-email": [24]
 	};
 
 export const hooks = {
