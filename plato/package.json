@@ -6,17 +6,20 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "jest"
   },
   "devDependencies": {
     "@event-calendar/core": "^2.4.0",
     "@event-calendar/time-grid": "^2.4.0",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
+    "@testing-library/svelte": "^4.1.0",
+    "@types/jest": "^29.5.12",
     "autoprefixer": "^10.4.14",
     "flowbite": "^1.8.1",
     "flowbite-svelte": "^0.44.18",
     "flowbite-svelte-icons": "^0.4.4",
+    "jest": "^29.7.0",
     "postcss": "^8.4.24",
     "postcss-load-config": "^4.0.1",
     "svelte": "^4.2.1",
