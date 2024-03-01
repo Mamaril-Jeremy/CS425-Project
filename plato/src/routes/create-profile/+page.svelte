@@ -77,7 +77,7 @@
         return;
       }
   
-      const docRef = await addDoc(collection(db, "users"), {
+      const data =  {
         userCity: selectedCity,
         userConnectsRemaining: connectsRemaining,
         userCountry: selectedCountry,
@@ -92,10 +92,26 @@
         userPhoneNumber: phoneNumber,
         userRole: role.toLowerCase(),
         userState: selectedState
-      });
-      console.log("Document written with ID:", docRef.id);
+      };
+      sendDataToFlask(data);
       goto("/create-profile/upload-pfp");
     };
+
+    async function sendDataToFlask(data) {
+        try {
+            const response = await fetch('http://localhost:5000/add_user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const responseData = await response.json();
+            console.log(responseData);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
   </script>
   
   <main class="flex items-center mt-10 justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">

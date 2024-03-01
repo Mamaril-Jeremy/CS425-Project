@@ -34,7 +34,7 @@
       try {
         if(isEmailVerified)
         {
-          goto('/home');
+          goto('/create-profile');
         }
         else{
           emailVerifiedWarning = true;
