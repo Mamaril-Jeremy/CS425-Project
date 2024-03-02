@@ -3,6 +3,7 @@
   import { auth } from '$lib/firebase/firebase.client.js';
   import { getStorage, ref, uploadBytes } from 'firebase/storage';
   import { goto } from '$app/navigation';
+  import { analyzeImageWithSightengine } from '$lib/assets/imagefilterNew'
 
   let image;
   let isButtonBlue = false, userUID;
@@ -34,8 +35,16 @@
       const metadata = {
         contentType: image.type
       }
-      const uploadTask = uploadBytes(storageRef, image, metadata);  
-      goto("/create-profile/upload-resume")
+
+      filtered = analyzeImageWithSightengine(image);
+
+      if (filtered == true) {
+        const uploadTask = uploadBytes(storageRef, image, metadata);  
+        goto("/create-profile/upload-resume")
+      } else {
+        console.error("Image Upload Failed.");
+      }
+
     }
   };
 </script>
