@@ -1,12 +1,25 @@
 <script>
+
+/*
+  ----------------------------------------------------------------------
+  Michael Nia - Dev Log
+  Updated: 3/3/2024
+  SightEngine Image Filter Implementation for Upload-pfp
+  Michael worked on the image filter: 
+    >Checks image file for inappropriate content and blocks or approves.
+    Improved take on the image filter system using SightEngine API.
+    >Replaced 'fs' with direct image upload with axios component.
+  -----------------------------------------------------------------------
+*/
+
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth } from '$lib/firebase/firebase.client.js';
   import { getStorage, ref, uploadBytes } from 'firebase/storage';
   import { goto } from '$app/navigation';
   //import { analyzeImageWithSightengine } from '$lib/assets/imagefilterNew'
   //Import image filter packages
-  import { axios } from 'axios';
-  import { FormData } from 'form-data';
+  import axios from 'axios';
+  import FormData from 'form-data';
 
   let image;
   let isButtonBlue = false, userUID;
@@ -39,30 +52,36 @@
         contentType: image.type
       }
 
-      //filtered = analyzeImageWithSightengine(image);
+      //filtered = analyzeImageWithSightengine(image); //Commented out, no longer useful.
       const data = new FormData();
-      //data.append('media', fs.createReadStream(image));
+      data.append('media', image); //Pretty straightforward
       data.append('models', 'nudity-2.0,offensive,gore');
-      data.append('api_user', '814034437');
-      data.append('api_secret', 'TyzDvp3zEYqFDJmBPJe6EgozSSMayrXG');
+      data.append('api_user', '814034437'); //User data
+      data.append('api_secret', 'TyzDvp3zEYqFDJmBPJe6EgozSSMayrXG'); //API secret
       
-      const response = await axios({
-      method: 'post',
-      url: 'https://api.sightengine.com/1.0/check.json',
-      data: data,
-      headers: data.getHeaders()
-      });
+      //Here goes...
+      let header = {'Content-Type': 'multipart/form-data'};
+      axios({
+        url: 'https://api.sightengine.com/1.0/check.json',
+        method: 'post',
+        data: data,
+        headers: header
+      })
+        .then((response) => {
+          // Handle the response here
+          console.log('Sightengine response:', response.data);
+          //Nice, it works. Now check ranges before upload
 
-      // Process response
-      console.log(response.data);
+            // -- Code to be added
 
-      if (response.data) {
-        const uploadTask = uploadBytes(storageRef, image, metadata);  
-        goto("/create-profile/upload-resume")
-      } else {
-        console.error("Image Upload Failed.");
-      }
-
+          //Upload image
+          //const uploadTask = uploadBytes(storageRef, image, metadata);  
+          //goto("/create-profile/upload-resume") //Direct user to resume upload.
+        })
+        .catch((error) => {
+          console.error('Error analyzing image:', error);
+          // Handle the error
+        });
     }
   };
 </script>
@@ -116,97 +135,3 @@
     color: #007bff;
   }
 </style>
-
-
-  
-
-<!-- const { ImageAnnotatorClient } = require('@google-cloud/vision');
-const fs = require('fs');
-
-// Assuming the credentials JSON file is named 'your-credentials-file.json' in the same directory.
-const credentialsPath = './safesearch-api-test-978a34fe91ce.json';
-
-// Check if the credentials file exists before creating the client.
-if (!fs.existsSync(credentialsPath)) {
-  console.error('Error: Credentials file not found. Make sure it exists in the current directory.');
-  process.exit(1);
-}
-
-const client = new ImageAnnotatorClient({ keyFilename: credentialsPath });
-
-// Get the command-line arguments
-const command = process.argv[2];
-const input = process.argv[3];
-
-// Decide whether to use a link or a local file based on the command-line argument
-if (command === 'link') {
-  testExplicitContentDetection(input);
-} else if (command === 'file') {
-  testExplicitContentDetectionFromFile(input);
-} else {
-  console.error('Error: Please specify whether to use "link" or "file" and provide the corresponding input.');
-  console.error('Link: node vision-api-proof.js link <insertimagelinkhere>');
-  console.error('Image: node vision-api-proof.js file <path/to/local/file>');
-  process.exit(1);
-}
-
-async function testExplicitContentDetection(input) {
-  try {
-    const [result] = await client.safeSearchDetection(input);
-    processResults(result.safeSearchAnnotation);
-  } catch (err) {
-    console.error('Error:', err.message || err);
-  }
-}
-
-async function testExplicitContentDetectionFromFile(input) {
-  try {
-    const content = fs.readFileSync(input);
-    const [result] = await client.safeSearchDetection(content);
-    processResults(result.safeSearchAnnotation);
-  } catch (err) {
-    console.error('Error:', err.message || err);
-  }
-}
-
-function processResults(safeSearchAnnotation) {
-  console.log('Safe Search Annotation:');
-  console.log(`Adult: ${safeSearchAnnotation.adult}`);
-  console.log(`Spoof: ${safeSearchAnnotation.spoof}`);
-  console.log(`Medical: ${safeSearchAnnotation.medical}`);
-  console.log(`Violence: ${safeSearchAnnotation.violence}`);
-  console.log(`Racy: ${safeSearchAnnotation.racy}`);
-
-  if (isContentLikelyBlocked(safeSearchAnnotation)) {
-    console.log('Content has been blocked.');
-  } else {
-    console.log('Content is allowed.');
-  }
-}
-
-function isContentLikelyBlocked(safeSearchAnnotation) {
-  // Check if any category is likely
-  if (
-    safeSearchAnnotation.adult === 'LIKELY' ||
-    safeSearchAnnotation.medical === 'LIKELY' ||
-    safeSearchAnnotation.violence === 'LIKELY' ||
-    safeSearchAnnotation.racy === 'LIKELY'
-  ) {
-    console.log('Likely blocked content:');
-    if (safeSearchAnnotation.adult === 'LIKELY') {
-      console.log('- Adult content');
-    }
-    if (safeSearchAnnotation.medical === 'LIKELY') {
-      console.log('- Medical content');
-    }
-    if (safeSearchAnnotation.violence === 'LIKELY') {
-      console.log('- Violent content');
-    }
-    if (safeSearchAnnotation.racy === 'LIKELY') {
-      console.log('- Racy content');
-    }
-    return true;
-  }
-
-  return false;
-} -->
