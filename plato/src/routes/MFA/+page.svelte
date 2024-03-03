@@ -1,42 +1,45 @@
 <script>
   //This code was developed by Mark Marsala
   import { goto } from '$app/navigation';
-  import { auth } from '../../lib/firebase/firebase.client'
-  import { RecaptchaVerifier } from "firebase/auth";
+  import { getAuth, signInWithPhoneNumber, onAuthStateChanged } from "firebase/auth";
 
   let formData = {
-    phoneNumber: ''
+    phoneNumber: '',
+    code: ''
   };
 
   async function handleSubmit() {
     console.log('Form submitted:', formData);
 
-    const { phoneNumber } = formData;
+    const { phoneNumber, code } = formData;
+    const recaptchaResponse = grecaptcha.getResponse();
+    const auth = getAuth();
+    const appVerifier = window.recaptchaVerifier;
 
     if(!phoneNumber)
     {
       return;
     }
 
-    const recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
-
-      // Optional reCAPTCHA parameters.
-      {
-        "size": "normal",
-        "callback": function(response) {
-          // reCAPTCHA solved, you can proceed with
-          // phoneAuthProvider.verifyPhoneNumber(...).
-          onSolvedRecaptcha();
-        },
-        "expired-callback": function() {
-          // Response expired. Ask user to solve reCAPTCHA again.
-          // ...
-        }
-      }, auth
-  );
-
-}
+    if (!recaptchaResponse) {
+      console.error('reCAPTCHA not verified');
+      return;
+    }
+    else
+    {
+      signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+      .then(confirmationResult => {
+        console.log("Recaptcha up! SMS sent!")
+        window.confirmationResult = confirmationResult;
+      }).catch(error => {
+        console.error(error);
+      })
+        confirmationResult.confirm(code).then((result) => {
+          goto('/home')
+        }).catch((error) => {
+      });
+    }
+  }
 </script>
   
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
@@ -51,11 +54,24 @@
       </div>
 
       <!-- reCAPTCHA -->
-      <div id="recaptcha-container"></div>
+      <div class="mb-4">
+        <div class="g-recaptcha" id="recaptcha-container" data-sitekey="6Leo44YpAAAAAO6GBX41rkcS-KD3VkPYiqf6XVjm"></div>
+      </div>
+
+      <!-- Send Code Button -->
+      <button type="button" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+        Send code
+      </button>
+
+      <!-- Verification code -->
+      <div class="mb-6 mt-6">
+        <label for="code" class="block text-sm font-medium text-gray-600">Code</label>
+        <input type="text" id="code" name="code" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.code} required />
+      </div>
   
       <!-- Submit Button -->
       <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-        Send code
+        Login
       </button>
     </form>
   </section>
