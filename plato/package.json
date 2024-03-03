@@ -30,9 +30,11 @@
   "type": "module",
   "dependencies": {
     "@event-calendar/day-grid": "^2.4.0",
-    "axios": "^1.6.2",
+    "axios": "^1.6.7",
     "firebase": "^10.7.0",
     "form-data": "^4.0.0",
+    "FormData": "^0.10.1",
+    "fs": "^0.0.1-security",
     "http": "0.0.1-security",
     "npm": "^10.2.1",
     "svelte-local-storage-store": "^0.6.4"

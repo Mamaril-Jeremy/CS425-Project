@@ -3,7 +3,10 @@
   import { auth } from '$lib/firebase/firebase.client.js';
   import { getStorage, ref, uploadBytes } from 'firebase/storage';
   import { goto } from '$app/navigation';
-  import { analyzeImageWithSightengine } from '$lib/assets/imagefilterNew'
+  //import { analyzeImageWithSightengine } from '$lib/assets/imagefilterNew'
+  //Import image filter packages
+  import { axios } from 'axios';
+  import { FormData } from 'form-data';
 
   let image;
   let isButtonBlue = false, userUID;
@@ -36,9 +39,24 @@
         contentType: image.type
       }
 
-      filtered = analyzeImageWithSightengine(image);
+      //filtered = analyzeImageWithSightengine(image);
+      const data = new FormData();
+      //data.append('media', fs.createReadStream(image));
+      data.append('models', 'nudity-2.0,offensive,gore');
+      data.append('api_user', '814034437');
+      data.append('api_secret', 'TyzDvp3zEYqFDJmBPJe6EgozSSMayrXG');
+      
+      const response = await axios({
+      method: 'post',
+      url: 'https://api.sightengine.com/1.0/check.json',
+      data: data,
+      headers: data.getHeaders()
+      });
 
-      if (filtered == true) {
+      // Process response
+      console.log(response.data);
+
+      if (response.data) {
         const uploadTask = uploadBytes(storageRef, image, metadata);  
         goto("/create-profile/upload-resume")
       } else {
