@@ -1,13 +1,14 @@
 <script>
   // This code was developed by Jeremy Mamaril
   import { onMount } from 'svelte';
-  import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
+  import { goto } from '$app/navigation';
+  import { collection, getDocs, query, where } from 'firebase/firestore';
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
   import { Avatar, Label, Input, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
   import Pfp from '$lib/assets/jeremy.png';
 
-  let userUID, firstName, lastName, phoneNumber, occupation, role, major, country, connectsRemaining = 5, passesRemaining = 10;
+  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, country, connectsRemaining = 5, passesRemaining = 10;
   let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor;
   let success = false;
 
@@ -24,6 +25,7 @@
   onAuthStateChanged(auth, (user) => {
       if (user) {
           userUID = user.uid;
+          userEmail - user.email;
           fetchData();
       }
   });
@@ -40,7 +42,7 @@
   const fetchStates = () => {
     if (!selectedCountry) return;
 
-    fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states`, getRequestOptions())
+    fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry.iso2}/states`, getRequestOptions())
       .then(response => response.json())
       .then(data => {
         states = data;
@@ -53,7 +55,7 @@
     console.log(selectedCountry);
     console.log(selectedState)
 
-    fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states/${selectedState}/cities`, getRequestOptions())
+    fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry.iso2}/states/${selectedState.iso2}/cities`, getRequestOptions())
       .then(response => response.json())
       .then(data => {
         cities = data;
@@ -72,75 +74,79 @@
   };
 
   const fetchData = async () => {
-      const userRef = collection(db, "users");
-      const q = query(userRef, where("userID", "==", userUID));
+    const data = { "user_id": userUID }; 
+    try {
+        const response = await fetch('http://localhost:5000/get_user_data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const responseData = await response.json();
+        let user_data = responseData.users;
+        firstName = user_data.userFirstName;
+        lastName = user_data.userLastName;
+        phoneNumber = user_data.userPhoneNumber;
+        occupation = user_data.userOccupation;
+        role = user_data.userRole;
+        major = user_data.userMajor;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-          const data = querySnapshot.docs[0].data();
-          {
-              firstName = data.userFirstName;
-              lastName = data.userLastName;
-              occupation = data.userOccupation;
-              role = data.userRole;
-              connectsRemaining = data.userConnectsRemaining;
-              phoneNumber = data.userPhoneNumber;
-              passesRemaining = data.userPassesRemaining;
-              userUID = data.userID;
-              major = data.userMajor;
-              city = data.userCity;
-              state = data.userState;
-              country = data.userCountry;
-          }
-      } else {
-          console.log('No such document!');
-      }
-  };
 
   const handleClick = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
 
-      if (!userUID) {
-          console.error('User not authenticated');
-          return;
-      }
+    if (!userUID) {
+      console.error('User not authenticated');
+      return;
+    }
 
-      firstName = localFirstName;
-      lastName = localLastName;
-      phoneNumber = localPhoneNumber;
-      occupation = localOccupation;
-      role = localRole;
-      major = localMajor;
+    firstName = localFirstName;
+    lastName = localLastName;
+    phoneNumber = localPhoneNumber;
+    occupation = localOccupation;
+    role = localRole;
+    major = localMajor;
 
-      const userRef = collection(db, "users");
-      const q = query(userRef, where("userID", "==", userUID));
-
-      const querySnapshot = await getDocs(q);
-      const docRef = querySnapshot.docs[0].ref;
-
-      try {
-          await updateDoc(docRef, {
-              userLastName: lastName,
-              userOccupation: occupation,
-              userRole: role,
-              userConnectsRemaining: connectsRemaining,
-              userPhoneNumber: phoneNumber,
-              userPassesRemaining: passesRemaining,
-              userID: userUID,
-              userFirstName: firstName,
-              userMajor: major,
-              userCountry: selectedCountry,
-              userCity: selectedCity,
-              userState: selectedState
-          });
-          console.log('Document updated with ID:', docRef.id);
-          success = true;
-      } catch (error) {
-          console.error('Error updating document:', error.message);
-          success = false;
-      }
+    const data =  {
+      userCity: selectedCity,
+      userConnectsRemaining: connectsRemaining,
+      userCountry: selectedCountry.name,
+      // userDateCreated: serverTimestamp(), 
+      userEmailAddress: userEmail,
+      userFirstName: firstName,
+      userID: userUID,
+      userLastName: lastName,
+      userMajor: major,
+      userOccupation: occupation,
+      userPassesRemaining: passesRemaining,
+      userPhoneNumber: phoneNumber,
+      userRole: role,
+      userState: selectedState.name
+    };
+    sendDataToFlask(data);
+    goto("/profile");
   };
+
+async function sendDataToFlask(data) {
+  try {
+      const response = await fetch('http://localhost:5000/update_user_data', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+  } catch (error) {
+      console.error('Error:', error);
+  }
+};
 </script>
 
 <style>
@@ -327,7 +333,7 @@
             <select class="text-gray-900 bg-gray-50" bind:value={selectedCountry} on:change={fetchStates}>
               <option value="">Select Country</option>
               {#each countries as country (country.iso2)}
-                <option value={country.iso2} key={country.iso2}>{country.name}</option>
+                <option value={country} key={country.iso2}>{country.name}</option>
               {/each}
             </select>
           </div>
@@ -335,7 +341,7 @@
             <select class="text-gray-900 bg-gray-50 w-6/12" bind:value={selectedState} on:change={fetchCities} if={states.length}>
               <option value="">Select State</option>
               {#each states as state (state.id)}
-                <option value={state.iso2} key={state.id}>{state.name}</option>
+                <option value={state} key={state.id}>{state.name}</option>
               {/each}
             </select>
             <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} if={cities.length}>
