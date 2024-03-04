@@ -6,7 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-cred = credentials.Certificate("../flask/service_account.json")
+cred = credentials.Certificate("../../plato/service_account.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
