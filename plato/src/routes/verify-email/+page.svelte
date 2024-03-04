@@ -9,7 +9,7 @@
   let isEmailVerified = false;
   let emailVerifiedWarning = false;
   let timer;
-  let countdown = 600;
+  let countdown = 300;
 
   function startTimer() {
     timer = setInterval(() => {
