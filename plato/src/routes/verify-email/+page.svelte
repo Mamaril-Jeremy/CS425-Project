@@ -35,7 +35,7 @@
       if(isEmailVerified)
       {
         //goto('/create-profile');
-        goto('/MFA');
+        goto('/create-profile');
       }
       else{
         emailVerifiedWarning = true;
