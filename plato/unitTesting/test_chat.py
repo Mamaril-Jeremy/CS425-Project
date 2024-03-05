@@ -1,3 +1,5 @@
+import unittest
+from unittest.mock import AsyncMock, patch, MagicMock
 from flask import Flask, request, jsonify
 import firebase_admin, json, asyncio
 from firebase_admin import credentials, firestore, storage
@@ -30,7 +32,6 @@ class Chat:
         try:
             response = requests.post(url, data=data)
             response_data = response.json()
-            print(response_data)
             temp_user = self.current_user
             if response_data['moderation_classes']['discriminatory'] > 0.2:
                 self.set_current_chat_user('Console')
@@ -125,4 +126,64 @@ class Chat:
 
         # Check if the message matches the template
         return message.strip() == template_message.strip()
+    
+
+class TestChat(unittest.TestCase):
+    def test_professional_check_message(self):
+        # Set up your Chat instance
+        chat_instance = Chat()
+        chat_instance.current_user = 'User1'
+        chat_instance.message_input = 'Hello, world!'
+        
+        # Call the method to be tested
+        chat_instance.check_message()
+        
+        # Assert the expected behavior
+        self.assertEqual(chat_instance.current_user, 'User1')
+        self.assertEqual(chat_instance.message_input, 'Hello, world!')
+        self.assertEqual(chat_instance.order, 2)  # Assuming the initial order is 1
+        
+    def test_unprofessional_check_message(self):
+        # Set up your Chat instance
+        chat_instance = Chat()
+        chat_instance.current_user = 'User1'
+        chat_instance.message_input = 'I hate children'
+        
+        # Call the method to be tested
+        chat_instance.check_message()
+        
+        # Assert the expected behavior
+        self.assertEqual(chat_instance.current_user, 'Console')
+        self.assertEqual(chat_instance.message_input, 'Can not be displayed due to unprofessional behavior')
+        self.assertEqual(chat_instance.order, 2)  # Assuming the initial order is 1
+
+
+    def test_set_current_chat_user(self):
+        # Set up your Chat instance
+        chat_instance = Chat()
+        
+        # Call the method to be tested
+        chat_instance.set_current_chat_user('NewUser')
+        
+        # Assert the expected behavior
+        self.assertEqual(chat_instance.current_user, 'NewUser')
+    
+    def test_read_json_file(self):
+        chat_instance = Chat()
+        sample_message = {
+            'user': 'Alice',
+            'text': 'Hello, how are you?',
+            'timestamp': '2024-03-05 09:15:00',
+            'messageOrder': 1
+        }
+        chat_instance.read_json_file(sample_message)
+        
+        self.assertEqual(chat_instance.current_user, 'Alice')
+        self.assertEqual(chat_instance.message_input, 'Hello, how are you?')
+        self.assertEqual(chat_instance.timestamp, '2024-03-05 09:15:00')
+        self.assertEqual(chat_instance.order, 1)
+        
+
+if __name__ == '__main__':
+    unittest.main()
     

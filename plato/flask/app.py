@@ -62,7 +62,6 @@ def get_data_from_chat():
     chat_instance.read_json_file(data)  # Call the read_json_file method
     chat_instance.check_message()  # Call the check_message method
     asyncio.run(chat_instance.handle_message_submit(db))
-    print("Received message data:", data)
     response_data = {'message': 'Data received successfully'}
     response = jsonify(response_data)
     return response
