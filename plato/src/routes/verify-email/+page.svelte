@@ -1,4 +1,5 @@
 <script>
+
   //This code was developed by Mark Marsala
   import { Button } from 'flowbite-svelte';
   import { authHandlers } from "../../stores/authStore"
@@ -30,12 +31,14 @@
     }
   });
 
+
   async function handleSubmit() {
     try {
       if(isEmailVerified)
       {
         //goto('/create-profile');
         goto('/create-profile');
+
       }
       else{
         emailVerifiedWarning = true;

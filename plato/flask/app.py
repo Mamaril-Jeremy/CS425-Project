@@ -1,6 +1,8 @@
+from chat import Chat
 from flask import Flask, request, jsonify
-import firebase_admin
-from firebase_admin import credentials, firestore
+import firebase_admin, asyncio
+from firebase_admin import credentials, firestore, storage
+
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -49,6 +51,30 @@ def update_user_data():
             return jsonify({"error": "UserID not provided"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+chat_instance = Chat()
+
+@app.route('/get_data_from_chat', methods=['POST'])
+def get_data_from_chat():
     
-if __name__ == '__main__':
+    # Get data from the request sent by SvelteKit
+    data = request.json  
+    chat_instance.read_json_file(data)  # Call the read_json_file method
+    chat_instance.check_message()  # Call the check_message method
+    asyncio.run(chat_instance.handle_message_submit(db))
+    print("Received message data:", data)
+    response_data = {'message': 'Data received successfully'}
+    response = jsonify(response_data)
+    return response
+
+@app.route('/get_initial_messages', methods=['GET'])
+def handle_get_data():
+    return chat_instance.get_initial_messages(db)
+
+@app.route('/get_message_updates', methods=['GET'])
+def handle_update():
+    chat_instance.get_updates(db)
+    return chat_instance.get_messages()
+
+if __name__ == "__main__":
     app.run(debug=True)

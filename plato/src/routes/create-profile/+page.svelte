@@ -118,6 +118,7 @@
   <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
     <h1 class="text-3xl font-semibold mb-6">Create Your Profile</h1>
   
+
     <form on:submit={handleSubmit}>
       <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div>
@@ -182,6 +183,7 @@
             <option value="Web Developer">Web Developer</option>
             <option value="Writer">Writer</option>
             <option value="Zoologist">Zoologist</option>
+            
           </select>
         </div>
         <div>
