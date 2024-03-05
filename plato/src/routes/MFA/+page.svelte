@@ -155,7 +155,7 @@
 
       login = true;
       await multiFactor(auth.currentUser).enroll(multiFactorAssertion, mfaDisplayName);
-      goto('/home');
+      goto('/create-profile');
     } catch (error) {
       console.error(error);
     }

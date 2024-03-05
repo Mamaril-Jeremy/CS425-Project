@@ -3,7 +3,7 @@ import firebase_admin, json, asyncio
 from firebase_admin import credentials, firestore, storage
 import requests, datetime
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit
+# from flask_socketio import SocketIO, emit
 
 
 class Chat:

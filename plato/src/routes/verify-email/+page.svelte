@@ -36,8 +36,7 @@
     try {
       if(isEmailVerified)
       {
-        //goto('/create-profile');
-        goto('/create-profile');
+        goto('/MFA');
 
       }
       else{
