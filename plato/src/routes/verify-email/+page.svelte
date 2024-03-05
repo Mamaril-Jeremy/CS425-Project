@@ -15,6 +15,7 @@
   function startTimer() {
     timer = setInterval(() => {
       countdown--;
+      console.log(countdown);
       if (countdown <= 0) {
         clearInterval(timer);
         console.log("Timer expired!");
@@ -37,7 +38,7 @@
       if(isEmailVerified)
       {
         goto('/MFA');
-
+        clearInterval(timer);
       }
       else{
         emailVerifiedWarning = true;

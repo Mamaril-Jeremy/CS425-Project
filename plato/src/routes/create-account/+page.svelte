@@ -16,7 +16,7 @@
   const MIN_PASSWORD_LENGTH = 8;
 
   async function handleSubmit() {
-    console.log('Form submitted:', formData);
+    //console.log('Form submitted:', formData);
 
     const { username, email, password, confirmPassword } = formData;
 
