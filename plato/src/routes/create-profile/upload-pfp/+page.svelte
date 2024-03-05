@@ -3,7 +3,7 @@
 /*
   ----------------------------------------------------------------------
   Michael Nia - Dev Log
-  Updated: 3/3/2024
+  Updated: 3/4/2024
   SightEngine Image Filter Implementation for Upload-pfp
   Michael worked on the image filter: 
     >Checks image file for inappropriate content and blocks or approves.
@@ -69,11 +69,28 @@
       })
         .then((response) => {
           // Handle the response here
-          console.log('Sightengine response:', response.data);
+          //console.log('Sightengine response:', response.data);
           //Nice, it works. Now check ranges before upload
+          let goreValue = response.data.gore.prob
+          let offensiveValue = response.data.offensive.prob
+          let nudityValue = 1 - response.data.nudity.none
+          let skullValue = response.data.skull.prob
+          let totalThreshold = (goreValue + offensiveValue + nudityValue + skullValue) - 0.04
 
-            // -- Code to be added
+          console.log('Gore:', goreValue);
+          console.log('Offensive:', offensiveValue);
+          console.log('Nudity:', nudityValue);
+          console.log('Skull:', skullValue);
+          console.log('TOTAL:', totalThreshold);
 
+          //Check threshold
+          if (totalThreshold > 0.7) {
+              console.log('[Image Denied]')
+          } else {
+              console.log('[Image Accepted]')
+              const uploadTask = uploadBytes(storageRef, image, metadata);  
+              goto("/create-profile/upload-resume") //Direct user to resume upload.
+          }
           //Upload image
           //const uploadTask = uploadBytes(storageRef, image, metadata);  
           //goto("/create-profile/upload-resume") //Direct user to resume upload.
