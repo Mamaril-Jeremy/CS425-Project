@@ -88,12 +88,12 @@
                 console.log('[Image Denied]')
             } else {
                 console.log('[Image Accepted]')
-                const uploadTask = uploadBytes(storageRef, image, metadata);  
-                goto("/create-profile/upload-resume") //Direct user to resume upload.
+                //const uploadTask = uploadBytes(storageRef, image, metadata);  
+                //goto("/create-profile/upload-resume") //Direct user to resume upload.
             }
             //Upload image
-            //const uploadTask = uploadBytes(storageRef, image, metadata);  
-            //goto("/create-profile/upload-resume") //Direct user to resume upload.
+            const uploadTask = uploadBytes(storageRef, image, metadata);  
+            goto("/create-profile/upload-resume") //Direct user to resume upload.
           })
           .catch((error) => {
             console.error('Error analyzing image:', error);
