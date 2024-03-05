@@ -2,6 +2,7 @@ from chat import Chat
 from flask import Flask, request, jsonify
 import firebase_admin, asyncio
 from firebase_admin import credentials, firestore, storage
+
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -51,7 +52,6 @@ def update_user_data():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 chat_instance = Chat()
 
 @app.route('/get_data_from_chat', methods=['POST'])
@@ -78,4 +78,3 @@ def handle_update():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
