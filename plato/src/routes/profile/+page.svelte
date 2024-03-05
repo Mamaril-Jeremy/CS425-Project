@@ -5,6 +5,7 @@
   import { auth, db } from '$lib/firebase/firebase.client.js';
   import { Avatar } from 'flowbite-svelte';
   import Pfp from '$lib/assets/jeremy.png';
+  import { circIn } from 'svelte/easing';
 
   let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, country, state, connectsRemaining = 5, passesRemaining = 10;
 
@@ -16,27 +17,28 @@
   });
 
   const fetchData = async () => {
-    const userRef = collection(db, "users");
-    const q = query(userRef, where("userID", "==", userUID));
-
-    const querySnapshot = await getDocs(q);
-
-    if (!querySnapshot.empty) {
-      const data = querySnapshot.docs[0].data();
-      firstName = data.userFirstName;
-      lastName = data.userLastName;
-      occupation = data.userOccupation;
-      role = data.userRole;
-      connectsRemaining = data.userConnectsRemaining;
-      phoneNumber = data.userPhoneNumber;
-      passesRemaining = data.userPassesRemaining;
-      userUID = data.userID;
-      major = data.userMajor;
-      city = data.userCity;
-      country = data.userCountry;
-      state = data.userState;
-    } else {
-      console.log('No such document!');
+    const data = { "user_id": userUID }; 
+    try {
+        const response = await fetch('http://localhost:5000/get_user_data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const responseData = await response.json();
+        let user_data = responseData.users;
+        firstName = user_data.userFirstName;
+        lastName = user_data.userLastName;
+        phoneNumber = user_data.userPhoneNumber;
+        occupation = user_data.userOccupation;
+        role = user_data.userRole;
+        major = user_data.userMajor;
+        city = user_data.userCity;
+        state = user_data.userState;
+        country = user_data.userCountry;
+    } catch (error) {
+        console.error('Error:', error);
     }
   };
 </script>

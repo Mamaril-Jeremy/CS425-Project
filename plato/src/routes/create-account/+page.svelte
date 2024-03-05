@@ -20,7 +20,6 @@
 
     const { username, email, password, confirmPassword } = formData;
 
-
     if(!username || !email || !password || !confirmPassword)
     {
       return;
@@ -92,6 +91,7 @@
       {#if passwordRequirementsError}
         <p class="text-red-500 mb-4">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character</p>
       {/if}
+
       <!-- Submit Button -->
       <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
         Create Account
@@ -109,6 +109,8 @@
 
   section {
     background: white;
+    margin-top: 5rem;
+    padding: 2rem;
   }
 
   label {

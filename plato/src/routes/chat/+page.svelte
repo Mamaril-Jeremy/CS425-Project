@@ -15,71 +15,34 @@
     let messages = writable([]);
     let tempUser = '';
     let messageInput = "";
+    let displayInput = "";
     let currentRecipient = 'Mark Marsala';
     let timestamp = "";
-    let ID = "e7Wee661lbq5bP5nlxD2", userID = -1, order = 2, messageCount = 0, chatID = 'a';
-    function sendMessage() {
-    // if (!messageInput.trim()) return;
-    // Add the new message to the store
-    messages.update((prevMessages) => [
-      ...prevMessages,
-      {
-        user: currentUser,
-        text: messageInput,
-        timestamp: timestamp,
-      },
-    ]);
-    //Clear the message box
-    setCurrentChatUser(tempUser);
-    messageInput = "";
-
+    let messageOrder = 1
+    function postMessage() {
+        messages.update((prevMessages) => [
+        ...prevMessages,
+        {
+            user: currentUser,
+            text: displayInput,
+            timestamp: timestamp,
+        },
+        ]);
     }
-    function checkMessage(message){
-        let data = new FormData();
-        data.append('text', message);
-        data.append('lang', 'en');
-        data.append('mode', 'ml');
-        data.append('api_user', '97089180');
-        data.append('api_secret', 'HBP5e2F44A275VqTL5iGcAagL6');
-        let header = {'Content-Type': 'multipart/form-data',};
-            axios({
-            url: 'https://api.sightengine.com/1.0/text/check.json',
-            method:'post',
-            data: data,
-            headers: header
-        })
-        .then(function (response) {
-        // on success: handle response
-        console.log(response.data);
-        tempUser = currentUser;
-        if(response.data.moderation_classes.discriminatory > 0.2){
-            setCurrentChatUser('Console');
-            messageInput = 'Can not be displayed due to unprofessional behavior';
-        }
-        else if(response.data.moderation_classes.insulting > 0.2){
-            setCurrentChatUser('Console');
-            messageInput = 'Can not be displayed due to unprofessional behavior';
-        }
-        else if(response.data.moderation_classes.sexual > 0.2){
-            setCurrentChatUser('Console');
-            messageInput = 'Can not be displayed due to unprofessional behavior';
-        }
-        else if(response.data.moderation_classes.toxic > 0.2){
-            setCurrentChatUser('Console');
-            messageInput = 'Can not be displayed due to unprofessional behavior';
-        }
-        else if(response.data.moderation_classes.violent > 0.2){
-            setCurrentChatUser('Console');
-            messageInput = 'Can not be displayed due to unprofessional behavior';
-        }
-        handleMessageSubmit(ID);
-        order++;
-        })
-        .catch(function (error) {
-        // handle error
-        if (error.response) console.log(error.response.data);
-        else console.log(error.message);
-        });
+    function sendMessage(){
+        timestamp = new Date().toLocaleString()
+        setCurrentChatUser('Jeremy Mamaril');
+        const messageData = {
+            user: currentUser,
+            text: messageInput,
+            timestamp: timestamp,
+            messageOrder: messageOrder
+        };
+        displayInput = messageInput
+        messageOrder++;
+        sendDataToFlask(messageData);
+        setCurrentChatUser(tempUser);
+        messageInput = "";
     }
 
     function setCurrentChatUser(user){
@@ -89,93 +52,75 @@
     function setCurrentRecipient(user){
         if (currentRecipient !== user){
             messages.set([]);
-            fetchData(ID);
+            fetchDataFromMiddleware();
         }
         currentRecipient = user;
     }
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+    // const handleSubmit = async (e) => {
+    //   e.preventDefault();
 
-      if (!chatID) {
-        console.error('Chat does not exist');
-        return;
-      }
-  
-      const docRef = await addDoc(collection(db, "chat"), {
-        chatID: ID,
-        numMessages: messageCount
-      });
-    };
-
-    const handleMessageSubmit = async (ID) => {
-        setCurrentChatUser('Jeremy Mamaril');
     //   if (!chatID) {
     //     console.error('Chat does not exist');
     //     return;
     //   }
-        timestamp = new Date().toLocaleString();
-        messageCount++;
-      const ref = await addDoc(collection(db, `chat/${ID}/messages`), {
-        message: messageInput,
-        user: currentUser,
-        messageTime: new Date().toLocaleString(),
-        messageOrder: order
-      });
-      const chatUpdate = collection(db, 'chat');
-      const q = query(chatUpdate, where("chatID", "==", chatID))
-
-      const querySnapshot = await getDocs(q);
-      const docuRef = querySnapshot.docs[0].ref;
-      try{
-        await updateDoc(docuRef, {
-            numMessages: messageCount
-        })
-    //    sendMessage();
-      } catch (error){
-        console.error("An error has been detected");
-      }
-    //   await chatUpdate.docRef(ID).set({
+  
+    //   const docRef = await addDoc(collection(db, "chat"), {
+    //     chatID: ID,
     //     numMessages: messageCount
     //   });
-    };
+    // };
 
-    const fetchData = async (ID) => {
-        const chatRef = collection(db, `chat/${ID}/messages`);
-        const orderedChatRef = query(chatRef,orderBy("messageOrder", "asc"));
-        const querySnapshot = await getDocs(orderedChatRef);
-        const numMessages = collection(db, `chat`)
-        const queryNumSnapshot = await getDocs(numMessages);
+    // const fetchData = async (ID) => {
+    //     const chatRef = collection(db, `chat/${ID}/messages`);
+    //     const orderedChatRef = query(chatRef,orderBy("messageOrder", "asc"));
+    //     const querySnapshot = await getDocs(orderedChatRef);
+    //     const numMessages = collection(db, `chat`)
+    //     const queryNumSnapshot = await getDocs(numMessages);
 
-        if (!queryNumSnapshot.empty) {
-            const data1 = queryNumSnapshot.docs[0].data();
-            messageCount = data1.numMessages;
-        } else {
-            console.log('No such document!');
+    //     if (!queryNumSnapshot.empty) {
+    //         const data1 = queryNumSnapshot.docs[0].data();
+    //         messageCount = data1.numMessages;
+    //     } else {
+    //         console.log('No such document!');
+    //     }
+    //     console.log(messageCount);
+    //     if (!querySnapshot.empty) {
+    //         for(let i = 1; i <= messageCount; i++){
+    //             const data = querySnapshot.docs[i].data();
+    //             timestamp = data.messageTime;
+    //             currentUser = data.user;
+    //             messageInput = data.message;
+    //             postMessage();
+    //         }
+    //     } else {
+    //         console.log('No such document!');
+    //     }
+    // };
+    
+    function analyzeMessage(data){
+        for(let i = 0; i < data.length; i++){
+            displayInput = data[i].message_input;
+            timestamp = data[i].timestamp;
+            currentUser = data[i].current_user;
+            postMessage()
         }
-        console.log(messageCount);
-        if (!querySnapshot.empty) {
-            for(let i = 1; i <= messageCount; i++){
-                const data = querySnapshot.docs[i].data();
-                timestamp = data.messageTime;
-                currentUser = data.user;
-                messageInput = data.message;
-                sendMessage();
-            }
-        } else {
-            console.log('No such document!');
+    }
+
+    const fetchDataFromMiddleware = async () => {
+        try {
+        const response = await fetch("http://localhost:5000/get_initial_messages");
+        const data = await response.json();
+        // Call post_message() or perform other actions with the data on the frontend
+        analyzeMessage(data.messages);
+        } catch (error) {
+        console.error("Error fetching data:", error);
         }
     };
 
     const startDataSync = async () => {
         const numMessages = collection(db, `chat`)
         const queryNumSnapshot = await getDocs(numMessages);
-        if (!queryNumSnapshot.empty) {
-            const data1 = queryNumSnapshot.docs[0].data();
-            messageCount = data1.numMessages;
-        } else {
-            console.log('No such document!');
-        }
         const subscribe = onSnapshot(query(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"),orderBy("messageOrder", "asc")), (querySnapshot) => {
             messages.set([]);
             // Update local data with changes from Firestore
@@ -183,12 +128,27 @@
                 const data = doc.data();
                 timestamp = data.messageTime;
                 currentUser = data.user;
-                messageInput = data.message;
-                sendMessage();
+                displayInput = data.message;
+                postMessage();
             })
         });
     };
     startDataSync();
+    async function sendDataToFlask(data) {
+        try {
+            const response = await fetch('http://localhost:5000/get_data_from_chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const responseData = await response.json();
+            console.log(responseData);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 </script>
 
 <div class = "Sidebar">
@@ -245,9 +205,9 @@
         <div class = message-container>
         </div>
         <div class = "textbox">
-            <input type="text" bind:value={messageInput} placeholder="Enter message here" on:keydown={(event) => event.key === 'Enter' && checkMessage(messageInput)} />
+            <input type="text" bind:value={messageInput} placeholder="Enter message here" on:keydown={(event) => event.key === 'Enter' && sendMessage(messageInput)} />
         </div>
-        <div class = "button"><Button color="blue" on:click={checkMessage(messageInput)}>Send</Button></div>
+        <div class = "button"><Button color="blue" on:click={sendMessage(messageInput)}>Send</Button></div>
     </div>
 </div>
 <style>
