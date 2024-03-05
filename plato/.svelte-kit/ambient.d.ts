@@ -45,7 +45,7 @@ declare module '$env/static/private' {
 	export const COMPUTERNAME: string;
 	export const ComSpec: string;
 	export const DriverData: string;
-	export const EFC_10832: string;
+	export const EFC_2016: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -70,7 +70,9 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const npm_package_dependencies_axios: string;
 	export const npm_package_dependencies_firebase: string;
+	export const npm_package_dependencies_FormData: string;
 	export const npm_package_dependencies_form_data: string;
+	export const npm_package_dependencies_fs: string;
 	export const npm_package_dependencies_http: string;
 	export const npm_package_dependencies_npm: string;
 	export const npm_package_dependencies_svelte_local_storage_store: string;
@@ -80,6 +82,7 @@ declare module '$env/static/private' {
 	export const npm_package_devDependencies_flowbite_svelte: string;
 	export const npm_package_devDependencies_flowbite_svelte_icons: string;
 	export const npm_package_devDependencies_jest: string;
+	export const npm_package_devDependencies_jest_environment_node: string;
 	export const npm_package_devDependencies_postcss: string;
 	export const npm_package_devDependencies_postcss_load_config: string;
 	export const npm_package_devDependencies_svelte: string;
@@ -185,7 +188,7 @@ declare module '$env/dynamic/private' {
 		COMPUTERNAME: string;
 		ComSpec: string;
 		DriverData: string;
-		EFC_10832: string;
+		EFC_2016: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
@@ -210,7 +213,9 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		npm_package_dependencies_axios: string;
 		npm_package_dependencies_firebase: string;
+		npm_package_dependencies_FormData: string;
 		npm_package_dependencies_form_data: string;
+		npm_package_dependencies_fs: string;
 		npm_package_dependencies_http: string;
 		npm_package_dependencies_npm: string;
 		npm_package_dependencies_svelte_local_storage_store: string;
@@ -220,6 +225,7 @@ declare module '$env/dynamic/private' {
 		npm_package_devDependencies_flowbite_svelte: string;
 		npm_package_devDependencies_flowbite_svelte_icons: string;
 		npm_package_devDependencies_jest: string;
+		npm_package_devDependencies_jest_environment_node: string;
 		npm_package_devDependencies_postcss: string;
 		npm_package_devDependencies_postcss_load_config: string;
 		npm_package_devDependencies_svelte: string;
