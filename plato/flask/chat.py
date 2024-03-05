@@ -120,9 +120,7 @@ class Chat:
         return jsonify({'messages': self.messages})
     
     def is_template_message(self, message):
-        # Define the template message or any condition to identify it
         template_message = ""
 
-        # Check if the message matches the template
         return message.strip() == template_message.strip()
     

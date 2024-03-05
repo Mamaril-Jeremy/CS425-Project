@@ -121,51 +121,41 @@ class Chat:
         return jsonify({'messages': self.messages})
     
     def is_template_message(self, message):
-        # Define the template message or any condition to identify it
         template_message = ""
 
-        # Check if the message matches the template
         return message.strip() == template_message.strip()
     
 
 class TestChat(unittest.TestCase):
     def test_professional_check_message(self):
-        # Set up your Chat instance
+
         chat_instance = Chat()
         chat_instance.current_user = 'User1'
         chat_instance.message_input = 'Hello, world!'
-        
-        # Call the method to be tested
+
         chat_instance.check_message()
         
-        # Assert the expected behavior
         self.assertEqual(chat_instance.current_user, 'User1')
         self.assertEqual(chat_instance.message_input, 'Hello, world!')
         self.assertEqual(chat_instance.order, 2)  # Assuming the initial order is 1
         
     def test_unprofessional_check_message(self):
-        # Set up your Chat instance
         chat_instance = Chat()
         chat_instance.current_user = 'User1'
         chat_instance.message_input = 'I hate children'
         
-        # Call the method to be tested
         chat_instance.check_message()
         
-        # Assert the expected behavior
         self.assertEqual(chat_instance.current_user, 'Console')
         self.assertEqual(chat_instance.message_input, 'Can not be displayed due to unprofessional behavior')
         self.assertEqual(chat_instance.order, 2)  # Assuming the initial order is 1
 
 
     def test_set_current_chat_user(self):
-        # Set up your Chat instance
         chat_instance = Chat()
         
-        # Call the method to be tested
         chat_instance.set_current_chat_user('NewUser')
         
-        # Assert the expected behavior
         self.assertEqual(chat_instance.current_user, 'NewUser')
     
     def test_read_json_file(self):
