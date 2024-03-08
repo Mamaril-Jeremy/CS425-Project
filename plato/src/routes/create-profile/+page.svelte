@@ -1,14 +1,12 @@
 <script>
   //This code was developed by Jeremy Mamaril
   import { onMount } from 'svelte';
-  import { collection, addDoc } from 'firebase/firestore';
   import { Label, Input } from 'flowbite-svelte';
   import { onAuthStateChanged } from 'firebase/auth';
-  import { auth, db } from '$lib/firebase/firebase.client.js';
+  import { auth } from '$lib/firebase/firebase.client.js';
   import { goto } from '$app/navigation';
 
-  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, city, state, aboutMe, connectsRemaining = 5, passesRemaining = 10;
-  let success = false;
+  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, aboutMe, connectsRemaining = 5, passesRemaining = 10;
 
   let countries = [], states = [], cities = [];
   let selectedCountry = '', selectedState = '', selectedCity = '';
@@ -18,6 +16,12 @@
   onMount(() => {
     fetchCountries();
   });
+
+  onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userUID = user.uid;
+      }
+    });
 
   const fetchCountries = () => {
     fetch("https://api.countrystatecity.in/v1/countries", getRequestOptions())
@@ -61,13 +65,6 @@
       redirect: 'follow'
     };
   };
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      userUID = user.uid;
-      userEmail = user.email;
-    }
-  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();

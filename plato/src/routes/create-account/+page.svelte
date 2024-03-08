@@ -33,7 +33,7 @@
             await authHandlers.signup(email, password);
             await authHandlers.verifyEmail();
             //goto('/verify-email');
-            goto('verify-email')
+            goto('create-profile/')
           } catch (err) {
             console.log(err);
           }
