@@ -10,6 +10,7 @@
     confirmPassword: '',
   };
 
+  let emailError = false;
   let passwordMatchError = false;
   let passwordLengthError = false;
   let passwordRequirementsError = false;
@@ -32,19 +33,25 @@
           try {
             await authHandlers.signup(email, password);
             await authHandlers.verifyEmail();
-            //goto('/verify-email');
             goto('verify-email')
           } catch (err) {
+            emailError = true;
             console.log(err);
           }
         } else {
           passwordRequirementsError = true;
+          passwordLengthError = false;
+          passwordMatchError = false;
         }
       } else {
         passwordLengthError = true;
+        passwordRequirementsError = false;
+        passwordMatchError = false;
       }
     } else {
       passwordMatchError = true;
+      passwordRequirementsError = false;
+      passwordLengthError = false;
     }
   }
 </script>
@@ -75,10 +82,24 @@
       </div>
   
       <!-- Confirm Password -->
-      <div class="mb-6">
+      <div class="mb-4">
         <label for="confirmPassword" class="block text-sm font-medium text-gray-600">Confirm Password</label>
         <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.confirmPassword} required />
       </div>
+
+      <div class="mb-4">
+        <p class="text-gray-600 text-sm mb-2">Password must:</p>
+        <ul class="list-disc list-inside text-gray-600 text-sm">
+          <li>Contain at least 8 characters</li>
+          <li>Include at least one uppercase letter</li>
+          <li>Include at least one digit</li>
+          <li>Include at least one special character (@ $ ! % * ? &)</li>
+        </ul>
+      </div>
+
+      {#if emailError}
+        <p class="text-red-500 mb-4">Email invalid</p>
+      {/if}
 
       {#if passwordMatchError}
         <p class="text-red-500 mb-4">Passwords must match</p>
@@ -93,7 +114,7 @@
       {/if}
 
       <!-- Submit Button -->
-      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+      <button type="submit" class="mt-2 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
         Create Account
       </button>
     </form>
