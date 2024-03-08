@@ -33,6 +33,7 @@
           try {
             await authHandlers.signup(email, password);
             await authHandlers.verifyEmail();
+            //goto('/verify-email');
             goto('verify-email')
           } catch (err) {
             emailError = true;
