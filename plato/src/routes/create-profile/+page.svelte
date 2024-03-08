@@ -7,7 +7,7 @@
   import { auth, db } from '$lib/firebase/firebase.client.js';
   import { goto } from '$app/navigation';
 
-  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, city, state, connectsRemaining = 5, passesRemaining = 10;
+  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, city, state, aboutMe, connectsRemaining = 5, passesRemaining = 10;
   let success = false;
 
   let countries = [], states = [], cities = [];
@@ -245,13 +245,18 @@
               <option value={state} key={state.id}>{state.name}</option>
             {/each}
           </select>
-          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedCity} if={cities.length}>
+          <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} if={cities.length}>
             <option value="">Select City</option>
             {#each cities as city (city.id)}
               <option value={city.name} key={city.id}>{city.name}</option>
             {/each}
           </select>
         </div>
+      </div>
+
+      <div>
+        <Label for="about_me" class="mb-2">About Me</Label>
+        <textarea id="about_me" rows="4" bind:value={aboutMe} placeholder="Tell us about yourself..."></textarea>
       </div>
 
       <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
@@ -280,7 +285,16 @@
     cursor: pointer;
   }
 
-  a{
+  a {
     margin-left: 70px;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
   }
 </style>
