@@ -49,6 +49,7 @@
   }
 </script>
   
+<main class="bg-gray-100">
   <body>
     <div class="title">Verify Your Email Before Continuing</div>
     <div class="form-container">
@@ -62,8 +63,9 @@
       <p class="text-blue-500 mb-4 mt-10">Please verify your email, then refresh the page.</p>
     {/if}
   </body>
+</main>
   
-  <style>
+<style>
   body {
     display: flex;
     flex-direction: column; 
@@ -76,7 +78,7 @@
     text-align: center;
     font-size: 32px;
     font-weight: 600;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
   
   .form-container {
@@ -90,5 +92,5 @@
     align-items: center;
     margin-top: 16px; 
   }
-  </style>
+</style>
   
