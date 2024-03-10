@@ -16,6 +16,7 @@
     import { auth } from '$lib/firebase/firebase.client.js';
     import { getStorage, ref, uploadBytes } from 'firebase/storage';
     import { goto } from '$app/navigation';
+    //import { analyzeImageWithSightengine } from '$lib/assets/imagefilterNew'
     //Import image filter packages
     import axios from 'axios';
     import FormData from 'form-data';
@@ -84,16 +85,19 @@
   
             //Check threshold
             if (totalThreshold > 0.7) {
-              alert("Image Denied");
+                console.log('[Image Denied]')
             } else {
-                console.log('Image Accepted')
-                //Upload image
-                const uploadTask = uploadBytes(storageRef, image, metadata);  
-                goto("/create-profile/upload-resume")
+                console.log('[Image Accepted]')
+                //const uploadTask = uploadBytes(storageRef, image, metadata);  
+                //goto("/create-profile/upload-resume") //Direct user to resume upload.
             }
+            //Upload image
+            const uploadTask = uploadBytes(storageRef, image, metadata);  
+            goto("/create-profile/upload-resume") //Direct user to resume upload.
           })
           .catch((error) => {
             console.error('Error analyzing image:', error);
+            // Handle the error
           });
       }
     };
