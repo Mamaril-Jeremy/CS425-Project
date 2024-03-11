@@ -1,16 +1,17 @@
 <script>
+
   // This code was developed by Jeremy Mamaril
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
-  import { collection, getDocs, query, where } from 'firebase/firestore';
+  import { getStorage, getDownloadURL, ref, listAll, uploadBytes } from "firebase/storage";
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
-  import { Avatar, Label, Input, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
-  import Pfp from '$lib/assets/jeremy.png';
+  import { Avatar, Label, Input, Button} from 'flowbite-svelte';
+  import axios from 'axios';
 
-  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, country, connectsRemaining = 5, passesRemaining = 10;
+  let image, userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, connectsRemaining = 5, passesRemaining = 10;
   let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor;
-  let success = false;
+  let success = false, avatarUrl;
 
   let countries = [], states = [], cities = [];
 
@@ -27,6 +28,7 @@
           userUID = user.uid;
           userEmail - user.email;
           fetchData();
+          downloadAvatar(userUID);
       }
   });
 
@@ -147,6 +149,89 @@ async function sendDataToFlask(data) {
       console.error('Error:', error);
   }
 };
+
+  const handleImageUpload = async (event) => {
+        const file = event.target.files[0];
+        const allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
+        const timestamp = new Date().getTime(); 
+        const filename = `${timestamp}_${file.name}`
+    
+        if (file && allowedTypes.includes(file.type)) {
+          image = file;
+        } else {
+          alert("Please upload a valid image file (png, jpg, jpeg).");
+        }
+        if (image) {
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${userUID}/${filename}`);
+  
+        const metadata = {
+          contentType: image.type
+        }
+  
+        //filtered = analyzeImageWithSightengine(image); //Commented out, no longer useful.
+        const data = new FormData();
+        data.append('media', image); //Pretty straightforward
+        data.append('models', 'nudity-2.0,offensive,gore');
+        data.append('api_user', '814034437'); //User data
+        data.append('api_secret', 'TyzDvp3zEYqFDJmBPJe6EgozSSMayrXG'); //API secret
+        
+        //Here goes...
+        let header = {'Content-Type': 'multipart/form-data'};
+        axios({
+          url: 'https://api.sightengine.com/1.0/check.json',
+          method: 'post',
+          data: data,
+          headers: header
+        })
+          .then((response) => {
+            // Handle the response here
+            //console.log('Sightengine response:', response.data);
+            //Nice, it works. Now check ranges before upload
+            let goreValue = response.data.gore.prob
+            let offensiveValue = response.data.offensive.prob
+            let nudityValue = 1 - response.data.nudity.none
+            let skullValue = response.data.skull.prob
+            let totalThreshold = (goreValue + offensiveValue + nudityValue + skullValue) - 0.04
+  
+            console.log('Gore:', goreValue);
+            console.log('Offensive:', offensiveValue);
+            console.log('Nudity:', nudityValue);
+            console.log('Skull:', skullValue);
+            console.log('TOTAL:', totalThreshold);
+  
+            //Check threshold
+            if (totalThreshold > 0.7) {
+                alert('Image Denied')
+            } else {
+                console.log('[Image Accepted]')
+                const uploadTask = uploadBytes(storageRef, image, metadata);  
+                goto("/profile") 
+            }
+          })
+          .catch((error) => {
+            console.error('Error analyzing image:', error);
+          });
+      }
+  };
+
+  const downloadAvatar = async (userUID) => {
+    try {
+        const storage = getStorage();
+        const listRef = ref(storage, `images/${userUID}`);
+
+        const items = (await listAll(listRef)).items;
+
+        items.sort((a, b) => b.timeCreated - a.timeCreated);
+
+        const latestImageRef = items[0];
+        const url = await getDownloadURL(latestImageRef);
+        
+        avatarUrl = url;
+    } catch (error) {
+        console.error('Error downloading avatar:', error);
+    }
+  };
 </script>
 
 <style>
@@ -200,9 +285,13 @@ async function sendDataToFlask(data) {
   <body>
     <div class="wrapper">
       <div class="user-info-container">
-        <div class="flex items-center space-x-10 text-xl">
-          <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
+        <div class="flex items-center space-x-8 text-xl">
+          <div>
+            <Avatar src={avatarUrl} data-name="profile-picture" border class="ring-blue-600 dark:ring-blue-300" size="lg"
             dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
+            <label for="uploadInput" class="text-blue-600 text-sm mt-2 cursor-pointer text-center ml-4">Change</label>
+            <input id="uploadInput" type="file" accept="image/*" style="display: none" on:change={handleImageUpload}>
+          </div>
           <div class="space-y-1 font-medium dark:text-black">
             <div>{firstName} {lastName}</div>
             <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2023</div>
