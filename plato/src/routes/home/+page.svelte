@@ -13,7 +13,6 @@
 
 {#if $authStore.currentUser}
   <div>
-    <h1>CURRENT USER: {email}</h1>
   </div>
 {:else}
 <div>Loading...</div>

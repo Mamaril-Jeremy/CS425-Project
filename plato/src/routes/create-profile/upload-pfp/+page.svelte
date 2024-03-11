@@ -45,8 +45,10 @@
   
     const handleContinue = async () => {
       if (image) {
+        const timestamp = new Date().getTime(); 
+        const filename = `${timestamp}_${file.name}`
         const storage = getStorage();
-        const storageRef = ref(storage, `images/${userUID}/${image.name}`);
+        const storageRef = ref(storage, `images/${userUID}/${filename}`);
   
         const metadata = {
           contentType: image.type
@@ -85,15 +87,12 @@
   
             //Check threshold
             if (totalThreshold > 0.7) {
-                console.log('[Image Denied]')
+                alert('Image Denied]')
             } else {
                 console.log('[Image Accepted]')
-                //const uploadTask = uploadBytes(storageRef, image, metadata);  
-                //goto("/create-profile/upload-resume") //Direct user to resume upload.
+                const uploadTask = uploadBytes(storageRef, image, metadata);  
+                goto("/create-profile/upload-resume");
             }
-            //Upload image
-            const uploadTask = uploadBytes(storageRef, image, metadata);  
-            goto("/create-profile/upload-resume") //Direct user to resume upload.
           })
           .catch((error) => {
             console.error('Error analyzing image:', error);
