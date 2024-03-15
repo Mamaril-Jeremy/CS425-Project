@@ -1,5 +1,4 @@
 <script>
-
   // This code was developed by Jeremy Mamaril
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
@@ -26,7 +25,7 @@
   onAuthStateChanged(auth, (user) => {
       if (user) {
           userUID = user.uid;
-          userEmail - user.email;
+          userEmail = user.email;
           fetchData();
           downloadAvatar(userUID);
       }
@@ -54,8 +53,6 @@
 
   const fetchCities = () => {
     if (!selectedCountry || !selectedState) return;
-    console.log(selectedCountry);
-    console.log(selectedState)
 
     fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry.iso2}/states/${selectedState.iso2}/cities`, getRequestOptions())
       .then(response => response.json())
@@ -98,7 +95,6 @@
     }
 }
 
-
   const handleClick = async (e) => {
     e.preventDefault();
 
@@ -118,7 +114,6 @@
       userCity: selectedCity,
       userConnectsRemaining: connectsRemaining,
       userCountry: selectedCountry.name,
-      // userDateCreated: serverTimestamp(), 
       userEmailAddress: userEmail,
       userFirstName: firstName,
       userID: userUID,
@@ -169,14 +164,12 @@ async function sendDataToFlask(data) {
           contentType: image.type
         }
   
-        //filtered = analyzeImageWithSightengine(image); //Commented out, no longer useful.
         const data = new FormData();
-        data.append('media', image); //Pretty straightforward
+        data.append('media', image);
         data.append('models', 'nudity-2.0,offensive,gore');
-        data.append('api_user', '814034437'); //User data
-        data.append('api_secret', 'TyzDvp3zEYqFDJmBPJe6EgozSSMayrXG'); //API secret
+        data.append('api_user', '814034437');
+        data.append('api_secret', 'TyzDvp3zEYqFDJmBPJe6EgozSSMayrXG');
         
-        //Here goes...
         let header = {'Content-Type': 'multipart/form-data'};
         axios({
           url: 'https://api.sightengine.com/1.0/check.json',
@@ -185,28 +178,18 @@ async function sendDataToFlask(data) {
           headers: header
         })
           .then((response) => {
-            // Handle the response here
-            //console.log('Sightengine response:', response.data);
-            //Nice, it works. Now check ranges before upload
             let goreValue = response.data.gore.prob
             let offensiveValue = response.data.offensive.prob
             let nudityValue = 1 - response.data.nudity.none
             let skullValue = response.data.skull.prob
             let totalThreshold = (goreValue + offensiveValue + nudityValue + skullValue) - 0.04
   
-            console.log('Gore:', goreValue);
-            console.log('Offensive:', offensiveValue);
-            console.log('Nudity:', nudityValue);
-            console.log('Skull:', skullValue);
-            console.log('TOTAL:', totalThreshold);
-  
             //Check threshold
             if (totalThreshold > 0.7) {
                 alert('Image Denied')
             } else {
-                console.log('[Image Accepted]')
                 const uploadTask = uploadBytes(storageRef, image, metadata);  
-                goto("/profile") 
+                avatarUrl = URL.createObjectURL(file);
             }
           })
           .catch((error) => {
