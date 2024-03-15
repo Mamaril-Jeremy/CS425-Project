@@ -27,35 +27,37 @@ export const nodes = [
 	() => import('./nodes/23'),
 	() => import('./nodes/24'),
 	() => import('./nodes/25'),
-	() => import('./nodes/26')
+	() => import('./nodes/26'),
+	() => import('./nodes/27')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [4],
-		"/MFA": [19,[3]],
+		"/MFA": [20,[3]],
 		"/about": [5],
 		"/chat": [6],
 		"/connections": [7],
 		"/create-account": [8,[2]],
 		"/create-profile": [9],
-		"/create-profile/upload-pfp": [10],
-		"/create-profile/upload-resume": [11],
-		"/events": [12],
-		"/footer/contact": [13],
-		"/footer/guidelines": [14],
-		"/footer/licensing": [15],
-		"/footer/privacy": [16],
-		"/forgot-password": [17],
-		"/home": [18],
-		"/profile": [20],
-		"/profile/edit-profile": [21],
-		"/settings": [22],
-		"/settings/change-email": [23],
-		"/settings/change-password": [24],
-		"/sign-in": [25],
-		"/verify-email": [26]
+		"/create-profile/upload-csv": [10],
+		"/create-profile/upload-pfp": [11],
+		"/create-profile/upload-resume": [12],
+		"/events": [13],
+		"/footer/contact": [14],
+		"/footer/guidelines": [15],
+		"/footer/licensing": [16],
+		"/footer/privacy": [17],
+		"/forgot-password": [18],
+		"/home": [19],
+		"/profile": [21],
+		"/profile/edit-profile": [22],
+		"/settings": [23],
+		"/settings/change-email": [24],
+		"/settings/change-password": [25],
+		"/sign-in": [26],
+		"/verify-email": [27]
 	};
 
 export const hooks = {
