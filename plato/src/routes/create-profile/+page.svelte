@@ -212,17 +212,17 @@
             <option value="Business">Business Administration</option>
             <option value="Chemistry">Chemistry</option>
             <option value="Communication">Communication Studies</option>
-            <option value="ComputerScience">Computer Science</option>
+            <option value="Computer Science">Computer Science</option>
             <option value="Economics">Economics</option>
             <option value="Education">Education</option>
             <option value="Engineering">Engineering</option>
             <option value="English">English Literature</option>
-            <option value="EnvironmentalScience">Environmental Science</option>
+            <option value="Environmental Science">Environmental Science</option>
             <option value="Finance">Finance</option>
             <option value="Geography">Geography</option>
-            <option value="GraphicDesign">Graphic Design</option>
-            <option value="HealthScience">Health Science</option>
-            <option value="InternationalRelations">International Relations</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Health Science">Health Science</option>
+            <option value="International Relations">International Relations</option>
             <option value="Linguistics">Linguistics</option>
             <option value="Management">Management</option>
             <option value="MarineBiology">Marine Biology</option>
@@ -230,7 +230,7 @@
             <option value="Nutrition">Nutrition</option>
             <option value="Philosophy">Philosophy</option>
             <option value="Physics">Physics</option>
-            <option value="PoliticalScience">Political Science</option>
+            <option value="Political Science">Political Science</option>
             <option value="Psychology">Psychology</option>
             <option value="Sociology">Sociology</option>
         </select>
