@@ -145,58 +145,64 @@ async function sendDataToFlask(data) {
   }
 };
 
-  const handleImageUpload = async (event) => {
-        const file = event.target.files[0];
-        const allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
-        const timestamp = new Date().getTime(); 
-        const filename = `${timestamp}_${file.name}`
+const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    const allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
+    const timestamp = new Date().getTime(); 
+    const filename = `${timestamp}_${file.name}`;
+
+    if (file && allowedTypes.includes(file.type)) {
+        image = file;
+    } else {
+        alert("Please upload a valid image file (png, jpg, jpeg).");
+    }
     
-        if (file && allowedTypes.includes(file.type)) {
-          image = file;
-        } else {
-          alert("Please upload a valid image file (png, jpg, jpeg).");
-        }
-        if (image) {
+    if (image) {
         const storage = getStorage();
         const storageRef = ref(storage, `images/${userUID}/${filename}`);
-  
+
         const metadata = {
-          contentType: image.type
-        }
-  
+            contentType: image.type
+        };
+
         const data = new FormData();
         data.append('media', image);
         data.append('models', 'nudity-2.0,offensive,gore');
         data.append('api_user', '814034437');
         data.append('api_secret', 'TyzDvp3zEYqFDJmBPJe6EgozSSMayrXG');
-        
+
         let header = {'Content-Type': 'multipart/form-data'};
-        axios({
-          url: 'https://api.sightengine.com/1.0/check.json',
-          method: 'post',
-          data: data,
-          headers: header
-        })
-          .then((response) => {
+
+        try {
+            const response = await axios({
+                url: 'https://api.sightengine.com/1.0/check.json',
+                method: 'post',
+                data: data,
+                headers: header
+            });
+
             let goreValue = response.data.gore.prob
             let offensiveValue = response.data.offensive.prob
             let nudityValue = 1 - response.data.nudity.none
             let skullValue = response.data.skull.prob
             let totalThreshold = (goreValue + offensiveValue + nudityValue + skullValue) - 0.04
-  
+
             //Check threshold
             if (totalThreshold > 0.7) {
                 alert('Image Denied')
             } else {
                 const uploadTask = uploadBytes(storageRef, image, metadata);  
-                avatarUrl = URL.createObjectURL(file);
+                avatarUrl = getDownloadURL(storageRef);
+                downloadAvatar(userUID);
+                location.reload();
             }
-          })
-          .catch((error) => {
+        } catch (error) {
             console.error('Error analyzing image:', error);
-          });
-      }
-  };
+        }
+    }
+};
+
+
 
   const downloadAvatar = async (userUID) => {
     try {
@@ -207,9 +213,8 @@ async function sendDataToFlask(data) {
 
         items.sort((a, b) => b.timeCreated - a.timeCreated);
 
-        const latestImageRef = items[0];
+        const latestImageRef = items[items.length-1];
         const url = await getDownloadURL(latestImageRef);
-        
         avatarUrl = url;
     } catch (error) {
         console.error('Error downloading avatar:', error);
@@ -229,7 +234,7 @@ async function sendDataToFlask(data) {
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-      margin-top: 150px;
+      margin-top: 170px;
   }
 
   .success {

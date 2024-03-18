@@ -29,7 +29,7 @@
                 // May 2024
                 { title: 'Prep Day', start: new Date(2024, 4, 8) },
                 { title: 'Finals week begins', start: new Date(2024, 4, 9) },
-                { title: 'Final day for submitting thesis/dissertation and notice of completion with Graduate School for May graduation', start: TBA },
+                // { title: 'Final day for submitting thesis/dissertation and notice of completion with Graduate School for May graduation', start: TBA },
                 { title: 'Instruction ends', start: new Date(2024, 4, 15) },
                 { title: 'On-campus residence hall move-out (11 a.m.)', start: new Date(2024, 4, 16) },
                 { title: 'Commencement', start: new Date(2024, 4, 16), end: new Date(2024, 4, 18) },
@@ -82,7 +82,7 @@
                 // August 2024
                 { title: 'Final day to change a Second Session class from credit to audit', start: new Date(2024, 7, 1) },
                 { title: 'Final day to withdraw from Second Session classes and receive a "W"', start: new Date(2024, 7, 1) },
-                { title: 'Deadline for submitting thesis/dissertation and Notice of Completion with Graduate School for August graduation', start: TBA },
+                // { title: 'Deadline for submitting thesis/dissertation and Notice of Completion with Graduate School for August graduation', start: TBA },
                 { title: 'Second Session and Regular Session instruction ends', start: new Date(2024, 7, 14) },
                 { title: 'Final grades for all Summer term classes due by 5 p.m. in MyNEVADA', start: new Date(2024, 7, 16) },
 
@@ -113,17 +113,29 @@
                 { title: 'Commencement', start: new Date(2024, 11, 7) },
                 { title: 'Prep Day', start: new Date(2024, 11, 11) },
                 { title: 'Finals week begins', start: new Date(2024, 11, 12) }
-            ]
+            ],
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            }
         });
-
-        setTimeout(() => {
-            calendar.render();
-        }, 0);
-
-        return () => {
-            calendar.destroy(); // Cleanup when component is destroyed
-        };
+        calendar.render();
+        window.addEventListener('resize', () => {
+            calendar.updateSize();
+        });
     });
 </script>
 
+<style>
+    #calendar {
+        height: 80vh;
+        width: 80%;
+        margin: 100px 20px 0px; 
+    }
+</style>
+
 <div id="calendar"></div>
+<div><button>Add Event</button></div>
+<div><button>Remove Event</button></div>
+
