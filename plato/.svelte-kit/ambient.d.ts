@@ -45,7 +45,7 @@ declare module '$env/static/private' {
 	export const COMPUTERNAME: string;
 	export const ComSpec: string;
 	export const DriverData: string;
-	export const EFC_23044: string;
+	export const EFC_3964: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -56,7 +56,6 @@ declare module '$env/static/private' {
 	export const LOGONSERVER: string;
 	export const NODE: string;
 	export const NODE_ENV: string;
-	export const NODE_PATH: string;
 	export const npm_command: string;
 	export const npm_config_engine_strict: string;
 	export const npm_config_frozen_lockfile: string;
@@ -68,6 +67,7 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
 	export const npm_package_dependencies_axios: string;
+	export const npm_package_dependencies_date_fns: string;
 	export const npm_package_dependencies_firebase: string;
 	export const npm_package_dependencies_FormData: string;
 	export const npm_package_dependencies_form_data: string;
@@ -76,6 +76,9 @@ declare module '$env/static/private' {
 	export const npm_package_dependencies_npm: string;
 	export const npm_package_dependencies_svelte_local_storage_store: string;
 	export const npm_package_dependencies__event_calendar_day_grid: string;
+	export const npm_package_dependencies__fullcalendar_core: string;
+	export const npm_package_dependencies__fullcalendar_daygrid: string;
+	export const npm_package_dependencies__fullcalendar_interaction: string;
 	export const npm_package_devDependencies_autoprefixer: string;
 	export const npm_package_devDependencies_flowbite: string;
 	export const npm_package_devDependencies_flowbite_svelte: string;
@@ -187,7 +190,7 @@ declare module '$env/dynamic/private' {
 		COMPUTERNAME: string;
 		ComSpec: string;
 		DriverData: string;
-		EFC_23044: string;
+		EFC_3964: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
@@ -198,7 +201,6 @@ declare module '$env/dynamic/private' {
 		LOGONSERVER: string;
 		NODE: string;
 		NODE_ENV: string;
-		NODE_PATH: string;
 		npm_command: string;
 		npm_config_engine_strict: string;
 		npm_config_frozen_lockfile: string;
@@ -210,6 +212,7 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
 		npm_package_dependencies_axios: string;
+		npm_package_dependencies_date_fns: string;
 		npm_package_dependencies_firebase: string;
 		npm_package_dependencies_FormData: string;
 		npm_package_dependencies_form_data: string;
@@ -218,6 +221,9 @@ declare module '$env/dynamic/private' {
 		npm_package_dependencies_npm: string;
 		npm_package_dependencies_svelte_local_storage_store: string;
 		npm_package_dependencies__event_calendar_day_grid: string;
+		npm_package_dependencies__fullcalendar_core: string;
+		npm_package_dependencies__fullcalendar_daygrid: string;
+		npm_package_dependencies__fullcalendar_interaction: string;
 		npm_package_devDependencies_autoprefixer: string;
 		npm_package_devDependencies_flowbite: string;
 		npm_package_devDependencies_flowbite_svelte: string;

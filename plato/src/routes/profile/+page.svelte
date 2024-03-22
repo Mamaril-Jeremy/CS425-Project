@@ -51,9 +51,8 @@
 
         items.sort((a, b) => b.timeCreated - a.timeCreated);
 
-        const latestImageRef = items[0];
+        const latestImageRef = items[items.length-1];
         const url = await getDownloadURL(latestImageRef);
-        
         avatarUrl = url;
     } catch (error) {
         console.error('Error downloading avatar:', error);

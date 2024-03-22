@@ -46,7 +46,7 @@
     const handleContinue = async () => {
       if (image) {
         const timestamp = new Date().getTime(); 
-        const filename = `${timestamp}_${file.name}`
+        const filename = `${timestamp}_${image.name}`
         const storage = getStorage();
         const storageRef = ref(storage, `images/${userUID}/${filename}`);
   
