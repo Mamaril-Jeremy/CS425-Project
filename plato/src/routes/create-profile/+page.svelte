@@ -271,7 +271,7 @@
       </div>
 
       <div class="mt-2">
-        Leading an Organization? <a href="/upload-csv">Create Users</a>
+        Leading an Organization? <a href="create-profile/upload-csv">Create Users</a>
       </div>
     </form>
   </section>
