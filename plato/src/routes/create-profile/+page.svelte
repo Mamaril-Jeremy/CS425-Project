@@ -267,7 +267,11 @@
       </button>
 
       <div class="mt-6">
-       Already have an account? <a href="/sign-in">Sign In</a> Instead!
+       Already have an account? <a href="/sign-in">Sign In</a>
+      </div>
+
+      <div class="mt-2">
+        Leading an Organization? <a href="create-profile/upload-csv">Create Users</a>
       </div>
     </form>
   </section>
