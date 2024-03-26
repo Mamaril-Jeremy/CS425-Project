@@ -78,7 +78,7 @@
 
       <div class="mb-6">
         <label for="phoneNumber" class="block text-sm font-medium text-gray-600">Phone Number</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" autocomplete="tel" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.phoneNumber} required />
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+1 123-456-7890" autocomplete="tel" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.phoneNumber} required />
       </div>
 
       <div class="mb-4">
@@ -91,7 +91,7 @@
 
       <div class="mb-6 mt-6">
         <label for="code" class="block text-sm font-medium text-gray-600">Code</label>
-        <input type="text" id="code" name="code" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.code} required />
+        <input type="text" id="code" name="code" placeholder="123456" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.code} required />
       </div>
   
       <button type="button" on:click={loginWithCode} class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
