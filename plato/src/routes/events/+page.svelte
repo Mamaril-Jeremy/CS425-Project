@@ -18,7 +18,7 @@
                 { title: 'Final day to receive a 50% refund if completely withdrawing from the University', start: new Date(2024, 2, 1) },
                 { title: 'Summer Session registration starts', start: new Date(2024, 2, 18) },
                 { title: 'Final fee payment due for those on a payment plan', start: new Date(2024, 2, 19) },
-                { title: 'Spring Break (campus open; no classes)', start: new Date(2024, 2, 23), end: new Date(2024, 2, 31) },
+                { title: 'Spring Break (campus open; no classes)', start: new Date(2024, 2, 25), end: new Date(2024, 2, 30) },
 
                 // April 2024
                 { title: 'Fall semester enrollment begins', start: new Date(2024, 3, 1) },
