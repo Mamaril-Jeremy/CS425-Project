@@ -3,7 +3,6 @@
   import { goto } from '$app/navigation';
   import { fade } from 'svelte/transition';
 
-  import Logo from '$lib/assets/plato_logo.png';
   import videoBackground from '$lib/assets/video.mp4';
 
   let text = "Welcome to Plato!";

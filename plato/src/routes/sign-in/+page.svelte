@@ -1,29 +1,40 @@
 <script>
   //This code was developed by Jeremy Mamaril & Mark Marsala
-  import { authHandlers, authStore} from "../../stores/authStore.js"
-  import { Card, Button, Label, Input} from 'flowbite-svelte';
+  import { authHandlers, authStore } from "../../stores/authStore.js";
+  import { Card, Button, Label, Input } from 'flowbite-svelte';
   import { goto } from '$app/navigation';
 
   let email = '';
   let password = '';
   let incorrectEmailOrPassword = false;
 
-  const handleSubmit = async (event) => {
-     event.preventDefault();
+  const storedEmail = localStorage.getItem('email');
+  const storedPassword = localStorage.getItem('password');
 
-    if(!email || !password) {
+  if (storedEmail && storedPassword) {
+    email = storedEmail;
+    password = storedPassword;
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!email || !password) {
       return;
     }
 
     try {
-      await authHandlers.login(email, password)
+      await authHandlers.login(email, password);
       authStore.update((curr) => {
         return {
           ...curr,
           loggedIn: true
         };
       });
-      goto('/home')
+      goto('/home');
+
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
     } catch (err) {
       console.log(err);
       incorrectEmailOrPassword = true;
@@ -69,12 +80,12 @@
     background-repeat: no-repeat;
   }
 
-  p{
+  p {
     display: inline;
     margin-left: 10px;
   }
 
-  a{
+  a {
     margin-left: 45px;
   }
 </style>

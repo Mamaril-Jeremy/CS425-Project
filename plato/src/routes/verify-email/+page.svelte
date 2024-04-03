@@ -6,6 +6,7 @@
   import { auth } from '$lib/firebase/firebase.client.js';
   import { goto } from '$app/navigation';
   import { onAuthStateChanged } from 'firebase/auth';
+  import { Progressbar } from 'flowbite-svelte';
 
   let isEmailVerified = false;
   let emailVerifiedWarning = false;
@@ -50,6 +51,7 @@
 </script>
   
 <main class="bg-gray-100">
+  <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="28.56" />
   <body>
     <div class="title">Verify Your Email Before Continuing</div>
     <div class="form-container">
