@@ -2,6 +2,7 @@
   //This code was developed by Mark Marsala
   import { authHandlers } from "../../stores/authStore.js"
   import { goto } from '$app/navigation';
+  import { Progressbar } from 'flowbite-svelte';
 
   let formData = {
     username: '',
@@ -57,7 +58,10 @@
 </script>
   
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
+  
+
   <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
+    <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="14.28" />
     <h1 class="text-3xl font-semibold mb-6">Create Account</h1>
   
     <form on:submit|preventDefault={handleSubmit}>
@@ -126,6 +130,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 100px;
   }
 
   section {

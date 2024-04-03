@@ -3,6 +3,7 @@
   import { multiFactor, PhoneAuthProvider, PhoneMultiFactorGenerator } from "firebase/auth";
   import { getAuth } from "firebase/auth";
   import { goto } from '$app/navigation';
+  import { Progressbar } from 'flowbite-svelte';
 
   let formData = {
     phoneNumber: '',
@@ -71,7 +72,8 @@
 </script>
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
-  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
+  <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="42.84" />
+  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-14">
     <h1 class="text-2xl font-semibold mb-6">Multi-Factor Authentication</h1>
   
     <form on:submit|preventDefault={goHome}>

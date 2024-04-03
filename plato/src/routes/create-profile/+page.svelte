@@ -1,11 +1,11 @@
 <script>
   //This code was developed by Jeremy Mamaril
   import { onMount } from 'svelte';
-  import { collection, addDoc } from 'firebase/firestore';
   import { Label, Input } from 'flowbite-svelte';
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
   import { goto } from '$app/navigation';
+  import { Progressbar } from 'flowbite-svelte';
 
   let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, city, state, aboutMe, connectsRemaining = 5, passesRemaining = 10;
   let success = false;
@@ -94,7 +94,7 @@
       userState: selectedState.name
     };
     sendDataToFlask(data);
-    goto("/create-profile/upload-pfp");
+    goto("/create-profile/add-availability")
   };
 
   async function sendDataToFlask(data) {
@@ -115,7 +115,8 @@
 </script>
 
 <main class="flex items-center mt-10 justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
-  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
+  <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="42.84" />
+  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-21">
     <h1 class="text-3xl font-semibold mb-6 mt-10">Create Your Profile</h1>
   
 

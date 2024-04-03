@@ -72,7 +72,7 @@
         </div>
         <div class="space-y-1 font-medium dark:text-black">
           <div>{firstName} {lastName}</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2023</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2024</div>
           <div class="text-sm dark:text-black"><span class="material-symbols-outlined">edit</span><a href="/profile/edit-profile">Edit Profile</a></div>
         </div>
       </div>

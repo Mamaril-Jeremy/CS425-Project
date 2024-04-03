@@ -1,17 +1,4 @@
-<script>
-
-  /*
-    ----------------------------------------------------------------------
-    Michael Nia - Dev Log
-    Updated: 3/4/2024
-    SightEngine Image Filter Implementation for Upload-pfp
-    Michael worked on the image filter: 
-      >Checks image file for inappropriate content and blocks or approves.
-      Improved take on the image filter system using SightEngine API.
-      >Replaced 'fs' with direct image upload with axios component.
-    -----------------------------------------------------------------------
-  */
-  
+<script>  
     import { onAuthStateChanged } from 'firebase/auth';
     import { auth } from '$lib/firebase/firebase.client.js';
     import { getStorage, ref, uploadBytes } from 'firebase/storage';
@@ -96,7 +83,7 @@
           })
           .catch((error) => {
             console.error('Error analyzing image:', error);
-            // Handle the error
+  
           });
       }
     };
