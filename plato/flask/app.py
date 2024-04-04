@@ -19,6 +19,15 @@ firebase_admin.initialize_app(cred)
 # bucket = storage_client.bucket(bucket_name)
 
 db = firestore.client()
+@app.route('/add_report', methods=['POST'])  
+def add_report():
+    try:
+        return jsonify({"message": "Report added successfully"}), 200
+        report_data = request.json
+        doc_ref = db.collection('report').add(report_data)
+       
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Create the temp directory if it doesn't exist
 if not os.path.exists('temp'):
