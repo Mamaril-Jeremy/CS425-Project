@@ -6,6 +6,7 @@
   import { auth } from '$lib/firebase/firebase.client.js';
   import { goto } from '$app/navigation';
   import { onAuthStateChanged } from 'firebase/auth';
+  import { Progressbar } from 'flowbite-svelte';
 
   let isEmailVerified = false;
   let emailVerifiedWarning = false;
@@ -15,6 +16,7 @@
   function startTimer() {
     timer = setInterval(() => {
       countdown--;
+      console.log(countdown);
       if (countdown <= 0) {
         clearInterval(timer);
         console.log("Timer expired!");
@@ -36,9 +38,8 @@
     try {
       if(isEmailVerified)
       {
-        //goto('/create-profile');
-        goto('/create-profile');
-
+        goto('/MFA');
+        clearInterval(timer);
       }
       else{
         emailVerifiedWarning = true;
@@ -49,6 +50,8 @@
   }
 </script>
   
+<main class="bg-gray-100">
+  <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="28.56" />
   <body>
     <div class="title">Verify Your Email Before Continuing</div>
     <div class="form-container">
@@ -62,8 +65,9 @@
       <p class="text-blue-500 mb-4 mt-10">Please verify your email, then refresh the page.</p>
     {/if}
   </body>
+</main>
   
-  <style>
+<style>
   body {
     display: flex;
     flex-direction: column; 
@@ -76,7 +80,7 @@
     text-align: center;
     font-size: 32px;
     font-weight: 600;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
   
   .form-container {
@@ -90,5 +94,5 @@
     align-items: center;
     margin-top: 16px; 
   }
-  </style>
+</style>
   

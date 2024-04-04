@@ -2,6 +2,7 @@
   //This code was developed by Mark Marsala
   import { authHandlers } from "../../stores/authStore.js"
   import { goto } from '$app/navigation';
+  import { Progressbar } from 'flowbite-svelte';
 
   let formData = {
     username: '',
@@ -10,13 +11,14 @@
     confirmPassword: '',
   };
 
+  let emailError = false;
   let passwordMatchError = false;
   let passwordLengthError = false;
   let passwordRequirementsError = false;
   const MIN_PASSWORD_LENGTH = 8;
 
   async function handleSubmit() {
-    console.log('Form submitted:', formData);
+    //console.log('Form submitted:', formData);
 
     const { username, email, password, confirmPassword } = formData;
 
@@ -32,25 +34,34 @@
           try {
             await authHandlers.signup(email, password);
             await authHandlers.verifyEmail();
-            //goto('/verify-email');
-            goto('create-profile/upload-pfp')
+            goto('verify-email')
           } catch (err) {
+            emailError = true;
             console.log(err);
           }
         } else {
           passwordRequirementsError = true;
+          passwordLengthError = false;
+          passwordMatchError = false;
         }
       } else {
         passwordLengthError = true;
+        passwordRequirementsError = false;
+        passwordMatchError = false;
       }
     } else {
       passwordMatchError = true;
+      passwordRequirementsError = false;
+      passwordLengthError = false;
     }
   }
 </script>
   
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
+  
+
   <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
+    <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="14.28" />
     <h1 class="text-3xl font-semibold mb-6">Create Account</h1>
   
     <form on:submit|preventDefault={handleSubmit}>
@@ -75,10 +86,24 @@
       </div>
   
       <!-- Confirm Password -->
-      <div class="mb-6">
+      <div class="mb-4">
         <label for="confirmPassword" class="block text-sm font-medium text-gray-600">Confirm Password</label>
         <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.confirmPassword} required />
       </div>
+
+      <div class="mb-4">
+        <p class="text-gray-600 text-sm mb-2">Password must:</p>
+        <ul class="list-disc list-inside text-gray-600 text-sm">
+          <li>Contain at least 8 characters</li>
+          <li>Include at least one uppercase letter</li>
+          <li>Include at least one digit</li>
+          <li>Include at least one special character (@ $ ! % * ? &)</li>
+        </ul>
+      </div>
+
+      {#if emailError}
+        <p class="text-red-500 mb-4">Email invalid</p>
+      {/if}
 
       {#if passwordMatchError}
         <p class="text-red-500 mb-4">Passwords must match</p>
@@ -93,7 +118,7 @@
       {/if}
 
       <!-- Submit Button -->
-      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+      <button type="submit" class="mt-2 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
         Create Account
       </button>
     </form>
@@ -105,6 +130,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 100px;
   }
 
   section {

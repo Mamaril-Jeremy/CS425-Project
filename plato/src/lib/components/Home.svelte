@@ -3,7 +3,6 @@
   import { goto } from '$app/navigation';
   import { fade } from 'svelte/transition';
 
-  import Logo from '$lib/assets/plato_logo.png';
   import videoBackground from '$lib/assets/video.mp4';
 
   let text = "Welcome to Plato!";
@@ -48,7 +47,7 @@
     </div>
     <div>
       {#if fadeIn}
-      <p in:fade={{delay: 5, duration: 1600}}><strong>We're committed to establishing mentor-to-mentee relationships.</strong></p>
+      <p in:fade={{delay: 5, duration: 1600}}><strong>We are committed to establishing worthwhile mentor-mentee relationships.</strong></p>
       {/if}
     </div>
     <video autoplay loop muted>

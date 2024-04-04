@@ -1,23 +1,23 @@
 <script>
   //This code was developed by Jeremy Mamaril
-  import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
+  import { getStorage, getDownloadURL, ref, listAll, uploadBytes } from "firebase/storage";
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
   import { Avatar } from 'flowbite-svelte';
-  import Pfp from '$lib/assets/jeremy.png';
-  import { circIn } from 'svelte/easing';
 
   let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, country, state, connectsRemaining = 5, passesRemaining = 10;
+  let avatarUrl;
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       userUID = user.uid;
       fetchData();
+      downloadAvatar(userUID)
     }
   });
 
   const fetchData = async () => {
-    const data = { "user_id": userUID }; 
+    const data = { "user_id" : userUID }; 
     try {
         const response = await fetch('http://localhost:5000/get_user_data', {
             method: 'POST',
@@ -41,27 +41,44 @@
         console.error('Error:', error);
     }
   };
+
+  const downloadAvatar = async (userUID) => {
+    try {
+        const storage = getStorage();
+        const listRef = ref(storage, `images/${userUID}`);
+
+        const items = (await listAll(listRef)).items;
+
+        items.sort((a, b) => b.timeCreated - a.timeCreated);
+
+        const latestImageRef = items[items.length-1];
+        const url = await getDownloadURL(latestImageRef);
+        avatarUrl = url;
+    } catch (error) {
+        console.error('Error downloading avatar:', error);
+    }
+  };
 </script>
 
-<body>
+<body class="bg-gray-100">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <div class="wrapper">
     <div class="user-info-container">
       <div class="flex items-center space-x-10 text-xl">
           <div style="position: relative; display: inline-block;">
-            <Avatar src="{Pfp}" data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
+            <Avatar src={avatarUrl} data-name="Mark Marsala" border class="ring-blue-600 dark:ring-blue-300" size="lg"
             dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
             <!-- <span class="material-symbols-outlined" style="position: absolute; top: 0; left: 0;">edit</span> -->
         </div>
         <div class="space-y-1 font-medium dark:text-black">
           <div>{firstName} {lastName}</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2023</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Joined in December 2024</div>
           <div class="text-sm dark:text-black"><span class="material-symbols-outlined">edit</span><a href="/profile/edit-profile">Edit Profile</a></div>
         </div>
       </div>
     </div>
 
-      <div class="grid gap-8 mt-10 md:grid-cols-2">
+      <div class="grid gap-8 mt-10 md:grid-cols-2 bg-white border-1 border-black rounded-lg p-3">
         <div>
           <p for="first_name" class="mb-2 text-l"><span class="material-symbols-outlined main">account_circle</span>Name: {firstName} {lastName}</p>
         </div>

@@ -1,110 +1,9 @@
-<!-- <script>
-  //This code was developed by Mark Marsala
-  import { goto } from '$app/navigation';
-  import { getAuth, signInWithPhoneNumber } from "firebase/auth";
-
-  let formData = {
-    phoneNumber: '',
-    code: ''
-  };
-
-  let confirmationResult;
-
-  async function signInWithPhoneNumberHandler() {
-    const { phoneNumber } = formData;
-    const recaptchaResponse = grecaptcha.getResponse();
-    const auth = getAuth();
-    const appVerifier = window.recaptchaVerifier;
-
-    if (!phoneNumber || !recaptchaResponse) {
-      console.error('Invalid phone number or reCAPTCHA not verified');
-      return;
-    }
-
-    try {
-      confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
-      console.log("Recaptcha up! SMS sent!");
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function confirmCodeHandler() {
-    const { code } = formData;
-
-    try {
-      await confirmationResult.confirm(code);
-      goto('/home');
-    } catch (error) {
-      console.error(error);
-    }
-  }
-</script>
-
-<main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
-  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
-    <h1 class="text-2xl font-semibold mb-6">Multi-Factor Authentication</h1>
-  
-    <form on:submit|preventDefault={confirmCodeHandler}>
-
-      <div class="mb-6">
-        <label for="phoneNumber" class="block text-sm font-medium text-gray-600">Phone Number</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" autocomplete="tel" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.phoneNumber} required />
-      </div>
-
-
-      <div class="mb-4">
-        <div class="g-recaptcha" id="recaptcha-container" data-sitekey="6Leo44YpAAAAAO6GBX41rkcS-KD3VkPYiqf6XVjm"></div>
-      </div>
-
-
-      <button type="button" on:click={signInWithPhoneNumberHandler} class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-        Send code
-      </button>
-
-
-      <div class="mb-6 mt-6">
-        <label for="code" class="block text-sm font-medium text-gray-600">Code</label>
-        <input type="text" id="code" name="code" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.code} required />
-      </div>
-  
-
-      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-        Login
-      </button>
-    </form>
-  </section>
-</main>
-
-<style>
-  main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  section {
-    background: white;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  input {
-    width: 100%;
-  }
-
-  button {
-    cursor: pointer;
-  }
-</style> -->
-
+<!-- Developed by Mark Marsala -->
 <script>
   import { multiFactor, PhoneAuthProvider, PhoneMultiFactorGenerator } from "firebase/auth";
   import { getAuth } from "firebase/auth";
   import { goto } from '$app/navigation';
+  import { Progressbar } from 'flowbite-svelte';
 
   let formData = {
     phoneNumber: '',
@@ -120,7 +19,7 @@
     const { phoneNumber } = formData;
     const recaptchaResponse = grecaptcha.getResponse();
 
-    if (!phoneNumber || !recaptchaResponse) {
+    if (!phoneNumber) {
       console.error('Invalid phone number or reCAPTCHA not verified');
       return;
     }
@@ -155,7 +54,7 @@
 
       login = true;
       await multiFactor(auth.currentUser).enroll(multiFactorAssertion, mfaDisplayName);
-      goto('/home');
+      goto('/create-profile');
     } catch (error) {
       console.error(error);
     }
@@ -173,14 +72,15 @@
 </script>
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
-  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
+  <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="42.84" />
+  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-14">
     <h1 class="text-2xl font-semibold mb-6">Multi-Factor Authentication</h1>
   
     <form on:submit|preventDefault={goHome}>
 
       <div class="mb-6">
         <label for="phoneNumber" class="block text-sm font-medium text-gray-600">Phone Number</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" autocomplete="tel" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.phoneNumber} required />
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+1 123-456-7890" autocomplete="tel" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.phoneNumber} required />
       </div>
 
       <div class="mb-4">
@@ -193,7 +93,7 @@
 
       <div class="mb-6 mt-6">
         <label for="code" class="block text-sm font-medium text-gray-600">Code</label>
-        <input type="text" id="code" name="code" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.code} required />
+        <input type="text" id="code" name="code" placeholder="123456" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.code} required />
       </div>
   
       <button type="button" on:click={loginWithCode} class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">

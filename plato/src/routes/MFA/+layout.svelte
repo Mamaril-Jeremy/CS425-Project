@@ -1,5 +1,5 @@
 <slot />
-
+<!-- Developed by Mark Marsala -->
 <script>
   import { onMount } from 'svelte';
   import { getAuth, RecaptchaVerifier } from "firebase/auth";

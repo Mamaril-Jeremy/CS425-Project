@@ -1,17 +1,4 @@
-<script>
-
-  /*
-    ----------------------------------------------------------------------
-    Michael Nia - Dev Log
-    Updated: 3/4/2024
-    SightEngine Image Filter Implementation for Upload-pfp
-    Michael worked on the image filter: 
-      >Checks image file for inappropriate content and blocks or approves.
-      Improved take on the image filter system using SightEngine API.
-      >Replaced 'fs' with direct image upload with axios component.
-    -----------------------------------------------------------------------
-  */
-  
+<script>  
     import { onAuthStateChanged } from 'firebase/auth';
     import { auth } from '$lib/firebase/firebase.client.js';
     import { getStorage, ref, uploadBytes } from 'firebase/storage';
@@ -45,8 +32,10 @@
   
     const handleContinue = async () => {
       if (image) {
+        const timestamp = new Date().getTime(); 
+        const filename = `${timestamp}_${image.name}`
         const storage = getStorage();
-        const storageRef = ref(storage, `images/${userUID}/${image.name}`);
+        const storageRef = ref(storage, `images/${userUID}/${filename}`);
   
         const metadata = {
           contentType: image.type
@@ -85,19 +74,16 @@
   
             //Check threshold
             if (totalThreshold > 0.7) {
-                console.log('[Image Denied]')
+                alert('Image Denied]')
             } else {
                 console.log('[Image Accepted]')
-                //const uploadTask = uploadBytes(storageRef, image, metadata);  
-                //goto("/create-profile/upload-resume") //Direct user to resume upload.
+                const uploadTask = uploadBytes(storageRef, image, metadata);  
+                goto("/create-profile/upload-resume");
             }
-            //Upload image
-            const uploadTask = uploadBytes(storageRef, image, metadata);  
-            goto("/create-profile/upload-resume") //Direct user to resume upload.
           })
           .catch((error) => {
             console.error('Error analyzing image:', error);
-            // Handle the error
+  
           });
       }
     };
