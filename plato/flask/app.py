@@ -8,10 +8,19 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-cred = credentials.Certificate("../../plato/service_account.json")
+cred = credentials.Certificate("./service_account.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
+@app.route('/add_report', methods=['POST'])  
+def add_report():
+    try:
+        return jsonify({"message": "Report added successfully"}), 200
+        report_data = request.json
+        doc_ref = db.collection('report').add(report_data)
+       
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/add_user', methods=['POST'])  
 def add_user():
