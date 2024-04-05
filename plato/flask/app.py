@@ -22,10 +22,9 @@ db = firestore.client()
 @app.route('/add_report', methods=['POST'])  
 def add_report():
     try:
-        return jsonify({"message": "Report added successfully"}), 200
         report_data = request.json
-        doc_ref = db.collection('report').add(report_data)
-       
+        doc_ref = db.collection('reports').add(report_data)
+        return jsonify({"message": "Report added successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -71,7 +70,7 @@ def upload_file():
             blob = bucket.blob(user_file_path)
             blob.upload_from_string(str(user_data), content_type='application/json')
 
-        # Clean up temporary file
+
         os.remove(file_path)
 
         return 'File uploaded successfully'
