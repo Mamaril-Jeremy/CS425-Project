@@ -64,31 +64,27 @@
 
         // Sending data to server here
         const data = {
-            userReason: reasonsProvided.join(", "),
-            userExplanation: otherReason || additionalInfo,
+            reason: reasonsProvided.join(", "),
+            explanation: otherReason || additionalInfo
         };
 
         sendDataToFlask(data);
 
         async function sendDataToFlask(data) {
             try {
-                const response = await fetch(
-                    'http://localhost:5000/add_report', //Match with your localhost to work
-                    {
-                        method: "POST",
-                        body: JSON.stringify(data),
+                const response = await fetch('http://localhost:5000/add_report', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
                     },
-                );
-
+                    body: JSON.stringify(data)
+            });
                 const responseData = await response.json();
                 console.log(responseData);
             } catch (error) {
-                console.error("Error:", error);
+                console.error('Error:', error);
             }
-        }
-
-        // ---------------------------
-    };
+        }}
 </script>
 
 <body id="outside-container" class="bg-gray-100">
@@ -170,6 +166,9 @@
 </body>
 
 <style>
+    body{
+        margin-top: 100px;
+    }
     #outside-container {
         font-family: Arial, sans-serif;
         margin: 0;
