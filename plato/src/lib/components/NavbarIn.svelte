@@ -12,6 +12,7 @@
     Navbar,
     NavUl
   } from 'flowbite-svelte';
+  import { goto } from '$app/navigation';
   import { collection, getDocs, query, where } from 'firebase/firestore';
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
@@ -56,7 +57,7 @@
 
         items.sort((a, b) => b.timeCreated - a.timeCreated);
 
-        const latestImageRef = items[0];
+        const latestImageRef = items[items.length-1];
 
         const url = await getDownloadURL(latestImageRef);
         
@@ -104,7 +105,7 @@
           {/if}
           <span class="block truncate text-sm font-medium">{userEmail}</span>
         </DropdownHeader>
-        <DropdownItem href="/settings" class="text-black">Dashboard</DropdownItem>
+        <DropdownItem href="/settings" class="text-black">View Plans</DropdownItem>
         <DropdownItem href="/settings" class="text-black" on:click={sClicked}>Settings</DropdownItem>
         <DropdownItem href="/profile" class="text-black" on:click={pClicked}>Profile</DropdownItem>
         <DropdownDivider />
@@ -120,3 +121,24 @@
     </NavUl>
   </Navbar>
 </div>
+
+<style>
+  .navbar-container {
+      position: fixed;
+      top: 17px;
+      left: 0;
+      right: 0;
+      z-index: 1000000; 
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+      height: 40px;
+  }
+  .plato{
+      background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: x-large;
+  }
+</style>

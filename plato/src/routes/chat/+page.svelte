@@ -2,8 +2,6 @@
     //This code was developed by Richard Cao
     import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, Button, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import { writable } from "svelte/store";
-    import axios from 'axios';
-    import FormData from 'form-data';
     import Mpfp from "$lib/assets/Mark Marsala.jpg";
     import Mipfp from "$lib/assets/mike.png";
     import Rpfp from "$lib/assets/Richard Cao.png";
@@ -188,7 +186,7 @@
             <NavHamburger  />
             <NavUl >
               <NavLi class="cursor-pointer hover:cursor-pointer">View Profile</NavLi>
-              <NavLi class="cursor-pointer hover:cursor-pointer">Schedule Appointment</NavLi>
+              <NavLi class="cursor-pointer hover:cursor-pointer" href="/report">Report</NavLi>
               <NavLi class="cursor-pointer hover:cursor-pointer">Disconnect</NavLi>
             </NavUl>
           </Navbar>
