@@ -1,5 +1,6 @@
 from chat import Chat
 import csv
+from resumeReader import ResumeParser
 from flask import Flask, request, jsonify
 import firebase_admin, asyncio
 from firebase_admin import credentials, firestore, storage
@@ -137,6 +138,15 @@ def handle_get_data():
 def handle_update():
     chat_instance.get_updates(db)
     return chat_instance.get_messages()
+
+parser_instance = ResumeParser()
+
+@app.route('/parse_resume_skills', methods=['POST'])
+def parse_resume():
+    data = request.json
+    parser_instance.set_resume(data)
+    parser_instance.extract_skills_from_resume()
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
