@@ -147,16 +147,12 @@ parser_instance = ResumeParser()
 
 @app.route('/parse_resume_skills', methods=['POST'])
 def parse_resume():
-    data = request.json
-    userUID = data['uid']
-    resumeName = data['resume']
-    path_to_resume = 'gs://plato-49d12.appspot.com/resumes/ugNHTyvZ84au8C21X6flzPacuGb2/Amin_Roohan_Resume.pdf'
-    print(path_to_resume)
-    blob = bucket.blob(path_to_resume)
-    resume = blob.download_as_bytes()
+    resume = request.files['file']
+    userUID = request.form['userUID']
     parser_instance.set_resume(resume)
     parser_instance.set_uid(userUID)
-    print(parser_instance.extract_skills_from_resume())
+    skills = parser_instance.extract_skills_from_resume()
+    parser_instance.handleStoreSkills(db, skills)
     response_data = {'message': 'Data received successfully'}
     response = jsonify(response_data)
     return response

@@ -45,26 +45,24 @@
             const metadata = {
                 contentType: file.type
             };
-            const uploadTask = uploadBytes(storageRef, file, metadata);
-            const dataToSend = {
-              uid: userUID,
-              resume: file.name
-            }
-            sendResumeToFlask(dataToSend)
+            console.log(file)
+            await uploadBytes(storageRef, file, metadata);
+            await sendResumeToFlask(file, userUID)
             goto("/home");
         }
     };
-    async function sendResumeToFlask(data) {
+    async function sendResumeToFlask(resumeFile, UID) {
+        const formData = new FormData()
+        formData.append('file', resumeFile)
+        formData.append('userUID', UID)
         try {
-            const response = await fetch('http://localhost:5000/parse_resume_skills', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            const responseData = await response.json();
-            console.log(responseData);
+          const response = await fetch('http://localhost:5000/parse_resume_skills', {
+            method: 'POST',
+            body: formData
+        });
+
+          const responseData = await response.json();
+          console.log(responseData);
         } catch (error) {
             console.error('Error:', error);
         }
