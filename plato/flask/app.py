@@ -1,7 +1,7 @@
 from chat import Chat
 import csv
 from resumeReader import ResumeParser
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 import firebase_admin, asyncio
 from firebase_admin import credentials, firestore, storage
 #from google.cloud import storage
@@ -13,7 +13,11 @@ app = Flask(__name__)
 CORS(app)
 
 cred = credentials.Certificate("service_account.json")
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, {
+    'storageBucket': 'gs://plato-49d12.appspot.com'
+})
+
+bucket = storage.bucket()
 
 # storage_client = storage.Client()
 # bucket_name = 'gs://plato-49d12.appspot.com'
@@ -144,8 +148,18 @@ parser_instance = ResumeParser()
 @app.route('/parse_resume_skills', methods=['POST'])
 def parse_resume():
     data = request.json
-    parser_instance.set_resume(data)
-    parser_instance.extract_skills_from_resume()
+    userUID = data['uid']
+    resumeName = data['resume']
+    path_to_resume = 'gs://plato-49d12.appspot.com/resumes/ugNHTyvZ84au8C21X6flzPacuGb2/Amin_Roohan_Resume.pdf'
+    print(path_to_resume)
+    blob = bucket.blob(path_to_resume)
+    resume = blob.download_as_bytes()
+    parser_instance.set_resume(resume)
+    parser_instance.set_uid(userUID)
+    print(parser_instance.extract_skills_from_resume())
+    response_data = {'message': 'Data received successfully'}
+    response = jsonify(response_data)
+    return response
     
 
 if __name__ == "__main__":

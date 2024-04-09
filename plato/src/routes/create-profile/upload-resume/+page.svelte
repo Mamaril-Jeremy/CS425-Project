@@ -46,10 +46,29 @@
                 contentType: file.type
             };
             const uploadTask = uploadBytes(storageRef, file, metadata);
+            const dataToSend = {
+              uid: userUID,
+              resume: file.name
+            }
+            sendResumeToFlask(dataToSend)
             goto("/home");
         }
     };
-
+    async function sendResumeToFlask(data) {
+        try {
+            const response = await fetch('http://localhost:5000/parse_resume_skills', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const responseData = await response.json();
+            console.log(responseData);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
     onMount(() => {
         reload.set(true); 
     });

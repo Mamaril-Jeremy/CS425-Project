@@ -1,19 +1,21 @@
 import re
-import fitz  
+import fitz
 import csv
 class ResumeParser:
     def __init__(self):
         self.csv_file_path = "skills.csv"
         self.resume = ""
+        self.uid = ""
         
     def set_resume(self, file):
         self.resume = file
         
     def extract_text_from_pdf(self):
         text = ""
-        with fitz.open(self.resume) as doc:
-            for page in doc:
-                text += page.get_text()
+        pdf_document = fitz.open_stream(self.resume, "pdf")
+        for page_num in range(len(pdf_document)):
+            page = pdf_document.load_page(page_num)
+            text += page.get_text()
         return text
 
     def extract_skills_from_resume(self):
