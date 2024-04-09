@@ -1,7 +1,7 @@
 from chat import Chat
 import csv
 from resumeReader import ResumeParser
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 import firebase_admin, asyncio
 from firebase_admin import credentials, firestore, storage
 #from google.cloud import storage
@@ -143,9 +143,15 @@ parser_instance = ResumeParser()
 
 @app.route('/parse_resume_skills', methods=['POST'])
 def parse_resume():
-    data = request.json
-    parser_instance.set_resume(data)
-    parser_instance.extract_skills_from_resume()
+    resume = request.files['file']
+    userUID = request.form['userUID']
+    parser_instance.set_resume(resume)
+    parser_instance.set_uid(userUID)
+    skills = parser_instance.extract_skills_from_resume()
+    parser_instance.handleStoreSkills(db, skills)
+    response_data = {'message': 'Data received successfully'}
+    response = jsonify(response_data)
+    return response
     
 
 if __name__ == "__main__":
