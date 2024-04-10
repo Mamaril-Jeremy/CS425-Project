@@ -69,7 +69,6 @@
         try {
         const response = await fetch("http://localhost:5000/get_initial_messages");
         const data = await response.json();
-        // Call post_message() or perform other actions with the data on the frontend
         analyzeMessage(data.messages);
         } catch (error) {
         console.error("Error fetching data:", error);
@@ -81,7 +80,6 @@
         const queryNumSnapshot = await getDocs(numMessages);
         const subscribe = onSnapshot(query(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"),orderBy("messageOrder", "asc")), (querySnapshot) => {
             messages.set([]);
-            // Update local data with changes from Firestore
             querySnapshot.docs.slice(1).forEach((doc) => {
                 const data = doc.data();
                 timestamp = data.messageTime;
@@ -153,7 +151,7 @@
     </div>
 
     <div class = "chatbox">
-        {#each $messages.slice().reverse() as { text, timestamp, user }}
+        {#each $messages.reverse() as { text, timestamp, user }}
             <div class="message-container">
                 <div class="{user === currentUser ? 'sent-message' : 'received-message'}">
                     <div class="meta">{user} {timestamp}</div>
@@ -179,27 +177,28 @@
     .message-container {
         display: flex;
         flex-direction: column-reverse;
-        overflow-y: auto; /* Allow vertical scrolling */
-        height: 9%; /* Occupy full height of the chatbox */
+        overflow-y: auto;
+        height: 9%;
     }
     .chatbox{
         width : 87%;
-        height : 93%;
+        height : 85%;
         position: fixed;
-        top: 4.2rem;
+        bottom: 0%;
         right: 0rem;
         border-radius: .5rem;
         box-shadow: rgba(0,0,0,0.25) 0px 3px 8px;
         background: white;
         z-index: 500;
+        overflow-y: auto;
     }  
     .dashboard{
         position:fixed;
         z-index:2000;
-        top:11%;
-        left:13%;
-        width: 85%;
-        height: 40%;
+        top:8%;
+        right:0%;
+        width: 90%;
+        height: 50%;
     }
     
     .button{
@@ -219,10 +218,10 @@
 
     .textbox
     {
-        position : absolute;
+        position : fixed;
         bottom: 1rem;
-        left: 1rem;
-        width : 89%;
+        left: 17%;
+        width : 75%;
         box-sizing: border-box;
         font-size: 16px;
         z-index: 1000;
@@ -241,36 +240,45 @@
         font-size: 30px;
         
     }
-    .sent-message {
-        display: flex;
-        flex-direction: column;
-        align-self: flex-end;
-        margin-bottom: 1px;
-        z-index: 1000;
-        margin-right: 5px;
-    }
-
-    .received-message {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-bottom: 10px;
-        z-index: 1000;
-    }
 
     .message {
         background-color: #083b7d;
+        color: white;
         padding: 8px;
         border-radius: 8px;
-        z-index: 1000;
+        max-width: fit-content;
+        word-wrap: break-word;
     }
 
-    .meta {
+    .meta, .sent-message {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-end;
         font-size: 12px;
         color: #010102;
         z-index: 1000;
     }
-    /* .container{
-        width: 100%;
-    } */
+
+    .meta, .received-message{
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        font-size: 12px;
+        color: #010102;
+        z-index: 1000;
+    }
+
+    .sent-message, .received-message {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .sent-message .message {
+        align-self: flex-end;
+    }
+
+    .received-message .message {
+        align-self: flex-start;
+    }
 </style>
