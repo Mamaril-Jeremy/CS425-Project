@@ -1,5 +1,5 @@
 <script>
-
+    import { ArrowRightOutline } from 'flowbite-svelte-icons';
 </script>
 
 <style>
@@ -15,7 +15,6 @@
         position: relative;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 20px;
-        
     }
 
     .name {
@@ -61,10 +60,6 @@
         text-align: center; 
     }
 
-    .section:hover a {
-        background-color: rgb(44, 102, 244); 
-    }
-
     .circle {
         width: 27.5%;
         height: 40%;
@@ -81,8 +76,8 @@
 </style>
 
 <div class="card">
-    <div class="section"><a href="/"><span>Resume</span></a></div>
-    <div class="section"><a href="/"><span>Interests</span></a></div>
+    <div class="section"><a href="/"><span>Education</span></a></div>
+    <div class="section"><a href="/"><span>Skills</span></a></div>
     <div class="section"><a href="/"><span>Info</span></a></div>
     <div class="section"><a href="/"><span>Hours</span></a></div>
     <div class="name">Jeremy Mamaril</div>

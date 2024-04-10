@@ -5,6 +5,7 @@
     import { onAuthStateChanged } from 'firebase/auth';
     import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
     import { auth, db } from '$lib/firebase/firebase.client.js';
+    import { ArrowLeftOutline, ArrowRightOutline } from 'flowbite-svelte-icons';
 
     let userUID;
     let connectsRemaining;
@@ -45,11 +46,11 @@
 
 <div class="container">
     <div class="pass">
-        <Button color="red" class="tinder-button" on:click={() => updateLimit('pass')}>Pass</Button>
+        <Button class="!p-2" on:click={() => updateLimit('pass')}><ArrowLeftOutline class="w-5 h-5 mr-2" /> Pass </Button>
     </div>
     <Card />
     <div class="connect">
-        <Button color="green" class="tinder-button" on:click={() => updateLimit('connect')}>Connect</Button>
+        <Button class="!p-2" on:click={() => updateLimit('connect')}>Connect <ArrowRightOutline class="w-5 h-5 ml-2" /></Button>
      </div>
 </div>
 
