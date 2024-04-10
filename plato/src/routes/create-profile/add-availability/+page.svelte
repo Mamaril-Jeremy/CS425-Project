@@ -1,5 +1,6 @@
 <script>
   import { goto } from '$app/navigation';
+  import { ProgressBar } from 'flowbite-svelte;'
 
   let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   let officeHours = {};
