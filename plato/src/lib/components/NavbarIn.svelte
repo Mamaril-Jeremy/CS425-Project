@@ -75,14 +75,6 @@
       console.error('Error during logout:', err);
     }
   }
-
-  const pClicked = async () => {
-    goto('/profile');
-  };
-
-  const sClicked = async () => {
-    goto('/settings');
-  };
 </script>
   
 <div class="navbar-container">
@@ -105,9 +97,9 @@
           {/if}
           <span class="block truncate text-sm font-medium">{userEmail}</span>
         </DropdownHeader>
-        <DropdownItem href="/settings" class="text-black">View Plans</DropdownItem>
-        <DropdownItem href="/settings" class="text-black" on:click={sClicked}>Settings</DropdownItem>
-        <DropdownItem href="/profile" class="text-black" on:click={pClicked}>Profile</DropdownItem>
+        <DropdownItem href="/premium" class="text-black">Premium</DropdownItem>
+        <DropdownItem href="/settings" class="text-black">Settings</DropdownItem>
+        <DropdownItem href="/profile" class="text-black">Profile</DropdownItem>
         <DropdownDivider />
         <DropdownItem on:click={handleClick}><span class="text-blue-600">Sign out</span></DropdownItem>
       </Dropdown>

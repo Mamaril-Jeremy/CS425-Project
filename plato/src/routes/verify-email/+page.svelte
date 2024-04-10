@@ -51,7 +51,7 @@
 </script>
   
 <main class="bg-gray-100">
-  <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="28.56" />
+  <Progressbar class="absolute top-40 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="25"/>
   <body>
     <div class="title">Verify Your Email Before Continuing</div>
     <div class="form-container">

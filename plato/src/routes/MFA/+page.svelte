@@ -72,7 +72,7 @@
 </script>
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
-  <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="42.84" />
+  <Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="37.5"/>
   <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-14">
     <h1 class="text-2xl font-semibold mb-6">Multi-Factor Authentication</h1>
   

@@ -5,6 +5,7 @@
     import { getStorage, ref, uploadBytes } from 'firebase/storage';
     import { writable } from 'svelte/store';
     import { goto } from '$app/navigation';
+    import { Progressbar } from 'flowbite-svelte';
 
     let file;
     let isButtonBlue = false;
@@ -55,8 +56,11 @@
     });
 </script>
 
-<main>
-  <div class="center">
+<main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
+  <Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="100"/>
+
+  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-16">
+    <div class="center">
     <h1>Upload A Professional Resume</h1>
 
     <label for="upload">Upload Resume (pdf):</label>
@@ -66,6 +70,7 @@
       Continue
     </button>
   </div>
+  </section>
 </main>
 
 <style>
@@ -97,12 +102,12 @@
   }
 
   .continue {
-    background-color: #007bff;
-    color: #ffffff;
-  }
-
-  .no-continue {
-    background-color: #ffffff;
-    color: #007bff;
-  }
+      background-color: #007bff;
+      color: black;
+    }
+  
+    .no-continue{
+      background-color: #ffffff;
+      color: #007bff;
+    }
 </style>
