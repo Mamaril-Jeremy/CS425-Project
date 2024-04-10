@@ -7,7 +7,7 @@
     import Rpfp from "$lib/assets/Richard Cao.png";
     import { auth, db } from '$lib/firebase/firebase.client.js';
     import { collection, updateDoc, getDocs, addDoc, query, where, orderBy, onSnapshot } from 'firebase/firestore';
-
+    import { onAuthStateChanged } from 'firebase/auth';
 
     let currentUser = '';
     let messages = writable([]);
@@ -16,20 +16,38 @@
     let displayInput = "";
     let currentRecipient = 'Mark Marsala';
     let timestamp = "";
-    let messageOrder = 1
+    let messageOrder = 1;
+    let userUID;
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            userUID = user.uid;
+        }
+    });
+
+    async function setCurrentUser(){
+        const q = query(collection(db, "users"), where("userID", "==", userUID));
+        const querySnap = await getDocs(q);
+        const doc = querySnap.docs[0];
+        const userData = doc.data();
+        const firstName = userData.userFirstName;
+        const lastName = userData.userLastName;
+        currentUser = `${firstName} ${lastName}`;
+    }
+
     function postMessage() {
         messages.update((prevMessages) => [
-        ...prevMessages,
         {
             user: currentUser,
             text: displayInput,
             timestamp: timestamp,
         },
+        ...prevMessages,
         ]);
     }
-    function sendMessage(){
-        timestamp = new Date().toLocaleString()
-        setCurrentChatUser('Jeremy Mamaril');
+    async function sendMessage(){
+        timestamp = new Date().toLocaleString();
+        await setCurrentUser();
         const messageData = {
             user: currentUser,
             text: messageInput,
@@ -55,46 +73,6 @@
         currentRecipient = user;
     }
 
-    // const handleSubmit = async (e) => {
-    //   e.preventDefault();
-
-    //   if (!chatID) {
-    //     console.error('Chat does not exist');
-    //     return;
-    //   }
-  
-    //   const docRef = await addDoc(collection(db, "chat"), {
-    //     chatID: ID,
-    //     numMessages: messageCount
-    //   });
-    // };
-
-    // const fetchData = async (ID) => {
-    //     const chatRef = collection(db, `chat/${ID}/messages`);
-    //     const orderedChatRef = query(chatRef,orderBy("messageOrder", "asc"));
-    //     const querySnapshot = await getDocs(orderedChatRef);
-    //     const numMessages = collection(db, `chat`)
-    //     const queryNumSnapshot = await getDocs(numMessages);
-
-    //     if (!queryNumSnapshot.empty) {
-    //         const data1 = queryNumSnapshot.docs[0].data();
-    //         messageCount = data1.numMessages;
-    //     } else {
-    //         console.log('No such document!');
-    //     }
-    //     console.log(messageCount);
-    //     if (!querySnapshot.empty) {
-    //         for(let i = 1; i <= messageCount; i++){
-    //             const data = querySnapshot.docs[i].data();
-    //             timestamp = data.messageTime;
-    //             currentUser = data.user;
-    //             messageInput = data.message;
-    //             postMessage();
-    //         }
-    //     } else {
-    //         console.log('No such document!');
-    //     }
-    // };
     
     function analyzeMessage(data){
         for(let i = 0; i < data.length; i++){
@@ -109,7 +87,6 @@
         try {
         const response = await fetch("http://localhost:5000/get_initial_messages");
         const data = await response.json();
-        // Call post_message() or perform other actions with the data on the frontend
         analyzeMessage(data.messages);
         } catch (error) {
         console.error("Error fetching data:", error);
@@ -121,7 +98,6 @@
         const queryNumSnapshot = await getDocs(numMessages);
         const subscribe = onSnapshot(query(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"),orderBy("messageOrder", "asc")), (querySnapshot) => {
             messages.set([]);
-            // Update local data with changes from Firestore
             querySnapshot.docs.slice(1).forEach((doc) => {
                 const data = doc.data();
                 timestamp = data.messageTime;
@@ -193,15 +169,14 @@
     </div>
 
     <div class = "chatbox">
-        <ul>
-            {#each $messages as { text, timestamp, user }}
-              <li>----------------------------------------------------------------------------------------------</li>
-              <li class = "font:30">{user} {timestamp}:</li>
-              <li>{text}</li>
-            {/each}
-          </ul>
-        <div class = message-container>
-        </div>
+        {#each $messages.reverse() as { text, timestamp, user }}
+            <div class="message-container">
+                <div class="{user === currentUser ? 'sent-message' : 'received-message'}">
+                    <div class="meta">{user} {timestamp}</div>
+                    <div class="message">{text}</div>
+                </div>
+            </div>
+        {/each}
         <div class = "textbox">
             <input type="text" bind:value={messageInput} placeholder="Enter message here" on:keydown={(event) => event.key === 'Enter' && sendMessage(messageInput)} />
         </div>
@@ -209,13 +184,6 @@
     </div>
 </div>
 <style>
-    ul{
-        color:black;
-        z-index:100000;
-        bottom:10%;
-        position:absolute;
-        left:2%;
-    }
     .Sidebar{
         position : fixed;
         top : 4.5rem;
@@ -224,31 +192,31 @@
         box-shadow: rgba(0,0,0,25) 0px 3px 8px;
         background: white;
     }
-    .message-container{
-        overflow-y: scroll;
-        position: absolute;
-        right:0.01rem;
-        top: 14%;
-        height : 80%;
+    .message-container {
+        display: flex;
+        flex-direction: column-reverse;
+        overflow-y: auto;
+        height: 9%;
     }
     .chatbox{
         width : 87%;
-        height : 93%;
+        height : 85%;
         position: fixed;
-        top: 4.2rem;
+        bottom: 0%;
         right: 0rem;
         border-radius: .5rem;
         box-shadow: rgba(0,0,0,0.25) 0px 3px 8px;
         background: white;
         z-index: 500;
+        overflow-y: auto;
     }  
     .dashboard{
         position:fixed;
         z-index:2000;
-        top:11%;
-        left:13%;
-        width: 85%;
-        height: 40%;
+        top:8%;
+        right:0%;
+        width: 90%;
+        height: 50%;
     }
     
     .button{
@@ -268,10 +236,10 @@
 
     .textbox
     {
-        position : absolute;
+        position : fixed;
         bottom: 1rem;
-        left: 1rem;
-        width : 89%;
+        left: 17%;
+        width : 75%;
         box-sizing: border-box;
         font-size: 16px;
         z-index: 1000;
@@ -291,7 +259,44 @@
         
     }
 
-    /* .container{
-        width: 100%;
-    } */
+    .message {
+        background-color: #083b7d;
+        color: white;
+        padding: 8px;
+        border-radius: 8px;
+        max-width: fit-content;
+        word-wrap: break-word;
+    }
+
+    .meta, .sent-message {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-end;
+        font-size: 12px;
+        color: #010102;
+        z-index: 1000;
+    }
+
+    .meta, .received-message{
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        font-size: 12px;
+        color: #010102;
+        z-index: 1000;
+    }
+
+    .sent-message, .received-message {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .sent-message .message {
+        align-self: flex-end;
+    }
+
+    .received-message .message {
+        align-self: flex-start;
+    }
 </style>
