@@ -30,9 +30,6 @@
         </div>
         <NavUl {hidden} class="order-1">
             <NavLi href="/home"><span class="hover-blue-600 text-xl">Home</span></NavLi>
-            <!-- <NavLi href="/sign-in"><span class="hover:text-blue-600 text-xl">Chat</span></NavLi>
-            <NavLi href="/sign-in"><span class="hover:text-blue-600 text-xl">Connections</span></NavLi>
-            <NavLi href="/sign-in"><span class="hover:text-blue-600 text-xl">Events</span></NavLi> -->
             <NavLi href="/about"><span class="hover:text-blue-600 text-xl">About</span></NavLi>
         </NavUl>
     </Navbar>
@@ -48,6 +45,7 @@
         width: 100%;
         top: 0;
         transition: top 0.3s;
-        height: 45px;
+        height: 40px;
+        padding: 0;
     }
 </style>
