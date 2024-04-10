@@ -1,11 +1,11 @@
 <script>
   //This code was developed by Jeremy Mamaril
-  import { getStorage, getDownloadURL, ref, listAll, uploadBytes } from "firebase/storage";
+  import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth, db } from '$lib/firebase/firebase.client.js';
   import { Avatar } from 'flowbite-svelte';
 
-  let userUID, firstName, lastName, phoneNumber, occupation, role, major, city, country, state, connectsRemaining = 5, passesRemaining = 10;
+  let userUID, firstName, lastName, status, occupation, role, major, city, country, state, connectsRemaining = 5, passesRemaining = 10;
   let avatarUrl;
 
   onAuthStateChanged(auth, (user) => {
@@ -30,13 +30,13 @@
         let user_data = responseData.users;
         firstName = user_data.userFirstName;
         lastName = user_data.userLastName;
-        phoneNumber = user_data.userPhoneNumber;
         occupation = user_data.userOccupation;
         role = user_data.userRole;
         major = user_data.userMajor;
         city = user_data.userCity;
         state = user_data.userState;
         country = user_data.userCountry;
+        status = user_data.userStatus
     } catch (error) {
         console.error('Error:', error);
     }
@@ -86,7 +86,7 @@
           <p for="company" class="mb-2 text-l"><span class="material-symbols-outlined main">work</span>Occupation: {occupation}</p>
         </div>
         <div>
-          <p for="phone" class="mb-2 text-l"><span class="material-symbols-outlined main">phone</span>Phone number: {phoneNumber}</p>
+          <p for="phone" class="mb-2 text-l"><span class="material-symbols-outlined main">grade</span>Current Academic Status: {status}</p>
         </div>        
         <div>
           <p for="role" class="mb-2 text-l"><span class="material-symbols-outlined main">supervised_user_circle</span>Role: {role}</p>

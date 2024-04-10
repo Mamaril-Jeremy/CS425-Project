@@ -75,7 +75,7 @@
   
             //Check threshold
             if (totalThreshold > 0.7) {
-                alert('Image Denied]')
+                alert('Image Denied')
             } else {
                 console.log('[Image Accepted]')
                 const uploadTask = uploadBytes(storageRef, image, metadata);  

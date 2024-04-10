@@ -41,7 +41,7 @@
                 { title: 'Spring semester ends, last day faculty on campus for spring semester', start: new Date(2024, 4, 20), allDay: true },
 
                 // Summer 2024 academic calendar - May 2024
-                { title: 'Mini and Regular session fees due; final day to pay Mini and Regular Session fees without incurring late payment fees', start: new Date(2024, 4, 17) },
+                { title: 'Mini and Regular session fees due; final day to pay Mini and Regular Session fees without incurring late payment fees', start: new Date(2024, 4, 17), allDay: true},
                 { title: 'First Summer payment due for students on a payment plan', start: new Date(2024, 4, 17), allDay: true },
                 { title: 'Mini and Regular Session classes begin', start: new Date(2024, 4, 20), allDay: true },
                 { title: 'Final day to add Mini Session classes', start: new Date(2024, 4, 21), allDay: true },
@@ -160,14 +160,14 @@
         justify-content: center;
         text-align: center;
         position: absolute;
-        margin: 30px 0px 0px 100px;
+        margin: 20px 0px 0px 100px;
         padding-bottom: 50px;
     }
 
     #calendar {
         height: 80vh;
         width: 80%;
-        margin-top: 100px;
+        margin: 100px 0px 0px 70px;
     }
 
     button {
@@ -184,7 +184,7 @@
     }
 </style>
 
-<body>
+<main>
     <div>
         <div id="calendar"></div>
     </div>
@@ -202,7 +202,7 @@
         <button on:click={saveEvent}>Save</button>
         {/if}
     </div>
-</body>
+</main>
 
 
 
