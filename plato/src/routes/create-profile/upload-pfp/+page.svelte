@@ -7,6 +7,7 @@
     //Import image filter packages
     import axios from 'axios';
     import FormData from 'form-data';
+    import { Progressbar } from 'flowbite-svelte';
   
     let image;
     let isButtonBlue = false, userUID;
@@ -88,8 +89,11 @@
       }
     };
   </script>
-  
-  <main>
+
+    <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
+      <Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="75"/>
+    
+      <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-16">
     <div class="center">
       <h1>Upload A Professional Image</h1>
   
@@ -130,7 +134,7 @@
   
     .continue {
       background-color: #007bff;
-      color: #ffffff;
+      color: black;
     }
   
     .no-continue{

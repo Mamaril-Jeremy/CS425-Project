@@ -1,4 +1,6 @@
 <script>
+    import { Button } from 'flowbite-svelte';
+
     let spamChecked = false;
     let abuseChecked = false;
     let otherChecked = false;
@@ -87,101 +89,79 @@
         }}
 </script>
 
-<body id="outside-container" class="bg-gray-100">
-    <div class="container">
-        <h1>User Report</h1>
-        <form on:submit|preventDefault={handleSubmit}>
-            <label for="reasons">Reasons to Report:</label>
-            <input
-                type="checkbox"
-                id="spam"
-                name="reason"
-                value="spam"
-                on:change={handleReasonChange}
-            />
-            <label for="spam">Spam</label>
-            <input
-                type="checkbox"
-                id="abuse"
-                name="reason"
-                value="abuse"
-                on:change={handleReasonChange}
-            />
-            <label for="abuse">Abuse</label>
-            <input
-                type="checkbox"
-                id="other"
-                name="reason"
-                value="other"
-                on:change={handleReasonChange}
-            />
-            <label for="other">Other</label>
-            <input
-                type="text"
-                id="otherReason"
-                class="other-reason"
-                bind:value={otherReason}
-                placeholder="Specify other reason..."
-                on:input={handleOtherReasonChange}
-            />
+<main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800 w-screen">
+    <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
+      <h1 class="text-3xl font-semibold mb-6">Report User</h1>
+  
+      <form on:submit|preventDefault={handleSubmit}>
+        <input
+            type="checkbox"
+            id="spam"
+            name="reason"
+            value="spam"
+            on:change={handleReasonChange}
+        />
+        <label for="reasons">Reasons to Report:</label>
+        <input
+            type="checkbox"
+            id="spam"
+            name="reason"
+            value="spam"
+            on:change={handleReasonChange}
+        />
+        <label for="spam">Spam</label>
+        <input
+            type="checkbox"
+            id="abuse"
+            name="reason"
+            value="abuse"
+            on:change={handleReasonChange}
+        />
+        <label for="abuse">Abuse</label>
+        <input
+            type="checkbox"
+            id="other"
+            name="reason"
+            value="other"
+            on:change={handleReasonChange}
+        />
+        <label for="other">Other</label>
+        <input
+            type="text"
+            id="otherReason"
+            class="other-reason"
+            bind:value={otherReason}
+            placeholder="Specify other reason..."
+            on:input={handleOtherReasonChange}
+        />
 
-            <label for="additionalInfo">Additional Information:</label>
-            <textarea
-                id="additionalInfo"
-                bind:value={additionalInfo}
-                placeholder="Enter additional details..."
-                on:input={handleAdditionalInfoChange}
-            ></textarea>
-            <div id="charCount" class="char-count">{2000 - additionalInfo.length} characters left</div>
+        <label for="additionalInfo">Additional Information:</label>
+        <textarea
+            id="additionalInfo"
+            bind:value={additionalInfo}
+            placeholder="Enter additional details..."
+            on:input={handleAdditionalInfoChange}
+        ></textarea>
+        <div id="charCount" class="char-count">{2000 - additionalInfo.length} characters left</div>
 
-            <label for="image">Attach Image:</label>
-            <input
-                type="file"
-                id="image"
-                on:change={handleImageUpload}
-                accept="image/*"
-            />
+        <label for="image" >Attach Image:</label>
+        <input
+            type="file"
+            id="image"
+            on:change={handleImageUpload}
+            accept="image/*"
+        />
 
-            <button type="submit" class="submit-btn">Send Report</button>
-        </form>
-    </div>
-
-    <script>
-        const toggleOtherReasonInput = () => {
-            const otherReasonInput = document.getElementById("otherReason");
-            if (otherReasonInput) {
-                otherReasonInput.style.display = otherChecked
-                    ? "block"
-                    : "none";
-            }
-        };
-
-        const otherCheckbox = document.getElementById("other");
-        const otherChecked = otherCheckbox.checked;
-
-        otherCheckbox.addEventListener("change", function () {
-            toggleOtherReasonInput();
-        });
-    </script>
-</body>
+        <div id="submit-btn"><Button type="submit" class="bg-blue-600 hover:opacity-75 hover:bg-blue-600">Send Report</Button></div>
+    </form>
+    </section>
+  </main>
 
 <style>
-    body{
+    main{
         margin-top: 100px;
     }
-    #outside-container {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-    .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: white;
-    }
+
     label {
         display: block;
         margin-bottom: 10px;
@@ -194,8 +174,11 @@
         height: 100px;
         resize: vertical;
     }
-    .submit-btn {
-        margin-top: 20px;
+    #submit-btn {
+        display: block;
+        margin-top: 20px; 
+        margin-bottom: 0px;
+        text-align: center; 
     }
     .other-reason {
         display: none;
@@ -206,3 +189,4 @@
         margin-top: 5px;
     }
 </style>
+

@@ -7,7 +7,7 @@
   import { goto } from '$app/navigation';
   import { Progressbar } from 'flowbite-svelte';
 
-  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, city, state, aboutMe, connectsRemaining = 5, passesRemaining = 10;
+  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, city, state, aboutMe = "", connectsRemaining = 5, passesRemaining = 10;
   let success = false;
 
   let countries = [], states = [], cities = [];
@@ -114,9 +114,9 @@
   }
 </script>
 
-<main class="flex items-center mt-10 justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
-  <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="42.84" />
-  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-21">
+<main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
+  <Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="50"/>
+  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-48">
     <h1 class="text-3xl font-semibold mb-6 mt-10">Create Your Profile</h1>
   
 
@@ -259,11 +259,12 @@
       </div>
 
       <div>
-        <Label for="about_me" class="mb-2">About Me</Label>
+        <Label for="about_me" class="mb-2">About Me (Min: 100 characters)</Label>
         <textarea class="mb-4" id="about_me" rows="4" bind:value={aboutMe} placeholder="Tell us about yourself..."></textarea>
+        <div id="charCount" class="char-count">{100 - aboutMe.length} characters needed</div>
       </div>
 
-      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+      <button type="submit" class="w-full mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
         Create Account
       </button>
 
@@ -304,6 +305,11 @@
     border: 1px solid black;
     border-radius: 4px;
     resize: vertical;
+    margin-bottom: 0px;
   }
   
+  .char-count {
+        font-size: 0.8em;
+        color: gray;
+  }
 </style>

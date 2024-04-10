@@ -1,6 +1,6 @@
 <script>
-  //This code was developed by Mark Marsala
-  import { authHandlers } from "../../stores/authStore.js"
+  // This code was developed by Mark Marsala
+  import { authHandlers } from "../../stores/authStore.js";
   import { goto } from '$app/navigation';
   import { Progressbar } from 'flowbite-svelte';
 
@@ -56,14 +56,14 @@
     }
   }
 </script>
-  
-<main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
-  
 
-  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
-    <Progressbar class="absolute top-40 left-0 w-full bg-white dark:bg-black-800" progress="14.28" />
+<main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
+  <Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="12.5"/>
+
+  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-16">
+
     <h1 class="text-3xl font-semibold mb-6">Create Account</h1>
-  
+
     <form on:submit|preventDefault={handleSubmit}>
       <!-- Username -->
       <div class="mb-4">
@@ -72,7 +72,7 @@
         </label>
         <input type="text" id="username" name="username" autocomplete="username" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.username} required />
       </div>
-  
+
       <!-- Email -->
       <div class="mb-4">
         <label for="email" class="block text-sm font-medium text-gray-600">Email Address</label>
@@ -84,7 +84,7 @@
         <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
         <input type="password" id="password" name="password" autocomplete="new-password" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.password} required />
       </div>
-  
+
       <!-- Confirm Password -->
       <div class="mb-4">
         <label for="confirmPassword" class="block text-sm font-medium text-gray-600">Confirm Password</label>
@@ -102,19 +102,19 @@
       </div>
 
       {#if emailError}
-        <p class="text-red-500 mb-4">Email invalid</p>
+      <p class="text-red-500 mb-4">Email invalid</p>
       {/if}
 
       {#if passwordMatchError}
-        <p class="text-red-500 mb-4">Passwords must match</p>
+      <p class="text-red-500 mb-4">Passwords must match</p>
       {/if}
 
       {#if passwordLengthError}
-        <p class="text-red-500 mb-4">Password must contain at least 8 characters</p>
+      <p class="text-red-500 mb-4">Password must contain at least 8 characters</p>
       {/if}
 
       {#if passwordRequirementsError}
-        <p class="text-red-500 mb-4">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character</p>
+      <p class="text-red-500 mb-4">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character</p>
       {/if}
 
       <!-- Submit Button -->
@@ -135,7 +135,6 @@
 
   section {
     background: white;
-    margin-top: 5rem;
     padding: 2rem;
   }
 
