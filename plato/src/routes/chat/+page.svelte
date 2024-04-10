@@ -19,12 +19,12 @@
     let messageOrder = 1
     function postMessage() {
         messages.update((prevMessages) => [
-        ...prevMessages,
         {
             user: currentUser,
             text: displayInput,
             timestamp: timestamp,
         },
+        ...prevMessages,
         ]);
     }
     function sendMessage(){
@@ -55,46 +55,6 @@
         currentRecipient = user;
     }
 
-    // const handleSubmit = async (e) => {
-    //   e.preventDefault();
-
-    //   if (!chatID) {
-    //     console.error('Chat does not exist');
-    //     return;
-    //   }
-  
-    //   const docRef = await addDoc(collection(db, "chat"), {
-    //     chatID: ID,
-    //     numMessages: messageCount
-    //   });
-    // };
-
-    // const fetchData = async (ID) => {
-    //     const chatRef = collection(db, `chat/${ID}/messages`);
-    //     const orderedChatRef = query(chatRef,orderBy("messageOrder", "asc"));
-    //     const querySnapshot = await getDocs(orderedChatRef);
-    //     const numMessages = collection(db, `chat`)
-    //     const queryNumSnapshot = await getDocs(numMessages);
-
-    //     if (!queryNumSnapshot.empty) {
-    //         const data1 = queryNumSnapshot.docs[0].data();
-    //         messageCount = data1.numMessages;
-    //     } else {
-    //         console.log('No such document!');
-    //     }
-    //     console.log(messageCount);
-    //     if (!querySnapshot.empty) {
-    //         for(let i = 1; i <= messageCount; i++){
-    //             const data = querySnapshot.docs[i].data();
-    //             timestamp = data.messageTime;
-    //             currentUser = data.user;
-    //             messageInput = data.message;
-    //             postMessage();
-    //         }
-    //     } else {
-    //         console.log('No such document!');
-    //     }
-    // };
     
     function analyzeMessage(data){
         for(let i = 0; i < data.length; i++){
@@ -193,15 +153,14 @@
     </div>
 
     <div class = "chatbox">
-        <ul>
-            {#each $messages as { text, timestamp, user }}
-              <li>----------------------------------------------------------------------------------------------</li>
-              <li class = "font:30">{user} {timestamp}:</li>
-              <li>{text}</li>
-            {/each}
-          </ul>
-        <div class = message-container>
-        </div>
+        {#each $messages.slice().reverse() as { text, timestamp, user }}
+            <div class="message-container">
+                <div class="{user === currentUser ? 'sent-message' : 'received-message'}">
+                    <div class="meta">{user} {timestamp}</div>
+                    <div class="message">{text}</div>
+                </div>
+            </div>
+        {/each}
         <div class = "textbox">
             <input type="text" bind:value={messageInput} placeholder="Enter message here" on:keydown={(event) => event.key === 'Enter' && sendMessage(messageInput)} />
         </div>
@@ -209,13 +168,6 @@
     </div>
 </div>
 <style>
-    ul{
-        color:black;
-        z-index:100000;
-        bottom:10%;
-        position:absolute;
-        left:2%;
-    }
     .Sidebar{
         position : fixed;
         top : 4.5rem;
@@ -225,11 +177,11 @@
         background: white;
     }
     .message-container{
-        overflow-y: scroll;
-        position: absolute;
-        right:0.01rem;
-        top: 14%;
+        overflow-y: auto;
+        position: relative;
         height : 80%;
+        display: flex;
+        flex-direction: column-reverse;
     }
     .chatbox{
         width : 87%;
@@ -290,7 +242,35 @@
         font-size: 30px;
         
     }
+    .sent-message {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-end;
+        margin-bottom: 10px;
+        z-index: 1000;
+        margin-right: 5px;
+    }
 
+    .received-message {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        z-index: 1000;
+    }
+
+    .message {
+        background-color: #083b7d;
+        padding: 8px;
+        border-radius: 8px;
+        z-index: 1000;
+    }
+
+    .meta {
+        font-size: 12px;
+        color: #010102;
+        z-index: 1000;
+    }
     /* .container{
         width: 100%;
     } */
