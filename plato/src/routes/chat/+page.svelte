@@ -7,7 +7,7 @@
     import Rpfp from "$lib/assets/Richard Cao.png";
     import { auth, db } from '$lib/firebase/firebase.client.js';
     import { collection, updateDoc, getDocs, addDoc, query, where, orderBy, onSnapshot } from 'firebase/firestore';
-
+    import { onAuthStateChanged } from 'firebase/auth';
 
     let currentUser = '';
     let messages = writable([]);
@@ -16,7 +16,25 @@
     let displayInput = "";
     let currentRecipient = 'Mark Marsala';
     let timestamp = "";
-    let messageOrder = 1
+    let messageOrder = 1;
+    let userUID;
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            userUID = user.uid;
+        }
+    });
+
+    async function setCurrentUser(){
+        const q = query(collection(db, "users"), where("userID", "==", userUID));
+        const querySnap = await getDocs(q);
+        const doc = querySnap.docs[0];
+        const userData = doc.data();
+        const firstName = userData.userFirstName;
+        const lastName = userData.userLastName;
+        currentUser = `${firstName} ${lastName}`;
+    }
+
     function postMessage() {
         messages.update((prevMessages) => [
         {
@@ -27,9 +45,9 @@
         ...prevMessages,
         ]);
     }
-    function sendMessage(){
-        timestamp = new Date().toLocaleString()
-        setCurrentChatUser('Jeremy Mamaril');
+    async function sendMessage(){
+        timestamp = new Date().toLocaleString();
+        await setCurrentUser();
         const messageData = {
             user: currentUser,
             text: messageInput,
