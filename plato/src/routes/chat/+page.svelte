@@ -176,12 +176,11 @@
         box-shadow: rgba(0,0,0,25) 0px 3px 8px;
         background: white;
     }
-    .message-container{
-        overflow-y: auto;
-        position: relative;
-        height : 80%;
+    .message-container {
         display: flex;
         flex-direction: column-reverse;
+        overflow-y: auto; /* Allow vertical scrolling */
+        height: 9%; /* Occupy full height of the chatbox */
     }
     .chatbox{
         width : 87%;
@@ -246,7 +245,7 @@
         display: flex;
         flex-direction: column;
         align-self: flex-end;
-        margin-bottom: 10px;
+        margin-bottom: 1px;
         z-index: 1000;
         margin-right: 5px;
     }
