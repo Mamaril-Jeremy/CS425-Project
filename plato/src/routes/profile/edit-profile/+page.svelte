@@ -8,8 +8,8 @@
   import { Avatar, Label, Input, Button} from 'flowbite-svelte';
   import axios from 'axios';
 
-  let image, userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, connectsRemaining = 5, passesRemaining = 10;
-  let localFirstName, localLastName, localPhoneNumber, localOccupation, localRole, localMajor;
+  let image, userUID, country, state, city, userEmail, firstName, lastName, status, occupation, role, major, connectsRemaining = 5, passesRemaining = 10;
+  let localFirstName, localLastName, localStatus, localOccupation, localRole, localMajor;
   let success = false, avatarUrl;
 
   let countries = [], states = [], cities = [];
@@ -47,6 +47,7 @@
       .then(response => response.json())
       .then(data => {
         states = data;
+        states.sort((a, b) => (a.name > b.name) ? 1 : -1); 
       })
       .catch(error => console.error('Error fetching states:', error));
   };
@@ -86,10 +87,13 @@
         let user_data = responseData.users;
         firstName = user_data.userFirstName;
         lastName = user_data.userLastName;
-        phoneNumber = user_data.userPhoneNumber;
+        status = user_data.userStatus;
         occupation = user_data.userOccupation;
         role = user_data.userRole;
         major = user_data.userMajor;
+        country = user_data.userCountry;
+        state = user_data.userState;
+        city = user_data.userCity
     } catch (error) {
         console.error('Error:', error);
     }
@@ -105,7 +109,7 @@
 
     firstName = localFirstName;
     lastName = localLastName;
-    phoneNumber = localPhoneNumber;
+    status = localStatus;
     occupation = localOccupation;
     role = localRole;
     major = localMajor;
@@ -121,8 +125,7 @@
       userMajor: major,
       userOccupation: occupation,
       userPassesRemaining: passesRemaining,
-      userPhoneNumber: phoneNumber,
-      userRole: role,
+      userStatus: status,
       userState: selectedState.name
     };
     sendDataToFlask(data);
@@ -273,7 +276,7 @@ const handleImageUpload = async (event) => {
   <body>
     <div class="wrapper">
       <div class="user-info-container">
-        <div class="flex items-center space-x-8 text-xl">
+  <div class="flex items-center space-x-8 text-xl mt-16">
           <div>
             <Avatar src={avatarUrl} data-name="profile-picture" border class="ring-blue-600 dark:ring-blue-300" size="lg"
             dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
@@ -295,7 +298,7 @@ const handleImageUpload = async (event) => {
   
     <div class="form-container">
       <form on:submit={handleClick}>
-        <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div class="grid gap-8 mb-6 md:grid-cols-2">
           <div>
             <Label for="first_name" class="mb-2 text-l">First name: {firstName}</Label>
             <Input type="text" id="first_name" placeholder="First" bind:value={localFirstName} required />
@@ -353,6 +356,7 @@ const handleImageUpload = async (event) => {
               <option value="Software Architect">Software Architect</option>
               <option value="Software Engineer">Software Engineer</option>
               <option value="Social Worker">Social Worker</option>
+              <option value="Student">Student</option>
               <option value="Teacher">Teacher</option>
               <option value="Veterinarian">Veterinarian</option>
               <option value="Web Developer">Web Developer</option>
@@ -361,52 +365,62 @@ const handleImageUpload = async (event) => {
           </select>
           </div>
           <div>
-            <Label for="phone" class="mb-2 text-l">Phone number: {phoneNumber}</Label>
-            <Input type="tel" id="phone" placeholder="123-456-7890" title="Please enter a valid phone number (e.g., 123-456-7890)" bind:value={localPhoneNumber} required />
+            <Label for="phone" class="mb-2 text-l">Current Academic Status: {status}</Label>
+            <select class="text-gray-900 bg-gray-50 w-full" bind:value={localStatus} required>
+              <option value="">Select</option>
+              <option value="Freshman">Freshman</option>
+              <option value="Sophomore">Sophomore</option>
+              <option value="Junior">Junior</option>
+              <option value="Senior">Senior</option>
+              <option value="Masters">Masters</option>
+              <option value="Doctorate">Doctorate</option>
+              <option value="Graduated">Graduated</option>
+              <option value="Other">Other</option>
           </div>        
           <div>
             <Label for="role" class="mb-2 text-l">Role: {role}</Label>
-            <select class="text-gray-900 bg-gray-50 w-full" bind:value={localRole}>
-              <option value="Mentor">Mentor</option>
-              <option value="Mentee">Mentee</option>
+            <select class="text-gray-900 bg-gray-50 w-full">           
+              <option value="Cannot change">Cannot Change</option>
             </select>
           </div>
           <div>
             <Label for="major" class="mb-2 text-l">Major: {major}</Label>
             <select class="text-gray-900 bg-gray-50 w-full" bind:value={localMajor}>
-              <option value="accounting">Accounting</option>
-              <option value="agriculture">Agriculture</option>
-              <option value="anthropology">Anthropology</option>
-              <option value="architecture">Architecture</option>
-              <option value="art">Art and Design</option>
-              <option value="biology">Biology</option>
-              <option value="business">Business Administration</option>
-              <option value="chemistry">Chemistry</option>
-              <option value="communication">Communication Studies</option>
-              <option value="computerScience">Computer Science</option>
-              <option value="economics">Economics</option>
-              <option value="education">Education</option>
-              <option value="engineering">Engineering</option>
-              <option value="english">English Literature</option>
-              <option value="environmentalScience">Environmental Science</option>
-              <option value="finance">Finance</option>
-              <option value="geography">Geography</option>
-              <option value="healthScience">Health Science</option>
-              <option value="internationalRelations">International Relations</option>
-              <option value="linguistics">Linguistics</option>
-              <option value="management">Management</option>
-              <option value="marineBiology">Marine Biology</option>
-              <option value="microbiology">Microbiology</option>
-              <option value="nutrition">Nutrition</option>
-              <option value="philosophy">Philosophy</option>
-              <option value="physics">Physics</option>
-              <option value="politicalScience">Political Science</option>
-              <option value="psychology">Psychology</option>
-              <option value="graphicDesign">Graphic Design</option>
-              <option value="sociology">Sociology</option>
+<option value="">Select Major</option>
+            <option value="Accounting">Accounting</option>
+            <option value="Agriculture">Agriculture</option>
+            <option value="Anthropology">Anthropology</option>
+            <option value="Architecture">Architecture</option>
+            <option value="Art">Art and Design</option>
+            <option value="Biology">Biology</option>
+            <option value="Business">Business Administration</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Communication">Communication Studies</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Economics">Economics</option>
+            <option value="Education">Education</option>
+            <option value="Engineering">Engineering</option>
+            <option value="English">English Literature</option>
+            <option value="Environmental Science">Environmental Science</option>
+            <option value="Finance">Finance</option>
+            <option value="Geography">Geography</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Health Science">Health Science</option>
+            <option value="International Relations">International Relations</option>
+            <option value="Linguistics">Linguistics</option>
+            <option value="Management">Management</option>
+            <option value="MarineBiology">Marine Biology</option>
+            <option value="Microbiology">Microbiology</option>
+            <option value="Nutrition">Nutrition</option>
+            <option value="Philosophy">Philosophy</option>
+            <option value="Physics">Physics</option>
+            <option value="Political Science">Political Science</option>
+            <option value="Psychology">Psychology</option>
+            <option value="Sociology">Sociology</option>
           </select>
           </div>
           <div>
+            <Label for="country" class="mb-2 text-l">Country: {country}</Label>
             <select class="text-gray-900 bg-gray-50" bind:value={selectedCountry} on:change={fetchStates}>
               <option value="">Select Country</option>
               {#each countries as country (country.iso2)}
@@ -415,6 +429,7 @@ const handleImageUpload = async (event) => {
             </select>
           </div>
           <div>
+            <Label for="state" class="mb-2 text-l relative">City and State: {city}, {state}</Label>
             <select class="text-gray-900 bg-gray-50 w-6/12" bind:value={selectedState} on:change={fetchCities} if={states.length}>
               <option value="">Select State</option>
               {#each states as state (state.id)}

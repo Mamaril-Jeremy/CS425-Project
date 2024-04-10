@@ -1,6 +1,6 @@
 <script>
   import { goto } from '$app/navigation';
-  import { ProgressBar } from 'flowbite-svelte;'
+  import { Progressbar } from 'flowbite-svelte';
 
   let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   let officeHours = {};
@@ -32,6 +32,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 100px;
   }
 
   .title-info-container {
@@ -94,13 +95,13 @@
 </style>
 
 <body>
+<Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="62.5"/>
   <div class="wrapper">
     <div class="title-info-container">
         <div class="flex items-center space-x-8 text-xl">
             Indicate your availability for office hours.
         </div>
     </div>
-  
     <div class="form-container">
         <form on:submit={saveOfficeHours}>
             <div class="office-hours">

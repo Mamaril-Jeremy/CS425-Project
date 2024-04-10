@@ -25,7 +25,7 @@
     }
 
     try {
-      const auth = getAuth(); // Assuming getAuth() is a function that returns your Firebase auth instance
+      const auth = getAuth();
 
       appVerifier = window.recaptchaVerifier;
       const multiFactorSession = await multiFactor(auth.currentUser).getSession();
@@ -48,7 +48,7 @@
     const { code } = formData;
 
     try {
-      const auth = getAuth(); // Assuming getAuth() is a function that returns your Firebase auth instance
+      const auth = getAuth(); 
       const cred = PhoneAuthProvider.credential(verificationId, code);
       const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
 
@@ -73,7 +73,7 @@
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
   <Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="37.5"/>
-  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-14">
+  <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-40">
     <h1 class="text-2xl font-semibold mb-6">Multi-Factor Authentication</h1>
   
     <form on:submit|preventDefault={goHome}>
@@ -97,7 +97,7 @@
       </div>
   
       <button type="button" on:click={loginWithCode} class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-        Login
+        Verify
       </button>
     </form>
   </section>

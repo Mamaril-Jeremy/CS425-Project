@@ -49,7 +49,7 @@
             console.log(file)
             await uploadBytes(storageRef, file, metadata);
             await sendResumeToFlask(file, userUID)
-            goto("/home");
+            goto("/create-profile/completed");
         }
     };
     async function sendResumeToFlask(resumeFile, UID) {
@@ -74,7 +74,7 @@
 </script>
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
-  <Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="100"/>
+  <Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="87.5"/>
 
   <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full mt-16">
     <div class="center">

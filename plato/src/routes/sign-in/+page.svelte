@@ -55,7 +55,7 @@
           </div>
         <Button type="submit" class="w-full bg-blue-600 hover:opacity-75 hover:bg-blue-600">Login to your account</Button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300 ml-3">
-          Not registered? <span class="ml-3"> </span><a href="/create-account" class="ml-2 text-blue-600 hover:underline dark:text-primary-500"> Create account </a>
+          Not registered? <span class="ml-3"> </span><a href="/start" class="ml-2 text-blue-600 hover:underline dark:text-primary-500"> Create account </a>
         </div>        
       </form>
     </Card>

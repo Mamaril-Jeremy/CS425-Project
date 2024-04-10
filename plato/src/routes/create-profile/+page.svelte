@@ -7,8 +7,7 @@
   import { goto } from '$app/navigation';
   import { Progressbar } from 'flowbite-svelte';
 
-  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, city, state, aboutMe = "", connectsRemaining = 5, passesRemaining = 10;
-  let success = false;
+  let userUID, userEmail, firstName, lastName, phoneNumber, occupation, role, major, aboutMe = "", status, connectsRemaining = 5, passesRemaining = 10;
 
   let countries = [], states = [], cities = [];
   let selectedCountry = '', selectedState = '', selectedCity = '';
@@ -35,6 +34,7 @@
       .then(response => response.json())
       .then(data => {
         states = data;
+        states.sort((a, b) => (a.name > b.name) ? 1 : -1); 
       })
       .catch(error => console.error('Error fetching states:', error));
   };
@@ -78,6 +78,7 @@
     }
 
     const data =  {
+      userBio: aboutMe,
       userCity: selectedCity,
       userConnectsRemaining: connectsRemaining,
       userCountry: selectedCountry.name,
@@ -91,7 +92,8 @@
       userPassesRemaining: passesRemaining,
       userPhoneNumber: phoneNumber,
       userRole: role,
-      userState: selectedState.name
+      userState: selectedState.name,
+      userStatus: status
     };
     sendDataToFlask(data);
     goto("/create-profile/add-availability")
@@ -132,7 +134,7 @@
         </div>
         <div>
           <Label for="company" class="mb-2">Occupation</Label>
-          <select class="text-gray-900 bg-gray-50 w-full" bind:value={occupation}>
+          <select class="text-gray-900 bg-gray-50 w-full" bind:value={occupation} required>
             <option value="">Select Occupation</option>
             <option value="Accountant">Accountant</option>
             <option value="Actor">Actor</option>
@@ -180,6 +182,7 @@
             <option value="Software Architect">Software Architect</option>
             <option value="Software Engineer">Software Engineer</option>
             <option value="Social Worker">Social Worker</option>
+            <option value="Student">Student</option>
             <option value="Teacher">Teacher</option>
             <option value="Veterinarian">Veterinarian</option>
             <option value="Web Developer">Web Developer</option>
@@ -189,8 +192,17 @@
           </select>
         </div>
         <div>
-          <Label for="phone" class="mb-2">Phone number</Label>
-          <input type="tel" id="phone" placeholder="+1 123-456-7890" bind:value={phoneNumber} style="width:180px;" required />
+          <Label for="text" class="mb-2">Current Academic Status</Label>
+          <select class="text-gray-900 bg-gray-50 w-full" bind:value={status} required>
+            <option value="">Select</option>
+            <option value="Freshman">Freshman</option>
+            <option value="Sophomore">Sophomore</option>
+            <option value="Junior">Junior</option>
+            <option value="Senior">Senior</option>
+            <option value="Masters">Masters</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Graduated">Graduated</option>
+            <option value="Other">Other</option>
         </div>
         <div>
           <Label for="role" class="mb-2">Role</Label>
@@ -202,7 +214,7 @@
         </div>
         <div>
           <Label for="major" class="mb-2">Major</Label>
-          <select class="text-gray-900 bg-gray-50 w-full" bind:value={major}>
+          <select class="text-gray-900 bg-gray-50 w-full" bind:value={major} required>
             <option value="">Select Major</option>
             <option value="Accounting">Accounting</option>
             <option value="Agriculture">Agriculture</option>
@@ -237,19 +249,19 @@
         </select>
         </div>
         <div>
-          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedCountry} style="width:180px;" on:change={fetchStates}>
+          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedCountry} style="width:180px;" on:change={fetchStates} required>
             <option value="">Select Country</option>
             {#each countries as country (country.iso2)}
               <option value={country} key={country.iso2}>{country.name}</option>
             {/each}
           </select>
-          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedState} style="width:180px;" on:change={fetchCities} if={states.length}>
+          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedState} style="width:180px;" on:change={fetchCities} if={states.length} required>
             <option value="">Select State</option>
             {#each states as state (state.id)}
               <option value={state} key={state.id}>{state.name}</option>
             {/each}
           </select>
-          <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} style="width:180px;" if={cities.length}>
+          <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} style="width:180px;" if={cities.length} required>
             <option value="">Select City</option>
             {#each cities as city (city.id)}
               <option value={city.name} key={city.id}>{city.name}</option>
@@ -259,9 +271,11 @@
       </div>
 
       <div>
-        <Label for="about_me" class="mb-2">About Me (Min: 100 characters)</Label>
-        <textarea class="mb-4" id="about_me" rows="4" bind:value={aboutMe} placeholder="Tell us about yourself..."></textarea>
-        <div id="charCount" class="char-count">{100 - aboutMe.length} characters needed</div>
+        <Label for="about_me" class="mb-2">About Me (Min: 200 characters)</Label>
+        <textarea class="mb-4" id="about_me" rows="4" bind:value={aboutMe} placeholder="Tell us about yourself..." required></textarea>
+        {#if aboutMe.length <= 200}
+          <div id="charCount" class="char-count">{200 - aboutMe.length} characters needed</div>
+        {/if}
       </div>
 
       <button type="submit" class="w-full mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
