@@ -19,11 +19,18 @@
     let messageOrder = 1;
     let userUID;
 
+
     onAuthStateChanged(auth, (user) => {
-        if (user) {
-            userUID = user.uid;
-        }
+        handleUserStateChange(user).catch(console.error);
     });
+    async function handleUserStateChange(user) {
+    if (user) {
+        userUID = user.uid;
+        await setCurrentUser();
+        // Any code that depends on setCurrentUser being completed
+    }
+}
+
 
     async function setCurrentUser(){
         const q = query(collection(db, "users"), where("userID", "==", userUID));
@@ -45,9 +52,8 @@
         ...prevMessages,
         ]);
     }
-    async function sendMessage(){
+    function sendMessage(){
         timestamp = new Date().toLocaleString();
-        await setCurrentUser();
         const messageData = {
             user: currentUser,
             text: messageInput,
