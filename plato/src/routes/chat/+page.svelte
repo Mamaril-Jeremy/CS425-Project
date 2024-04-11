@@ -18,28 +18,39 @@
     let timestamp = "";
     let messageOrder = 1;
     let userUID;
-
+    let currentUserId;
 
     onAuthStateChanged(auth, (user) => {
-        handleUserStateChange(user).catch(console.error);
+        if (user) {
+            currentUserId = user.uid;
+            handleUserStateChange(user).catch(console.error);
+        }
     });
     async function handleUserStateChange(user) {
-    if (user) {
-        userUID = user.uid;
-        await setCurrentUser();
-        // Any code that depends on setCurrentUser being completed
+        if (user) {
+            userUID = user.uid;
+            await setCurrentUser();
+        }
     }
-}
 
 
     async function setCurrentUser(){
-        const q = query(collection(db, "users"), where("userID", "==", userUID));
-        const querySnap = await getDocs(q);
-        const doc = querySnap.docs[0];
-        const userData = doc.data();
-        const firstName = userData.userFirstName;
-        const lastName = userData.userLastName;
-        currentUser = `${firstName} ${lastName}`;
+        try {
+            const q = query(collection(db, "users"), where("userID", "==", userUID));
+            const querySnap = await getDocs(q);
+            if (!querySnap.empty) {
+                const doc = querySnap.docs[0];
+                const userData = doc.data();
+                const firstName = userData.userFirstName;
+                const lastName = userData.userLastName;
+                currentUser = `${firstName} ${lastName}`;
+                console.log(`Current user set to: ${currentUser}`);
+            } else {
+                console.log("No user found with the specified UID.");
+            }
+        } catch (error) {
+            console.error("Error setting current user:", error);
+        }
     }
 
     function postMessage() {
@@ -52,7 +63,8 @@
         ...prevMessages,
         ]);
     }
-    function sendMessage(){
+    async function sendMessage(){
+        await setCurrentUser();
         timestamp = new Date().toLocaleString();
         const messageData = {
             user: currentUser,
