@@ -42,7 +42,11 @@ class Connection:
                     'user1Status': self.user1Status,
                     'user2Status': self.user2Status
                 })
-
+                temp, query3 = self.check_existing_document(collection_ref)
+                for doc in query3:
+                    self.docName = doc.id
+                    print(self.docName)
+                self.store_pending_connections_into_user_database(db)
             except Exception as e:
                 print("An error has been detected:", e)
         else:
@@ -59,12 +63,12 @@ class Connection:
                         'user1Status': self.user1Status,
                         'user2Status': self.user2Status
                     })
-                    self.check_connection_status(query)
+                    self.check_connection_status(query, db)
                     doc_ref.update({
                         'Status': self.connection_status,
                     })
                 
-    def check_connection_status(self, query):
+    def check_connection_status(self, query, db):
         collection_ref = db.collection('connections')
         for doc in query:
             doc_ref = collection_ref.document(doc.id)
@@ -72,8 +76,10 @@ class Connection:
             doc_data = doc_snapshot.to_dict()
             if doc_data['user1Status'] == 'True' and doc_data['user2Status'] == 'True':
                 self.connection_status = 'True'
+                self.store_success_connections_into_user_database(db)
             if doc_data['user1Status'] == 'False' or doc_data['user2Status'] == 'False':
                 self.connection_status = 'False'
+                self.store_failed_connections_into_user_database(db)
             print(doc_data['Status'])
         
     def set_connection_status(self, status, user):
@@ -110,8 +116,64 @@ class Connection:
                 'pendingConnections': array
             })
             
+    def store_failed_connections_into_user_database(self, db):
+        collection_ref = db.collection('users')
+        user1Query = collection_ref.where(filter=FieldFilter("userID", "==", self.user1)).get()
+        user2Query = collection_ref.where(filter=FieldFilter("userID", "==", self.user2)).get()
+        connection_ref = db.collection('connections').document(self.docName)
+        
+        for doc in user1Query:
+            doc_ref = collection_ref.document(doc.id)
+            doc_snapshot = doc_ref.get()
+            doc_data = doc_snapshot.to_dict()
+            array = doc_data.get('failedConnections', [])
+            array.append(connection_ref)
+            doc_ref.update({
+                'pendingConnections': firestore.ArrayRemove([connection_ref]),
+                'successConnections': firestore.ArrayRemove([connection_ref]),
+                'failedConnections': array
+            })
+        
+        for doc in user2Query:
+            doc_ref = collection_ref.document(doc.id)
+            doc_snapshot = doc_ref.get()
+            doc_data = doc_snapshot.to_dict()
+            array = doc_data.get('failedConnections', [])
+            array.append(connection_ref)
+            doc_ref.update({
+                'pendingConnections': firestore.ArrayRemove([connection_ref]),
+                'successConnections': firestore.ArrayRemove([connection_ref]),
+                'failedConnections': array
+            })
       
-      
+    def store_success_connections_into_user_database(self, db):
+        collection_ref = db.collection('users')
+        user1Query = collection_ref.where(filter=FieldFilter("userID", "==", self.user1)).get()
+        user2Query = collection_ref.where(filter=FieldFilter("userID", "==", self.user2)).get()
+        connection_ref = db.collection('connections').document(self.docName)
+            
+        for doc in user1Query:
+            doc_ref = collection_ref.document(doc.id)
+            doc_snapshot = doc_ref.get()
+            doc_data = doc_snapshot.to_dict()
+            array = doc_data.get('successConnections', [])
+            array.append(connection_ref)
+            doc_ref.update({
+                'pendingConnections': firestore.ArrayRemove([connection_ref]),
+                'successConnections': array
+            })
+            
+        for doc in user2Query:
+            doc_ref = collection_ref.document(doc.id)
+            doc_snapshot = doc_ref.get()
+            doc_data = doc_snapshot.to_dict()
+            array = doc_data.get('successConnections', [])
+            array.append(connection_ref)
+            doc_ref.update({
+                'pendingConnections': firestore.ArrayRemove([connection_ref]),
+                'successConnections': array
+            })
+            
 def main():
     connection = Connection("4dlrVm0mb9bsZJkwaQsAwrxCMGQ2", "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
     connection.set_connection_status('True', "4dlrVm0mb9bsZJkwaQsAwrxCMGQ2")
@@ -120,9 +182,8 @@ def main():
     connection.handle_pending_connection(db)
     connection.set_connection_status('False', "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
     connection.handle_pending_connection(db)
-    connection.set_connection_status('True', "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
-    connection.handle_pending_connection(db)
-    connection.store_pending_connections_into_user_database(db)
+    # connection.set_connection_status('True', "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
+    # connection.handle_pending_connection(db)
     
 if __name__ == "__main__":
     main()
