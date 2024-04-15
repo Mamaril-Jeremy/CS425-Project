@@ -1,5 +1,7 @@
 <script>
-    import { Button, Input } from 'flowbite-svelte';
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { auth } from '$lib/firebase/firebase.client.js';
+    import { Button } from 'flowbite-svelte';
 
     let spamChecked = false;
     let abuseChecked = false;
@@ -7,7 +9,15 @@
     let otherReason = "";
     let additionalInfo = "";
     let imageFile;
-    let submissionStatus = ""; // Variable to track submission status
+    let submissionStatus = ""; 
+    let userName, reportName = "";
+    let userUID;
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            userUID = user.uid;
+        }
+    });
 
     const handleReasonChange = (event) => {
         const { id, checked } = event.target;
@@ -65,8 +75,10 @@
             console.log("[No Image Attached]");
         }
 
-        // Sending data to server here
         const data = {
+            userUID: userUID,
+            victimName: userName,
+            offenderName: reportName,
             reason: reasonsProvided.join(", "),
             explanation: otherReason || additionalInfo
         };
@@ -102,9 +114,9 @@
         {:else}
             <form on:submit|preventDefault={handleSubmit}>
                 <label for="reasons">Your First and Last Name:</label>
-                <input class="mb-2" type="text" id="first_name" placeholder="Name" required />
+                <input class="mb-2" type="text" id="first_name" placeholder="Name" bind:value={userName} required />
                 <label for="reasons">User's First and Last Name:</label>
-                <input class="mb-2" type="text" id="first_name" placeholder="Name" required />
+                <input class="mb-2" type="text" id="first_name" placeholder="Name" bind:value={reportName} required />
                 <label for="reasons">Reasons to Report:</label>
                 <input
                     type="checkbox"
