@@ -45,7 +45,7 @@ declare module '$env/static/private' {
 	export const COMPUTERNAME: string;
 	export const ComSpec: string;
 	export const DriverData: string;
-	export const EFC_7944: string;
+	export const EFC_14768: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -75,6 +75,7 @@ declare module '$env/static/private' {
 	export const npm_package_dependencies_http: string;
 	export const npm_package_dependencies_npm: string;
 	export const npm_package_dependencies_svelte_local_storage_store: string;
+	export const npm_package_dependencies_swiper: string;
 	export const npm_package_dependencies__event_calendar_day_grid: string;
 	export const npm_package_dependencies__fullcalendar_core: string;
 	export const npm_package_dependencies__fullcalendar_daygrid: string;
@@ -190,7 +191,7 @@ declare module '$env/dynamic/private' {
 		COMPUTERNAME: string;
 		ComSpec: string;
 		DriverData: string;
-		EFC_7944: string;
+		EFC_14768: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
@@ -220,6 +221,7 @@ declare module '$env/dynamic/private' {
 		npm_package_dependencies_http: string;
 		npm_package_dependencies_npm: string;
 		npm_package_dependencies_svelte_local_storage_store: string;
+		npm_package_dependencies_swiper: string;
 		npm_package_dependencies__event_calendar_day_grid: string;
 		npm_package_dependencies__fullcalendar_core: string;
 		npm_package_dependencies__fullcalendar_daygrid: string;

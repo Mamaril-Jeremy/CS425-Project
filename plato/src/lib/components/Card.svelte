@@ -1,6 +1,55 @@
 <script>
-    import { ArrowRightOutline } from 'flowbite-svelte-icons';
+      import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
+      import { onAuthStateChanged } from 'firebase/auth';
+      import { auth } from '$lib/firebase/firebase.client.js';
+
+      let userUID, status;
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+            userUID = user.uid;
+            fetchData();
+            // downloadAvatar(userUID);
+        }
+    });
+
+    const fetchData = async () => {
+        const data = { "user_id" : userUID }; 
+        try {
+            const response = await fetch('http://localhost:5000/get_user_data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const responseData = await response.json();
+            let user_data = responseData.users;
+            status = user_data.userStatus
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const downloadAvatar = async (userUID) => {
+        try {
+            const storage = getStorage();
+            const listRef = ref(storage, `images/${userUID}`);
+
+            const items = (await listAll(listRef)).items;
+
+            items.sort((a, b) => b.timeCreated - a.timeCreated);
+
+            const latestImageRef = items[items.length-1];
+            const url = await getDownloadURL(latestImageRef);
+            avatarUrl = url;
+        } catch (error) {
+            console.error('Error downloading avatar:', error);
+        }
+    };
 </script>
+
+
 
 <style>
     .card {
@@ -48,7 +97,7 @@
         background-color: rgb(44, 102, 244);
     }
 
-    .section a {
+    .section span {
         text-decoration: none;
         font-size: 18px;
         font-weight: 600; 
@@ -57,7 +106,11 @@
         transition: background-color 0.3s, color 0.3s; 
         display: block; 
         padding: 10px; 
-        text-align: center; 
+        text-align: center;
+        position: absolute;
+        top: 0; 
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .circle {
@@ -76,10 +129,10 @@
 </style>
 
 <div class="card">
-    <div class="section"><a href="/"><span>Education</span></a></div>
-    <div class="section"><a href="/"><span>Skills</span></a></div>
-    <div class="section"><a href="/"><span>Info</span></a></div>
-    <div class="section"><a href="/"><span>Hours</span></a></div>
+    <div class="section"><span>Status</span></div>
+    <div class="section"><span>Skills</span></div>
+    <div class="section"><span>Info</span></div>
+    <div class="section"><span>Hours</span></div>
     <div class="name">Jeremy Mamaril</div>
     <div class="circle"></div>
 </div>
