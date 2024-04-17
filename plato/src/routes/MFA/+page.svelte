@@ -69,6 +69,10 @@
       console.error(error);
     }
   }
+
+  async function skip(){
+    goto('/create-profile');
+  }
 </script>
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
@@ -99,6 +103,12 @@
       <button type="button" on:click={loginWithCode} class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
         Verify
       </button>
+
+      <div class="flex justify-center"> <!-- This div centers the Skip button -->
+        <button type="button" on:click={skip} class="mt-5 w-24 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+          Skip
+        </button>
+      </div>
     </form>
   </section>
 </main>
