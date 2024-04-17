@@ -154,6 +154,17 @@ def parse_resume():
     response = jsonify(response_data)
     return response
     
+@app.route('/manage_connections', methods=['POST'])
+def manage_connections():
+    user1 = request.form['currentUser']
+    user2 = request.form['viewedUser']
+    connection = Connection(user1, user2)
+    selection = request.form['selection']
+    connection.set_connection_status(selection, user1)
+    connection.handle_pending_connection(db)
+    response_data = {'message': 'Data received successfully'}
+    response = jsonify(response_data)
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)
