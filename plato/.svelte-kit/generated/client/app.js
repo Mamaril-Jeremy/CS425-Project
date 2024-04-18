@@ -32,8 +32,7 @@ export const nodes = [
 	() => import('./nodes/28'),
 	() => import('./nodes/29'),
 	() => import('./nodes/30'),
-	() => import('./nodes/31'),
-	() => import('./nodes/32')
+	() => import('./nodes/31')
 ];
 
 export const server_loads = [];
@@ -58,16 +57,15 @@ export const dictionary = {
 		"/footer/privacy": [19],
 		"/forgot-password": [20],
 		"/home": [21],
-		"/premium": [23],
-		"/profile": [24],
-		"/profile/edit-profile": [25],
-		"/report": [26],
-		"/settings": [27],
-		"/settings/change-email": [28],
-		"/settings/change-password": [29],
-		"/sign-in": [30],
-		"/start": [31],
-		"/verify-email": [32]
+		"/profile": [23],
+		"/profile/edit-profile": [24],
+		"/report": [25],
+		"/settings": [26],
+		"/settings/change-email": [27],
+		"/settings/change-password": [28],
+		"/sign-in": [29],
+		"/start": [30],
+		"/verify-email": [31]
 	};
 
 export const hooks = {
