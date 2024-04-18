@@ -1,6 +1,7 @@
 from chat import Chat
 import csv
 from resumeReader import ResumeParser
+from connections import Connection
 from flask import Flask, request, jsonify, Response
 import firebase_admin, asyncio
 from firebase_admin import credentials, firestore, storage

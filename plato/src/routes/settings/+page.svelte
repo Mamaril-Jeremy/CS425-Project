@@ -52,7 +52,11 @@
           <p>Change Password</p>
           <a href="/settings/change-password" class="text-blue-500">Change</a>
         </div>
-        <!-- Add more account-related settings as needed -->
+        <div class="flex items-center justify-center mt-2 mb-2">
+          <p>Configure MFA</p>
+          <a href="/settings/MFA-setup" class="text-blue-500 ml-4">Setup</a>
+        </div>
+
       </div>
     </section>
   </main>
