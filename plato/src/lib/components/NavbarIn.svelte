@@ -97,7 +97,6 @@
           {/if}
           <span class="block truncate text-sm font-medium">{userEmail}</span>
         </DropdownHeader>
-        <DropdownItem href="/premium" class="text-black">Premium</DropdownItem>
         <DropdownItem href="/settings" class="text-black">Settings</DropdownItem>
         <DropdownItem href="/profile" class="text-black">Profile</DropdownItem>
         <DropdownDivider />

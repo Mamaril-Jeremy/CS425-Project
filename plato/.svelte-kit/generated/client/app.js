@@ -32,6 +32,7 @@ export const nodes = [
 	() => import('./nodes/28'),
 	() => import('./nodes/29'),
 	() => import('./nodes/30'),
+	() => import('./nodes/31')
 	() => import('./nodes/31'),
 	() => import('./nodes/32'),
 	() => import('./nodes/33'),
@@ -61,7 +62,6 @@ export const dictionary = {
 		"/footer/privacy": [21],
 		"/forgot-password": [22],
 		"/home": [23],
-		"/premium": [25],
 		"/profile": [26],
 		"/profile/edit-profile": [27],
 		"/report": [28],
