@@ -271,10 +271,10 @@
       </div>
 
       <div>
-        <Label for="about_me" class="mb-2">About Me (Min: 200 characters)</Label>
+        <Label for="about_me" class="mb-2">About Me (Min: 150 characters)</Label>
         <textarea class="mb-4" id="about_me" rows="4" bind:value={aboutMe} placeholder="Tell us about yourself..." required></textarea>
         {#if aboutMe.length <= 200}
-          <div id="charCount" class="char-count">{200 - aboutMe.length} characters needed</div>
+          <div id="charCount" class="char-count">{150 - aboutMe.length} characters needed</div>
         {/if}
       </div>
 

@@ -1,4 +1,6 @@
 <script>
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { auth } from '$lib/firebase/firebase.client.js';
     import { Button } from 'flowbite-svelte';
 
     let spamChecked = false;
@@ -7,6 +9,15 @@
     let otherReason = "";
     let additionalInfo = "";
     let imageFile;
+    let submissionStatus = ""; 
+    let userName, reportName = "";
+    let userUID;
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            userUID = user.uid;
+        }
+    });
 
     const handleReasonChange = (event) => {
         const { id, checked } = event.target;
@@ -64,8 +75,10 @@
             console.log("[No Image Attached]");
         }
 
-        // Sending data to server here
         const data = {
+            userUID: userUID,
+            victimName: userName,
+            offenderName: reportName,
             reason: reasonsProvided.join(", "),
             explanation: otherReason || additionalInfo
         };
@@ -80,82 +93,86 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data)
-            });
+                });
                 const responseData = await response.json();
                 console.log(responseData);
+                submissionStatus = "success";
             } catch (error) {
                 console.error('Error:', error);
+                submissionStatus = "error"; 
             }
-        }}
+        }
+    }
 </script>
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800 w-screen">
     <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
-      <h1 class="text-3xl font-semibold mb-6">Report User</h1>
-  
-      <form on:submit|preventDefault={handleSubmit}>
-        <input
-            type="checkbox"
-            id="spam"
-            name="reason"
-            value="spam"
-            on:change={handleReasonChange}
-        />
-        <label for="reasons">Reasons to Report:</label>
-        <input
-            type="checkbox"
-            id="spam"
-            name="reason"
-            value="spam"
-            on:change={handleReasonChange}
-        />
-        <label for="spam">Spam</label>
-        <input
-            type="checkbox"
-            id="abuse"
-            name="reason"
-            value="abuse"
-            on:change={handleReasonChange}
-        />
-        <label for="abuse">Abuse</label>
-        <input
-            type="checkbox"
-            id="other"
-            name="reason"
-            value="other"
-            on:change={handleReasonChange}
-        />
-        <label for="other">Other</label>
-        <input
-            type="text"
-            id="otherReason"
-            class="other-reason"
-            bind:value={otherReason}
-            placeholder="Specify other reason..."
-            on:input={handleOtherReasonChange}
-        />
+        <h1 class="text-3xl font-semibold mb-6">Report User</h1>
 
-        <label for="additionalInfo">Additional Information:</label>
-        <textarea
-            id="additionalInfo"
-            bind:value={additionalInfo}
-            placeholder="Enter additional details..."
-            on:input={handleAdditionalInfoChange}
-        ></textarea>
-        <div id="charCount" class="char-count">{2000 - additionalInfo.length} characters left</div>
+        {#if submissionStatus === "success"} 
+            <p class="text-green-500">Report successfully submitted!</p>
+        {:else}
+            <form on:submit|preventDefault={handleSubmit}>
+                <label for="reasons">Your First and Last Name:</label>
+                <input class="mb-2" type="text" id="first_name" placeholder="Name" bind:value={userName} required />
+                <label for="reasons">User's First and Last Name:</label>
+                <input class="mb-2" type="text" id="first_name" placeholder="Name" bind:value={reportName} required />
+                <label for="reasons">Reasons to Report:</label>
+                <input
+                    type="checkbox"
+                    id="spam"
+                    name="reason"
+                    value="spam"
+                    on:change={handleReasonChange}
+                />
+                <label for="spam">Spam</label>
+                <input
+                    type="checkbox"
+                    id="abuse"
+                    name="reason"
+                    value="abuse"
+                    on:change={handleReasonChange}
+                />
+                <label for="abuse">Abuse</label>
+                <input
+                    type="checkbox"
+                    id="other"
+                    name="reason"
+                    value="other"
+                    on:change={handleReasonChange}
+                />
+                <label for="other">Other</label>
+                <input 
+                    type="text"
+                    id="otherReason"
+                    class="other-reason"
+                    bind:value={otherReason}
+                    placeholder="Specify other reason..."
+                    on:input={handleOtherReasonChange}
+                />
 
-        <label for="image" >Attach Image:</label>
-        <input
-            type="file"
-            id="image"
-            on:change={handleImageUpload}
-            accept="image/*"
-        />
+                <label for="additionalInfo">Additional Information:</label>
+                <textarea
+                    id="additionalInfo"
+                    bind:value={additionalInfo}
+                    placeholder="Enter additional details..."
+                    on:input={handleAdditionalInfoChange}
+                ></textarea>
+                <div id="charCount" class="char-count">{2000 - additionalInfo.length} characters left</div>
 
-        <div id="submit-btn"><Button type="submit" class="bg-blue-600 hover:opacity-75 hover:bg-blue-600">Send Report</Button></div>
-    </form>
+                <label for="image" >Attach Image:</label>
+                <input
+                    type="file"
+                    id="image"
+                    on:change={handleImageUpload}
+                    accept="image/*"
+                />
+
+                <div id="submit-btn"><Button type="submit" class="bg-blue-600 hover:opacity-75 hover:bg-blue-600">Send Report</Button></div>
+            </form>
+        {/if}
     </section>
-  </main>
+</main>
 
 <style>
     main{
@@ -182,6 +199,7 @@
     }
     .other-reason {
         display: none;
+        margin-bottom: 8px;
     }
     .char-count {
         font-size: 0.8em;
@@ -189,4 +207,3 @@
         margin-top: 5px;
     }
 </style>
-

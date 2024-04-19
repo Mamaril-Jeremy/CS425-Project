@@ -1,5 +1,7 @@
 <script>
     import { onMount } from 'svelte';
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { auth } from '$lib/firebase/firebase.client.js';
     import { Calendar } from '@fullcalendar/core';
     import dayGridPlugin from '@fullcalendar/daygrid';
     import interactionPlugin from '@fullcalendar/interaction';
@@ -9,6 +11,14 @@
     let startDate;
     let endDate;
     let display = false;
+    let userRole, userUID;
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            userUID = user.uid;
+            fetchData();
+        }
+    });
 
     onMount(() => {
         const calendarEl = document.getElementById('calendar');
@@ -151,6 +161,25 @@
         endDate = null;
         
     }
+
+    const fetchData = async () => {
+        const data = { "user_id" : userUID }; 
+        try {
+            const response = await fetch('http://localhost:5000/get_user_data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const responseData = await response.json();
+            let user_data = responseData.users;
+            userRole = user_data.userRole;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
 </script>
 
 <style>
@@ -189,6 +218,7 @@
         <div id="calendar"></div>
     </div>
     
+    {#if userRole == 'Mentor'}
     <div id="event-container">
         <button on:click={addEvent}>Add Event</button>
         {#if display}
@@ -202,6 +232,7 @@
         <button on:click={saveEvent}>Save</button>
         {/if}
     </div>
+    {/if}
 </main>
 
 

@@ -1,76 +1,106 @@
 <script>
-    //This code was developed by Michael Nia and Jeremy Mamaril
-    import { Button } from 'flowbite-svelte';
-    import Card from '$lib/components/Card.svelte';
-    import { onAuthStateChanged } from 'firebase/auth';
-    import { collection, updateDoc, getDocs, query, where } from 'firebase/firestore';
-    import { auth, db } from '$lib/firebase/firebase.client.js';
-    import { ArrowLeftOutline, ArrowRightOutline } from 'flowbite-svelte-icons';
+  import ConnectionsStore, { initializeConnectionsStore } from '../../stores/ConnectionsStore.js';
+  import Card from '$lib/components/Card.svelte';
+  import Startcard from '$lib/components/Startcard.svelte';
+  import Endcard from '$lib/components/Endcard.svelte';
+  import { onMount } from 'svelte';
+  import { Button } from 'flowbite-svelte';
+  import { ArrowLeftOutline, ArrowRightOutline } from 'flowbite-svelte-icons';
+  import Swiper from 'swiper';
+  import 'swiper/css';
 
-    let userUID;
-    let connectsRemaining;
-    let passesRemaining;
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            userUID = user.uid;
-        }
+  let swiper;
+  let connections = [];
+
+  onMount(() => {
+    initializeConnectionsStore();
+    swiper = new Swiper(".mySwiper", {
+        effect: "cards",
+        grabCursor: true,
     });
+  });
 
-    const updateLimit = async (action) => {
-        const userRef = collection(db, "users");
-        const q = query(userRef, where("userID", "==", userUID));
 
-        const querySnapshot = await getDocs(q);
-        const docRef = querySnapshot.docs[0].ref;
 
-        try {
-            const data = querySnapshot.docs[0].data();
-            if (action === 'connect' && connectsRemaining > 0) {
-                connectsRemaining = data.userConnectsRemaining - 1;
-                await updateDoc(docRef, {
-                    userConnectsRemaining: connectsRemaining,
-                });
-            } else if (action === 'pass' && passesRemaining > 0) {
-                passesRemaining = data.userPassesRemaining - 1;
-                await updateDoc(docRef, {
-                    userPassesRemaining: passesRemaining,
-                });
-            }
-            console.log('Document updated with ID:', docRef.id);
-        } catch (error) {
-            console.error('Error updating document:', error.message);
-        }
-    }
+  function handleNext() {
+    swiper.slideNext();
+  }
+
+  ConnectionsStore.subscribe(data => {
+    connections = data;
+  });
+
 </script>
 
-<div class="container">
-    <div class="pass">
-        <Button class="!p-2" on:click={() => updateLimit('pass')}><ArrowLeftOutline class="w-5 h-5 mr-2" /> Pass </Button>
-    </div>
-    <Card />
-    <div class="connect">
-        <Button class="!p-2" on:click={() => updateLimit('connect')}>Connect <ArrowRightOutline class="w-5 h-5 ml-2" /></Button>
-     </div>
-</div>
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Demo styles -->
+  <style>
+    body {
+      position: relative;
+      height: 100vh;
+      background: #fff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-<style>
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin-left: auto;
-        margin-right: auto;
+    .swiper {
+      width: 620px;
+      height: 420px;
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+      width: 600px;
+      height: 400px;
     }
 
     .pass {
-        text-align: center;
-        padding-right: 10px;
+      text-align: center;
+      padding-right: 10px;
     }
 
     .connect {
-        text-align: center;
-        padding-left: 10px;
+      text-align: center;
+      padding-left: 10px;
     }
-</style>
+  </style>
+</head>
+
+
+<body>
+  <div class="pass">
+    <Button class="!p-2" on:click={handleNext}><ArrowLeftOutline class="w-5 h-5 mr-2" /> Pass</Button>
+  </div>
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><Startcard/></div>
+        {#each connections as connection (connection.id)}
+        <div class="swiper-slide"><Card/></div>
+        {/each}
+        <div class="swiper-slide"><Endcard/></div>
+    </div>
+  </div>
+<div class="connect">
+    <Button class="!p-2" on:click={handleNext}>Connect <ArrowRightOutline class="w-5 h-5 ml-2" /></Button>
+</div>
+
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</body>

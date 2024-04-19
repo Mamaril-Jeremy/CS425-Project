@@ -2,7 +2,7 @@
   //This code was developed by Jeremy Mamaril
   import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
   import { onAuthStateChanged } from 'firebase/auth';
-  import { auth, db } from '$lib/firebase/firebase.client.js';
+  import { auth } from '$lib/firebase/firebase.client.js';
   import { Avatar } from 'flowbite-svelte';
 
   let userUID, firstName, lastName, status, occupation, role, major, city, country, state, connectsRemaining = 5, passesRemaining = 10;
