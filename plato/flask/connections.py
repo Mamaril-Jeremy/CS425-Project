@@ -19,6 +19,7 @@ class Connection:
         self.user1Status = 'Pending'
         self.user2Status = 'Pending'
         self.docName = ''
+        self.chatID = ''
         
     def check_existing_document(self, ref):
         query1 = ref.where(filter=FieldFilter("user1", "==", self.user1)).where(filter=FieldFilter("user2", "==", self.user2)).get()
@@ -77,10 +78,10 @@ class Connection:
             if doc_data['user1Status'] == 'True' and doc_data['user2Status'] == 'True':
                 self.connection_status = 'True'
                 self.store_success_connections_into_user_database(db)
+                self.createNewChat(db)
             if doc_data['user1Status'] == 'False' or doc_data['user2Status'] == 'False':
                 self.connection_status = 'False'
                 self.store_failed_connections_into_user_database(db)
-            print(doc_data['Status'])
         
     def set_connection_status(self, status, user):
         if self.user1 == user:
@@ -174,14 +175,61 @@ class Connection:
                 'successConnections': array
             })
             
+    def createNewChat(self, db):
+        chat_ref = db.collection('chat')
+        user_ref = db.collection('users')
+        user1Query = user_ref.where(filter=FieldFilter("userID", "==", self.user1)).get()
+        user2Query = user_ref.where(filter=FieldFilter("userID", "==", self.user2)).get()
+        temp, query = self.check_existing_document(chat_ref)
+        if not temp:
+            chat_ref.add({
+                'user1': self.user1,
+                'user2': self.user2
+            })
+            temp1, query = self.check_existing_document(chat_ref)
+            for doc in query:
+                self.chatID = doc.id
+                doc_ref = chat_ref.document(doc.id)
+                subcollection_ref = doc_ref.collection('messages')
+                subcollection_ref.add({
+                    'message': '',
+                    'messageOrder': 1,
+                    'messageTime': '',
+                    'user': ''
+                })
+        else:
+            for doc in query:
+                self.chatID = doc.id
+        chatName_ref = chat_ref.document(self.chatID)
+        for doc in user1Query:
+            doc_ref = user_ref.document(doc.id)
+            doc_snapshot = doc_ref.get()
+            doc_data = doc_snapshot.to_dict()
+            array = doc_data.get('Chats', [])
+            if chatName_ref not in array:
+                array.append(chatName_ref)
+                doc_ref.update({
+                    'Chats': array
+                })
+        for doc in user2Query:
+            doc_ref = user_ref.document(doc.id)
+            doc_snapshot = doc_ref.get()
+            doc_data = doc_snapshot.to_dict()
+            array = doc_data.get('Chats', [])
+            if chatName_ref not in array:
+                array.append(chatName_ref)
+                doc_ref.update({
+                    'Chats': array
+                })
+            
 def main():
-    connection = Connection("4dlrVm0mb9bsZJkwaQsAwrxCMGQ2", "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
-    connection.set_connection_status('True', "4dlrVm0mb9bsZJkwaQsAwrxCMGQ2")
+    connection = Connection("34U0pOHuZFZZS0RgZW0cwF5I77f2", "x1WD3laAszfLTi4dR2gvmUxVip63")
+    connection.set_connection_status('True', "x1WD3laAszfLTi4dR2gvmUxVip63")
     connection.handle_pending_connection(db)
-    connection.set_connection_status('True', "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
+    connection.set_connection_status('True', "34U0pOHuZFZZS0RgZW0cwF5I77f2")
     connection.handle_pending_connection(db)
-    connection.set_connection_status('False', "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
-    connection.handle_pending_connection(db)
+    # connection.set_connection_status('False', "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
+    # connection.handle_pending_connection(db)
     # connection.set_connection_status('True', "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
     # connection.handle_pending_connection(db)
     

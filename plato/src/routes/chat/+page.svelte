@@ -114,7 +114,7 @@
     const startDataSync = async () => {
         const numMessages = collection(db, `chat`)
         const queryNumSnapshot = await getDocs(numMessages);
-        const subscribe = onSnapshot(query(collection(db, "chat/e7Wee661lbq5bP5nlxD2/messages"),orderBy("messageOrder", "asc")), (querySnapshot) => {
+        const subscribe = onSnapshot(query(collection(db, "chat/akB88qTZle2IEYbEmUER/messages"),orderBy("messageOrder", "asc")), (querySnapshot) => {
             messages.set([]);
             querySnapshot.docs.slice(1).forEach((doc) => {
                 const data = doc.data();
