@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 cred = credentials.Certificate("service_account.json")
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, name='first')
 
 # storage_client = storage.Client()
 # bucket_name = 'gs://plato-49d12.appspot.com'

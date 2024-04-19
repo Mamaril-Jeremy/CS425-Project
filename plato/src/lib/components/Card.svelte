@@ -1,17 +1,59 @@
 <script>
     import { onAuthStateChanged } from 'firebase/auth';
     import { auth } from '$lib/firebase/firebase.client.js';
+    import { Modal } from 'flowbite-svelte';
 
-    let userUID;
-    export let info, status, hours, skills;
+    let userUID, defaultModal = false, selectedInfo = "";
+    let parsedHours = "";
+
+    export let firstname, lastname, info, status, hours, skills, avatarUrl = "";
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
             userUID = user.uid;
-            fetchData();
+        }
+        for (const dayKey of Object.keys(hours)) {
+            const day = dayKey;
+            const daySchedule = hours[dayKey];
+            const startHour = daySchedule.startHour;
+            const endHour = daySchedule.endHour;
+
+            parsedHours += `${day}<br>`;
+            parsedHours += `Start Hour: ${startHour}<br>`;
+            parsedHours += `End Hour: ${endHour}<br><br>`;
         }
     });
+
+    function displayModal(sectionInfo, event){
+        selectedInfo = sectionInfo;
+        defaultModal = !defaultModal; 
+    }
 </script>
+
+<div class="card">
+    <div class="name">{firstname} {lastname}</div>
+    <div class="section" role="button" tabindex="" on:click={(event) => displayModal(status, event)} on:keypress={(event) => displayModal(status, event)}>
+        <span>Status</span>
+        <div class="info">{status}</div>
+    </div>
+    <div class="section" role="button" tabindex="" on:click={(event) => displayModal(skills, event)} on:keypress={(event) => displayModal(skills, event)}>
+        <span>Skills</span>
+        <div class="info">
+            {#each skills as skill}
+            <div>{skill}</div>
+            {/each}
+        </div>
+    </div>
+    <div class="section" role="button" tabindex="" on:click={(event) => displayModal(info, event)} on:keypress={(event) => displayModal(info, event)}>
+        <span>About</span>
+        <div class="info">{info}</div>
+    </div>
+    <div class="section" role="button" tabindex="" on:click={(event) => displayModal(parsedHours)} on:keypress={(event) => displayModal(parsedHours)}>
+        <span>Hours</span>
+        <div class="info" style="white-space: pre-line">{parsedHours}</div>
+    </div>
+    <img class="circle" src={avatarUrl} alt="User Avatar">
+</div>
 
 <style>
     .card {
@@ -27,6 +69,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 20px;
         padding: 22px;
+        z-index: 0;
     }
 
     .name {
@@ -68,17 +111,30 @@
         display: block; 
         text-align: center;
         position: absolute;
-        top: 0;
         left: 50%;
         transform: translateX(-50%);
     }
 
+    .info {
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600; 
+        color: rgb(51, 51, 51); 
+        outline: none; 
+        transition: background-color 0.3s, color 0.3s; 
+        display: block; 
+        padding: 10px; 
+        text-align: center; 
+        justify-content: center;
+        align-items: center;
+        top: 50%;
+    }
+
     .circle {
-        width: 27.5%;
+        width: 25%;
         height: 40%;
         border: 2px solid #ccc; 
         border-radius: 70%;
-        background-image: url("$lib/assets/jeremy.png"); 
         background-position: center;
         position: absolute;
         top: 42.5%;
@@ -87,15 +143,28 @@
         z-index: 2;
     }
 
+    .section {
+        position: relative;
+    }
+
+    .section .info {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        border: 1px solid #ccc;
+        z-index: 999;
+        padding: 10px;
+        display: none;
+    }
+
+    .section:hover .info {
+        display: block;
+    }
+
+    .section:hover span{
+        top: 0;
+    }
 </style>
-
-
-<div class="card">
-    <div class="name">Jeremy Mamaril</div>
-    <div class="section"><span>Status</span><span>{status}</span></div>
-    <div class="section"><span>Skills</span><span>{skills}</span></div>
-    <div class="section"><span>Info</span><span>{info}</span></div>
-    <div class="section"><span>Hours</span><span>{hours}</span></div>    
-    <div class="circle"></div>
-</div>
 

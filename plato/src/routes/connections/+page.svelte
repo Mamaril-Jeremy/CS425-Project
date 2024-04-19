@@ -1,5 +1,5 @@
 <script>
-  import ConnectionsStore, { initializeConnectionsStore } from '../../stores/ConnectionsStore.js';
+  import ConnectionsStore from '../../stores/ConnectionsStore.js';
   import Card from '$lib/components/Card.svelte';
   import Startcard from '$lib/components/Startcard.svelte';
   import Endcard from '$lib/components/Endcard.svelte';
@@ -9,19 +9,16 @@
   import Swiper from 'swiper';
   import 'swiper/css';
 
-
   let swiper;
   let connections = [];
 
   onMount(() => {
-    initializeConnectionsStore();
     swiper = new Swiper(".mySwiper", {
         effect: "cards",
-        grabCursor: true,
+        grabCursor: false,
+        allowSlidePrev: false
     });
   });
-
-
 
   function handleNext() {
     swiper.slideNext();
@@ -51,6 +48,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 0;
     }
 
     .swiper {
@@ -91,7 +89,7 @@
     <div class="swiper-wrapper">
         <div class="swiper-slide"><Startcard/></div>
         {#each connections as connection (connection.id)}
-        <div class="swiper-slide"><Card/></div>
+        <div class="swiper-slide"><Card firstname={connection.firstname} lastname={connection.lastname} info={connection.info} status={connection.status} hours={connection.hours} skills={connection.skills} avatarUrl={connection.avatarUrl}/></div>
         {/each}
         <div class="swiper-slide"><Endcard/></div>
     </div>
