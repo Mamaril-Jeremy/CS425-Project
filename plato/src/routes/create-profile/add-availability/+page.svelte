@@ -14,7 +14,7 @@
   function saveOfficeHours(e) {
     e.preventDefault();
     console.log('Office hours saved:', officeHours);
-    goto("/create-profile/upload-pfp");
+    goto("/create-profile/add-interests");
   }
 
 </script>
