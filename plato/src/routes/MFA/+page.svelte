@@ -54,7 +54,7 @@
 
       login = true;
       await multiFactor(auth.currentUser).enroll(multiFactorAssertion, mfaDisplayName);
-      goto('/create-profile');
+      goto('/organization');
     } catch (error) {
       console.error(error);
     }
@@ -71,7 +71,7 @@
   }
 
   async function skip(){
-    goto('/create-profile');
+    goto('/organization');
   }
 </script>
 
@@ -104,7 +104,7 @@
         Verify
       </button>
 
-      <div class="flex justify-center"> <!-- This div centers the Skip button -->
+      <div class="flex justify-center">
         <button type="button" on:click={skip} class="mt-5 w-24 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
           Skip
         </button>

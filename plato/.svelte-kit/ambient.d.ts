@@ -46,7 +46,8 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const configsetroot: string;
 	export const DriverData: string;
-	export const EFC_22780: string;
+	export const EDITOR: string;
+	export const EFC_1312: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -166,7 +167,6 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		configsetroot: string;
 		DriverData: string;
-		EFC_22780: string;
 		EDITOR: string;
 		EFC_1312: string;
 		GIT_ASKPASS: string;
