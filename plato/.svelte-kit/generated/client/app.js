@@ -36,42 +36,44 @@ export const nodes = [
 	() => import('./nodes/32'),
 	() => import('./nodes/33'),
 	() => import('./nodes/34'),
-	() => import('./nodes/35')
+	() => import('./nodes/35'),
+	() => import('./nodes/36')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [6],
-		"/MFA": [24,[3]],
+		"/MFA": [25,[3]],
 		"/about": [7],
 		"/chat": [8],
 		"/connections": [9],
 		"/create-account": [10,[2]],
 		"/create-profile": [11],
 		"/create-profile/add-availability": [12],
-		"/create-profile/completed": [13],
-		"/create-profile/upload-csv": [14],
-		"/create-profile/upload-pfp": [15],
-		"/create-profile/upload-resume": [16],
-		"/events": [17],
-		"/footer/contact": [18],
-		"/footer/guidelines": [19],
-		"/footer/licensing": [20],
-		"/footer/privacy": [21],
-		"/forgot-password": [22],
-		"/home": [23],
-		"/organization": [25],
-		"/profile": [26],
-		"/profile/edit-profile": [27],
-		"/report": [28],
-		"/settings": [29],
-		"/settings/MFA-setup": [32,[4]],
-		"/settings/change-email": [30],
-		"/settings/change-password": [31],
-		"/sign-in": [33,[5]],
-		"/start": [34],
-		"/verify-email": [35]
+		"/create-profile/add-interests": [13],
+		"/create-profile/completed": [14],
+		"/create-profile/upload-csv": [15],
+		"/create-profile/upload-pfp": [16],
+		"/create-profile/upload-resume": [17],
+		"/events": [18],
+		"/footer/contact": [19],
+		"/footer/guidelines": [20],
+		"/footer/licensing": [21],
+		"/footer/privacy": [22],
+		"/forgot-password": [23],
+		"/home": [24],
+		"/organization": [26],
+		"/profile": [27],
+		"/profile/edit-profile": [28],
+		"/report": [29],
+		"/settings": [30],
+		"/settings/MFA-setup": [33,[4]],
+		"/settings/change-email": [31],
+		"/settings/change-password": [32],
+		"/sign-in": [34,[5]],
+		"/start": [35],
+		"/verify-email": [36]
 	};
 
 export const hooks = {

@@ -3,7 +3,6 @@ import firebase_admin, json, asyncio
 from firebase_admin import credentials, firestore, storage
 import requests, datetime
 from flask_cors import CORS
-# from flask_socketio import SocketIO, emit
 
 
 class Chat:
@@ -13,7 +12,7 @@ class Chat:
         self.chatID = 'a'
         self.message_count = 0
         self.message_input = ''
-        self.ID = 'e7Wee661lbq5bP5nlxD2'
+        self.ID = 'akB88qTZle2IEYbEmUER'
         self.timestamp = ''
         self.messages = []
         self.data_received = False
@@ -78,7 +77,7 @@ class Chat:
         self.order = data['messageOrder']
     
     def get_initial_messages(self, db):
-        chat_ref = db.collection('chat').document('e7Wee661lbq5bP5nlxD2').collection('messages')
+        chat_ref = db.collection('chat').document(self.ID).collection('messages')
         query = chat_ref.order_by('messageOrder')
         messages = []
 
@@ -97,7 +96,7 @@ class Chat:
         return jsonify({'messages': messages})
     
     def get_updates(self, db):
-        chat_ref = db.collection('chat').document('e7Wee661lbq5bP5nlxD2').collection('messages')
+        chat_ref = db.collection('chat').document(self.ID).collection('messages')
         query = chat_ref.order_by('messageOrder')
 
         def on_snapshot(doc_snapshot, changes, read_time):
