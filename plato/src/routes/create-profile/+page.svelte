@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { Label, Input } from 'flowbite-svelte';
   import { onAuthStateChanged } from 'firebase/auth';
-  import { auth, db } from '$lib/firebase/firebase.client.js';
+  import { auth } from '$lib/firebase/firebase.client.js';
   import { goto } from '$app/navigation';
   import { Progressbar } from 'flowbite-svelte';
 

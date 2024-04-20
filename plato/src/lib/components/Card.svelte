@@ -149,7 +149,7 @@
 
     .section .info {
         position: absolute;
-        top: 50%;
+        top: 25%;
         left: 0;
         width: 100%;
         background-color: white;
