@@ -8,13 +8,18 @@
     import { auth, db } from '$lib/firebase/firebase.client.js';
     import { collection, updateDoc, getDocs, addDoc, query, where, orderBy, onSnapshot } from 'firebase/firestore';
     import { onAuthStateChanged } from 'firebase/auth';
+    import { onMount } from 'svelte';
+    import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
 
     let currentUser = '';
     let messages = writable([]);
+    let chats = writable([]);
+    let recipientNames = writable([]);
+    let recipientIcons = writable([]);
     let tempUser = '';
     let messageInput = "";
     let displayInput = "";
-    let currentRecipient = 'Mark Marsala';
+    let currentRecipient = writable({name: 'Mark Marsala'});
     let timestamp = "";
     let messageOrder = 1;
     let userUID;
@@ -32,8 +37,21 @@
             await setCurrentUser();
         }
     }
+    async function determineRecipientUser(){
+        for(let reference in chats){
 
-
+        }
+    }
+    async function fetchData(){
+        const q = query(collection(db, users), where('userID', '==', userUID))
+        const querySnap = await getDocs(q);
+        if (!querySnap.empty){
+            const doc = querySnap[0];
+            const userData = doc.data()
+            const chatList = userData.chats;
+            chats.set(chatList);
+        }
+    }
     async function setCurrentUser(){
         try {
             const q = query(collection(db, "users"), where("userID", "==", userUID));
@@ -111,10 +129,10 @@
         }
     };
 
-    const startDataSync = async () => {
+    const startDataSync = async (reference) => {
         const numMessages = collection(db, `chat`)
         const queryNumSnapshot = await getDocs(numMessages);
-        const subscribe = onSnapshot(query(collection(db, "chat/akB88qTZle2IEYbEmUER/messages"),orderBy("messageOrder", "asc")), (querySnapshot) => {
+        const subscribe = onSnapshot(query(collection(db, `${reference}/messages`),orderBy("messageOrder", "asc")), (querySnapshot) => {
             messages.set([]);
             querySnapshot.docs.slice(1).forEach((doc) => {
                 const data = doc.data();
@@ -125,7 +143,6 @@
             })
         });
     };
-    startDataSync();
     async function sendDataToFlask(data) {
         try {
             const response = await fetch('http://localhost:5000/get_data_from_chat', {
@@ -141,6 +158,10 @@
             console.error('Error:', error);
         }
     }
+    onMount(() => {
+        fetchData();
+        startDataSync(chats[0]);
+    });
 </script>
 
 <div class = "Sidebar">
@@ -175,7 +196,7 @@
         <Navbar rounded color="form">
             <NavBrand>
               <img src={Mpfp} class="mr-3 h-6 sm:h-9" alt="Mark Marsala profile picture" aria-hidden="false"/>
-              <span class="self-center whitespace-nowrap text-xl font-semibold dark text-black">{currentRecipient}</span>
+              <span class="self-center whitespace-nowrap text-xl font-semibold dark text-black">{currentRecipient.name}</span>
             </NavBrand>
             <NavHamburger  />
             <NavUl >
