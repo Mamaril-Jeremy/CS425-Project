@@ -36,7 +36,8 @@ export const nodes = [
 	() => import('./nodes/32'),
 	() => import('./nodes/33'),
 	() => import('./nodes/34'),
-	() => import('./nodes/35')
+	() => import('./nodes/35'),
+	() => import('./nodes/36')
 ];
 
 export const server_loads = [];
@@ -62,16 +63,17 @@ export const dictionary = {
 		"/footer/privacy": [22],
 		"/forgot-password": [23],
 		"/home": [24],
-		"/profile": [26],
-		"/profile/edit-profile": [27],
-		"/report": [28],
-		"/settings": [29],
-		"/settings/MFA-setup": [32,[4]],
-		"/settings/change-email": [30],
-		"/settings/change-password": [31],
-		"/sign-in": [33,[5]],
-		"/start": [34],
-		"/verify-email": [35]
+		"/organization": [26],
+		"/profile": [27],
+		"/profile/edit-profile": [28],
+		"/report": [29],
+		"/settings": [30],
+		"/settings/MFA-setup": [33,[4]],
+		"/settings/change-email": [31],
+		"/settings/change-password": [32],
+		"/sign-in": [34,[5]],
+		"/start": [35],
+		"/verify-email": [36]
 	};
 
 export const hooks = {

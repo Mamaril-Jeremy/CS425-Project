@@ -4,21 +4,17 @@ from resumeReader import ResumeParser
 from connections import Connection
 from flask import Flask, request, jsonify, Response
 import firebase_admin, asyncio
-from firebase_admin import credentials, firestore, storage
-#from google.cloud import storage
-import os
+from firebase_admin import credentials, firestore
+import io
 
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
-cred = credentials.Certificate("service_account.json")
-firebase_admin.initialize_app(cred, name='first')
-
-# storage_client = storage.Client()
-# bucket_name = 'gs://plato-49d12.appspot.com'
-# bucket = storage_client.bucket(bucket_name)
+if not firebase_admin._apps:
+    cred = credentials.Certificate("service_account.json")
+    firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 @app.route('/add_report', methods=['POST'])  
@@ -29,55 +25,104 @@ def add_report():
         return jsonify({"message": "Report added successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-# Create the temp directory if it doesn't exist
-if not os.path.exists('temp'):
-    os.makedirs('temp')
-
-def parse_csv(file_path):
-    data = []
-    with open(file_path, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            user = {
-                'userFirstName': row['First'],
-                'userLastName': row['Last'],
-                'userOccupation': row['Occupation'],
-                'userPhoneNumber': row['Phone'],
-                'userRole': row['Role'],
-                'userMajor': row['Major'],
-                'userCountry': row['Country'],
-                'userState': row['State'],
-                'userCity': row['City']
-            }
-            data.append(user)
-    return data
-
-@app.route('/add_org_user', methods=['POST'])
-def upload_file():
-    # user_uid = request.form['userUID']
+    
+@app.route('/add_unr_users', methods=['POST'])
+def upload_unr_file():
     file = request.files['file']
     if file and file.filename.endswith('.csv'):
-        # Save the file temporarily
-        file_path = os.path.join('temp', file.filename)
-        file.save(file_path)
+        try:
+            with io.StringIO(file.stream.read().decode("utf-8")) as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    user_data = {
+                        'First': row['First'],
+                        'Last': row['Last'],
+                        'Occupation': row['Occupation'],
+                        'Phone': row['Phone'],
+                        'Role': row['Role'],
+                        'Major': row['Major'],
+                        'Country': row['Country'],
+                        'State': row['State'],
+                        'City': row['City'],
+                        'Organization': "University of Nevada, Reno"
+                    }
+                    db.collection('org_users').document('unr').collection('unr_uncreated_users').add(user_data)
 
-        # Parse the CSV file
-        parsed_data = parse_csv(file_path)
-        
-        # Upload users to UNRusers folder in Firebase Storage
-        for user_data in parsed_data:
-            username = user_data['userFirstName'] + '_' + user_data['userLastName']
-            user_file_path = f'UNRusers/{username}.json' 
-            blob = bucket.blob(user_file_path)
-            blob.upload_from_string(str(user_data), content_type='application/json')
-
-
-        os.remove(file_path)
-
-        return 'File uploaded successfully'
+            return jsonify({'message': 'Data uploaded successfully'}), 200
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
     else:
-        return 'Invalid file or file type'
+        return 'Invalid file or file type', 400
+
+@app.route('/add_unlv_users', methods=['POST'])
+def upload_unlv_file():
+    file = request.files['file']
+    if file and file.filename.endswith('.csv'):
+        try:
+            with io.StringIO(file.stream.read().decode("utf-8")) as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    user_data = {
+                        'First': row['First'],
+                        'Last': row['Last'],
+                        'Occupation': row['Occupation'],
+                        'Phone': row['Phone'],
+                        'Role': row['Role'],
+                        'Major': row['Major'],
+                        'Country': row['Country'],
+                        'State': row['State'],
+                        'City': row['City'],
+                        'Organization': "University of Nevada, Las Vegas"
+                    }
+                    db.collection('org_users').document('unlv').collection('unlv_uncreated_users').add(user_data)
+
+            return jsonify({'message': 'Data uploaded successfully'}), 200
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    else:
+        return 'Invalid file or file type', 400
+    
+@app.route('/check_user', methods=['POST'])
+def check_user():
+    data = request.json
+    selected_university = data['selectedUniversity']
+    first_name = data['firstName']
+    last_name = data['lastName']
+
+    if selected_university == 'University of Nevada, Reno':
+        collection_path = 'org_users/unr/unr_uncreated_users'
+    elif selected_university == 'University of Nevada, Las Vegas':
+        collection_path = 'org_users/unlv/unlv_uncreated_users'
+    else:
+        return jsonify({'error': 'Invalid university'}), 400
+
+    user_ref = db.collection(collection_path).where('First', '==', first_name).where('Last', '==', last_name).limit(1)
+    users = user_ref.stream()
+
+    user_data = {}
+    for user in users:
+        user_data = user.to_dict()
+        break  # Assuming only one user should match, so breaking after the first one
+
+    if user_data:
+        response = {
+            'exists': True,
+            'userData': {
+                'First': user_data.get('First', ''),
+                'Last': user_data.get('Last', ''),
+                'Occupation': user_data.get('Occupation', ''),
+                'Phone': user_data.get('Phone', ''),
+                'Role': user_data.get('Role', ''),
+                'Major': user_data.get('Major', ''),
+                'Country': user_data.get('Country', ''),
+                'State': user_data.get('State', ''),
+                'City': user_data.get('City', '')
+            }
+        }
+    else:
+        response = {'exists': False}
+
+    return jsonify(response)
 
 @app.route('/add_user', methods=['POST'])  
 def add_user():
