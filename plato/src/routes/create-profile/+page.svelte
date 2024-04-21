@@ -11,7 +11,7 @@
 
   let countries = [], states = [], cities = [];
   let selectedCountry = '', selectedState = '', selectedCity = '';
-  let autofill = false;
+  let autofiller = false;
 
   const API_KEY = 'Wk5MTzFkRGJvUEx3eExmVjZrWEhJRzFlazZiTE9LYUtFUFJqcWIyWQ==';
 
@@ -28,7 +28,7 @@
       selectedCountry = urlParams.get('Country');
       selectedState = urlParams.get('State');
       selectedCity = urlParams.get('City');
-      autofill = true;
+      autofiller = true;
     } else {
       fetchCountries();
     }
@@ -209,7 +209,7 @@
             <option value="Web Developer">Web Developer</option>
             <option value="Writer">Writer</option>
             <option value="Zoologist">Zoologist</option>
-            
+            <option value="Other">Other</option>
           </select>
         </div>
         <div>
@@ -227,7 +227,7 @@
         </div>
         <div>
           <Label for="role" class="mb-2">Role</Label>
-          <select class="text-gray-900 bg-gray-50 w-full" bind:value={role}>
+          <select class="text-gray-900 bg-gray-50 w-full" bind:value={role} required>
             <option value="">Select Role</option>
             <option value="Mentor">Mentor</option>
             <option value="Mentee">Mentee</option>
@@ -267,47 +267,50 @@
             <option value="Political Science">Political Science</option>
             <option value="Psychology">Psychology</option>
             <option value="Sociology">Sociology</option>
-        </select>
+            <option value="Other">Other</option>
+          </select>
         </div>
 
-        {#if autofill}
-          <div>
-            <Label for="country" class="mb-2">Country</Label>
-            <input class="text-gray-900 bg-gray-50" type="text" id="country" placeholder="Country" bind:value={selectedCountry} style="width:180px;" required />
-          </div>
-          <div>
-            <Label for="state" class="mb-2">State</Label>
-            <input class="text-gray-900 bg-gray-50" type="text" id="state" placeholder="State" bind:value={selectedState} style="width:180px;" required />
-          </div>
-          <div>
-            <Label for="city" class="mb-2">City</Label>
-            <input class="text-gray-900 bg-gray-50 mb-5" type="text" id="city" placeholder="City" bind:value={selectedCity} style="width:180px;" required />
-          </div>
-        {/if}
-      
-
-        {#if !autofill}
+        {#if !autofiller}
         <div>
+          <Label for="country" class="mb-2">Country</Label>
           <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedCountry} style="width:180px;" on:change={fetchStates} required>
             <option value="">Select Country</option>
             {#each countries as country (country.iso2)}
-              <option value={country.iso2} key={country.iso2}>{country.name}</option>
+              <option value={country} key={country.iso2}>{country.name}</option>
             {/each}
           </select>
+          <Label for="state" class="mb-2">State</Label>
           <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedState} style="width:180px;" on:change={fetchCities} if={states.length} required>
             <option value="">Select State</option>
-            {#each states as state (state.iso2)}
-              <option value={state.iso2} key={state.iso2}>{state.name}</option>
+            {#each states as state (state.id)}
+              <option value={state} key={state.id}>{state.name}</option>
             {/each}
           </select>
+          <Label for="city" class="mb-2">City</Label>
           <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} style="width:180px;" if={cities.length} required>
             <option value="">Select City</option>
             {#each cities as city (city.id)}
               <option value={city.name} key={city.id}>{city.name}</option>
             {/each}
-          </select>          
+          </select>
         </div>
-        {/if}
+      {/if}
+
+      {#if autofiller}
+        <div>
+          <Label for="country" class="mb-2">Country</Label>
+          <input class="text-gray-900 bg-gray-50" type="text" id="country" placeholder="Country" bind:value={selectedCountry} style="width:180px;" required />
+        </div>
+        <div>
+          <Label for="state" class="mb-2">State</Label>
+          <input class="text-gray-900 bg-gray-50" type="text" id="state" placeholder="State" bind:value={selectedState} style="width:180px;" required />
+        </div>
+        <div>
+          <Label for="city" class="mb-2">City</Label>
+          <input class="text-gray-900 bg-gray-50 mb-5" type="text" id="city" placeholder="City" bind:value={selectedCity} style="width:180px;" required />
+        </div>
+      {/if}
       </div>
 
       <div>
@@ -338,10 +341,6 @@
 
   button {
     cursor: pointer;
-  }
-
-  a {
-    margin-left: 70px;
   }
 
   textarea {
