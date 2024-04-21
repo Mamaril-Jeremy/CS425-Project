@@ -15,19 +15,6 @@
         <DarkMode {btnClass} />
       </div>
   
-      <!-- Notification Settings -->
-      <div class="mb-6">
-        <h2 class="text-xl font-semibold mb-2">Notification Settings</h2>
-        <div class="flex justify-between">
-          <p>Receive Notifications</p>
-          <span class="text-gray-500">On</span>
-        </div>
-        <div class="flex justify-between">
-          <p>Email Notifications</p>
-          <span class="text-gray-500">On</span>
-        </div>
-        <!-- Add more notification-related settings as needed -->
-      </div>
   
       <!-- Privacy Settings -->
       <div class="mb-6">
@@ -40,7 +27,6 @@
           <p>Show Online Status</p>
           <span class="text-gray-500">On</span>
         </div>
-        <!-- Add more privacy-related settings as needed -->
       </div>
   
       <!-- Account Settings -->
@@ -54,9 +40,10 @@
         </div>
         <div class="flex items-center justify-center mt-2 mb-2">
           <p>Configure MFA</p>
-          <a href="/settings/MFA-setup" class="text-blue-500 ml-4">Setup</a>
+          <a href="/settings/MFA-setup" class="text-blue-500 ml-4 mr-4">Setup</a>
+          <p>Delete Account</p>
+          <a href="/settings/MFA-setup" class="text-red-500 ml-4 mr-4">Delete</a>
         </div>
-
       </div>
     </section>
   </main>

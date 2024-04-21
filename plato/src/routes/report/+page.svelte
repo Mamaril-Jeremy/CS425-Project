@@ -1,6 +1,7 @@
 <script>
     import { onAuthStateChanged } from 'firebase/auth';
     import { auth } from '$lib/firebase/firebase.client.js';
+    import { getStorage, ref, uploadBytes } from 'firebase/storage';
     import { Button } from 'flowbite-svelte';
 
     let spamChecked = false;
@@ -32,15 +33,23 @@
     };
 
     const handleOtherReasonChange = (event) => {
-        otherReason = event.target.value.slice(0, 200); // Limit to 200 characters
+        otherReason = event.target.value.slice(0, 200); 
     };
 
     const handleAdditionalInfoChange = (event) => {
-        additionalInfo = event.target.value.slice(0, 2000); // Limit to 2000 characters
+        additionalInfo = event.target.value.slice(0, 2000);
     };
 
     const handleImageUpload = (event) => {
         imageFile = event.target.files[0];
+        const storage = getStorage();
+        const storageRef = ref(storage, `reports/${userUID}/${imageFile.name}`);
+        
+        const metadata = {
+            contentType: imageFile.type
+        }
+
+        const uploadTask = uploadBytes(storageRef, imageFile, metadata);  
     };
 
     const toggleOtherReasonInput = () => {

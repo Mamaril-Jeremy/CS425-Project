@@ -117,6 +117,10 @@
       <p class="text-red-500 mb-4">Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character</p>
       {/if}
 
+      <div class="mt-6">
+        Already have an account? <a href="/sign-in">Sign In</a>
+       </div>
+
       <!-- Submit Button -->
       <button type="submit" class="mt-2 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
         Create Account
