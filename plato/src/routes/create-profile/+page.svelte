@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { Label, Input } from 'flowbite-svelte';
   import { onAuthStateChanged } from 'firebase/auth';
-  import { auth, db } from '$lib/firebase/firebase.client.js';
+  import { auth } from '$lib/firebase/firebase.client.js';
   import { goto } from '$app/navigation';
   import { Progressbar } from 'flowbite-svelte';
 
@@ -11,11 +11,28 @@
 
   let countries = [], states = [], cities = [];
   let selectedCountry = '', selectedState = '', selectedCity = '';
+  let autofiller = false;
 
   const API_KEY = 'Wk5MTzFkRGJvUEx3eExmVjZrWEhJRzFlazZiTE9LYUtFUFJqcWIyWQ==';
 
   onMount(() => {
-    fetchCountries();
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlLength = window.location.href.length;
+    firstName = urlParams.get('First');
+    lastName = urlParams.get('Last');
+    phoneNumber = urlParams.get('Phone');
+    occupation = urlParams.get('Occupation');
+    role = urlParams.get('Role');
+    major = urlParams.get('Major');
+    if(urlLength > 150){
+      selectedCountry = urlParams.get('Country');
+      selectedState = urlParams.get('State');
+      selectedCity = urlParams.get('City');
+      autofiller = true;
+    } else {
+      fetchCountries();
+    }
+    console.log(urlLength);
   });
 
   const fetchCountries = () => {
@@ -69,6 +86,9 @@
     }
   });
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedUniversity = urlParams.get('university');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -93,7 +113,8 @@
       userPhoneNumber: phoneNumber,
       userRole: role,
       userState: selectedState.name,
-      userStatus: status
+      userStatus: status,
+      organization: selectedUniversity
     };
     sendDataToFlask(data);
     goto("/create-profile/add-availability")
@@ -113,7 +134,7 @@
       } catch (error) {
           console.error('Error:', error);
       }
-  }
+  };
 </script>
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
@@ -188,7 +209,7 @@
             <option value="Web Developer">Web Developer</option>
             <option value="Writer">Writer</option>
             <option value="Zoologist">Zoologist</option>
-            
+            <option value="Other">Other</option>
           </select>
         </div>
         <div>
@@ -206,7 +227,7 @@
         </div>
         <div>
           <Label for="role" class="mb-2">Role</Label>
-          <select class="text-gray-900 bg-gray-50 w-full" bind:value={role}>
+          <select class="text-gray-900 bg-gray-50 w-full" bind:value={role} required>
             <option value="">Select Role</option>
             <option value="Mentor">Mentor</option>
             <option value="Mentee">Mentee</option>
@@ -246,47 +267,61 @@
             <option value="Political Science">Political Science</option>
             <option value="Psychology">Psychology</option>
             <option value="Sociology">Sociology</option>
-        </select>
+            <option value="Other">Other</option>
+          </select>
         </div>
+
+        {#if !autofiller}
         <div>
+          <Label for="country" class="mb-2">Country</Label>
           <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedCountry} style="width:180px;" on:change={fetchStates} required>
             <option value="">Select Country</option>
             {#each countries as country (country.iso2)}
               <option value={country} key={country.iso2}>{country.name}</option>
             {/each}
           </select>
-          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedState} style="width:180px;" on:change={fetchCities} if={states.length} required>
+          <Label for="state" class="mb-2">State</Label>
+          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedState} style="width:180px;" on:change={fetchCities} if={states.length}>
             <option value="">Select State</option>
             {#each states as state (state.id)}
               <option value={state} key={state.id}>{state.name}</option>
             {/each}
           </select>
-          <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} style="width:180px;" if={cities.length} required>
+          <Label for="city" class="mb-2">City</Label>
+          <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} style="width:180px;" if={cities.length}>
             <option value="">Select City</option>
             {#each cities as city (city.id)}
               <option value={city.name} key={city.id}>{city.name}</option>
             {/each}
           </select>
         </div>
+      {/if}
+
+      {#if autofiller}
+        <div>
+          <Label for="country" class="mb-2">Country</Label>
+          <input class="text-gray-900 bg-gray-50" type="text" id="country" placeholder="Country" bind:value={selectedCountry} style="width:180px;" required />
+        </div>
+        <div>
+          <Label for="state" class="mb-2">State</Label>
+          <input class="text-gray-900 bg-gray-50" type="text" id="state" placeholder="State" bind:value={selectedState} style="width:180px;" required />
+        </div>
+        <div>
+          <Label for="city" class="mb-2">City</Label>
+          <input class="text-gray-900 bg-gray-50 mb-5" type="text" id="city" placeholder="City" bind:value={selectedCity} style="width:180px;" required />
+        </div>
+      {/if}
       </div>
 
       <div>
-        <Label for="about_me" class="mb-2">About Me (Min: 150 characters)</Label>
-        <textarea class="mb-4" id="about_me" rows="4" bind:value={aboutMe} placeholder="Tell us about yourself..." required></textarea>
-        {#if aboutMe.length <= 200}
-          <div id="charCount" class="char-count">{150 - aboutMe.length} characters needed</div>
+        <Label for="about_me" class="mb-2">About Me (Max: 100 characters)</Label>
+        <textarea class="mb-4" id="about_me" rows="4"  maxlength="100" bind:value={aboutMe} placeholder="Tell us about yourself..." required></textarea>
+        {#if aboutMe.length <= 100}
+          <div id="charCount" class="char-count">{100 - aboutMe.length} characters remaining</div>
         {/if}
       </div>
 
-      <button type="submit" class="w-full mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-        Create Account
-      </button>
-
-      <div class="mt-6">
-       Already have an account? <a href="/sign-in">Sign In</a>
-      </div>
-
-      <div class="mt-2">
+      <div class="mt-4">
         Leading an Organization? <a href="create-profile/upload-csv">Create Users</a>
       </div>
     </form>
@@ -306,10 +341,6 @@
 
   button {
     cursor: pointer;
-  }
-
-  a {
-    margin-left: 70px;
   }
 
   textarea {

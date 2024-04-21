@@ -1,5 +1,5 @@
 <script>
-  import { authHandlers } from "../../stores/authStore.js";
+  import { authHandlers, authStore } from "../../stores/authStore.js";
   import {
     Avatar,
     Dropdown,
@@ -28,7 +28,7 @@
       userUID = user.uid;
       userEmail = user.email;
       fetchData(); 
-      downloadAvatar(userUID)
+      downloadAvatar(userUID);
     }
   });
 
@@ -69,6 +69,12 @@
 
   async function handleClick() {
     try {
+      authStore.update((curr) => {
+        return {
+          ...curr,
+          loggedIn: false
+        };
+      });
       await authHandlers.logout();
       goto('/home');
     } catch (err) {
@@ -97,6 +103,7 @@
           {/if}
           <span class="block truncate text-sm font-medium">{userEmail}</span>
         </DropdownHeader>
+        <DropdownItem href="/settings" class="text-black">Your Card</DropdownItem>
         <DropdownItem href="/settings" class="text-black">Settings</DropdownItem>
         <DropdownItem href="/profile" class="text-black">Profile</DropdownItem>
         <DropdownDivider />

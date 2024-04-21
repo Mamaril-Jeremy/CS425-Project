@@ -132,18 +132,18 @@
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      authStore.update((curr) => {
+        return {
+          ...curr,
+          loggedIn: true
+        };
+      });
+      goto("/home");
             //If rememberMe then set
         if (rememberMe) {
           localStorage.setItem("email", email);
           localStorage.setItem("password", enigma.encrypt(password, 5, 9, 3));
         } //Local email-password storage
-      authStore.update((curr) => {
-        return {
-          ...curr,
-          loggedIn: true,
-        };
-      });
-      goto("/home");
     } catch (err) {
       console.log(err);
       if (err.code === 'auth/multi-factor-auth-required') {
