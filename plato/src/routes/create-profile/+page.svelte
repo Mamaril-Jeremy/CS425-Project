@@ -134,7 +134,7 @@
       } catch (error) {
           console.error('Error:', error);
       }
-  }
+  };
 </script>
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black-800 w-screen">
@@ -281,14 +281,14 @@
             {/each}
           </select>
           <Label for="state" class="mb-2">State</Label>
-          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedState} style="width:180px;" on:change={fetchCities} if={states.length} required>
+          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedState} style="width:180px;" on:change={fetchCities} if={states.length}>
             <option value="">Select State</option>
             {#each states as state (state.id)}
               <option value={state} key={state.id}>{state.name}</option>
             {/each}
           </select>
           <Label for="city" class="mb-2">City</Label>
-          <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} style="width:180px;" if={cities.length} required>
+          <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} style="width:180px;" if={cities.length}>
             <option value="">Select City</option>
             {#each cities as city (city.id)}
               <option value={city.name} key={city.id}>{city.name}</option>
@@ -314,16 +314,16 @@
       </div>
 
       <div>
-        <Label for="about_me" class="mb-2">About Me (Min: 150 characters)</Label>
-        <textarea class="mb-4" id="about_me" rows="4" bind:value={aboutMe} placeholder="Tell us about yourself..." required></textarea>
-        {#if aboutMe.length <= 200}
-          <div id="charCount" class="char-count">{150 - aboutMe.length} characters needed</div>
+        <Label for="about_me" class="mb-2">About Me (Max: 100 characters)</Label>
+        <textarea class="mb-4" id="about_me" rows="4"  maxlength="100" bind:value={aboutMe} placeholder="Tell us about yourself..." required></textarea>
+        {#if aboutMe.length <= 100}
+          <div id="charCount" class="char-count">{100 - aboutMe.length} characters remaining</div>
         {/if}
       </div>
 
-      <button type="submit" class="w-full mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-        Create Account
-      </button>
+      <div class="mt-4">
+        Leading an Organization? <a href="create-profile/upload-csv">Create Users</a>
+      </div>
     </form>
   </section>
 </main>

@@ -1,4 +1,3 @@
-<!-- Developed by Mark Marsala -->
 <script>
   import { multiFactor, PhoneAuthProvider, PhoneMultiFactorGenerator } from "firebase/auth";
   import { getAuth } from "firebase/auth";
@@ -12,6 +11,7 @@
   let verificationId = '';
   let appVerifier = null;
   let login = false;
+  let phoneNumberError = '';
 
   const mfaDisplayName = "Phone Auth"
 
@@ -22,6 +22,15 @@
     if (!phoneNumber) {
       console.error('Invalid phone number or reCAPTCHA not verified');
       return;
+    }
+
+    const phoneRegex = /^\+\d{4}-\d{3}-\d{4}$/;
+
+    if (!phoneRegex.test(phoneNumber)) {
+      phoneNumberError = 'Please enter a valid phone number in the format: +1123-456-7890';
+      return;
+    } else {
+      phoneNumberError = '';
     }
 
     try {
@@ -85,6 +94,9 @@
       <div class="mb-6">
         <label for="phoneNumber" class="block text-sm font-medium text-gray-600">Phone Number</label>
         <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+1 123-456-7890" autocomplete="tel" class="mt-1 p-2 w-full border rounded-md" bind:value={formData.phoneNumber} required />
+        {#if phoneNumberError}
+          <p class="text-red-500">{phoneNumberError}</p>
+        {/if}
       </div>
 
       <div class="mb-4">
