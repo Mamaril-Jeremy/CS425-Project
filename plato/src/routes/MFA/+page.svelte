@@ -63,7 +63,7 @@
 
       login = true;
       await multiFactor(auth.currentUser).enroll(multiFactorAssertion, mfaDisplayName);
-      goto('/create-profile');
+      goto('/organization');
     } catch (error) {
       console.error(error);
     }
@@ -80,7 +80,7 @@
   }
 
   async function skip(){
-    goto('/create-profile');
+    goto('/organization');
   }
 </script>
 
