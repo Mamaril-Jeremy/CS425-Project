@@ -321,6 +321,10 @@
         {/if}
       </div>
 
+      <button type="submit" class="w-full mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+        Create Account
+      </button>
+
       <div class="mt-4">
         Leading an Organization? <a href="create-profile/upload-csv">Create Users</a>
       </div>
