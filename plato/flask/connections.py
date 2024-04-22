@@ -3,13 +3,13 @@ from firebase_admin import credentials, firestore, storage
 from google.cloud.firestore_v1.base_query import FieldFilter
 import requests
 
-cred = credentials.Certificate("service_account.json")
-firebase_admin.initialize_app(cred, {
-    'storageBucket': 'gs://plato-49d12.appspot.com'
-})
 
-bucket = storage.bucket()
+if not firebase_admin._apps:
+    cred = credentials.Certificate("service_account.json")
+    firebase_admin.initialize_app(cred)
+
 db = firestore.client()
+
 class Connection:
     def __init__(self, firstUser, secondUser):
         self.user1 = firstUser
@@ -223,10 +223,10 @@ class Connection:
                 })
             
 def main():
-    connection = Connection("34U0pOHuZFZZS0RgZW0cwF5I77f2", "x1WD3laAszfLTi4dR2gvmUxVip63")
-    connection.set_connection_status('True', "x1WD3laAszfLTi4dR2gvmUxVip63")
+    connection = Connection("RIeZdmX61IRiSSh8WwwL8a4RlnL2", "ySZvSdFK9EOqnrUimaNZxI8bJwE2")
+    connection.set_connection_status('True', "ySZvSdFK9EOqnrUimaNZxI8bJwE2")
     connection.handle_pending_connection(db)
-    connection.set_connection_status('True', "34U0pOHuZFZZS0RgZW0cwF5I77f2")
+    connection.set_connection_status('True', "RIeZdmX61IRiSSh8WwwL8a4RlnL2")
     connection.handle_pending_connection(db)
     # connection.set_connection_status('False', "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
     # connection.handle_pending_connection(db)

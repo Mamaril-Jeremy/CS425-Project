@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify, Response
 import firebase_admin, asyncio
 from firebase_admin import credentials, firestore
 import io
+from google.cloud.firestore_v1.base_query import FieldFilter
 
 from flask_cors import CORS
 
@@ -176,9 +177,9 @@ def get_data_from_chat():
     response = jsonify(response_data)
     return response
 
-@app.route('/get_initial_messages', methods=['GET'])
-def handle_get_data():
-    return chat_instance.get_initial_messages(db)
+@app.route('/get_initial_messages/<chat_id>', methods=['GET'])
+def handle_get_data(chat_id):
+    return chat_instance.get_initial_messages(db, chat_id)
 
 @app.route('/get_message_updates', methods=['GET'])
 def handle_update():
@@ -210,6 +211,36 @@ def manage_connections():
     response_data = {'message': 'Data received successfully'}
     response = jsonify(response_data)
     return response
+
+@app.route('/disconnect_user', methods=['POST'])
+def disconnect_user():
+    collection_ref = db.collection('users')
+    viewedUser = request.form['viewedUser']
+    currentUser =  request.form['currentUser']
+    user1Query = collection_ref.where(filter=FieldFilter("userID", "==", viewedUser)).get()
+    user2Query = collection_ref.where(filter=FieldFilter("userID", "==", currentUser)).get()
+    chatId = request.form['chatRef']
+    chatRef = db.collection('chat').document(chatId)
+    for doc in user1Query:
+        doc_ref = collection_ref.document(doc.id)
+        array = [chatRef]
+        doc_ref.update({
+            'Chats': firestore.ArrayRemove(array),
+        })
+    for doc in user2Query:
+        doc_ref = collection_ref.document(doc.id)
+        array = [chatRef]
+        doc_ref.update({
+            'Chats': firestore.ArrayRemove(array),
+        })
+    chatRef.delete()
+    connection = Connection(currentUser, viewedUser)
+    connection.set_connection_status('False', currentUser)
+    connection.handle_pending_connection(db)
+    response_data = {'message': 'Data received successfully'}
+    response = jsonify(response_data)
+    return response
+
 
 if __name__ == "__main__":
     app.run(debug=True)
