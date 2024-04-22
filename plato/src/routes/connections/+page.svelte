@@ -30,7 +30,8 @@
   function handleNext(decision) {
     swiper.slideNext();
     if (counter < connections.length && counter > -1) {
-      sendDataToFlask(userUID, connections[counter].id, decision);
+      console.log(connections[counter].userId);
+      sendDataToFlask(userUID, connections[counter].userId, decision);
     }
     counter++;
   }
