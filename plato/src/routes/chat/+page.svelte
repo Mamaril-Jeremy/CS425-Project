@@ -239,7 +239,7 @@
         </Sidebar>
     </div>
     <div class = "chat-area">
-        <div class="chat-header">
+        <div class="chat-header mt-5">
             <div class="chat-header-details">
                 <Avatar src={$currentRecipientIcon || 'default-avatar.png'} class="avatar-large" />
                 <span class="recipient-name">{$currentRecipient || 'Select a chat'}</span>
@@ -270,7 +270,7 @@
 <style>
     .main-container{
         display: flex;
-        margin-top:90px;
+        margin-top:70px;
         height: 90vh;
     }
     .Sidebar{

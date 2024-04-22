@@ -24,14 +24,14 @@
       return;
     }
 
-    const phoneRegex = /^\+\d{4}-\d{3}-\d{4}$/;
+    // const phoneRegex = /^\+\d{4}-\d{3}-\d{4}$/;
 
-    if (!phoneRegex.test(phoneNumber)) {
-      phoneNumberError = 'Please enter a valid phone number in the format: +1123-456-7890';
-      return;
-    } else {
-      phoneNumberError = '';
-    }
+    // if (!phoneRegex.test(phoneNumber)) {
+    //   phoneNumberError = 'Please enter a valid phone number in the format: +1 123-456-7890';
+    //   return;
+    // } else {
+    //   phoneNumberError = '';
+    // }
 
     try {
       const auth = getAuth();
