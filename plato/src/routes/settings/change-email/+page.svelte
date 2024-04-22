@@ -17,7 +17,7 @@
     }
 
     try {
-      await authHandlers.verifyNewEmail(newEmail);
+      await authHandlers.updateEmail(newEmail);
       goto('/home');
     } catch (err) {
       console.log(err);

@@ -37,7 +37,7 @@
         <h2 class="text-xl font-semibold mb-2">Privacy Settings</h2>
         <div class="flex justify-between">
           <p>Make Profile Public</p>
-          <span class="text-gray-500">Off</span>
+          <span class="text-gray-500">On</span>
         </div>
         <div class="flex justify-between">
           <p>Show Online Status</p>
