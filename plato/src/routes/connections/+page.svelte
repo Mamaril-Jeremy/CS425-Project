@@ -13,6 +13,7 @@
 
   let counter = -1, userUID, swiper;
   let connections = [];
+  let click = true;
 
   onMount(() => {
     swiper = new Swiper(".mySwiper", {
@@ -56,6 +57,18 @@
       userUID = user.uid;
     }
   });
+
+  function toggleFilterButtonStyle(buttonIndex) {
+    const buttons = document.querySelectorAll('.filter button');
+    buttons.forEach((button, index) => {
+        if (index === buttonIndex) {
+            button.classList.add('button-clicked');
+        } else {
+            button.classList.remove('button-clicked');
+        }
+    });
+  }
+
 </script>
 
 <head>
@@ -103,6 +116,23 @@
       text-align: center;
       padding-left: 10px;
     }
+
+    .filter {
+      position: absolute;
+      bottom: 80px; 
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1; 
+    }
+
+    button{
+      margin-left: 10px;
+    }
+
+    .button-clicked{
+      background-color: blue;
+      color: white;
+    }
   </style>
 </head>
 
@@ -124,6 +154,15 @@
       <Button class="!p-2" on:click={() => handleNext('true')}>Connect <ArrowRightOutline class="w-5 h-5 ml-2" /></Button>
     </div>
   {/if}
+
+  <div class="filter">Filter by:  &nbsp; 
+    <button on:click={() => toggleFilterButtonStyle(0)}>Location</button>
+    <button on:click={() => toggleFilterButtonStyle(1)}>Interests</button>
+    <button on:click={() => toggleFilterButtonStyle(2)}>Skills</button>
+  </div>
+
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>

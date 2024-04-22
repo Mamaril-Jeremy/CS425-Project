@@ -120,7 +120,7 @@
 
   .continue {
       background-color: #007bff;
-      color: black;
+      color: white;
     }
   
     .no-continue{

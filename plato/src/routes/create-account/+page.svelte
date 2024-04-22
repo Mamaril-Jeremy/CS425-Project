@@ -1,8 +1,10 @@
 <script>
   // This code was developed by Mark Marsala
-  import { authHandlers } from "../../stores/authStore.js";
+  import { authHandlers, authStore } from "../../stores/authStore.js";
   import { goto } from '$app/navigation';
   import { Progressbar } from 'flowbite-svelte';
+  import { onAuthStateChanged } from 'firebase/auth';
+  import { auth } from '$lib/firebase/firebase.client.js';
 
   let formData = {
     username: '',
@@ -16,6 +18,13 @@
   let passwordLengthError = false;
   let passwordRequirementsError = false;
   const MIN_PASSWORD_LENGTH = 8;
+
+  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      let userUID = user.uid;
+    }
+  });
 
   async function handleSubmit() {
     //console.log('Form submitted:', formData);
@@ -34,6 +43,11 @@
           try {
             await authHandlers.signup(email, password);
             await authHandlers.verifyEmail();
+            const unsubscribe = auth.onAuthStateChanged((user) => {
+                authStore.update((curr) => {
+                  return { ...curr, isLoading: false, currentUser: user, loggedIn: false};
+                });
+            });
             goto('verify-email')
           } catch (err) {
             emailError = true;

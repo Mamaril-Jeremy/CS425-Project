@@ -23,7 +23,7 @@ const config = {
           "900":"#1e3a8a"
         }
       },
-      gray: {
+      black: {
         '800': "#4F4A49"
       }
     }

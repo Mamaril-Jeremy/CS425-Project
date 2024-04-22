@@ -28,13 +28,13 @@
       position: relative;
       top: -10px;
       margin-bottom: 10px;
-      animation: fadeIn ease-in 2s;
+      animation: fadeIn ease-in 1s;
   }
 
   .fade-in {
       opacity: 0;
-      animation: fadeInStretchOut ease-in-out 4s;
-      animation-delay: 2s;
+      animation: fadeInStretchOut ease-in-out 2s;
+      animation-delay: 1s;
       animation-fill-mode: forwards;
       line-height: 2;
       margin: 10px 0;
