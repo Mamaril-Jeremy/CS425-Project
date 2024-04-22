@@ -16,6 +16,8 @@ class Chat:
         self.timestamp = ''
         self.messages = []
         self.data_received = False
+        self.chatRef = ''
+    
     def check_message(self):
         url = 'https://api.sightengine.com/1.0/text/check.json'
         data = {
@@ -49,24 +51,31 @@ class Chat:
             self.order += 1
         except requests.exceptions.RequestException as e:
             print("Error:", e)
-            
+        
     def set_current_chat_user(self, user):
         self.current_user = user
         
     async def handle_message_submit(self, db):
 
         timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-        chat_ref = db.collection(f'chat/{self.ID}/messages')
-
+        chat_ref = db.collection('chat').document(self.chatID).collection('messages')
         try:
-            chat_ref.add({
+            query = chat_ref.order_by('messageOrder', direction=firestore.Query.DESCENDING).limit(1)
+            docs = query.stream()
+            highest_order = 1  # Default if no messages are found
+            
+            for doc in docs:
+                highest_order = doc.to_dict().get('messageOrder')
+                break
+            new_message_order = highest_order + 1
+            self.order = new_message_order
+            new_message_ref = chat_ref.document()  # Auto ID generated
+            new_message_ref.set({
                 'message': self.message_input,
                 'user': self.current_user,
                 'messageTime': timestamp,
                 'messageOrder': self.order
             })
-
         except Exception as e:
             print("An error has been detected:", e)
     
@@ -75,15 +84,19 @@ class Chat:
         self.message_input = data['text']
         self.timestamp = data['timestamp']
         self.order = data['messageOrder']
+        self.chat_id = data['chatRef']
     
-    def get_initial_messages(self, db):
-        chat_ref = db.collection('chat').document(self.ID).collection('messages')
+    def get_initial_messages(self, db, chat_id):
+        chat_ref = db.collection('chat').document(chat_id).collection('messages')
+        self.chatRef = chat_ref
+        self.chatID = chat_id
         query = chat_ref.order_by('messageOrder')
         messages = []
 
         for doc in query.stream():
             data = doc.to_dict()
             message_input = data['message']
+            print(data['message'])
 
             # Exclude template messages
             if not self.is_template_message(message_input):

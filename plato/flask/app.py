@@ -176,9 +176,9 @@ def get_data_from_chat():
     response = jsonify(response_data)
     return response
 
-@app.route('/get_initial_messages', methods=['GET'])
-def handle_get_data():
-    return chat_instance.get_initial_messages(db)
+@app.route('/get_initial_messages/<chat_id>', methods=['GET'])
+def handle_get_data(chat_id):
+    return chat_instance.get_initial_messages(db, chat_id)
 
 @app.route('/get_message_updates', methods=['GET'])
 def handle_update():
