@@ -18,9 +18,9 @@
             const startHour = daySchedule.startHour;
             const endHour = daySchedule.endHour;
 
-            parsedHours += `${day}<br>`;
-            parsedHours += `Start Hour: ${startHour}<br>`;
-            parsedHours += `End Hour: ${endHour}<br><br>`;
+            parsedHours += `${day}: \r\n`;
+            parsedHours += `Start Hour: ${startHour}\r\n`;
+            parsedHours += `End Hour: ${endHour}\r\n`;
         }
     });
 
@@ -32,9 +32,9 @@
 
 <div class="card">
     <div class="name">{firstname} {lastname}</div>
-    <div class="section" role="button" tabindex="" on:click={(event) => displayModal(status, event)} on:keypress={(event) => displayModal(status, event)}>
-        <span>Status</span>
-        <div class="info">{status}</div>
+    <div class="section" role="button" tabindex="" on:click={(event) => displayModal(parsedHours)} on:keypress={(event) => displayModal(parsedHours)}>
+        <span>Hours</span>
+        <div class="info" style="white-space: pre-line">{parsedHours}</div>
     </div>
     <div class="section" role="button" tabindex="" on:click={(event) => displayModal(skills, event)} on:keypress={(event) => displayModal(skills, event)}>
         <span>Skills</span>
@@ -48,9 +48,9 @@
         <span>About</span>
         <div class="info">{info}</div>
     </div>
-    <div class="section" role="button" tabindex="" on:click={(event) => displayModal(parsedHours)} on:keypress={(event) => displayModal(parsedHours)}>
-        <span>Hours</span>
-        <div class="info" style="white-space: pre-line">{parsedHours}</div>
+    <div class="section" role="button" tabindex="" on:click={(event) => displayModal(status, event)} on:keypress={(event) => displayModal(status, event)}>
+        <span>Status</span>
+        <div class="info">{status}</div>
     </div>
     <img class="circle" src={avatarUrl} alt="User Avatar">
 </div>

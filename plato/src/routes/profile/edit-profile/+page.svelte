@@ -276,7 +276,7 @@ const handleImageUpload = async (event) => {
   <body>
     <div class="wrapper">
       <div class="user-info-container">
-  <div class="flex items-center space-x-8 text-xl mt-16">
+     <div class="flex items-center space-x-8 text-xl mt-16">
           <div>
             <Avatar src={avatarUrl} data-name="profile-picture" border class="ring-blue-600 dark:ring-blue-300" size="lg"
             dot={{ placement: 'top-right', color: 'green', size: 'lg' }} />
@@ -300,15 +300,15 @@ const handleImageUpload = async (event) => {
       <form on:submit={handleClick}>
         <div class="grid gap-8 mb-6 md:grid-cols-2">
           <div>
-            <Label for="first_name" class="mb-2 text-l">First name: {firstName}</Label>
+            <Label for="first_name" class="mb-2 text-l dark:text-black">First name: {firstName}</Label>
             <Input type="text" id="first_name" placeholder="First" bind:value={localFirstName} required />
           </div>
           <div>
-            <Label for="last_name" class="mb-2 text-l">Last name: {lastName}</Label>
+            <Label for="last_name" class="mb-2 text-l dark:text-black">Last name: {lastName}</Label>
             <Input type="text" id="last_name" placeholder="Last" bind:value={localLastName} required />
           </div>
           <div>
-            <Label for="company" class="mb-2 text-l">Occupation: {occupation}</Label>
+            <Label for="company" class="mb-2 text-l dark:text-black">Occupation: {occupation}</Label>
             <select class="text-gray-900 bg-gray-50 w-full" bind:value={localOccupation}>
               <option value="Accountant">Accountant</option>
               <option value="Actor">Actor</option>
@@ -365,7 +365,7 @@ const handleImageUpload = async (event) => {
           </select>
           </div>
           <div>
-            <Label for="phone" class="mb-2 text-l">Current Academic Status: {status}</Label>
+            <Label for="phone" class="mb-2 text-l dark:text-black">Current Academic Status: {status}</Label>
             <select class="text-gray-900 bg-gray-50 w-full" bind:value={localStatus} required>
               <option value="">Select</option>
               <option value="Freshman">Freshman</option>
@@ -378,13 +378,13 @@ const handleImageUpload = async (event) => {
               <option value="Other">Other</option>
           </div>        
           <div>
-            <Label for="role" class="mb-2 text-l">Role: {role}</Label>
+            <Label for="role" class="mb-2 text-l dark:text-black">Role: {role}</Label>
             <select class="text-gray-900 bg-gray-50 w-full">           
               <option value="Cannot change">Cannot Change</option>
             </select>
           </div>
           <div>
-            <Label for="major" class="mb-2 text-l">Major: {major}</Label>
+            <Label for="major" class="mb-2 text-l dark:text-black">Major: {major}</Label>
             <select class="text-gray-900 bg-gray-50 w-full" bind:value={localMajor}>
 <option value="">Select Major</option>
             <option value="Accounting">Accounting</option>
@@ -420,7 +420,7 @@ const handleImageUpload = async (event) => {
           </select>
           </div>
           <div>
-            <Label for="country" class="mb-2 text-l">Country: {country}</Label>
+            <Label for="country" class="mb-2 text-l dark:text-black">Country: {country}</Label>
             <select class="text-gray-900 bg-gray-50" bind:value={selectedCountry} on:change={fetchStates}>
               <option value="">Select Country</option>
               {#each countries as country (country.iso2)}
@@ -429,14 +429,14 @@ const handleImageUpload = async (event) => {
             </select>
           </div>
           <div>
-            <Label for="state" class="mb-2 text-l relative">City and State: {city}, {state}</Label>
+            <Label for="state" class="mb-2 text-l relative dark:text-black">City and State: {city}, {state}</Label>
             <select class="text-gray-900 bg-gray-50 w-6/12" bind:value={selectedState} on:change={fetchCities} if={states.length}>
               <option value="">Select State</option>
               {#each states as state (state.id)}
                 <option value={state} key={state.id}>{state.name}</option>
               {/each}
             </select>
-            <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} if={cities.length}>
+            <select class="text-gray-900 bg-gray-50 dark:text-black" bind:value={selectedCity} if={cities.length}>
               <option value="">Select City</option>
               {#each cities as city (city.id)}
                 <option value={city.name} key={city.id}>{city.name}</option>
@@ -444,11 +444,11 @@ const handleImageUpload = async (event) => {
             </select>
           </div>
           <div>
-            <Label for="visitors" class="mb-2 text-l">Connects Remaining</Label>
+            <Label for="visitors" class="mb-2 text-l dark:text-black">Connects Remaining</Label>
             <div class="constants">{connectsRemaining}</div>
           </div>
           <div>
-            <Label for="visitors" class="mb-2 text-l">Passes Remaining</Label>
+            <Label for="visitors" class="mb-2 text-l dark:text-black">Passes Remaining</Label>
             <div class="constants">{passesRemaining}</div>
           </div>
         </div>

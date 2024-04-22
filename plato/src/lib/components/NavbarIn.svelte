@@ -87,7 +87,7 @@
   <Navbar>
     <NavBrand href="/home">
       <img src={Logo} class="mr-3 w-14 first-line:sm:w-16" alt="Flowbite Logo" />
-      <span class="self-center whitespace-nowrap font-semibolddark:text-white"><span class="plato">Plato</span></span>
+      <span class="self-center whitespace-nowrap font-semibold"><span id="plato" class="dark:text-white">Plato</span></span>
     </NavBrand>
     <div class="flex items-center md:order-2">
       {#if avatarUrl}
@@ -103,19 +103,19 @@
           {/if}
           <span class="block truncate text-sm font-medium">{userEmail}</span>
         </DropdownHeader>
-        <DropdownItem href="/settings" class="text-black">Your Card</DropdownItem>
-        <DropdownItem href="/settings" class="text-black">Settings</DropdownItem>
-        <DropdownItem href="/profile" class="text-black">Profile</DropdownItem>
+        <DropdownItem href="/settings" class="text-black dark:text-white">Your Card</DropdownItem>
+        <DropdownItem href="/settings" class="text-black dark:text-white">Settings</DropdownItem>
+        <DropdownItem href="/profile" class="text-black dark:text-white">Profile</DropdownItem>
         <DropdownDivider />
-        <DropdownItem on:click={handleClick}><span class="text-blue-600">Sign out</span></DropdownItem>
+        <DropdownItem on:click={handleClick}><span class="text-blue-600 dark:text-white">Sign out</span></DropdownItem>
       </Dropdown>
     {/if}
     <NavUl>
-      <NavLi href="/home"><span class="hover:text-blue-600 text-lg">Home</span></NavLi>
-      <NavLi href="/chat"><span class="hover:text-blue-600 text-lg">Chat</span></NavLi>
-      <NavLi href="/connections"><span class="hover:text-blue-600 text-lg">Connections</span></NavLi>
-      <NavLi href="/events"><span class="hover:text-blue-600 text-lg">Events</span></NavLi>
-      <NavLi href="/about"><span class="hover:text-blue-600 text-lg">About</span></NavLi>
+      <NavLi href="/home"><span class="hover:text-blue-600 text-lg dark:text-white dark:hover:text-blue-600">Home</span></NavLi>
+      <NavLi href="/chat"><span class="hover:text-blue-600 text-lg dark:text-white dark:hover:text-blue-600">Chat</span></NavLi>
+      <NavLi href="/connections"><span class="hover:text-blue-600 text-lg dark:text-white dark:hover:text-blue-600">Connections</span></NavLi>
+      <NavLi href="/events"><span class="hover:text-blue-600 text-lg dark:text-white dark:hover:text-blue-600">Events</span></NavLi>
+      <NavLi href="/about"><span class="hover:text-blue-600 text-lg dark:text-white dark:hover:text-blue-600">About</span></NavLi>
     </NavUl>
   </Navbar>
 </div>
@@ -133,7 +133,7 @@
       align-items: center;
       height: 40px;
   }
-  .plato{
+  #plato{
       background: linear-gradient(rgb(80, 101, 168), rgb(78, 99, 166));
       -webkit-background-clip: text;
       background-clip: text;

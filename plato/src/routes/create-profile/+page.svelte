@@ -1,7 +1,7 @@
 <script>
-  //This code was developed by Jeremy Mamaril
+  //This code was developed by Jeremy Mamaril and Mark Marsala
   import { onMount } from 'svelte';
-  import { Label, Input } from 'flowbite-svelte';
+  import { Label } from 'flowbite-svelte';
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth } from '$lib/firebase/firebase.client.js';
   import { goto } from '$app/navigation';
@@ -209,7 +209,7 @@
             <option value="Web Developer">Web Developer</option>
             <option value="Writer">Writer</option>
             <option value="Zoologist">Zoologist</option>
-            <option value="Other">Other</option>
+            
           </select>
         </div>
         <div>
@@ -227,7 +227,7 @@
         </div>
         <div>
           <Label for="role" class="mb-2">Role</Label>
-          <select class="text-gray-900 bg-gray-50 w-full" bind:value={role} required>
+          <select class="text-gray-900 bg-gray-50 w-full" bind:value={role}>
             <option value="">Select Role</option>
             <option value="Mentor">Mentor</option>
             <option value="Mentee">Mentee</option>
@@ -267,8 +267,7 @@
             <option value="Political Science">Political Science</option>
             <option value="Psychology">Psychology</option>
             <option value="Sociology">Sociology</option>
-            <option value="Other">Other</option>
-          </select>
+        </select>
         </div>
 
         {#if !autofiller}
@@ -315,9 +314,9 @@
 
       <div>
         <Label for="about_me" class="mb-2">About Me (Max: 100 characters)</Label>
-        <textarea class="mb-4" id="about_me" rows="4"  maxlength="100" bind:value={aboutMe} placeholder="Tell us about yourself..." required></textarea>
+        <textarea class="mb-4" id="about_me" rows="3"  maxlength="100" bind:value={aboutMe} placeholder="Tell us about yourself..." required></textarea>
         {#if aboutMe.length <= 100}
-          <div id="charCount" class="char-count">{100 - aboutMe.length} characters remaining</div>
+          <div id="charCount" class="char-count">{100 - aboutMe.length} characters left</div>
         {/if}
       </div>
 
@@ -326,7 +325,7 @@
       </button>
 
       <div class="mt-4">
-        Leading an Organization? <a href="create-profile/upload-csv">Create Users</a>
+        Leading an Organization? <a class="ml-20" href="create-profile/upload-csv">Create Users</a>
       </div>
     </form>
   </section>

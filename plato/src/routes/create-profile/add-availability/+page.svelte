@@ -49,11 +49,12 @@
 
 <style>
     body {
-        margin: 25px;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
+        margin-top: 20px;
+        padding: 5px;
     }
 
     .wrapper {
@@ -68,7 +69,6 @@
         border-radius: 10px;
         box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
         margin-top: 20px;
-        margin-bottom: 20px;
         justify-content: center;
         display: flex;
         align-items: center;
@@ -105,7 +105,7 @@
     button {
         margin: 20px auto;
         padding: 10px 20px;
-        background-color: #4CAF50;
+        background-color: #007bff;
         color: white;
         border: none;
         border-radius: 5px;
@@ -115,10 +115,6 @@
         text-align: center;
         display: block; 
     }
-
-    button:hover {
-        background-color: #45a049;
-    }
 </style>
 
 
@@ -126,8 +122,13 @@
     <Progressbar class="absolute top-32 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="62.5"/>
     <div class="wrapper">
         <div class="title-info-container">
-            <div class="flex items-center space-x-8 text-xl">
-                Indicate your availability for office hours.
+            <div class="flex flex-col items-center space-y-4 text-xl">
+                <div class="flex items-center space-x-8">
+                    Indicate your availability for office hours.
+                </div>
+                <div class="flex items-center space-x-8 text-sm">
+                    If not applicable, leave blank.
+                </div>
             </div>
         </div>
         <div class="form-container">
