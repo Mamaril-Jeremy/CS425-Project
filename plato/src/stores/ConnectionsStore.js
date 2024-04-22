@@ -32,6 +32,7 @@ onAuthStateChanged(auth, async (user) => {
 
       connections.push({
         id: doc.id,
+        userID: docData.userID,
         firstname: docData.userFirstName,
         lastname: docData.userLastName,
         info: docData.userBio,
