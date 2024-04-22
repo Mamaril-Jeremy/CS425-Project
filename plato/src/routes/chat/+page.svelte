@@ -195,6 +195,25 @@
             console.error('Error:', error);
         }
     }
+    async function disconnectUser(){
+        const formData = new FormData()
+        formData.append('currentUser', $userID)
+        formData.append('viewedUser', $recipientUIDs[$currentIndex])
+        formData.append('chatRef', $chats[$currentIndex].id)
+        try {
+            const response = await fetch('http://localhost:5000/disconnect_user', {
+                method: 'POST',
+                body: formData
+            });
+            const responseData = await response.json();
+            console.log(responseData);
+            await fetchData()
+            await determineRecipientUser();
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        
+    }
     onMount(() => {
         startDataSync(chats[0]);
     });
@@ -226,8 +245,9 @@
                 <span class="recipient-name">{$currentRecipient || 'Select a chat'}</span>
             </div>
             <div class="chat-header-actions">
+                <button class="view-profile" >View Profile</button>
                 <a href="/report" class="report-button">Report</a>
-                <button class="disconnect-button">Disconnect</button>
+                <button class="disconnect-button" on:click={disconnectUser}>Disconnect</button>
             </div>
         </div>
 
@@ -315,7 +335,9 @@
         display: flex;
         align-items: center;
     }
+    .report-button{
 
+    }
     .recipient-name {
         margin-left: 10px;
     }
