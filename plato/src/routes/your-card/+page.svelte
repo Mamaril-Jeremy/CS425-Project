@@ -5,8 +5,9 @@
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth } from '$lib/firebase/firebase.client.js';
 
-  let userUID, firstName, lastName, user_status, user_hours, user_skills = [], user_bio;
+  let userUID, firstName, lastName, user_status, user_skills = [], user_bio;
   let avatarUrl;
+  let user_hours;
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -29,7 +30,6 @@
         user_bio = doc.data().userBio;
         user_status = doc.data().userStatus;
         user_hours = doc.data().userOfficeHours;
-        console.log(doc.data().userOfficeHours);
         user_skills = doc.data().Skills;
     } catch (error) {
         console.error('Error:', error);

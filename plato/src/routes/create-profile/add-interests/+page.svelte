@@ -45,9 +45,9 @@
 </script>
 
 <Progressbar class="absolute top-28 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="70"/>
-<div class="area mt-10">
-    <h1 class="mr-20">Add Interests</h1>
+<div class="area mt-20">
     <div class="add-interests-container mt-12">
+        <h1 class="text-center">Add Interests</h1>
         <div class="interests-grid">
             {#each interests as interest}
             <label class="interest-entry">
@@ -112,4 +112,3 @@
         background-color: #0056b3;
     }
 </style>
-
