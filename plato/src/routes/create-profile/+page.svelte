@@ -98,6 +98,10 @@
     }
 
     const data =  {
+      Chats: [],
+      pendingConnections: [],
+      failedConnections: [],
+      successConnections: [],
       userBio: aboutMe,
       userCity: selectedCity,
       userConnectsRemaining: connectsRemaining,
