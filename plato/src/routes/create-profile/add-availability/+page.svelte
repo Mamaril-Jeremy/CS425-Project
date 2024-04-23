@@ -27,7 +27,7 @@
         userOfficeHours : officeHours
       }
       sendDataToFlask(data);
-      goto("/create-profile/upload-pfp");
+      goto("/create-profile/add-interests");
     }
 
     async function sendDataToFlask(data) {
