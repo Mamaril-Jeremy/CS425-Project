@@ -257,7 +257,7 @@ def disconnect_user():
         })
     chatRef.delete()
     connection = Connection(currentUser, viewedUser)
-    connection.set_connection_status('False', currentUser)
+    connection.set_connection_status('False', 1, 'Pending')
     connection.handle_pending_connection(db)
     response_data = {'message': 'Data received successfully'}
     response = jsonify(response_data)
