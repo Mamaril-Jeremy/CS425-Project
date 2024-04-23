@@ -13,7 +13,7 @@
 <main>
     <div class="bar">
         <Progressbar progress="100"/>
-        <h1 style="text-align: center; margin-top: 20px;">Profile Creation Completed!</h1>
+        <h1 style="text-align: center; margin-top: 50px;">Profile Creation Completed!</h1>
     </div>
 </main>
 
