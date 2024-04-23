@@ -148,7 +148,7 @@
 
   <div class="section section5">
     <div>
-      <h1>Thank You for Allowing Us to Share About Our Values</h1>
+      <h1>Thank You for Allowing Us to Share About Our Values!</h1>
     </div>
   </div>
 </body>
