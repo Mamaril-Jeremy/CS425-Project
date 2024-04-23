@@ -83,10 +83,10 @@ class Connection:
                 self.connection_status = 'False'
                 self.store_failed_connections_into_user_database(db)
         
-    def set_connection_status(self, status, user):
-        if self.user1 == user:
+    def set_connection_status(self, status, user, selection):
+        if selection == 1:
             self.user1Status = status
-        elif self.user2 == user:
+        elif selection == 2:
             self.user2Status = status
         else:
             print("Who clicked the button then")

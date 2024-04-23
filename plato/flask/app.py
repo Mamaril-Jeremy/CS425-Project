@@ -206,7 +206,16 @@ def manage_connections():
     user2 = request.form['viewedUser']
     connection = Connection(user1, user2)
     selection = request.form['selection']
-    connection.set_connection_status(selection, user1)
+    selectionUser = 0
+    ref = db.collection('connections')
+    query1 = ref.where(filter=FieldFilter("user1", "==", user1)).where(filter=FieldFilter("user2", "==", user2)).get()
+    query2 = ref.where(filter=FieldFilter("user1", "==", user2)).where(filter=FieldFilter("user2", "==", user1)).get()
+    if len(query1) > 0:
+        selectionUser = 1
+    elif len(query2) > 0:
+        selectionUser = 2
+
+    connection.set_connection_status(selection, selectionUser)
     connection.handle_pending_connection(db)
     response_data = {'message': 'Data received successfully'}
     response = jsonify(response_data)
