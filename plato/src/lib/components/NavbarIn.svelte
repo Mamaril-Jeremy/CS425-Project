@@ -103,7 +103,7 @@
           {/if}
           <span class="block truncate text-sm font-medium">{userEmail}</span>
         </DropdownHeader>
-        <DropdownItem href="/settings" class="text-black dark:text-white">Your Card</DropdownItem>
+        <DropdownItem href="/your-card" class="text-black dark:text-white">Your Card</DropdownItem>
         <DropdownItem href="/settings" class="text-black dark:text-white">Settings</DropdownItem>
         <DropdownItem href="/profile" class="text-black dark:text-white">Profile</DropdownItem>
         <DropdownDivider />

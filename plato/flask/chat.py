@@ -84,7 +84,7 @@ class Chat:
         self.message_input = data['text']
         self.timestamp = data['timestamp']
         self.order = data['messageOrder']
-        self.chat_id = data['chatRef']
+        self.chatID = data['chatRef']
     
     def get_initial_messages(self, db, chat_id):
         chat_ref = db.collection('chat').document(chat_id).collection('messages')

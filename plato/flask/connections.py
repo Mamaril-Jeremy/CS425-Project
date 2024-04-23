@@ -225,10 +225,10 @@ class Connection:
                 })
             
 def main():
-    connection = Connection("RIeZdmX61IRiSSh8WwwL8a4RlnL2", "ySZvSdFK9EOqnrUimaNZxI8bJwE2")
-    connection.set_connection_status('True', "ySZvSdFK9EOqnrUimaNZxI8bJwE2")
+    connection = Connection("M4MUF7j1VhY64z6wjwsULxneIQE3", "OC2sAIILwAep2Ftok2SVv5PhbDG2")
+    connection.set_connection_status('True', 1, 'Pending')
     connection.handle_pending_connection(db)
-    connection.set_connection_status('True', "RIeZdmX61IRiSSh8WwwL8a4RlnL2")
+    connection.set_connection_status('True', 2, 'True')
     connection.handle_pending_connection(db)
     # connection.set_connection_status('False', "YKRWZPAOVna9WPLCWWgx3KD2WOX2")
     # connection.handle_pending_connection(db)

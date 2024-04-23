@@ -234,6 +234,11 @@ def manage_connections():
     response = jsonify(response_data)
     return response
 
+def delete_all_documents(ref):
+    docs = ref.stream()
+    for doc in docs:
+        doc.reference.delete()
+
 @app.route('/disconnect_user', methods=['POST'])
 def disconnect_user():
     collection_ref = db.collection('users')
@@ -243,6 +248,7 @@ def disconnect_user():
     user2Query = collection_ref.where(filter=FieldFilter("userID", "==", currentUser)).get()
     chatId = request.form['chatRef']
     chatRef = db.collection('chat').document(chatId)
+    messagesRef = db.collection('chat').document(chatId).collection('messages')
     for doc in user1Query:
         doc_ref = collection_ref.document(doc.id)
         array = [chatRef]
@@ -255,9 +261,10 @@ def disconnect_user():
         doc_ref.update({
             'Chats': firestore.ArrayRemove(array),
         })
+    delete_all_documents(messagesRef)
     chatRef.delete()
     connection = Connection(currentUser, viewedUser)
-    connection.set_connection_status('False', currentUser)
+    connection.set_connection_status('False', 1, 'Pending')
     connection.handle_pending_connection(db)
     response_data = {'message': 'Data received successfully'}
     response = jsonify(response_data)

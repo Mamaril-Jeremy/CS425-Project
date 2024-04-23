@@ -37,7 +37,8 @@ export const nodes = [
 	() => import('./nodes/33'),
 	() => import('./nodes/34'),
 	() => import('./nodes/35'),
-	() => import('./nodes/36')
+	() => import('./nodes/36'),
+	() => import('./nodes/37')
 ];
 
 export const server_loads = [];
@@ -73,7 +74,8 @@ export const dictionary = {
 		"/settings/change-password": [32],
 		"/sign-in": [34,[5]],
 		"/start": [35],
-		"/verify-email": [36]
+		"/verify-email": [36],
+		"/your-card": [37]
 	};
 
 export const hooks = {
