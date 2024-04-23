@@ -18,9 +18,9 @@
             const startHour = daySchedule.startHour;
             const endHour = daySchedule.endHour;
 
-            parsedHours += `${day}: \r\n`;
-            parsedHours += `Start Hour: ${startHour}\r\n`;
-            parsedHours += `End Hour: ${endHour}\r\n`;
+            parsedHours += `${day}: `;
+            parsedHours += `${startHour}-`;
+            parsedHours += `${endHour}\r\n`;
         }
     });
 
