@@ -2,17 +2,40 @@
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
     import { Progressbar } from "flowbite-svelte";
+    
     let interests = [
-        { name: 'Computer Science', checked: false },
-        { name: 'Psychology', checked: false },
-        { name: 'Cybersecurity', checked: false },
-        { name: 'Machine Learning', checked: false },
-        { name: 'Mathematics', checked: false },
-        { name: 'Robotics', checked: false },
-        { name: 'Front-end Development', checked: false },
-        { name: 'Back-end Development', checked: false },
-        { name: 'Football', checked: false },
-    ];
+    { name: 'Computer Science', checked: false },
+    { name: 'Psychology', checked: false },
+    { name: 'Cybersecurity', checked: false },
+    { name: 'Machine Learning', checked: false },
+    { name: 'Mathematics', checked: false },
+    { name: 'Robotics', checked: false },
+    { name: 'Front-end Development', checked: false },
+    { name: 'Back-end Development', checked: false },
+    { name: 'Football', checked: false },
+    { name: 'Basketball', checked: false },
+    { name: 'Baseball', checked: false },
+    { name: 'Tennis', checked: false },
+    { name: 'Golf', checked: false },
+    { name: 'Swimming', checked: false },
+    { name: 'Running', checked: false },
+    { name: 'Cycling', checked: false },
+    { name: 'Hiking', checked: false },
+    { name: 'Cooking', checked: false },
+    { name: 'Photography', checked: false },
+    { name: 'Painting', checked: false },
+    { name: 'Music Production', checked: false },
+    { name: 'Graphic Design', checked: false },
+    { name: 'Fashion Design', checked: false },
+    { name: 'Writing', checked: false },
+    { name: 'Reading', checked: false },
+    { name: 'Traveling', checked: false },
+    { name: 'Yoga', checked: false },
+    { name: 'Meditation', checked: false },
+    { name: 'Gardening', checked: false },
+    { name: 'DIY Projects', checked: false },
+];
+
     
     function addInterest() {
         const selectedInterests = interests.filter(i => i.checked).map(i => i.name);
@@ -21,76 +44,72 @@
     }
 </script>
 
-<div class="area">
-    <h2>Add Interests</h2>
-    <div class="add-interests-container">
-        <div class="interests-wrapper">
-            <div class="interests-grid">
-                {#each interests as interest}
-                <label class="interest-entry">
-                    <input type="checkbox" bind:checked={interest.checked}>
-                    <span>{interest.name}</span>
-                </label>
-                {/each}
-            </div>
+<Progressbar class="absolute top-28 left-1/2 transform -translate-x-1/2 w-1/2 z-10" progress="70"/>
+<div class="area mt-10">
+    <h1 class="mr-20">Add Interests</h1>
+    <div class="add-interests-container mt-12">
+        <div class="interests-grid">
+            {#each interests as interest}
+            <label class="interest-entry">
+                <input class="mr-2" type="checkbox" bind:checked={interest.checked}>
+                <span>{interest.name}</span>
+            </label>
+            {/each}
         </div>
+        <button class="mt-5" on:click={addInterest}>Add</button>
     </div>
-    <button on:click={addInterest}>Add</button>
 </div>
 
 <style>
     .area {
-        width: 100%; 
-        height: 90vh; 
-        background-color: #f3f4f6; 
+        width: 100%;
+        height: 100vh;
+        background-color: #f3f4f6;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: auto;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-        position:fixed;
-        bottom: 0%;
-    }
-    .add-interests-container {
-        display: flex;
-        flex-direction: column;
-        max-width: fit-content; 
-        top: 100%;
-        margin: auto;
+        position: relative;
     }
     
-    .area h2 {
-        position: fixed;
+    .add-interests-container {
+        max-width: 400px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .area h1 {
+        margin-top: 0;
         text-align: center;
-        top: 10%;
-        font: 20px;
+        font-size: 32px;
+        margin-bottom: 20px;
     }
+    
     .interests-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px; 
-        justify-content: flex-start;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(100px, 1fr));
+        grid-gap: 10px;
     }
-    .interests-wrapper {
-        width: 50%; 
-        margin: 0 auto; 
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
+    
     .interest-entry {
         display: flex;
-        margin-bottom: 10px; 
         align-items: center;
     }
   
     button {
-        position: absolute;
-        width: 100px; /* Adjust width as needed */
-        margin-top: 20px;
-        bottom:2%;
-        align-self: center; /* Center the button */
-        background-color: blue;
-        color:white;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
     }
 </style>
+
