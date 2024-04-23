@@ -227,7 +227,7 @@
             <SidebarWrapper>
                 <SidebarGroup>
                     <div class="Title">
-                        <p>Connections</p>
+                        <p class="dark:text-white">Connections</p>
                     </div>
                     {#each $chats as chat, index}
                         <SidebarItem label={$recipientNames[index] || 'Loading...'} on:click={() => setCurrentRecipient(index)}>
