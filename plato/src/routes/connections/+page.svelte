@@ -140,7 +140,7 @@
 <body>
   {#if connections.length > 0}
     <div class="pass">
-      <Button class="!p-2" on:click={() => handleNext('false')}><ArrowLeftOutline class="w-5 h-5 mr-2" /> Pass</Button>
+      <Button class="!p-2" on:click={() => handleNext('False')}><ArrowLeftOutline class="w-5 h-5 mr-2" /> Pass</Button>
     </div>
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
@@ -152,7 +152,7 @@
       </div>
     </div>
     <div class="connect">
-      <Button class="!p-2" on:click={() => handleNext('true')}>Connect <ArrowRightOutline class="w-5 h-5 ml-2" /></Button>
+      <Button class="!p-2" on:click={() => handleNext('True')}>Connect <ArrowRightOutline class="w-5 h-5 ml-2" /></Button>
     </div>
   {/if}
 
