@@ -7,6 +7,7 @@
     import { onAuthStateChanged } from 'firebase/auth';
     import { onMount } from 'svelte';
     import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
+    import Mpfp from "$lib/assets/default-avatar.jpg";
 
     let currentUser = '';
     export const messages = writable([]);
@@ -207,6 +208,8 @@
             });
             const responseData = await response.json();
             console.log(responseData);
+            currentRecipient.set('Select a chat');
+            currentRecipientIcon.set(Mpfp);
             await fetchData()
             await determineRecipientUser();
         } catch (error) {
@@ -241,13 +244,13 @@
     <div class = "chat-area">
         <div class="chat-header mt-5">
             <div class="chat-header-details">
-                <Avatar src={$currentRecipientIcon || 'default-avatar.png'} class="avatar-large" />
+                <Avatar src={$currentRecipientIcon || Mpfp} class="avatar-large" />
                 <span class="recipient-name">{$currentRecipient || 'Select a chat'}</span>
             </div>
             <div class="chat-header-actions">
-                <button class="view-profile" >View Profile</button>
-                <a href="/report" class="report-button">Report</a>
-                <button class="disconnect-button" on:click={disconnectUser}>Disconnect</button>
+                <button class="custom-button" >View Profile</button>
+                <a href="/report" class="custom-button">Report</a>
+                <button class="custom-button" on:click={disconnectUser}>Disconnect</button>
             </div>
         </div>
 
@@ -335,8 +338,18 @@
         display: flex;
         align-items: center;
     }
-    .report-button{
-
+    .custom-button{
+        background-color: #e7e7e7; 
+        border: #b5b5b5; 
+        color: black; 
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        margin: 0 10px; 
+    }
+    .custom-button:hover {
+        background-color: #d7d7d7;
     }
     .recipient-name {
         margin-left: 10px;
