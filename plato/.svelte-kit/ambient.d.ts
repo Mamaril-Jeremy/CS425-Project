@@ -45,7 +45,7 @@ declare module '$env/static/private' {
 	export const COMPUTERNAME: string;
 	export const ComSpec: string;
 	export const DriverData: string;
-	export const EFC_14736: string;
+	export const EFC_20748: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -53,7 +53,6 @@ declare module '$env/static/private' {
 	export const INIT_CWD: string;
 	export const LANG: string;
 	export const LOCALAPPDATA: string;
-	export const LOCAL_GIT_DIRECTORY: string;
 	export const LOGONSERVER: string;
 	export const NODE: string;
 	export const NODE_ENV: string;
@@ -76,6 +75,9 @@ declare module '$env/static/private' {
 	export const npm_package_dependencies_http: string;
 	export const npm_package_dependencies_npm: string;
 	export const npm_package_dependencies_svelte_local_storage_store: string;
+	export const npm_package_dependencies_svelte_notifications: string;
+	export const npm_package_dependencies_svelte_toastify: string;
+	export const npm_package_dependencies_svelte_toasts: string;
 	export const npm_package_dependencies_swiper: string;
 	export const npm_package_dependencies__event_calendar_day_grid: string;
 	export const npm_package_dependencies__fullcalendar_core: string;
@@ -192,7 +194,7 @@ declare module '$env/dynamic/private' {
 		COMPUTERNAME: string;
 		ComSpec: string;
 		DriverData: string;
-		EFC_14736: string;
+		EFC_20748: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
@@ -200,7 +202,6 @@ declare module '$env/dynamic/private' {
 		INIT_CWD: string;
 		LANG: string;
 		LOCALAPPDATA: string;
-		LOCAL_GIT_DIRECTORY: string;
 		LOGONSERVER: string;
 		NODE: string;
 		NODE_ENV: string;
@@ -223,6 +224,9 @@ declare module '$env/dynamic/private' {
 		npm_package_dependencies_http: string;
 		npm_package_dependencies_npm: string;
 		npm_package_dependencies_svelte_local_storage_store: string;
+		npm_package_dependencies_svelte_notifications: string;
+		npm_package_dependencies_svelte_toastify: string;
+		npm_package_dependencies_svelte_toasts: string;
 		npm_package_dependencies_swiper: string;
 		npm_package_dependencies__event_calendar_day_grid: string;
 		npm_package_dependencies__fullcalendar_core: string;
