@@ -230,12 +230,12 @@
           />
         </Label>
 
-        <div class="mb-4">
+        <div>
           <div id="recaptcha-container"></div>
         </div>
 
         {#if showCode}
-        <div class="mb-6 mt-6">
+        <div class="mb-6">
           <label for="code" class="block text-sm font-medium text-gray-600">Code</label>
           <input type="text" id="code" name="code" placeholder="123456" class="mt-1 p-2 w-full border rounded-md" bind:value={code} required />
         </div>
