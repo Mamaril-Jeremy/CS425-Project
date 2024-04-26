@@ -1,6 +1,6 @@
 <slot />
 <!-- Developed by Mark Marsala -->
-<script>
+<!-- <script>
   import { onMount } from 'svelte';
   import { getAuth, RecaptchaVerifier } from "firebase/auth";
 
@@ -24,4 +24,4 @@
       console.error('Error during RecaptchaVerifier initialization:', error);
     }
   });
-</script>
+</script> -->

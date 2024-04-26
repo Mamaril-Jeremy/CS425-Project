@@ -36,7 +36,7 @@
     try {
       const auth = getAuth();
 
-      appVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {});
+      appVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', { size: 'invisible' });
       await appVerifier.render();
       const multiFactorSession = await multiFactor(auth.currentUser).getSession();
 
