@@ -1,6 +1,6 @@
 <script>
   import { multiFactor, PhoneAuthProvider, PhoneMultiFactorGenerator } from "firebase/auth";
-  import { getAuth } from "firebase/auth";
+  import { getAuth, RecaptchaVerifier } from "firebase/auth";
   import { goto } from '$app/navigation';
   import { Progressbar } from 'flowbite-svelte';
 
@@ -12,12 +12,12 @@
   let appVerifier = null;
   let login = false;
   let phoneNumberError = '';
-
+  let recaptchaVerifier = null;
+  
   const mfaDisplayName = "Phone Auth"
 
   async function sendCode() {
     const { phoneNumber } = formData;
-    const recaptchaResponse = grecaptcha.getResponse();
 
     if (!phoneNumber) {
       console.error('Invalid phone number or reCAPTCHA not verified');
@@ -36,7 +36,8 @@
     try {
       const auth = getAuth();
 
-      appVerifier = window.recaptchaVerifier;
+      appVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {});
+      await appVerifier.render();
       const multiFactorSession = await multiFactor(auth.currentUser).getSession();
 
       const phoneInfoOptions = {
@@ -100,7 +101,7 @@
       </div>
 
       <div class="mb-4">
-        <div class="g-recaptcha" id="recaptcha-container" data-sitekey="6Leo44YpAAAAAO6GBX41rkcS-KD3VkPYiqf6XVjm"></div>
+        <div id="recaptcha-container"></div>
       </div>
 
       <button type="button" on:click={sendCode} class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
