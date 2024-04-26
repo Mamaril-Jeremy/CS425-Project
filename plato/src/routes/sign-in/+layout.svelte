@@ -13,7 +13,7 @@
     // script.async = true;
     // script.defer = true;
     document.head.appendChild(script);
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {});
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', { size: 'invisible'});
     
     try {
       if (window.recaptchaVerifier) {
