@@ -144,6 +144,7 @@
         currentRecipient.set($recipientNames[index]);
         currentRecipientIcon.set($recipientIcons[index]);
         startDataSync($chats[$currentIndex].id);
+        unsubscribe();
         // fetchDataFromMiddleware($chats[$currentIndex].id);
     }
 
@@ -300,7 +301,7 @@
         display: flex;
         flex-direction: column-reverse;
         overflow-y: auto;
-        height: 9%;
+        height: 10%;
         min-width:100%;
         border-bottom: 1px solid #e1e1e1;
         border-top: 1px solid #e1e1e1;
