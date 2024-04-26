@@ -248,7 +248,7 @@
                 <span class="recipient-name">{$currentRecipient || 'Select a chat'}</span>
             </div>
             <div class="chat-header-actions">
-                <button class="custom-button" >View Profile</button>
+                <!-- <button class="custom-button" >View Profile</button> -->
                 <a href="/report" class="custom-button">Report</a>
                 <button class="custom-button" on:click={disconnectUser}>Disconnect</button>
             </div>

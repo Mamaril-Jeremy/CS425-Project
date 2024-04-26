@@ -16,7 +16,6 @@
   
     async function sendCode() {
       const { phoneNumber } = formData;
-      const recaptchaResponse = grecaptcha.getResponse();
   
       if (!phoneNumber) {
         console.error('Invalid phone number or reCAPTCHA not verified');
