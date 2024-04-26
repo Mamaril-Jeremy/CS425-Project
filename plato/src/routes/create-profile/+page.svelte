@@ -277,28 +277,28 @@
         {#if !autofiller}
         <div>
           <Label for="country" class="mb-2">Country</Label>
-          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedCountry} style="width:180px;" on:change={fetchStates} required>
+          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedCountry} style="width:180px;" on:change={() => { selectedCity = ''; fetchStates(); }} required>
             <option value="">Select Country</option>
             {#each countries as country (country.iso2)}
               <option value={country} key={country.iso2}>{country.name}</option>
             {/each}
           </select>
-          <Label for="state" class="mb-2">State</Label>
-          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedState} style="width:180px;" on:change={fetchCities} if={states.length}>
+          <Label for="state" class="mb-2">State/Region</Label>
+          <select class="text-gray-900 bg-gray-50 mb-5" bind:value={selectedState} style="width:180px;" on:change={() => { selectedCity = ''; fetchCities(); }} disabled={!selectedCountry} if={states.length}>
             <option value="">Select State</option>
             {#each states as state (state.id)}
               <option value={state} key={state.id}>{state.name}</option>
             {/each}
           </select>
           <Label for="city" class="mb-2">City</Label>
-          <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} style="width:180px;" if={cities.length}>
+          <select class="text-gray-900 bg-gray-50" bind:value={selectedCity} style="width:180px;" disabled={!selectedState || !cities.length}>
             <option value="">Select City</option>
             {#each cities as city (city.id)}
               <option value={city.name} key={city.id}>{city.name}</option>
             {/each}
           </select>
         </div>
-      {/if}
+        {/if}
 
       {#if autofiller}
         <div>
@@ -306,7 +306,7 @@
           <input class="text-gray-900 bg-gray-50" type="text" id="country" placeholder="Country" bind:value={selectedCountry} style="width:180px;" required />
         </div>
         <div>
-          <Label for="state" class="mb-2">State</Label>
+          <Label for="state" class="mb-2">State/Region</Label>
           <input class="text-gray-900 bg-gray-50" type="text" id="state" placeholder="State" bind:value={selectedState} style="width:180px;" required />
         </div>
         <div>
