@@ -44,6 +44,18 @@ dependencies:
   svelte-local-storage-store:
     specifier: ^0.6.4
     version: 0.6.4(svelte@4.2.1)
+  svelte-notifications:
+    specifier: ^0.9.98
+    version: 0.9.98
+  svelte-toastify:
+    specifier: ^0.0.27
+    version: 0.0.27
+  svelte-toasts:
+    specifier: ^1.1.2
+    version: 1.1.2
+  swiper:
+    specifier: ^11.1.1
+    version: 11.1.1
 
 devDependencies:
   '@event-calendar/core':
@@ -4488,6 +4500,18 @@ packages:
       svelte: 4.2.1
     dev: false
 
+  /svelte-notifications@0.9.98:
+    resolution: {integrity: sha512-w7/sqnQtEjM5uzjb3HfB50RE6KMuuWEQZxfBw86IykslHFJRcTuRvaUv503UMqY/LaioOu6w9mjJTO+ejiReSQ==}
+    dev: false
+
+  /svelte-toastify@0.0.27:
+    resolution: {integrity: sha512-O1srWUTBe7FMhaBvGKKShAPZCBM9v7jyT2xmn7c3Z6e9DwHQj+K/1bGtwhQVtpQ7u5dM5tEMkcUlPGkRqFewaA==}
+    dev: false
+
+  /svelte-toasts@1.1.2:
+    resolution: {integrity: sha512-m+yL4eEKXyJoyjTYaH1j1GFwF0Pi8YDqnVfwWPDmwi4712iZesv+TNCmToSNlav3R5Vkmc8ZBRkT8DOcu3sywQ==}
+    dev: false
+
   /svelte@4.2.1:
     resolution: {integrity: sha512-LpLqY2Jr7cRxkrTc796/AaaoMLF/1ax7cto8Ot76wrvKQhrPmZ0JgajiWPmg9mTSDqO16SSLiD17r9MsvAPTmw==}
     engines: {node: '>=16'}
@@ -4559,6 +4583,11 @@ packages:
     dependencies:
       svg.js: 2.7.1
     dev: true
+
+  /swiper@11.1.1:
+    resolution: {integrity: sha512-jGmEA/fNz1lACIcY4/40ggm1Gcyv+EUivmgV/Jd2WFPsEJhbWXnRAwzZR8OPjkBLtDxmzcoYG/iiAMWfRs0YKQ==}
+    engines: {node: '>= 4.7.0'}
+    dev: false
 
   /tailwind-merge@1.14.0:
     resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}

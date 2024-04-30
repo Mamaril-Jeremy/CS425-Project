@@ -20,16 +20,27 @@
     let displayInput = "";
     export const currentRecipient = writable();
     export const currentRecipientIcon = writable();
+    export const activeToast = writable();
     let timestamp = "";
     let messageOrder = 1;
     export const userID = writable(null);
-
+    import { toasts, ToastContainer, FlatToast }  from "svelte-toasts";
     onAuthStateChanged(auth, (user) => {
         if (user) {
             userID.set(user.uid);
             handleUserStateChange(user).catch(console.error);
         }
     });
+    const showToast = () => {
+        const toast = toasts.add({
+        title: 'Message Denied',
+        description: 'Inappropriate Message',
+        duration: 10000, 
+        theme: 'light',
+        placement: 'bottom-center',
+        type: 'error',
+        });
+    }
     async function handleUserStateChange(user) {
         if (user) {
             await setCurrentUser();
@@ -192,7 +203,9 @@
                 body: JSON.stringify(data)
             });
             const responseData = await response.json();
-            console.log(responseData);
+            if (!responseData.result){
+                showToast();
+            }
         } catch (error) {
             console.error('Error:', error);
         }
@@ -264,6 +277,9 @@
                     </div>
                 </div>
             {/each}
+            <ToastContainer placement="bottom-center" let:data={data}>
+                <FlatToast {data} /> 
+            </ToastContainer>
             <div class = "textbox">
                 <input type="text" bind:value={messageInput} placeholder="Enter message here" on:keydown={(event) => event.key === 'Enter' && sendMessage(messageInput)} />
             </div>

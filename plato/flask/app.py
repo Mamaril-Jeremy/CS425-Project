@@ -171,9 +171,13 @@ def get_data_from_chat():
     
     data = request.json  
     chat_instance.read_json_file(data)  
-    chat_instance.check_message()  
-    asyncio.run(chat_instance.handle_message_submit(db))
-    response_data = {'message': 'Data received successfully'}
+    decision = chat_instance.check_message()
+    if decision:
+        asyncio.run(chat_instance.handle_message_submit(db))
+        response_data = {'result': True}
+        response = jsonify(response_data)
+    else:
+        response_data = {'result': False}
     response = jsonify(response_data)
     return response
 
@@ -208,6 +212,7 @@ def manage_connections():
     selection = request.form['selection']
     selectionUser = 0
     originalSelection = ''
+    connection.make_connection(db)
     ref = db.collection('connections')
     query1 = ref.where(filter=FieldFilter("user1", "==", user1)).where(filter=FieldFilter("user2", "==", user2)).get()
     query2 = ref.where(filter=FieldFilter("user1", "==", user2)).where(filter=FieldFilter("user2", "==", user1)).get()
