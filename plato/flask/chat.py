@@ -34,21 +34,17 @@ class Chat:
             print(response_data)
             temp_user = self.current_user
             if response_data['moderation_classes']['discriminatory'] > 0.2:
-                self.set_current_chat_user('Console')
-                self.message_input = 'Can not be displayed due to unprofessional behavior'
+                return False
             elif response_data['moderation_classes']['insulting'] > 0.2:
-                self.set_current_chat_user('Console')
-                self.message_input = 'Can not be displayed due to unprofessional behavior'
+                return False
             elif response_data['moderation_classes']['sexual'] > 0.2:
-                self.set_current_chat_user('Console')
-                self.message_input = 'Can not be displayed due to unprofessional behavior'
+                return False
             elif response_data['moderation_classes']['toxic'] > 0.2:
-                self.set_current_chat_user('Console')
-                self.message_input = 'Can not be displayed due to unprofessional behavior'
+                return False
             elif response_data['moderation_classes']['violent'] > 0.2:
-                self.set_current_chat_user('Console')
-                self.message_input = 'Can not be displayed due to unprofessional behavior'
+                return False
             self.order += 1
+            return True
         except requests.exceptions.RequestException as e:
             print("Error:", e)
         

@@ -29,8 +29,7 @@ class Connection:
         elif len(query2) > 0:
             return True, query2
         return False, None
-    
-    def handle_pending_connection(self, db):
+    def make_connection(self, db):
         collection_ref = db.collection('connections')
         existing, query = self.check_existing_document(collection_ref)
         if not existing:
@@ -50,7 +49,11 @@ class Connection:
                 self.store_pending_connections_into_user_database(db)
             except Exception as e:
                 print("An error has been detected:", e)
-        else:
+                
+    def handle_pending_connection(self, db):
+        collection_ref = db.collection('connections')
+        existing, query = self.check_existing_document(collection_ref)
+        if existing:
             for doc in query:
                 self.docName = doc.id
                 doc_ref = collection_ref.document(doc.id)
