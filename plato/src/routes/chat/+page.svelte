@@ -256,11 +256,12 @@
         </div>
 
         <div class = "chatbox">
-            {#each $messages as { text, timestamp, user }}
+            {#each $messages as { messageOrder, text, timestamp, user }}
                 <div class="message-container">
                     <div class="{user === currentUser ? 'sent-message' : 'received-message'}">
                         <div class="meta">{user} {timestamp}</div>
                         <div class="message">{text}</div>
+                        <a href="{`/report?message_order=${messageOrder}&chat_id=${$chats[$currentIndex].id}`}" class="custom-button">Report</a>
                     </div>
                 </div>
             {/each}

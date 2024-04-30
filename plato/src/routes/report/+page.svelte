@@ -3,6 +3,7 @@
     import { auth } from '$lib/firebase/firebase.client.js';
     import { getStorage, ref, uploadBytes } from 'firebase/storage';
     import { Button } from 'flowbite-svelte';
+    import { page } from '$app/stores';
 
     let spamChecked = false;
     let abuseChecked = false;
@@ -89,7 +90,9 @@
             victimName: userName,
             offenderName: reportName,
             reason: reasonsProvided.join(", "),
-            explanation: otherReason || additionalInfo
+            explanation: otherReason || additionalInfo,
+            messageOrder: $page.url.searchParams['message_order'],
+            chatId: $page.url.searchParams['chat_id']
         };
 
         sendDataToFlask(data);
