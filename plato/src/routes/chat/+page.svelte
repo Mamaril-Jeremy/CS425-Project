@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
     //This code was developed by Richard Cao
     import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, Button, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import { writable, get } from "svelte/store";
@@ -8,6 +9,7 @@
     import { onMount } from 'svelte';
     import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
     import Mpfp from "$lib/assets/default-avatar.jpg";
+    import { ReportStore } from "../../stores/ReportStore.js";
 
     let currentUser = '';
     export const messages = writable([]);
@@ -234,6 +236,15 @@
     onMount(() => {
         startDataSync(chats[0]);
     });
+
+    function reportUser(){
+        let reportData = [];
+        reportData.push($userID);
+        reportData.push($currentRecipient);
+        reportData.push($messages);
+        ReportStore.set(reportData);
+        goto('/report');
+    }
 </script>
 <div class="main-container">
     <div class="Sidebar">
@@ -263,7 +274,8 @@
             </div>
             <div class="chat-header-actions">
                 <!-- <button class="custom-button" >View Profile</button> -->
-                <a href="/report" class="custom-button">Report</a>
+                
+                <button class="custom-button" on:click={reportUser}>Report</button>
                 <button class="custom-button" on:click={disconnectUser}>Disconnect</button>
             </div>
         </div>
@@ -316,8 +328,7 @@
     .message-container {
         display: flex;
         flex-direction: column-reverse;
-        overflow-y: auto;
-        height: 10%;
+        height: 11%;
         min-width:100%;
         border-bottom: 1px solid #e1e1e1;
         border-top: 1px solid #e1e1e1;
