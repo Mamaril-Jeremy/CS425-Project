@@ -3,6 +3,7 @@
     import { auth } from '$lib/firebase/firebase.client.js';
     import { getStorage, ref, uploadBytes } from 'firebase/storage';
     import { Button } from 'flowbite-svelte';
+    import { ReportStore } from '../../stores/ReportStore.js';
 
     let spamChecked = false;
     let abuseChecked = false;
@@ -11,8 +12,12 @@
     let additionalInfo = "";
     let imageFile;
     let submissionStatus = ""; 
-    let userName, reportName = "";
     let userUID;
+    let reportData = [];
+
+    ReportStore.subscribe(data => {
+        reportData = data;
+    });
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -86,8 +91,8 @@
 
         const data = {
             userUID: userUID,
-            victimName: userName,
-            offenderName: reportName,
+            offenderName: reportData[1],
+            messages:  reportData[2],
             reason: reasonsProvided.join(", "),
             explanation: otherReason || additionalInfo
         };
@@ -106,6 +111,7 @@
                 const responseData = await response.json();
                 console.log(responseData);
                 submissionStatus = "success";
+                setTimeout(() => goto('/chat'), 2000);
             } catch (error) {
                 console.error('Error:', error);
                 submissionStatus = "error"; 
@@ -116,16 +122,12 @@
 
 <main class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800 w-screen">
     <section class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md max-w-md w-full">
-        <h1 class="text-3xl font-semibold mb-6">Report User</h1>
+        <h1 class="text-3xl font-semibold mb-6">Report {reportData[1]}</h1>
 
         {#if submissionStatus === "success"} 
             <p class="text-green-500">Report successfully submitted!</p>
         {:else}
             <form on:submit|preventDefault={handleSubmit}>
-                <label for="reasons">Your First and Last Name:</label>
-                <input class="mb-2" type="text" id="first_name" placeholder="Name" bind:value={userName} required />
-                <label for="reasons">User's First and Last Name:</label>
-                <input class="mb-2" type="text" id="first_name" placeholder="Name" bind:value={reportName} required />
                 <label for="reasons">Reasons to Report:</label>
                 <input
                     type="checkbox"

@@ -13,7 +13,6 @@
 
   let counter = -1, userUID, swiper;
   let connections = [];
-  let click = true;
 
   onMount(() => {
     swiper = new Swiper(".mySwiper", {

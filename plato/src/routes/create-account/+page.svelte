@@ -48,7 +48,7 @@
                   return { ...curr, isLoading: false, currentUser: user, loggedIn: false};
                 });
             });
-            goto('verify-email')
+            goto('/verify-email')
           } catch (err) {
             emailError = true;
             console.log(err);
