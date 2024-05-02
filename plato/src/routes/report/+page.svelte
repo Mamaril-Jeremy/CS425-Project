@@ -1,9 +1,10 @@
 <script>
     import { onAuthStateChanged } from 'firebase/auth';
-    import { auth } from '$lib/firebase/firebase.client.js';
+    import { auth, db } from '$lib/firebase/firebase.client.js';
     import { getStorage, ref, uploadBytes } from 'firebase/storage';
     import { Button } from 'flowbite-svelte';
-    import { ReportStore } from '../../stores/ReportStore.js';
+    import { doc, updateDoc } from 'firebase/firestore';
+    import { ReportStore, recipientStore } from '../../stores/ReportStore.js';
 
     let spamChecked = false;
     let abuseChecked = false;
@@ -88,7 +89,7 @@
         } else {
             console.log("[No Image Attached]");
         }
-
+        
         const data = {
             userUID: userUID,
             offenderName: reportData[1],
@@ -96,9 +97,13 @@
             reason: reasonsProvided.join(", "),
             explanation: otherReason || additionalInfo
         };
-
+        updateChat();
         sendDataToFlask(data);
-
+        async function updateChat(){
+            console.log('lets go');
+            const docRef = doc(db, "chat", $recipientStore);
+            await updateDoc(docRef, {status: false})
+        }
         async function sendDataToFlask(data) {
             try {
                 const response = await fetch('http://localhost:5000/add_report', {
