@@ -107,20 +107,22 @@ class Connection:
             doc_snapshot = doc_ref.get()
             doc_data = doc_snapshot.to_dict()
             array = doc_data.get('pendingConnections', [])
-            array.append(connection_ref)
-            doc_ref.update({
-                'pendingConnections': array
-            })
+            if connection_ref not in array:
+                array.append(connection_ref)
+                doc_ref.update({
+                    'pendingConnections': array
+                })
         
         for doc in user2Query:
             doc_ref = collection_ref.document(doc.id)
             doc_snapshot = doc_ref.get()
             doc_data = doc_snapshot.to_dict()
             array = doc_data.get('pendingConnections', [])
-            array.append(connection_ref)
-            doc_ref.update({
-                'pendingConnections': array
-            })
+            if connection_ref not in array:
+                array.append(connection_ref)
+                doc_ref.update({
+                    'pendingConnections': array
+                })
             
     def store_failed_connections_into_user_database(self, db):
         collection_ref = db.collection('users')
@@ -134,23 +136,26 @@ class Connection:
             doc_data = doc_snapshot.to_dict()
             array = doc_data.get('failedConnections', [])
             array.append(connection_ref)
-            doc_ref.update({
-                'pendingConnections': firestore.ArrayRemove([connection_ref]),
-                'successConnections': firestore.ArrayRemove([connection_ref]),
-                'failedConnections': array
-            })
+            if connection_ref not in array:
+                array.append(connection_ref)
+                doc_ref.update({
+                    'pendingConnections': firestore.ArrayRemove([connection_ref]),
+                    'successConnections': firestore.ArrayRemove([connection_ref]),
+                    'failedConnections': array
+                })
         
         for doc in user2Query:
             doc_ref = collection_ref.document(doc.id)
             doc_snapshot = doc_ref.get()
             doc_data = doc_snapshot.to_dict()
             array = doc_data.get('failedConnections', [])
-            array.append(connection_ref)
-            doc_ref.update({
-                'pendingConnections': firestore.ArrayRemove([connection_ref]),
-                'successConnections': firestore.ArrayRemove([connection_ref]),
-                'failedConnections': array
-            })
+            if connection_ref not in array:
+                array.append(connection_ref)
+                doc_ref.update({
+                    'pendingConnections': firestore.ArrayRemove([connection_ref]),
+                    'successConnections': firestore.ArrayRemove([connection_ref]),
+                    'failedConnections': array
+                })
       
     def store_success_connections_into_user_database(self, db):
         collection_ref = db.collection('users')
@@ -164,10 +169,12 @@ class Connection:
             doc_data = doc_snapshot.to_dict()
             array = doc_data.get('successConnections', [])
             array.append(connection_ref)
-            doc_ref.update({
-                'pendingConnections': firestore.ArrayRemove([connection_ref]),
-                'successConnections': array
-            })
+            if connection_ref not in array:
+                array.append(connection_ref)
+                doc_ref.update({
+                    'pendingConnections': firestore.ArrayRemove([connection_ref]),
+                    'successConnections': array
+                })
             
         for doc in user2Query:
             doc_ref = collection_ref.document(doc.id)
@@ -175,10 +182,12 @@ class Connection:
             doc_data = doc_snapshot.to_dict()
             array = doc_data.get('successConnections', [])
             array.append(connection_ref)
-            doc_ref.update({
-                'pendingConnections': firestore.ArrayRemove([connection_ref]),
-                'successConnections': array
-            })
+            if connection_ref not in array:
+                array.append(connection_ref)
+                doc_ref.update({
+                    'pendingConnections': firestore.ArrayRemove([connection_ref]),
+                    'successConnections': array
+                })
             
     def createNewChat(self, db):
         chat_ref = db.collection('chat')
@@ -189,7 +198,8 @@ class Connection:
         if not temp:
             chat_ref.add({
                 'user1': self.user1,
-                'user2': self.user2
+                'user2': self.user2,
+                'status': True
             })
             temp1, query = self.check_existing_document(chat_ref)
             for doc in query:

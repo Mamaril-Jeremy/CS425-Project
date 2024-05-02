@@ -4,12 +4,12 @@
     import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Avatar, Button, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import { writable, get } from "svelte/store";
     import { auth, db } from '$lib/firebase/firebase.client.js';
-    import { collection, updateDoc, getDocs, addDoc, query, where, orderBy, onSnapshot, getDoc } from 'firebase/firestore';
+    import { collection, updateDoc, getDocs, addDoc, query, where, orderBy, onSnapshot, getDoc, doc } from 'firebase/firestore';
     import { onAuthStateChanged } from 'firebase/auth';
     import { onMount } from 'svelte';
     import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
     import Mpfp from "$lib/assets/default-avatar.jpg";
-    import { ReportStore } from "../../stores/ReportStore.js";
+    import { ReportStore, recipientStore } from "../../stores/ReportStore.js";
 
     let currentUser = '';
     export const messages = writable([]);
@@ -18,8 +18,11 @@
     export const recipientUIDs = writable([]);
     export const recipientIcons = writable([]);
     export const currentIndex = writable();
+    let activeMessageBox = 'Enter message here';
+    let blockedMessageBox = 'Chat Blocked';
     let messageInput = "";
     let displayInput = "";
+    export const status = writable(false);
     export const currentRecipient = writable();
     export const currentRecipientIcon = writable();
     export const activeToast = writable();
@@ -27,12 +30,14 @@
     let messageOrder = 1;
     export const userID = writable(null);
     import { toasts, ToastContainer, FlatToast }  from "svelte-toasts";
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             userID.set(user.uid);
             handleUserStateChange(user).catch(console.error);
         }
     });
+
     const showToast = () => {
         const toast = toasts.add({
         title: 'Message Denied',
@@ -77,6 +82,7 @@
         recipientUIDs.set(recipientUID);
         recipientIcons.set(imageURL);
     }
+
     async function downloadAvatar(UID){
         try {
             const storage = getStorage();
@@ -102,6 +108,7 @@
             chats.set(chatList);
         }
     }
+
     async function setCurrentUser(){
         try {
             const q = query(collection(db, "users"), where("userID", "==", get(userID)));
@@ -131,6 +138,7 @@
         ...prevMessages,
         ]);
     }
+
     async function sendMessage(){
         await setCurrentUser();
         timestamp = new Date().toLocaleString();
@@ -156,11 +164,18 @@
         currentIndex.set(index);
         currentRecipient.set($recipientNames[index]);
         currentRecipientIcon.set($recipientIcons[index]);
+        handleChatAccess();
         startDataSync($chats[$currentIndex].id);
         unsubscribe();
         // fetchDataFromMiddleware($chats[$currentIndex].id);
     }
-
+    
+    async function handleChatAccess(){
+        const docRef = doc(db, "chat", $chats[$currentIndex].id);
+        const docSnap = await getDoc(docRef);
+        console.log(docSnap.data().status);
+        status.set(docSnap.data().status);
+    }
     
     function analyzeMessage(data){
         for(let i = 0; i < data.length; i++){
@@ -242,6 +257,8 @@
         reportData.push($userID);
         reportData.push($currentRecipient);
         reportData.push($messages);
+        let recipientData = $chats[$currentIndex].id;
+        recipientStore.set(recipientData);
         ReportStore.set(reportData);
         goto('/report');
     }
@@ -293,7 +310,7 @@
                 <FlatToast {data} /> 
             </ToastContainer>
             <div class = "textbox">
-                <input type="text" bind:value={messageInput} placeholder="Enter message here" on:keydown={(event) => event.key === 'Enter' && sendMessage(messageInput)} />
+                <input type="text" bind:value={messageInput} placeholder={!$status ? blockedMessageBox : activeMessageBox} on:keydown={(event) => event.key === 'Enter' && sendMessage(messageInput)} readonly={!$status} />
             </div>
             <div class = "button"><Button color="blue" on:click={sendMessage(messageInput)}>Send</Button></div>
         </div>
