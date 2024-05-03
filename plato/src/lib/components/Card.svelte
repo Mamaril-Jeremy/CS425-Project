@@ -6,7 +6,7 @@
     let userUID, defaultModal = false, selectedInfo = "";
     let parsedHours = "";
 
-    export let firstname, lastname, info, status, hours, skills, avatarUrl = "";
+    export let firstname, lastname, info, status, hours, skills, major, avatarUrl = "";
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -46,11 +46,11 @@
     </div>
     <div class="section" role="button" tabindex="" on:click={(event) => displayModal(info, event)} on:keypress={(event) => displayModal(info, event)}>
         <span>About</span>
-        <div class="info">{info}</div>
+        <div class="info">{info} Status: {status}</div>
     </div>
     <div class="section" role="button" tabindex="" on:click={(event) => displayModal(status, event)} on:keypress={(event) => displayModal(status, event)}>
-        <span>Status</span>
-        <div class="info">{status}</div>
+        <span>Major</span>
+        <div class="info">Studying {major}</div>
     </div>
     <img class="circle" src={avatarUrl} alt="User Avatar">
 </div>

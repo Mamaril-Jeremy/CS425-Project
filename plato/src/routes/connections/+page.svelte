@@ -145,7 +145,7 @@
       <div class="swiper-wrapper">
           <div class="swiper-slide"><Startcard/></div>
           {#each connections as connection (connection.id)}
-            <div class="swiper-slide"><Card firstname={connection.firstname} lastname={connection.lastname} info={connection.info} status={connection.status} hours={connection.hours} skills={connection.skills} avatarUrl={connection.avatarUrl}/></div>
+            <div class="swiper-slide"><Card firstname={connection.firstname} lastname={connection.lastname} info={connection.info} status={connection.status} hours={connection.hours} skills={connection.skills} major={connection.major} avatarUrl={connection.avatarUrl}/></div>
           {/each}
           <div class="swiper-slide"><Endcard/></div>
       </div>
