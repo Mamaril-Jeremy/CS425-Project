@@ -5,7 +5,7 @@
   import { onAuthStateChanged } from 'firebase/auth';
   import { auth } from '$lib/firebase/firebase.client.js';
 
-  let userUID, firstName, lastName, user_status, user_skills = [], user_bio;
+  let userUID, firstName, lastName, user_status, user_major, user_skills = [], user_bio;
   let avatarUrl;
   let user_hours;
 
@@ -31,6 +31,7 @@
         user_status = doc.data().userStatus;
         user_hours = doc.data().userOfficeHours;
         user_skills = doc.data().Skills;
+        user_major = doc.data().userMajor
     } catch (error) {
         console.error('Error:', error);
     }
@@ -55,7 +56,7 @@
 </script>
 
 <body>
-    <Card firstname={firstName} lastname={lastName} info={user_bio} status={user_status} hours={user_hours} skills={user_skills} avatarUrl={avatarUrl}/>
+    <Card firstname={firstName} lastname={lastName} info={user_bio} status={user_status} hours={user_hours} skills={user_skills} major={user_major} avatarUrl={avatarUrl}/>
 </body>
 
 <style>

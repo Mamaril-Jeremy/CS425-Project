@@ -157,6 +157,14 @@
                     value="other"
                     on:change={handleReasonChange}
                 />
+                <label for="harassment">Harassment</label>
+                <input
+                    type="checkbox"
+                    id="other"
+                    name="reason"
+                    value="other"
+                    on:change={handleReasonChange}
+                />
                 <label for="other">Other</label>
                 <input 
                     type="text"
@@ -175,15 +183,6 @@
                     on:input={handleAdditionalInfoChange}
                 ></textarea>
                 <div id="charCount" class="char-count">{2000 - additionalInfo.length} characters left</div>
-
-                <label for="image" >Attach Image:</label>
-                <input
-                    type="file"
-                    id="image"
-                    on:change={handleImageUpload}
-                    accept="image/*"
-                />
-
                 <div id="submit-btn"><Button type="submit" class="bg-blue-600 hover:opacity-75 hover:bg-blue-600">Send Report</Button></div>
             </form>
         {/if}

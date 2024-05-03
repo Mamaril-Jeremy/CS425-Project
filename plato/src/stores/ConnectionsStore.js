@@ -39,6 +39,7 @@ onAuthStateChanged(auth, async (user) => {
         status: docData.userStatus,
         hours: docData.userOfficeHours,
         skills: docData.Skills,
+        major: docData.userMajor,
         avatarUrl: avatarUrl
       });
     }
