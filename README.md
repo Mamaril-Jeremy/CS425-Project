@@ -2,10 +2,6 @@
 
 A web application that matches mentors with mentees in a community of professional users. Built over two semesters as the CS 425/426 Senior Project at the University of Nevada, Reno.
 
-![SvelteKit](https://img.shields.io/badge/SvelteKit-frontend-ff3e00)
-![Firebase](https://img.shields.io/badge/Firebase-backend-ffca28)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-f7df1e)
-![Commits](https://img.shields.io/badge/commits-601-blue)
 
 **[Demo video](https://www.youtube.com/watch?v=cVx3tBaflXY)** · **[Project site](https://aboutplato.wordpress.com/)** · **[Full documentation](https://aboutplato.wordpress.com/docu/)**
 
@@ -15,7 +11,7 @@ A web application that matches mentors with mentees in a community of profession
 
 76% of people say mentorship matters. Only 37% actually have a mentor.
 
-The gap isn't interest, it's logistics. Finding a mentor whose background matches what you're trying to learn usually depends on already knowing the right people. Plato closes that gap by matching on profile data instead of existing networks, so the connection doesn't depend on who you already know.
+Finding a mentor whose background matches what you're trying to learn usually depends on already knowing the right people. Plato closes that gap by matching on profile data instead of existing networks, so the connection doesn't depend on who you already know.
 
 ---
 
@@ -63,8 +59,6 @@ FILL: 2-3 more specific sentences. What attributes did you match on? Was it weig
 
 ## Engineering process
 
-This was a full software engineering course sequence, not just a build:
-
 - Requirements specification with functional and nonfunctional requirements, use case modeling, and a traceability matrix
 - High-level, medium-level, and detailed design documents
 - User stories with acceptance criteria, a defined testing workflow and strategy, and unit tests
@@ -104,10 +98,6 @@ cd CS425-Project/plato
 npm install
 npm run dev
 ```
-
-FILL: Firebase config. A reader will need their own Firebase project and credentials — note which environment variables to set and where. Without this the repo won't run for anyone but you.
-
----
 
 ## Limitations
 
