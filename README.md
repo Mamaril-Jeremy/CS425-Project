@@ -51,9 +51,7 @@ flowchart TD
 
 ## My contribution
 
-I designed and implemented the matchmaking logic — the system that reads profile attributes and scores potential mentor-mentee pairings. That meant coordinating across the front end (how profile data gets collected), the back end (how it's stored and queried in Firebase), and the matching layer itself.
-
-FILL: 2-3 more specific sentences. What attributes did you match on? Was it weighted scoring, filtering, similarity? What was the hardest part — sparse profiles, cold start, tie-breaking? This is the section an interviewer will ask about, so make it concrete.
+I designed and implemented the matchmaking logic — the system that reads profile attributes and scores potential mentor-mentee pairings. That meant coordinating across the front end (how profile data gets collected), the back end (how it's stored and queried in Firebase), and the matching layer itself. We matched users based on category similarity, assigning a similarity score for users and prioritizing them in the queue.
 
 ---
 
@@ -78,15 +76,6 @@ Worth noting because it forced a question most class projects never ask: would a
 
 ---
 
-## Repo structure
-
-```
-├── .vscode/
-├── plato/          # SvelteKit application
-└── README.md
-```
-
-FILL: expand this once you've looked inside `plato/` — routes, components, lib, and wherever the matchmaking code lives. Pointing a reader straight at your matchmaking file is the highest-value thing you can do here.
 
 ---
 
